@@ -164,3 +164,5 @@ Use request IDs or cancellation so old responses cannot overwrite newer UI.
 # Senior Frontend Engineer Takeaway
 
 For senior-level work, WebSockets, SSE, and Realtime UI is not only a syntax topic. You should be able to explain the mental model, choose the right pattern for a product requirement, identify common failure modes, and verify behavior through tooling, tests, and browser inspection.
+
+Related practical note: [Realtime Data Patterns in React](./l_realtime_data_patterns_react.md).

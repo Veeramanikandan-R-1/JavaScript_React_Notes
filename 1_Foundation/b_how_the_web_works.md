@@ -1,57 +1,56 @@
-# How the Web Works (Senior Frontend Engineer Perspective)
+# How the Web Works
 
-Before going deeper into frameworks or libraries, understand this topic as part of real frontend engineering: the request-response path from URL entry to pixels on screen.
-
----
-
-# 1. Fundamentals
-
-* The web is built on clients, servers, URLs, HTTP, HTML documents, assets, and browser rendering.
-* A browser is not just a viewer; it is a runtime with networking, parsing, rendering, storage, security, and JavaScript execution.
-* Frontend decisions affect network cost, rendering speed, caching, accessibility, and security.
+This note explains what happens when you open a website, in simple practical steps.
 
 ---
 
-# 2. Core Concepts
+# 1. Simple Flow
 
-| Concept | Practical meaning |
-| ------- | ----------------- |
-| URL | Identifies a resource and includes protocol, host, path, query string, and fragment. |
-| DNS | Resolves a domain name to an IP address. |
-| HTTP | Defines request methods, response status codes, headers, caching, cookies, and content negotiation. |
-| HTML response | The initial document that references CSS, JavaScript, images, fonts, and other assets. |
-| Rendering pipeline | The browser parses, styles, lays out, paints, and composites the page. |
+When you type a URL and press Enter:
 
----
+```text
+URL entered
+  -> Browser finds server
+  -> Browser sends HTTP request
+  -> Server sends HTML
+  -> Browser loads CSS, JS, images, fonts
+  -> Browser shows the page
+  -> JavaScript adds interaction
+```
 
-# 3. Internal Working
+Example URL:
 
-* After navigation, the browser performs DNS lookup, opens a connection, sends an HTTP request, receives bytes, and starts parsing HTML as it streams.
-* CSS can block rendering because the browser needs styles to calculate layout correctly.
-* JavaScript can block parsing unless loaded with `defer`, `async`, modules, or moved away from critical parsing paths.
-* Caching and compression dramatically change user-perceived speed.
+```text
+https://example.com/products?page=2
+```
 
----
-
-# 4. Common Mistakes
-
-* Loading large scripts in the document head without understanding render blocking.
-* Treating all status codes as success or failure without nuance.
-* Forgetting that network latency matters even when local development feels instant.
-* Shipping pages that rely on JavaScript before meaningful HTML appears.
-
----
-
-# 5. Best Practices
-
-* Use `defer` or module scripts for most application JavaScript.
-* Inspect the Network panel for request waterfalls, cache behavior, payload sizes, and failed requests.
-* Return correct HTTP status codes and meaningful error bodies from APIs.
-* Prioritize critical CSS, optimized assets, and useful first content.
+| Part | Meaning |
+| ---- | ------- |
+| `https` | Protocol |
+| `example.com` | Domain |
+| `/products` | Path |
+| `?page=2` | Query parameter |
 
 ---
 
-# 6. Code Example
+# 2. Files Browser Usually Loads
+
+A normal frontend page often loads:
+
+```text
+index.html
+styles.css
+main.js
+logo.png
+font.woff2
+API requests
+```
+
+In DevTools, open the **Network** tab and reload the page. You can see every file the browser requested.
+
+---
+
+# 3. Basic HTML Page
 
 ```html
 <!doctype html>
@@ -59,110 +58,201 @@ Before going deeper into frameworks or libraries, understand this topic as part 
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/styles.css">
-    <script type="module" src="/src/main.js"></script>
-    <title>Web App</title>
+    <title>My Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="main.js"></script>
   </head>
   <body>
-    <main id="root">Loading...</main>
+    <main>
+      <h1>Hello Web</h1>
+      <button id="btn">Click me</button>
+    </main>
   </body>
 </html>
 ```
 
----
+Important points:
 
-# 7. Real-world Scenarios
-
-* A page is blank for three seconds because a blocking script delays parsing.
-* A CSS file is not updating because the browser serves it from cache.
-* An API returns 200 with an error payload, making client-side error handling confusing.
-
----
-
-# 8. Senior Deep Dive
-
-## When to Use
-
-* Use How the Web Works when it directly supports a user workflow, a maintainability goal, or a measurable quality requirement.
-* Prefer native browser/platform behavior when it already solves the problem well.
-* Reach for libraries when the domain is complex, error-prone, or already standardized in your stack.
-
-## Debug Checklist
-
-* Reproduce the issue with the smallest realistic input.
-* Inspect runtime state instead of trusting source-code assumptions.
-* Change one variable at a time and keep the failing case visible.
-* After fixing, add a note, test, or checklist item that would have caught the issue earlier.
-
-## Code Review Checklist
-
-* Does the code handle loading, empty, error, long-content, and small-screen states?
-* Is the naming clear enough for a teammate to extend safely?
-* Are accessibility and keyboard behavior preserved?
-* Is the performance cost reasonable for the user journey?
-
+* HTML gives structure.
+* CSS makes it look good.
+* JavaScript makes it interactive.
+* `type="module"` loads modern JavaScript safely after parsing.
 
 ---
 
-# Revision Notes
+# 4. Common HTTP Methods
 
-* How the Web Works matters because it affects real users, future maintainers, and production behavior.
-* Learn the mental model before memorizing syntax.
-* Use browser DevTools, tests, and small examples to verify behavior.
-* The web is built on clients, servers, URLs, HTTP, HTML documents, assets, and browser rendering.
-* A browser is not just a viewer; it is a runtime with networking, parsing, rendering, storage, security, and JavaScript execution.
-* Frontend decisions affect network cost, rendering speed, caching, accessibility, and security.
+| Method | Used for |
+| ------ | -------- |
+| `GET` | Read data |
+| `POST` | Create data |
+| `PUT` | Replace data |
+| `PATCH` | Update part of data |
+| `DELETE` | Delete data |
 
----
+Example:
 
-# Cheat Sheet
-
-| Concept | Practical meaning |
-| ------- | ----------------- |
-| URL | Identifies a resource and includes protocol, host, path, query string, and fragment. |
-| DNS | Resolves a domain name to an IP address. |
-| HTTP | Defines request methods, response status codes, headers, caching, cookies, and content negotiation. |
-| HTML response | The initial document that references CSS, JavaScript, images, fonts, and other assets. |
-| Rendering pipeline | The browser parses, styles, lays out, paints, and composites the page. |
+```js
+const response = await fetch("/api/products");
+const products = await response.json();
+```
 
 ---
 
-# Interview Questions with Answers
+# 5. Common Status Codes
 
-### 1. How would you explain How the Web Works in a real project?
+| Code | Meaning |
+| ---- | ------- |
+| `200` | Success |
+| `201` | Created |
+| `204` | Success with no body |
+| `400` | Bad request |
+| `401` | Not logged in |
+| `403` | No permission |
+| `404` | Not found |
+| `500` | Server error |
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+In frontend code, do not assume every response is successful.
 
-### 2. What happens internally when How the Web Works is involved?
+```js
+const response = await fetch("/api/user");
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
-
-### 3. How do you debug issues related to How the Web Works?
-
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
-
-### 4. What is the biggest production risk with How the Web Works?
-
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
-
-### 5. What should a senior engineer look for in code review?
-
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
-
----
-
-# Hands-on Exercises
-
-## Exercise 1
-
-Open any website and write the sequence of document, CSS, JS, image, and API requests you see.
-
-### Solution
-
-Use DevTools Network, sort by start time, and note which files block rendering or arrive late.
+if (!response.ok) {
+  throw new Error(`Request failed: ${response.status}`);
+}
+```
 
 ---
 
-# Senior Frontend Engineer Takeaway
+# 5.1 Web Hosting Types
 
-For senior-level work, How the Web Works is not only a syntax topic. You should be able to explain the mental model, choose the right pattern for a product requirement, identify common failure modes, and verify behavior through tooling, tests, and browser inspection.
+Hosting means putting your site/app files somewhere users can reach through the internet.
+
+| Hosting type | Simple meaning | Common use |
+| ------------ | -------------- | ---------- |
+| Shared hosting | Many sites share one server. | basic websites, low cost |
+| VPS | Your own virtual server on shared hardware. | more control than shared hosting |
+| Dedicated server | Physical server rented for one customer. | high control, expensive |
+| Cloud hosting | Scalable infrastructure from cloud providers. | apps that need scaling and managed services |
+| Reseller hosting | Someone sells hosting space to other customers. | agencies/hosting businesses |
+| Static hosting | Serves HTML, CSS, JS, images from storage/CDN. | frontend apps, docs, portfolios |
+
+For React/Vite apps, production build output is usually static files:
+
+```text
+npm run build -> dist/ -> static hosting/CDN
+```
+
+Dynamic backend APIs are hosted separately or through serverless/fullstack platforms.
+
+Visual notes from `htmlCss.docx`:
+
+<img src="../assets/htmlCss_docx/image4.png" alt="Types of web hosting slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image3.png" alt="Shared hosting slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image11.png" alt="VPS hosting slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image1.png" alt="Dedicated server hosting slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image12.png" alt="Cloud hosting slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image18.png" alt="Reseller hosting slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image16.png" alt="Static hosting slide from htmlCss.docx" width="720">
+
+---
+
+# 6. Practical Debugging
+
+## Page is blank
+
+Check:
+
+```text
+Console tab -> JavaScript error?
+Network tab -> JS/CSS file failed?
+Elements tab -> HTML exists?
+```
+
+## CSS not updating
+
+Check:
+
+```text
+Hard refresh
+Disable cache in Network tab
+Check correct CSS file path
+Check if another CSS rule overrides it
+```
+
+## API not working
+
+Check:
+
+```text
+Network tab
+Request URL
+Status code
+Request payload
+Response body
+CORS error in Console
+```
+
+---
+
+# 7. Performance Basics
+
+To make a page load faster:
+
+* Keep images small.
+* Avoid huge JavaScript files.
+* Load important content first.
+* Use `loading="lazy"` for below-the-fold images.
+* Do not block the page with unnecessary scripts.
+
+Example:
+
+```html
+<img src="team.jpg" alt="Team members" width="800" height="500" loading="lazy">
+```
+
+---
+
+# 8. Quick Exercise
+
+Open any website and do this:
+
+```text
+1. Open DevTools
+2. Go to Network tab
+3. Reload page
+4. Find the HTML document
+5. Find CSS files
+6. Find JS files
+7. Find image files
+8. Find one API request if available
+```
+
+Write down:
+
+* Which request loaded first?
+* Which request was largest?
+* Did any request fail?
+* How long did the page take to load?
+
+---
+
+# 9. Interview Notes
+
+### What happens when you enter a URL?
+
+The browser resolves the domain, sends an HTTP request, receives HTML, loads linked assets, builds the page, and runs JavaScript.
+
+### Why can JavaScript block rendering?
+
+If a normal script loads during HTML parsing, the browser may pause parsing until the script downloads and runs.
+
+### Why use the Network tab?
+
+It shows files, API calls, status codes, payloads, response data, cache behavior, and timing.

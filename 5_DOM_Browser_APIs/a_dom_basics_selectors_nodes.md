@@ -70,6 +70,50 @@ list.append(item);
 
 ---
 
+# 7.1 DOM vs BOM
+
+| Topic | DOM | BOM |
+| ----- | --- | --- |
+| Full form | Document Object Model | Browser Object Model |
+| Root object | `document` | `window` |
+| Represents | HTML/XML page content | Browser environment |
+| Common APIs | `querySelector`, `createElement`, `append`, `classList` | `location`, `history`, `navigator`, `screen`, dialogs |
+| React usage | React renders UI changes into the real DOM | Routers, viewport hooks, navigation, storage, and browser capabilities |
+
+DOM example:
+
+```js
+const title = document.getElementById("main-title");
+title.textContent = "Welcome";
+
+document.querySelector(".save").addEventListener("click", () => {
+  console.log("saved");
+});
+```
+
+BOM example:
+
+```js
+console.log(window.innerWidth);
+console.log(navigator.userAgent);
+history.back();
+location.href = "/dashboard";
+```
+
+React note: prefer React state and props for UI updates. Use refs only when you need direct DOM access, such as focusing an input or integrating with a non-React library.
+
+```jsx
+function SearchBox() {
+  const inputRef = React.useRef(null);
+
+  React.useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  return <input ref={inputRef} />;
+}
+```
+
 # 8. Senior Deep Dive
 
 ## When to Use

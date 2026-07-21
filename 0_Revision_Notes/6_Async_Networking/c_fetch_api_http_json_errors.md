@@ -11,6 +11,9 @@
 * Avoid: Letting stale requests overwrite newer results.
 * Avoid: Treating every fetch resolution as successful HTTP status.
 * Avoid: Retrying non-idempotent operations blindly.
+* API is a broad contract for software communication.
+* REST is a common API style based on resources, URLs, HTTP methods, status codes, and stateless requests.
+* Not every API is REST; GraphQL, SOAP, RPC, and WebSockets are different styles.
 
 ---
 
@@ -23,6 +26,18 @@
 | Promise | Represents eventual success or failure. |
 | Cancellation | Stopping work that is no longer needed. |
 | Race condition | A bug where timing changes the result. |
+
+---
+
+# REST Quick Map
+
+| Method | Typical meaning |
+| ------ | --------------- |
+| `GET` | Read |
+| `POST` | Create or trigger |
+| `PUT` | Replace |
+| `PATCH` | Partial update |
+| `DELETE` | Remove |
 
 ---
 

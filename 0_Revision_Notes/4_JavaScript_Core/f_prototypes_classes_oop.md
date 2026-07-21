@@ -11,6 +11,14 @@
 * Avoid: Ignoring error paths in async code.
 * Avoid: Using loose equality without a deliberate reason.
 * Avoid: Treating objects and arrays as if they are deep-copied by spread.
+* Prototype inheritance lets an object find methods through its prototype chain.
+* Prefer `Object.create`, constructor functions, or `class extends` over direct `__proto__` assignment.
+* `class` syntax is cleaner syntax over JavaScript prototypes.
+* React UI code usually favors functions and hooks, but prototype knowledge matters for interviews, SDKs, and legacy code.
+* Encapsulation: keep state private and expose controlled methods, such as `#balance` with `deposit()`.
+* Abstraction: expose a contract such as `area()` and hide each class's calculation details.
+* Inheritance: use `extends` to reuse parent behavior.
+* Polymorphism: different classes respond to the same method name in their own way.
 
 ---
 

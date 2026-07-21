@@ -74,6 +74,39 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 SEO, SSR, and CSR
+
+SEO means improving page visibility and usefulness in search results.
+
+On-page SEO:
+
+* meaningful HTML structure
+* unique title and description
+* heading hierarchy
+* useful content
+* image `alt` text
+* structured data when appropriate
+* fast loading and good Core Web Vitals
+
+Off-page SEO:
+
+* backlinks
+* social sharing
+* brand mentions
+* guest posts
+* reputable references
+
+## SSR vs CSR
+
+| Topic | SSR | CSR |
+| ----- | --- | --- |
+| Initial HTML | Server sends meaningful HTML | Server may send a mostly empty shell |
+| SEO | Usually stronger for public pages | Can be weaker if crawlers do not see content quickly |
+| Interactivity | Hydrates after JS loads | Fully driven by client JS |
+| Good for | product pages, blogs, marketing, docs | dashboards, internal tools, highly interactive apps |
+
+Important correction: SSR does not automatically mean slower initial loading. It can improve first content visibility, but hydration and server cost must be managed. CSR can feel fast after load, but an empty shell plus large JS bundle can hurt first load.
+
 # 8. Senior Deep Dive
 
 ## When to Use

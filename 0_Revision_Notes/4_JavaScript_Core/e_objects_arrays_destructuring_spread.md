@@ -11,6 +11,12 @@
 * Avoid: Ignoring error paths in async code.
 * Avoid: Using loose equality without a deliberate reason.
 * Avoid: Treating objects and arrays as if they are deep-copied by spread.
+* `slice` copies part of an array and does not mutate.
+* `splice` removes/replaces/inserts and mutates the original array.
+* `shift` removes from the start; `unshift` adds to the start.
+* In React state, avoid mutating array methods unless you first create a new array.
+* Use `Map` for dynamic key-value collections, any key type, and easy `.size`.
+* Use `Object.freeze` for enum-like constants in plain JavaScript.
 
 ---
 
@@ -23,6 +29,19 @@
 | Execution context | The environment where code runs. |
 | Reference | A way objects and arrays are shared by identity. |
 | Module | A file-level boundary for imports and exports. |
+
+---
+
+# Array and Collection Cheats
+
+| Need | Use |
+| ---- | --- |
+| Copy a portion | `slice` |
+| Insert/remove in place | `splice` |
+| Remove first item | `shift` |
+| Add first item | `unshift` |
+| Dynamic key-value store | `Map` |
+| Enum-like constants | `Object.freeze` |
 
 ---
 

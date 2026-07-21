@@ -70,6 +70,30 @@ document.documentElement.dataset.theme = theme;
 
 ---
 
+# 7.1 `localStorage` vs `sessionStorage`
+
+| Feature | `localStorage` | `sessionStorage` |
+| ------- | -------------- | ---------------- |
+| Lifetime | Persists until cleared | Cleared when the tab/session ends |
+| Scope | Same origin across tabs/windows | Same origin, usually limited to the current tab |
+| Capacity | Browser-dependent, often around 5-10 MB | Browser-dependent, often similar to `localStorage` |
+| API | Synchronous key-value strings | Synchronous key-value strings |
+| Good for | Non-sensitive preferences | Temporary per-tab UI state |
+
+```js
+localStorage.setItem("theme", "dark");
+sessionStorage.setItem("checkoutStep", "payment");
+
+const theme = localStorage.getItem("theme") ?? "light";
+const step = sessionStorage.getItem("checkoutStep") ?? "cart";
+```
+
+Important:
+
+* Store only strings; use `JSON.stringify` and `JSON.parse` for objects.
+* Do not store tokens, passwords, or sensitive user data in web storage.
+* Storage APIs are synchronous, so avoid large repeated reads/writes during render or scroll.
+
 # 8. Senior Deep Dive
 
 ## When to Use

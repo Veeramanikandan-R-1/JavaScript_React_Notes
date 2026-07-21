@@ -72,6 +72,43 @@ form.addEventListener("submit", (event) => {
 
 ---
 
+# 7.1 Constraint Validation API
+
+The Constraint Validation API lets JavaScript work with native form validation instead of replacing it completely.
+
+```js
+const form = document.querySelector("form");
+const email = document.querySelector("#email");
+
+email.addEventListener("input", () => {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("Enter a valid email address.");
+  } else {
+    email.setCustomValidity("");
+  }
+});
+
+form.addEventListener("submit", (event) => {
+  if (!form.checkValidity()) {
+    event.preventDefault();
+    form.reportValidity();
+  }
+});
+```
+
+Useful APIs:
+
+| API | Meaning |
+| --- | ------- |
+| `checkValidity()` | Returns `true`/`false` without showing browser UI. |
+| `reportValidity()` | Shows native validation messages. |
+| `setCustomValidity(message)` | Sets a custom error; pass `""` to clear it. |
+| `validity` | Exposes flags such as `valueMissing`, `typeMismatch`, and `patternMismatch`. |
+
+Server-side validation is still required.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

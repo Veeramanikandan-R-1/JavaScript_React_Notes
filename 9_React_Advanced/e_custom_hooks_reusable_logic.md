@@ -84,6 +84,42 @@ export default function OrdersPage({ orders }) {
 
 ---
 
+# 7.1 Custom Hooks Practical Notes
+
+A custom hook is a function whose name starts with `use` and can call other hooks.
+
+Use custom hooks to share stateful logic across components without repeating effect/state code.
+
+Good examples:
+
+* `useLocalStorage`
+* `useCounter`
+* `useDocumentTitle`
+* `useDebouncedValue`
+* `useAuthUser`
+* `useWindowSize`
+
+```jsx
+function useDocumentTitle(title) {
+  React.useEffect(() => {
+    const previousTitle = document.title;
+    document.title = title;
+
+    return () => {
+      document.title = previousTitle;
+    };
+  }, [title]);
+}
+```
+
+Why custom hooks help:
+
+* cleaner components
+* reusable logic
+* easier testing
+* less HOC/render-prop nesting
+* clearer separation between UI and behavior
+
 # 8. Senior Deep Dive
 
 ## When to Use

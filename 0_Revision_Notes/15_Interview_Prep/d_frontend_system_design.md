@@ -27,6 +27,22 @@
 
 ---
 
+# Frontend System Design Topics
+
+* CSR
+* SSR
+* Hydration
+* Caching
+* CDN
+* Microfrontends
+* Bundle splitting
+* Auth flow
+* AI API boundary
+* Streaming response state
+* Rate limits and error UX
+
+---
+
 # Interview Questions & Answers
 
 ### 1. How would you explain Frontend System Design in a real project?

@@ -58,3 +58,14 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* Controlled input source of truth is React state.
+* Uncontrolled input source of truth is the DOM; read it with refs or `FormData`.
+* Controlled forms are best for validation and instant UI feedback.
+* Uncontrolled forms can be fine for simple forms and file inputs.
+* Refs should not replace normal UI state.
+* `onCopy`/`onPaste` can block copy/paste as UX behavior, but it is not real security and can hurt accessibility.

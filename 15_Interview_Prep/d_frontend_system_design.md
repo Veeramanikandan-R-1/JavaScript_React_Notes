@@ -68,6 +68,39 @@ Observability and rollout
 
 ---
 
+# Frontend System Design Topics to Study
+
+| Topic | What to explain |
+| ----- | --------------- |
+| CSR | Browser renders app after JavaScript loads |
+| SSR | Server returns rendered HTML |
+| Hydration | React attaches interactivity to server-rendered HTML |
+| Caching | Browser, CDN, server, and API cache choices |
+| CDN | Serving static assets close to users |
+| Microfrontends | Splitting frontend ownership across teams/apps |
+| Bundle splitting | Loading only the code needed for a route |
+| Auth flow | Session loading, protected routes, permissions |
+| Nested search | Tree, trie, or indexed lookup depending on data shape |
+
+For AI-ready frontend interviews, also explain:
+
+* Where AI API calls happen.
+* How API keys are protected.
+* How streaming responses affect UI state.
+* How chat history is stored.
+* How rate limits and errors are shown to users.
+
+Nested search design example:
+
+```text
+Small menu/tree data: traverse tree recursively.
+Large prefix search: build a trie or use backend search.
+Large dashboard records: normalize data and build indexes by id, parentId, name, tag, or status.
+Remote search: debounce input, cancel stale requests, and show loading/empty/error states.
+```
+
+---
+
 # 7. Real-world Scenarios
 
 * Explaining closure behavior with a short code sample.

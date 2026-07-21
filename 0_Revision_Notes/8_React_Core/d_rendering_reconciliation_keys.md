@@ -58,3 +58,14 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* Flow: JSX -> React elements -> render work -> reconciliation -> commit DOM changes -> browser paint.
+* Re-render means React calls components again; DOM update means the browser DOM actually changes.
+* If root element type changes, React tears down the old subtree.
+* If element type is the same, React updates changed attributes where possible.
+* Virtual DOM is a React/library concept; Shadow DOM is a browser encapsulation feature.
+* Fiber lets React split, pause, resume, and prioritize render work.

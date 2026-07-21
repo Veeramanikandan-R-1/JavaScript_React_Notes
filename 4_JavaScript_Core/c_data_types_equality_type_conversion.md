@@ -71,6 +71,66 @@ if (Number.isNaN(value)) {
 
 ---
 
+# 7.1 Practical Data Type Revision
+
+## Primitive vs Reference Types
+
+| Category | Types | How comparison works |
+| -------- | ----- | -------------------- |
+| Primitive | `string`, `number`, `bigint`, `boolean`, `undefined`, `null`, `symbol` | Compared by value |
+| Reference | object, array, function, `Date`, `RegExp`, `Map`, `Set`, `WeakMap`, `WeakSet` | Compared by reference identity |
+
+```js
+console.log(10 === 10); // true
+console.log({ id: 1 } === { id: 1 }); // false
+
+const user = { id: 1 };
+const sameUser = user;
+console.log(user === sameUser); // true
+```
+
+Important quirks:
+
+```js
+typeof null; // "object" historical quirk
+typeof NaN; // "number"
+Number.isNaN(NaN); // true
+Array.isArray([]); // true
+```
+
+## Type Checks
+
+| Need | Use |
+| ---- | --- |
+| Primitive check | `typeof value` |
+| Array check | `Array.isArray(value)` |
+| Class/prototype check | `value instanceof SomeClass` |
+| Detailed built-in tag | `Object.prototype.toString.call(value)` |
+
+## React-Specific Type Notes
+
+Pick initial state types deliberately:
+
+```jsx
+const [count, setCount] = useState(0);
+const [user, setUser] = useState(null);
+const [items, setItems] = useState([]);
+```
+
+JSX rendering gotcha:
+
+```jsx
+{count && <span>{count}</span>}
+```
+
+If `count` is `0`, React renders `0`. For conditional UI, prefer an explicit boolean:
+
+```jsx
+{count > 0 && <span>{count}</span>}
+```
+
+When API values arrive as strings, convert before saving to state if the UI expects numbers or booleans.
+
 # 8. Senior Deep Dive
 
 ## When to Use

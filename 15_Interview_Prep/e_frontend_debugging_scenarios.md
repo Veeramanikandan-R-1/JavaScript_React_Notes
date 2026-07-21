@@ -72,6 +72,32 @@ Debugging answer structure:
 
 ---
 
+# 7.1 Machine Coding Round Checklist
+
+Focus on:
+
+* readable naming
+* reusable components
+* modular files
+* testable pure logic
+* clear state ownership
+* loading, empty, error, and success states
+* accessibility basics
+* simple styling that survives real content
+
+A good machine-coding answer is not only "it works." It should be easy to explain, change, and debug.
+
+---
+
+# 7.2 Questions to Ask Interviewers
+
+Useful closing questions:
+
+* What qualities matter most for this role?
+* What would success look like in the first three months?
+* What should I improve to be stronger for this team?
+* What are the biggest frontend challenges the team is solving now?
+
 # 8. Senior Deep Dive
 
 ## When to Use

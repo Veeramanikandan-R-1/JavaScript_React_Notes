@@ -84,6 +84,34 @@ export default function OrdersPage({ orders }) {
 
 ---
 
+# 7.1 Formik Note
+
+Formik is another popular React form library. It is common in older React codebases and still useful to recognize in interviews.
+
+```bash
+npm install formik
+```
+
+```jsx
+import { Formik, Form, Field } from "formik";
+
+function LoginForm() {
+  return (
+    <Formik initialValues={{ email: "" }} onSubmit={console.log}>
+      <Form>
+        <label htmlFor="email">Email</label>
+        <Field id="email" name="email" type="email" />
+        <button type="submit">Login</button>
+      </Form>
+    </Formik>
+  );
+}
+```
+
+Use the form library already chosen by the project. Do not mix Formik, React Hook Form, and custom state in the same feature without a strong reason.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

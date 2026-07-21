@@ -58,3 +58,15 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* `children` is JSX placed between component tags and supports layout/composition.
+* Type `children` as `React.ReactNode` in TypeScript.
+* Render props pass a function so the consumer controls rendering with data from the component.
+* JSX uses `className` instead of `class`.
+* Fragments have no DOM node, so they cannot have `className`, `id`, or styles.
+* Use `prop-types` in JS projects or TypeScript for stronger static checks.
+* React is a UI library, not a full framework; routing, data fetching, and state choices are separate.

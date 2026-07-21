@@ -24,6 +24,13 @@ These notes follow a consistent senior frontend engineer format:
 4. Complete the exercise.
 5. Revisit the matching file in `0_Revision_Notes` before interviews.
 
+## 0_Notes
+
+* [Study Progress Tracker](./0_Notes/study_progress_tracker.md)
+* [To Learn](./0_Notes/to_learn.md)
+* [Revision Resource Index](./0_Notes/revision_resource_index.md)
+* [Important Links](./0_Notes/imp_links.md)
+
 ## 1_Foundation
 
 * [Frontend Engineering Roadmap](./1_Foundation/a_frontend_engineering_roadmap.md)
@@ -64,6 +71,7 @@ These notes follow a consistent senior frontend engineer format:
 * [CSS Layout Patterns](./3_CSS/n_layout_patterns.md)
 * [CSS Debugging, Performance, and Browser Support](./3_CSS/o_debugging_performance_browser_support.md)
 * [CSS Interview Notes](./3_CSS/p_css_interview_notes.md)
+* [React Styling Options Revision](./3_CSS/q_react_styling_options_revision.md)
 
 ## 4_JavaScript_Core
 
@@ -78,6 +86,7 @@ These notes follow a consistent senior frontend engineer format:
 * [Functional Array Methods](./4_JavaScript_Core/i_functional_array_methods.md)
 * [Memory, References, and Mutation](./4_JavaScript_Core/j_memory_reference_mutation.md)
 * [JavaScript Interview Drills](./4_JavaScript_Core/k_javascript_interview_drills.md)
+* [JavaScript Revision Practical Notes](./4_JavaScript_Core/l_js_revision_practical_notes.md)
 
 ## 5_DOM_Browser_APIs
 
@@ -90,6 +99,7 @@ These notes follow a consistent senior frontend engineer format:
 * [Rendering, Reflow, Repaint, and Layout Thrashing](./5_DOM_Browser_APIs/g_rendering_reflow_repaint.md)
 * [Web Platform APIs, Observers, and Workers](./5_DOM_Browser_APIs/h_web_platform_observers_workers.md)
 * [Accessibility with JavaScript](./5_DOM_Browser_APIs/i_accessibility_with_javascript.md)
+* [Event Propagation and Event Delegation Revision](./5_DOM_Browser_APIs/j_event_propagation_delegation_revision.md)
 
 ## 6_Async_Networking
 
@@ -102,6 +112,9 @@ These notes follow a consistent senior frontend engineer format:
 * [Debounce, Throttle, Rate Limiting, and Queues](./6_Async_Networking/g_debounce_throttle_rate_limiting.md)
 * [Caching, Offline Basics, and Service Workers](./6_Async_Networking/h_caching_offline_service_workers.md)
 * [Async JavaScript Interview Drills](./6_Async_Networking/i_async_interview_drills.md)
+* [Async Script Loading, Debounce, and Throttle Revision](./6_Async_Networking/j_async_script_loading_debounce_throttle_revision.md)
+* [GraphQL with React and Apollo Practical Notes](./6_Async_Networking/k_graphql_react_apollo_notes.md)
+* [Realtime Data Patterns in React](./6_Async_Networking/l_realtime_data_patterns_react.md)
 
 ## 7_Modern_JS_Tooling
 
@@ -111,6 +124,9 @@ These notes follow a consistent senior frontend engineer format:
 * [ESLint, Prettier, and Code Quality](./7_Modern_JS_Tooling/d_eslint_prettier_code_quality.md)
 * [Environment Variables and Build Modes](./7_Modern_JS_Tooling/e_environment_variables_build_modes.md)
 * [Source Maps, Debugging, CI, and Frontend Delivery](./7_Modern_JS_Tooling/f_source_maps_debugging_ci_cd.md)
+* [React Environment Variables and DevTools Revision](./7_Modern_JS_Tooling/g_react_environment_devtools_revision.md)
+* [npm vs Yarn Package Managers](./7_Modern_JS_Tooling/h_npm_yarn_package_managers.md)
+* [PNPM and Turbo Monorepo Practical Notes](./7_Modern_JS_Tooling/i_pnpm_turbo_monorepo_practical_notes.md)
 
 ## 8_React_Core
 
@@ -121,6 +137,7 @@ These notes follow a consistent senior frontend engineer format:
 * [useEffect and Side Effects](./8_React_Core/e_useeffect_side_effects.md)
 * [Conditional Rendering and Lists](./8_React_Core/f_conditional_rendering_lists.md)
 * [React Forms, Controlled and Uncontrolled Inputs](./8_React_Core/g_forms_controlled_uncontrolled.md)
+* [React Revision and Interview Notes](./8_React_Core/h_react_revision_interview_notes.md)
 
 ## 9_React_Advanced
 
@@ -132,6 +149,10 @@ These notes follow a consistent senior frontend engineer format:
 * [Error Boundaries and Suspense](./9_React_Advanced/f_error_boundaries_suspense.md)
 * [Portals, Modals, and Overlays](./9_React_Advanced/g_portals_modals_overlays.md)
 * [React Architecture Patterns](./9_React_Advanced/h_react_architecture_patterns.md)
+* [React Hooks Advanced Revision](./9_React_Advanced/i_react_hooks_advanced_revision.md)
+* [React Patterns and Ecosystem Revision](./9_React_Advanced/j_react_patterns_ecosystem_revision.md)
+* [Design Systems: Harbor, DNAC UI, and Magnetic](./9_React_Advanced/k_design_systems_harbor_magnetic.md)
+* [Progressive Web Apps in React](./9_React_Advanced/l_pwa_react_practical_notes.md)
 
 ## 10_Routing_Data_Fetching
 
@@ -140,6 +161,8 @@ These notes follow a consistent senior frontend engineer format:
 * [Data Fetching Patterns](./10_Routing_Data_Fetching/c_data_fetching_patterns.md)
 * [Server State with React Query or SWR](./10_Routing_Data_Fetching/d_server_state_react_query_swr.md)
 * [Auth, Protected Routes, and Loading States](./10_Routing_Data_Fetching/e_auth_protected_routes_loading_states.md)
+* [Next.js Fullstack Basics](./10_Routing_Data_Fetching/f_nextjs_fullstack_basics.md)
+* [React Router DOM Revision](./10_Routing_Data_Fetching/g_react_router_revision.md)
 
 ## 11_State_Management_Forms
 
@@ -148,6 +171,9 @@ These notes follow a consistent senior frontend engineer format:
 * [React Hook Form and Validation](./11_State_Management_Forms/c_react_hook_form_validation.md)
 * [Form Accessibility and Error States](./11_State_Management_Forms/d_form_accessibility_error_states.md)
 * [Schema Validation with Zod or Yup](./11_State_Management_Forms/e_schema_validation_zod_yup.md)
+* [Redux, Redux Toolkit, Thunk, Saga, and Context Revision](./11_State_Management_Forms/f_redux_thunk_saga_revision.md)
+* [Redux Toolkit, Thunk, and RTK Query Practical Notes](./11_State_Management_Forms/g_redux_toolkit_thunk_practical_notes.md)
+* [Redux Saga Practical Notes](./11_State_Management_Forms/h_redux_saga_practical_notes.md)
 
 ## 12_Testing
 
@@ -156,6 +182,9 @@ These notes follow a consistent senior frontend engineer format:
 * [React Testing Library](./12_Testing/c_react_testing_library.md)
 * [Playwright End-to-End Tests](./12_Testing/d_playwright_e2e_tests.md)
 * [Mocking Network Requests with MSW](./12_Testing/e_mocking_network_msw.md)
+* [React Testing Revision](./12_Testing/f_react_testing_revision.md)
+* [React Testing Library Practical Interview Notes](./12_Testing/g_react_testing_library_interview_practical.md)
+* [Cypress Selector Automation PoC](./12_Testing/h_cypress_selector_automation_poc.md)
 
 ## 13_Performance
 
@@ -164,12 +193,16 @@ These notes follow a consistent senior frontend engineer format:
 * [Bundle Splitting and Lazy Loading](./13_Performance/c_bundle_splitting_lazy_loading.md)
 * [React Performance and Profiling](./13_Performance/d_react_performance_profiling.md)
 * [Virtualization and Large Lists](./13_Performance/e_virtualization_large_lists.md)
+* [Data Visualization with Recharts, Chart.js, D3, and Plotly](./13_Performance/f_data_visualization_recharts_chartjs_d3.md)
+* [React Re-render Optimization Revision](./13_Performance/g_react_rerender_optimization_revision.md)
+* [Lighthouse React Audit Notes](./13_Performance/h_lighthouse_react_audit_notes.md)
 
 ## 14_Accessibility_SEO
 
 * [Accessibility, WCAG, Keyboard, and Screen Readers](./14_Accessibility_SEO/a_accessibility_wcag_keyboard_screen_readers.md)
 * [Focus Management, Modals, and Menus](./14_Accessibility_SEO/b_focus_management_modals_menus.md)
 * [SEO for React Apps](./14_Accessibility_SEO/c_seo_for_react_apps.md)
+* [React Security, Accessibility, and Protected Routes Revision](./14_Accessibility_SEO/d_react_security_accessibility_auth_revision.md)
 
 ## 15_Interview_Prep
 
@@ -178,6 +211,11 @@ These notes follow a consistent senior frontend engineer format:
 * [React Interview Questions](./15_Interview_Prep/c_react_interview_questions.md)
 * [Frontend System Design](./15_Interview_Prep/d_frontend_system_design.md)
 * [Frontend Debugging Scenarios](./15_Interview_Prep/e_frontend_debugging_scenarios.md)
+* [Frontend Delivery, Agile, and DevOps Interview Notes](./15_Interview_Prep/f_frontend_delivery_agile_devops.md)
+* [TypeScript Interview Questions](./15_Interview_Prep/g_typescript_interview_questions.md)
+* [HCL UI Interview Prep](./15_Interview_Prep/h_hcl_ui_interview_prep.md)
+* [Company Interview Rounds and Answer Bank](./15_Interview_Prep/i_company_interview_rounds_2025.md)
+* [Project Experience Story Bank](./15_Interview_Prep/j_project_experience_story_bank.md)
 
 ## 16_Capstone_Projects
 
@@ -185,3 +223,39 @@ These notes follow a consistent senior frontend engineer format:
 * [Capstone: Todo App with Vanilla JavaScript](./16_Capstone_Projects/b_todo_app_vanilla_js.md)
 * [Capstone: React Dashboard](./16_Capstone_Projects/c_react_dashboard.md)
 * [Capstone: E-commerce Frontend in React](./16_Capstone_Projects/d_ecommerce_frontend_react.md)
+* [Capstone: AI Productivity Hub](./16_Capstone_Projects/e_ai_productivity_hub.md)
+* [Capstone: React GraphQL CRUD App](./16_Capstone_Projects/f_react_graphql_crud_app.md)
+
+## 17_AI_Ready_Frontend
+
+* [6-Month AI-Ready Frontend Developer Roadmap](./17_AI_Ready_Frontend/a_6_month_ai_ready_frontend_roadmap.md)
+* [AI Frontend Integration and LLM APIs](./17_AI_Ready_Frontend/b_ai_frontend_integration_llm_apis.md)
+* [Conversational, Voice, and Streaming AI UI](./17_AI_Ready_Frontend/c_conversational_voice_streaming_ui.md)
+* [AI Tools, Workflow, and Design](./17_AI_Ready_Frontend/d_ai_tools_workflow_and_design.md)
+* [AI Portfolio Projects and Interview Prep](./17_AI_Ready_Frontend/e_ai_portfolio_projects_and_interview_prep.md)
+
+## 18_TypeScript
+
+* [TypeScript Fundamentals](./18_TypeScript/a_typescript_fundamentals.md)
+* [TypeScript Advanced Types, Utility Types, and OOP](./18_TypeScript/b_typescript_advanced_types_oop.md)
+* [React with TypeScript](./18_TypeScript/c_react_with_typescript.md)
+* [TypeScript Interview Revision](./18_TypeScript/d_typescript_interview_revision.md)
+
+## 19_Coding_Practice
+
+* [JavaScript Coding Programs](./19_Coding_Practice/a_javascript_programs.md)
+* [React Machine Coding Programs](./19_Coding_Practice/b_react_machine_coding_programs.md)
+
+## 20_Networking
+
+* [Networking Foundations: L2, VLAN, SDN, and SD-Access](./20_Networking/a_networking_foundations_vlan_sdn_sda.md)
+* [IP, ARP, TCP/UDP, DHCP, DNS, RIP, and NAT Basics](./20_Networking/b_ip_tcp_dns_dhcp_nat_routing_basics.md)
+* [EVPN-VXLAN Fundamentals](./20_Networking/c_evpn_vxlan_fundamentals.md)
+* [EVPN, DNAC, and Fabric Operations](./20_Networking/d_evpn_dnac_fabric_operations.md)
+
+## 21_Enterprise_Frontend
+
+* [Large Enterprise Frontend Codebase Study Map](./21_Enterprise_Frontend/a_large_enterprise_frontend_codebase_study_map.md)
+* [Micro Frontend Manifest and Runtime Patterns](./21_Enterprise_Frontend/b_micro_frontend_manifest_runtime_patterns.md)
+* [Enterprise Auth, Feature Flags, and Session Notes](./21_Enterprise_Frontend/c_enterprise_auth_feature_flags_session_notes.md)
+* [Enterprise Testing and Observability Practical Patterns](./21_Enterprise_Frontend/d_enterprise_testing_observability_practical_patterns.md)

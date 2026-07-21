@@ -58,3 +58,13 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* `useRef` persists a mutable value across renders without triggering re-render.
+* Good uses: DOM focus, uncontrolled values, timer IDs, previous values, render counters, third-party DOM APIs.
+* If a value should update the visible UI, use state instead of ref.
+* Focus pattern: `inputRef.current?.focus()`.
+* Uncontrolled submit pattern: call `event.preventDefault()`, then read `inputRef.current.value`.

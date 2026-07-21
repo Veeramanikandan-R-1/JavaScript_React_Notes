@@ -11,6 +11,11 @@
 * Avoid: Adding event listeners repeatedly without cleanup.
 * Avoid: Reading and writing layout in tight loops.
 * Avoid: Trusting unsanitized user input.
+* `localStorage` persists until cleared.
+* `sessionStorage` is temporary for the current tab/session.
+* Both store strings and have browser-dependent limits, commonly around 5-10 MB.
+* Do not store passwords, tokens, or sensitive user data in web storage.
+* Use `JSON.stringify`/`JSON.parse` for object values.
 
 ---
 

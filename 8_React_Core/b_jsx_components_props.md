@@ -84,6 +84,139 @@ export default function OrdersPage({ orders }) {
 
 ---
 
+# 7.1 Practical Revision Notes from `react_1.docx`
+
+## `children` Prop
+
+`children` is the JSX placed between a component's opening and closing tags.
+
+```jsx
+function Card({ children }) {
+  return <section className="card">{children}</section>;
+}
+
+function App() {
+  return (
+    <Card>
+      <h2>Dashboard</h2>
+      <p>Welcome back.</p>
+    </Card>
+  );
+}
+```
+
+Use `children` for layout and slot-style composition when the wrapper does not need to inject dynamic data into the child.
+
+TypeScript:
+
+```tsx
+type CardProps = {
+  children: React.ReactNode;
+};
+```
+
+Safe handling:
+
+```jsx
+React.Children.map(children, (child) => <div>{child}</div>);
+```
+
+## Render Prop vs `children`
+
+| Pattern | Use when |
+| ------- | -------- |
+| `children` as JSX | You want to place static or structural UI inside a wrapper |
+| render prop | The component provides data/logic and the consumer decides the UI |
+| `children` as function | Same idea as render props, but using the `children` prop |
+
+```jsx
+function DataFetcher({ url, render, children }) {
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch(url).then((res) => res.json()).then(setData);
+  }, [url]);
+
+  if (typeof children === "function") return children(data);
+  if (render) return render(data);
+  return null;
+}
+```
+
+Modern React often replaces render props with custom hooks, but render props still appear in older codebases and libraries.
+
+## `className` and Fragments
+
+React uses `className` instead of `class` because JSX is JavaScript syntax and `class` is a JavaScript keyword.
+
+```jsx
+return <div className="panel">Content</div>;
+```
+
+Fragments do not render a real DOM element, so they cannot receive `className`, `id`, or styles.
+
+```jsx
+// Invalid: Fragment has no DOM node to style.
+<React.Fragment className="wrapper">
+  <Header />
+  <Main />
+</React.Fragment>
+```
+
+If you need styling, use a real wrapper element, parent CSS selector, or a reusable wrapper component.
+
+## Prop Validation
+
+For JavaScript projects, use the `prop-types` package. For larger apps, prefer TypeScript because it catches many contract mistakes during development.
+
+```jsx
+import PropTypes from "prop-types";
+
+Card.propTypes = {
+  children: PropTypes.node,
+};
+```
+
+### Visual Notes from `react_1.docx`
+
+<img src="../assets/react_1_docx/image22.png" alt="Stateful and stateless component screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image44.png" alt="PropTypes predefined type list screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image8.png" alt="Class component PropTypes example screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image45.png" alt="Function component PropTypes example screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image34.png" alt="Why React uses className screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image41.png" alt="React Fragment cannot receive className screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image6.png" alt="React Fragment invalid className example screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image29.png" alt="React Fragment styling alternatives screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image46.png" alt="Conditional rendering screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image42.png" alt="Spreading props on DOM elements screenshot from react_1.docx" width="720">
+
+## React Advantages and Limitations
+
+Advantages:
+
+* component-based UI
+* strong ecosystem
+* declarative rendering
+* virtual DOM/reconciliation model
+* works with client rendering, server rendering, and hybrid frameworks
+* good testing support with tools like Testing Library
+
+Limitations:
+
+* React is a UI library, not a full framework
+* routing, data fetching, state management, and build setup need choices
+* JSX and component patterns have a learning curve
+* too many tiny components or abstractions can create unnecessary complexity
+
 # 8. Senior Deep Dive
 
 ## When to Use

@@ -62,6 +62,48 @@ message.textContent = userProvidedMessage;
 
 ---
 
+# 7.1 Frontend Security Checklist
+
+XSS prevention:
+
+* render untrusted text as text, not HTML
+* sanitize rich text before using `innerHTML` or `dangerouslySetInnerHTML`
+* validate URLs before using them in links or redirects
+* avoid `javascript:` URLs
+* use CSP to reduce damage if injection happens
+
+CSRF prevention:
+
+* use `SameSite` cookies where possible
+* use CSRF tokens for cookie-authenticated unsafe requests
+* avoid state-changing `GET` endpoints
+* validate `Origin`/`Referer` on the server for sensitive flows
+
+Clickjacking prevention:
+
+```http
+Content-Security-Policy: frame-ancestors 'self'
+X-Frame-Options: DENY
+```
+
+External link safety:
+
+```html
+<a href="https://example.com" target="_blank" rel="noopener noreferrer">
+  External report
+</a>
+```
+
+Cookie flags:
+
+```http
+Set-Cookie: session=abc; HttpOnly; Secure; SameSite=Lax
+```
+
+Frontend code can reduce risk, but security-sensitive checks must be enforced by the backend.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

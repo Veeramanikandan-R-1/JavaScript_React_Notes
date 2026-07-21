@@ -11,6 +11,10 @@
 * Avoid: Letting stale requests overwrite newer results.
 * Avoid: Treating every fetch resolution as successful HTTP status.
 * Avoid: Retrying non-idempotent operations blindly.
+* `Promise.all`: resolves when all resolve; rejects on first rejection.
+* `Promise.allSettled`: waits for all and reports each status.
+* `Promise.race`: first settled promise wins.
+* `Promise.any`: first fulfilled promise wins; rejects only if all reject.
 
 ---
 
@@ -23,6 +27,17 @@
 | Promise | Represents eventual success or failure. |
 | Cancellation | Stopping work that is no longer needed. |
 | Race condition | A bug where timing changes the result. |
+
+---
+
+# Promise Method Choice
+
+| Need | Use |
+| ---- | --- |
+| All required data | `Promise.all` |
+| Partial results allowed | `Promise.allSettled` |
+| Timeout or first settled result | `Promise.race` |
+| First successful fallback | `Promise.any` |
 
 ---
 

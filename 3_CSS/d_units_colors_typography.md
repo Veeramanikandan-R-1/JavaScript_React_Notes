@@ -77,6 +77,33 @@ body {
 
 ---
 
+# 7.1 `em` vs `rem`
+
+| Unit | Based on | Practical use |
+| ---- | -------- | ------------- |
+| `em` | Current element font size | component-local spacing that scales with the component |
+| `rem` | Root font size | predictable typography and spacing across the app |
+
+```css
+html {
+  font-size: 16px;
+}
+
+.card {
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+.button {
+  font-size: 0.875rem;
+  padding: 0.75em 1em;
+}
+```
+
+Use `rem` when you want consistent sizing across the page. Use `em` when spacing should scale with the element's own font size, such as button padding.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

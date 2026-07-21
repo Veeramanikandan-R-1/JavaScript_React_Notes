@@ -84,6 +84,83 @@ function SignupForm() {
 
 ---
 
+# 7.1 Controlled vs Uncontrolled Inputs
+
+| Type | Source of truth | Access value with | Best for |
+| ---- | --------------- | ----------------- | -------- |
+| Controlled | React state | state variable | validation, conditional UI, instant feedback |
+| Uncontrolled | DOM input itself | `ref` or `FormData` | simple forms, file inputs, less rerendering |
+
+Controlled:
+
+```jsx
+function NameInput() {
+  const [name, setName] = React.useState("");
+
+  return <input value={name} onChange={(event) => setName(event.target.value)} />;
+}
+```
+
+Uncontrolled:
+
+```jsx
+function NameForm() {
+  const inputRef = React.useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(inputRef.current.value);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input ref={inputRef} name="name" />
+      <button>Save</button>
+    </form>
+  );
+}
+```
+
+Do not use refs as a replacement for normal UI state. Refs are useful when you need DOM access, previous values, render counters, timers, or uncontrolled inputs.
+
+Uncontrolled ref submit is useful for small forms where you only need the value on submit:
+
+```jsx
+function FeedbackForm() {
+  const messageRef = React.useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    alert(messageRef.current.value);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="message">Message</label>
+      <textarea id="message" ref={messageRef} name="message" />
+      <button type="submit">Send</button>
+    </form>
+  );
+}
+```
+
+## Disabling Copy/Paste
+
+React can intercept copy/paste events, but this is a UX rule, not real security. Users can still bypass it through browser tools or other inputs.
+
+```jsx
+<input
+  onCopy={(event) => event.preventDefault()}
+  onPaste={(event) => event.preventDefault()}
+/>
+```
+
+Use this only for a clear product requirement. Avoid blocking password managers, accessibility tools, or normal user workflows without a strong reason.
+
+### Visual Notes from `react_1.docx`
+
+<img src="../assets/react_1_docx/image11.png" alt="Disabling copy and paste in React screenshot from react_1.docx" width="720">
+
 # 8. Senior Deep Dive
 
 ## When to Use

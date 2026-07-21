@@ -26,6 +26,17 @@
 
 ---
 
+# CSS Modules Quick Notes
+
+* File name: `Component.module.css`
+* Import: `import styles from "./Component.module.css"`
+* Usage: `className={styles.button}`
+* Classes are locally scoped.
+* Helps avoid global class collisions.
+* Good for React component-level styling.
+
+---
+
 # Interview Questions & Answers
 
 ### 1. How would you explain CSS Architecture, BEM, and CSS Modules in a real project?

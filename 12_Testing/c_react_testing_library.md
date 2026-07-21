@@ -170,3 +170,5 @@ The test should prove how the UI behaves when data is missing, validation fails,
 # Senior Frontend Engineer Takeaway
 
 For senior-level work, React Testing Library is not only a syntax topic. You should be able to explain the mental model, choose the right pattern for a product requirement, identify common failure modes, and verify behavior through tooling, tests, and browser inspection.
+
+Related practical note: [React Testing Library Practical Interview Notes](./g_react_testing_library_interview_practical.md).

@@ -56,3 +56,12 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* Production builds remove development warnings, minify output, and enable dead-code removal.
+* Modern tools enable production behavior through `npm run build`.
+* Custom Webpack projects can use `mode: "production"`.
+* Always test production build output, not only the dev server.

@@ -78,6 +78,69 @@ console.log(next()); // 2
 
 ---
 
+# 7.1 Practical Revision Notes from Pasted Notes
+
+## Temporal Dead Zone
+
+`let` and `const` declarations are hoisted, but they are not usable until JavaScript reaches the declaration line. That period is the Temporal Dead Zone.
+
+```js
+console.log(count); // ReferenceError
+let count = 1;
+
+console.log(total); // undefined
+var total = 10;
+```
+
+Practical rule: declare `let` and `const` before using them. In React components, keep derived values and hook variables easy to scan so you do not read a variable before initialization.
+
+```jsx
+function Counter() {
+  const [count, setCount] = React.useState(0);
+  const label = `Count: ${count}`;
+
+  return <button onClick={() => setCount(count + 1)}>{label}</button>;
+}
+```
+
+## Lexical Environment vs Execution Context
+
+| Concept | Simple meaning | Example |
+| ------- | -------------- | ------- |
+| Lexical environment | Where variables are written and how scope is connected | Inner function can read outer function variables |
+| Execution context | What is running right now | A new function call gets its own local context |
+
+Use this interview shortcut:
+
+```text
+Lexical environment = where the code is written
+Execution context   = what is happening while code runs
+```
+
+## Is JavaScript Interpreted or Compiled?
+
+Modern JavaScript engines use parsing, interpretation, and JIT compilation together.
+
+1. Source code is parsed into an internal structure.
+2. The engine starts executing bytecode/intermediate code.
+3. Hot code paths can be optimized by a Just-In-Time compiler.
+
+Interview answer: JavaScript is commonly described as interpreted, but modern engines also compile optimized machine code at runtime.
+
+## Strict Mode
+
+`"use strict"` enables stricter JavaScript rules in old-style scripts.
+
+```js
+"use strict";
+
+function updateUser() {
+  username = "Mani"; // ReferenceError instead of accidental global variable
+}
+```
+
+In ES modules and modern bundler output, strict mode is already applied. Still understand it for interview questions and legacy files.
+
 # 8. Senior Deep Dive
 
 ## When to Use

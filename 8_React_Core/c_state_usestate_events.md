@@ -81,6 +81,73 @@ function QuantitySelector({ initialValue = 1 }) {
 
 ---
 
+# 7.1 Functional State Updates and Lifting State
+
+Use the functional updater form when the next state depends on the previous state.
+
+```jsx
+setCount((previousCount) => previousCount + 1);
+```
+
+This avoids stale values when React batches updates or when multiple updates happen in one event.
+
+```jsx
+function Counter() {
+  const [count, setCount] = React.useState(0);
+
+  function addThree() {
+    setCount((count) => count + 1);
+    setCount((count) => count + 1);
+    setCount((count) => count + 1);
+  }
+
+  return <button onClick={addThree}>{count}</button>;
+}
+```
+
+## Lifting State Up
+
+Lift state to the closest common parent when multiple child components need the same changing value.
+
+```jsx
+function Parent() {
+  const [selectedId, setSelectedId] = React.useState(null);
+
+  return (
+    <>
+      <List selectedId={selectedId} onSelect={setSelectedId} />
+      <Details selectedId={selectedId} />
+    </>
+  );
+}
+```
+
+Do not lift state higher than needed. Too much lifted state makes unrelated components re-render and increases prop passing.
+
+### Visual Notes from `react_1.docx`
+
+<img src="../assets/react_1_docx/image2.png" alt="Functional state updater screenshot from react_1.docx" width="720">
+
+## Class Component `this.setState` Binding
+
+In class components, normal methods do not automatically bind `this`.
+
+```jsx
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+    this.increment = this.increment.bind(this);
+  }
+
+  increment() {
+    this.setState((state) => ({ count: state.count + 1 }));
+  }
+}
+```
+
+Arrow class fields avoid manual binding because they capture lexical `this`.
+
 # 8. Senior Deep Dive
 
 ## When to Use

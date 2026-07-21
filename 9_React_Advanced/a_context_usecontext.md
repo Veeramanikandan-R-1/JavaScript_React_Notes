@@ -84,6 +84,50 @@ export default function OrdersPage({ orders }) {
 
 ---
 
+# 7.1 Practical Theme Context Example
+
+Create the context, wrap the app with the provider, then read the value inside children. A common mistake is calling `useContext(ThemeContext)` in a component that is rendered outside the provider.
+
+```jsx
+const ThemeContext = React.createContext("light");
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = React.useState("light");
+  const value = React.useMemo(() => ({ theme, setTheme }), [theme]);
+
+  return (
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+function ThemeSwitcher() {
+  const { theme, setTheme } = React.useContext(ThemeContext);
+
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
+      Current theme: {theme}
+    </button>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <ThemeSwitcher />
+    </ThemeProvider>
+  );
+}
+```
+
+Keep provider values stable with `useMemo` when passing objects/functions. Otherwise, every consumer can re-render whenever the provider component renders.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

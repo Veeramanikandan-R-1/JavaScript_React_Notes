@@ -56,3 +56,13 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* On-page SEO includes HTML structure, title, description, headings, content, alt text, structured data, and performance.
+* Off-page SEO includes backlinks, social sharing, brand mentions, guest posts, and references.
+* SSR sends meaningful HTML from the server and usually helps public SEO pages.
+* CSR is often fine for dashboards/internal tools where SEO is not important.
+* SSR is not automatically faster; hydration and server cost still matter.

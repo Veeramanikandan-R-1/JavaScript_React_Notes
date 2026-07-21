@@ -75,6 +75,159 @@ const client = new ApiClient("/api");
 
 ---
 
+# 7.1 Practical Prototype Revision
+
+Prototype inheritance means one object can look up properties and methods from another object through its prototype chain.
+
+```js
+const animal = {
+  lives() {
+    return "Every animal lives";
+  },
+};
+
+const bird = Object.create(animal);
+bird.sings = function () {
+  return "Bird sings";
+};
+
+console.log(bird.sings());
+console.log(bird.lives());
+```
+
+Avoid assigning `__proto__` in application code. Prefer `Object.create`, constructor functions, or `class extends`.
+
+Class syntax:
+
+```js
+class Animal {
+  lives() {
+    return "Every animal lives";
+  }
+}
+
+class Bird extends Animal {
+  sings() {
+    return "Bird sings";
+  }
+}
+
+const parrot = new Bird();
+console.log(parrot.lives());
+console.log(parrot.sings());
+```
+
+Senior note: classes are syntax over JavaScript's prototype model. They are useful for framework APIs, SDK clients, and domain objects, but React UI is usually simpler with functions, hooks, and plain objects.
+
+---
+
+# 7.2 Four OOP Pillars in JavaScript
+
+JavaScript is prototype-based, but ES6 `class` syntax lets you write familiar OOP-style code. The four interview pillars are encapsulation, abstraction, inheritance, and polymorphism.
+
+## Encapsulation
+
+Encapsulation means keeping data and behavior together and controlling how data changes.
+
+```js
+class BankAccount {
+  #balance;
+
+  constructor(owner, balance) {
+    this.owner = owner;
+    this.#balance = balance;
+  }
+
+  deposit(amount) {
+    if (amount <= 0) throw new Error("Amount must be positive");
+    this.#balance += amount;
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const account = new BankAccount("Veer", 1000);
+account.deposit(500);
+
+console.log(account.getBalance()); // 1500
+// account.#balance; // SyntaxError: private field is not accessible outside class
+```
+
+Interview point: private fields such as `#balance` prevent direct modification of sensitive internal state.
+
+## Abstraction
+
+Abstraction means exposing the required behavior while hiding implementation details.
+
+```js
+class Shape {
+  area() {
+    throw new Error("area() must be implemented");
+  }
+}
+
+class Circle extends Shape {
+  constructor(radius) {
+    super();
+    this.radius = radius;
+  }
+
+  area() {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+console.log(new Circle(5).area());
+```
+
+Interview point: JavaScript does not have strict abstract classes like Java, but a base class can still define a contract.
+
+## Inheritance
+
+Inheritance lets a child reuse and override parent behavior.
+
+```js
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    return `${this.name} makes a sound`;
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    return `${this.name} barks`;
+  }
+}
+
+console.log(new Dog("Tommy").speak());
+```
+
+## Polymorphism
+
+Polymorphism means the same interface can produce different behavior depending on the object.
+
+```js
+class Cat extends Animal {
+  speak() {
+    return `${this.name} meows`;
+  }
+}
+
+const animals = [new Dog("Bruno"), new Cat("Kitty")];
+
+for (const animal of animals) {
+  console.log(animal.speak());
+}
+```
+
+Interview point: the caller uses the same method, `speak()`, without caring whether the object is a `Dog` or `Cat`.
+
 # 8. Senior Deep Dive
 
 ## When to Use

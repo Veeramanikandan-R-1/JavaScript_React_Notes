@@ -11,6 +11,14 @@
 * Avoid: Ignoring error paths in async code.
 * Avoid: Using loose equality without a deliberate reason.
 * Avoid: Treating objects and arrays as if they are deep-copied by spread.
+* Normal functions have dynamic `this`; arrow functions capture `this` from surrounding scope.
+* `call` runs a function with a chosen `this` and comma-separated args.
+* `apply` runs a function with a chosen `this` and array args.
+* `bind` returns a new function with `this` fixed.
+* Closures help with private state, callbacks, factory functions, event handlers, and memoization.
+* In React, stale closures usually mean an effect/callback captured old values.
+* Currying converts a multi-argument function into unary function calls.
+* Partial application lets you provide repeated arguments once and reuse the specialized function.
 
 ---
 
@@ -23,6 +31,18 @@
 | Execution context | The environment where code runs. |
 | Reference | A way objects and arrays are shared by identity. |
 | Module | A file-level boundary for imports and exports. |
+
+---
+
+# Function Differences
+
+| Topic | Practical rule |
+| ----- | -------------- |
+| Normal function | Use for object methods and dynamic `this`. |
+| Arrow function | Use for callbacks and lexical `this`. |
+| `call` | Invoke now with selected `this`. |
+| `apply` | Invoke now with selected `this` and array args. |
+| `bind` | Create a later callback with selected `this`. |
 
 ---
 

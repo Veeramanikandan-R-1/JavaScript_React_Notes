@@ -297,10 +297,195 @@ git add src/components/OrderFilter.jsx src/components/OrderFilter.css
 git commit -m "Add order filter controls"
 git push -u origin feature/order-filter
 `),
+    extraSections: `# 7. Frequently Used Git Commands
+
+## Check Current State
+
+${codeBlock("bash", `
+git status
+git branch
+git branch -a
+git log --oneline
+git log --oneline --graph --decorate --all
+`)}
+
+Use these before editing, before committing, and before pushing. \`git status\` is the command you should run most often.
+
+## Create and Switch Branches
+
+${codeBlock("bash", `
+git switch main
+git pull origin main
+git switch -c feature/login-form
+git switch feature/login-form
+git branch -d feature/login-form
+`)}
+
+Create a new branch for every meaningful feature, bug fix, or experiment.
+
+## Stage and Commit Changes
+
+${codeBlock("bash", `
+git diff
+git diff --staged
+git add README.md
+git add src/components/LoginForm.jsx
+git add .
+git commit -m "Add login form validation"
+`)}
+
+Use \`git diff\` before staging and \`git diff --staged\` before committing. Avoid \`git add .\` when unrelated files are changed.
+
+## Push and Pull
+
+${codeBlock("bash", `
+git push -u origin feature/login-form
+git push
+git pull
+git pull --rebase origin main
+`)}
+
+Use \`git push -u origin branch-name\` the first time you push a new branch. Use \`pull --rebase\` only when your team prefers a linear history.
+
+## Undo Local Changes Safely
+
+${codeBlock("bash", `
+git restore README.md
+git restore --staged README.md
+git commit --amend
+git revert <commit-hash>
+`)}
+
+\`git restore\` is for local uncommitted changes. \`git revert\` is safer for undoing a commit that may already be shared because it creates a new commit instead of rewriting history.
+
+## Stash Temporary Work
+
+${codeBlock("bash", `
+git stash
+git stash list
+git stash pop
+git stash apply stash@{0}
+git stash drop stash@{0}
+`)}
+
+Use stash when you need to switch branches but your current work is not ready to commit.
+
+## Sync Feature Branch with Main
+
+${codeBlock("bash", `
+git switch main
+git pull origin main
+git switch feature/login-form
+git merge main
+`)}
+
+Alternative if your team uses rebase:
+
+${codeBlock("bash", `
+git switch feature/login-form
+git fetch origin
+git rebase origin/main
+`)}
+
+Do not rebase public/shared branches unless your team has agreed to that workflow.
+
+## Remote Repository Commands
+
+${codeBlock("bash", `
+git remote -v
+git fetch origin
+git clone <repo-url>
+git remote add origin <repo-url>
+`)}
+
+\`git fetch\` downloads remote changes without merging them into your current branch.
+
+## Useful Inspection Commands
+
+${codeBlock("bash", `
+git show <commit-hash>
+git blame README.md
+git diff main...feature/login-form
+git ls-files
+`)}
+
+Use these during reviews, debugging regressions, or understanding why a line changed.`,
+    revisionExtraSections: `# Frequently Used Git Commands
+
+## Daily Commands
+
+${codeBlock("bash", `
+git status
+git diff
+git add <file>
+git commit -m "Message"
+git push
+git pull
+git log --oneline
+`)}
+
+## Branch Commands
+
+${codeBlock("bash", `
+git branch
+git switch main
+git switch -c feature/login-form
+git branch -d feature/login-form
+`)}
+
+## Undo Commands
+
+${codeBlock("bash", `
+git restore <file>
+git restore --staged <file>
+git commit --amend
+git revert <commit-hash>
+`)}
+
+## Stash Commands
+
+${codeBlock("bash", `
+git stash
+git stash list
+git stash pop
+`)}
+
+## Sync Commands
+
+${codeBlock("bash", `
+git fetch origin
+git pull origin main
+git merge main
+git rebase origin/main
+`)}
+
+Use \`git revert\` for commits already pushed/shared. Use \`git restore\` for local uncommitted changes.`,
     scenarios: [
       "Reviewing a UI change where the screenshot confirms behavior better than prose.",
       "Separating a component refactor from a feature so regressions are easier to isolate.",
       "Resolving a package-lock conflict after two branches update dependencies.",
+    ],
+    interview: [
+      {
+        q: "How would you explain Git and Frontend Project Workflow in a real project?",
+        a: "Git lets a team make small, reviewable changes safely. A good workflow keeps unrelated changes separate, makes rollback possible, and gives reviewers enough context to trust the change.",
+      },
+      {
+        q: "What happens internally when Git and Frontend Project Workflow is involved?",
+        a: "Git stores snapshots of file content, links them through commits, and moves branch names to point at the latest commit in a line of work.",
+      },
+      {
+        q: "How do you debug issues related to Git and Frontend Project Workflow?",
+        a: "I check `git status`, inspect diffs, compare branches, review commit history, and isolate which commit introduced the behavior.",
+      },
+      {
+        q: "When should you use git revert instead of resetting history?",
+        a: "Use `git revert` when the commit has already been pushed or shared. It creates a new commit that undoes the old one without rewriting history.",
+      },
+      {
+        q: "What should you check before committing frontend code?",
+        a: "Check `git status`, review `git diff`, avoid unrelated files, run relevant tests or linting, and write a commit message that explains the user-facing or engineering reason.",
+      },
     ],
     exercises: [
       {
@@ -2527,13 +2712,13 @@ ${topic.example}
 
 ---
 
-# 7. Real-world Scenarios
+${topic.extraSections ? `${topic.extraSections}\n\n---\n\n# 8. Real-world Scenarios` : "# 7. Real-world Scenarios"}
 
 ${list(scenarios)}
 
 ---
 
-${topic.deepDive || seniorDeepDive(topic)}
+${topic.extraSections ? (topic.deepDive || seniorDeepDive(topic)).replace("# 8. Senior Deep Dive", "# 9. Senior Deep Dive") : (topic.deepDive || seniorDeepDive(topic))}
 
 ---
 
@@ -2600,7 +2785,7 @@ ${list([
 
 ---
 
-# Cheat Sheet
+${topic.revisionExtraSections ? `${topic.revisionExtraSections}\n\n---\n\n` : ""}# Cheat Sheet
 
 ${table(topic.concepts.slice(0, 8))}
 

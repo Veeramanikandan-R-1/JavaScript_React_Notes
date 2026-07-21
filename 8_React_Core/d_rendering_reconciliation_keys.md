@@ -81,6 +81,45 @@ function CartItems({ items }) {
 
 ---
 
+# 7.1 Virtual DOM, Reconciliation, Fiber, and Browser DOM
+
+The DOM is the browser's live document tree. React does not usually mutate DOM nodes manually from your component code. Instead, components return React elements, React compares the new element tree with the previous one, and React commits the needed DOM changes.
+
+```text
+JSX -> React elements -> render work -> reconciliation -> commit DOM changes -> browser paints
+```
+
+Key distinction:
+
+| Concept | Meaning |
+| ------- | ------- |
+| DOM update | Actual browser DOM node/attribute/text change |
+| Re-render | React calls components again to calculate the next UI |
+| Reconciliation | React compares previous and next element trees |
+| Commit | React applies changes to the real DOM |
+
+Reconciliation rules to remember:
+
+* If the root element type changes, React tears down the old subtree and creates a new one.
+* If the element type is the same, React updates changed attributes and keeps the existing DOM node where possible.
+* Stable keys help React preserve identity inside lists.
+
+## Virtual DOM vs Shadow DOM
+
+| Topic | Virtual DOM | Shadow DOM |
+| ----- | ----------- | ---------- |
+| What it is | In-memory UI representation used by libraries like React | Browser feature for DOM/CSS encapsulation |
+| Main goal | Efficient UI reconciliation | Web component encapsulation |
+| Owned by | JavaScript library/runtime | Browser platform |
+
+## React Fiber
+
+React Fiber is React's internal reconciliation architecture introduced in React 16. It lets React split rendering work into smaller units, prioritize updates, pause work, resume work, and support modern concurrent rendering behavior.
+
+### Visual Notes from `react_1.docx`
+
+<img src="../assets/react_1_docx/image4.png" alt="Virtual DOM and real DOM diagram screenshot from react_1.docx" width="720">
+
 # 8. Senior Deep Dive
 
 ## When to Use

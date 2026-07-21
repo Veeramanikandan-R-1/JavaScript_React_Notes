@@ -76,6 +76,40 @@ try {
 
 ---
 
+# 7.1 Idempotency and Duplicate Request Prevention
+
+Retries are safe only when the backend can handle repeated attempts correctly. For payment, order creation, and booking flows, use an idempotency key so the server can treat repeated requests as the same operation.
+
+```js
+async function createPaymentIntent(amount) {
+  const idempotencyKey = crypto.randomUUID();
+
+  const response = await fetch("/api/payments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Idempotency-Key": idempotencyKey,
+    },
+    body: JSON.stringify({ amount }),
+  });
+
+  if (!response.ok) throw new Error("Payment request failed");
+  return response.json();
+}
+```
+
+Frontend duplicate prevention:
+
+* disable submit buttons while a mutation is in progress
+* debounce search input
+* cancel stale requests on route/query change
+* ignore out-of-order responses with request IDs
+* use backend idempotency for important writes
+
+Do not rely only on disabling a button. Users can double-click, refresh, retry, or send duplicate requests from another tab.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

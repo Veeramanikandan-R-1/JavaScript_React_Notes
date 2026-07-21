@@ -168,3 +168,5 @@ Include JavaScript size, image size, LCP target, CLS target, and interaction res
 # Senior Frontend Engineer Takeaway
 
 For senior-level work, Web Vitals, LCP, CLS, and INP is not only a syntax topic. You should be able to explain the mental model, choose the right pattern for a product requirement, identify common failure modes, and verify behavior through tooling, tests, and browser inspection.
+
+Related practical note: [Lighthouse React Audit Notes](./h_lighthouse_react_audit_notes.md).

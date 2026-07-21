@@ -11,6 +11,11 @@
 * Avoid: Adding event listeners repeatedly without cleanup.
 * Avoid: Reading and writing layout in tight loops.
 * Avoid: Trusting unsanitized user input.
+* DOM represents page content through `document`.
+* BOM represents browser features through `window`.
+* DOM examples: elements, attributes, text nodes, events.
+* BOM examples: `location`, `history`, `navigator`, `screen`, `alert`.
+* In React, use refs for direct DOM access only when state/props are not enough.
 
 ---
 
@@ -23,6 +28,16 @@
 | Event | A notification from user input, browser lifecycle, network, or code. |
 | Mutation | A change to DOM structure, text, attributes, or state. |
 | Accessibility tree | Browser-derived structure consumed by assistive technologies. |
+
+---
+
+# DOM vs BOM
+
+| DOM | BOM |
+| --- | --- |
+| Page/document tree | Browser environment |
+| Root is `document` | Root is `window` |
+| Change content, attributes, and nodes | Navigate, inspect browser info, use history |
 
 ---
 

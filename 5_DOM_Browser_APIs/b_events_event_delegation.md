@@ -71,6 +71,44 @@ document.querySelector("[data-list]").addEventListener("click", (event) => {
 
 ---
 
+# 7.1 Capture, Bubble, Passive Listeners, and React
+
+Event phases:
+
+```text
+capture phase -> target phase -> bubble phase
+```
+
+React capture handler:
+
+```jsx
+function Toolbar() {
+  return (
+    <div onClickCapture={() => console.log("capture")}>
+      <button onClick={() => console.log("button")}>Save</button>
+    </div>
+  );
+}
+```
+
+Native passive listener for scroll/touch performance:
+
+```js
+window.addEventListener(
+  "scroll",
+  () => {
+    console.log(window.scrollY);
+  },
+  { passive: true }
+);
+```
+
+Passive listeners tell the browser the handler will not call `preventDefault()`, which can help scrolling stay responsive.
+
+React uses a SyntheticEvent wrapper around native events. You still need to understand native propagation because React handlers are ultimately tied to browser events.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

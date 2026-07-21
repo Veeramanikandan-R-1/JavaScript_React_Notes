@@ -77,6 +77,42 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Practical Flexbox Examples
+
+Responsive row that stacks on small screens:
+
+```css
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.feature {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+```
+
+Common alignment map:
+
+| Property | Axis |
+| -------- | ---- |
+| `justify-content` | main axis |
+| `align-items` | cross axis for all items |
+| `align-self` | cross axis for one item |
+| `gap` | space between items |
+
+Visual notes from `htmlCss.docx`:
+
+<img src="../assets/htmlCss_docx/image2.png" alt="What is Flexbox slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image7.png" alt="Flexbox alignment properties slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image13.jpg" alt="Grid vs Flex slide from htmlCss.docx" width="720">
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

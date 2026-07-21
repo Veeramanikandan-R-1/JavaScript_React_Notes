@@ -58,3 +58,14 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* Error boundaries catch render, lifecycle, and child constructor errors.
+* They do not catch event handler, async, SSR, or boundary-self errors.
+* Use small boundaries around fragile UI and log to monitoring.
+* Native React error boundaries are class components; function-component apps often use a wrapper or `react-error-boundary`.
+* `React.lazy` expects a default export.
+* For named exports, map the import promise to `{ default: module.NamedExport }`.

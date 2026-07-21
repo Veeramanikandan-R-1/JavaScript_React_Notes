@@ -82,6 +82,66 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Media Query Practice
+
+Common syntax:
+
+```css
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .layout {
+    grid-template-columns: 16rem 1fr;
+  }
+}
+
+@media (min-resolution: 2dppx) {
+  .logo {
+    background-image: url("/logo@2x.png");
+  }
+}
+```
+
+Approximate breakpoint language:
+
+| Range | Treat as |
+| ----- | -------- |
+| up to `600px` | small/mobile layouts |
+| `600px` to `900px` | tablet/intermediate layouts |
+| `900px` and above | desktop/wide layouts |
+
+These are not fixed rules. Add breakpoints when the content/layout needs them.
+
+Responsive flex layout:
+
+```css
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .cards {
+    flex-direction: row;
+  }
+
+  .card {
+    flex: 1;
+  }
+}
+```
+
+Visual note from `htmlCss.docx`:
+
+<img src="../assets/htmlCss_docx/image8.png" alt="Responsive design practices slide from htmlCss.docx" width="720">
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

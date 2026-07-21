@@ -83,6 +83,45 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 `npm` vs `npx`
+
+| Tool | Use |
+| ---- | --- |
+| `npm` | Install packages, manage scripts, publish packages |
+| `npx` | Execute a package binary without manually installing it globally |
+
+```powershell
+npm install
+npm run dev
+npm install react-router-dom
+
+npm create vite@latest my-app -- --template react
+npx eslint .
+```
+
+Modern note: many package managers can run package binaries. In npm scripts, local binaries from `node_modules/.bin` are available automatically.
+
+## React Project Setup Note
+
+Old notes often use Create React App:
+
+```powershell
+npx create-react-app my-app
+```
+
+Treat CRA as legacy for new projects. React's official docs announced Create React App deprecation for new apps on February 14, 2025 and point new custom setups toward tools such as Vite, Parcel, or Rsbuild.
+
+Practical modern setup:
+
+```powershell
+npm create vite@latest my-app -- --template react
+cd my-app
+npm install
+npm run dev
+```
+
+Use CRA knowledge for maintaining older projects, but practice Vite/framework setups for current interviews and new work.
+
 # 8. Senior Deep Dive
 
 ## When to Use
@@ -176,3 +215,5 @@ Use the Common Mistakes section, then add how you would prevent each mistake in 
 # Senior Frontend Engineer Takeaway
 
 For senior-level work, npm, package.json, and SemVer is not only a syntax topic. You should be able to explain the mental model, choose the right pattern for a product requirement, identify common failure modes, and verify behavior through tooling, tests, and browser inspection.
+
+Related practical note: [npm vs Yarn Package Managers](./h_npm_yarn_package_managers.md).

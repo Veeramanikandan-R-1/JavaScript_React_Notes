@@ -74,6 +74,50 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 React Accessibility Practical Checklist
+
+Start with semantic HTML:
+
+* use `header`, `nav`, `main`, `section`, and `footer` for structure
+* use `button` for actions
+* use `a`/`Link` for navigation
+* use `label` with form controls
+
+Use ARIA only when native HTML is not enough:
+
+```jsx
+<p role="alert">Form submission failed.</p>
+
+<div aria-live="polite">
+  {items.length} items in cart.
+</div>
+```
+
+Focus management:
+
+```jsx
+function StartPanel() {
+  const buttonRef = React.useRef(null);
+
+  React.useEffect(() => {
+    buttonRef.current?.focus();
+  }, []);
+
+  return <button ref={buttonRef}>Start</button>;
+}
+```
+
+Testing tools:
+
+* keyboard-only navigation
+* browser Accessibility panel
+* Lighthouse
+* axe DevTools
+* `eslint-plugin-jsx-a11y`
+* screen readers such as NVDA, VoiceOver, and JAWS
+
+Senior rule: accessibility is not only ARIA. It is semantics, labels, focus, keyboard, announcements, contrast, motion, and testing.
+
 # 8. Senior Deep Dive
 
 ## When to Use

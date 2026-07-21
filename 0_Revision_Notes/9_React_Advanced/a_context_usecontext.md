@@ -58,3 +58,11 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_concepts_with_code.docx`
+
+* Theme context pattern: create context, wrap children with provider, consume with `useContext`.
+* Memoize object provider values with `useMemo` when consumers rerender too often.
+* If a consumer is outside the provider, it receives the context default value.

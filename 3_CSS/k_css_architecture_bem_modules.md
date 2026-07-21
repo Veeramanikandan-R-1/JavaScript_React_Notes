@@ -77,7 +77,116 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
-# 8. Senior Deep Dive
+# 8. CSS Modules in React
+
+CSS Modules use files like `Component.module.css` to scope class names locally to a component.
+
+Normal CSS is global:
+
+```css
+.button {
+  color: red;
+}
+```
+
+If multiple components use `.button`, styles can clash.
+
+CSS Module:
+
+```css
+/* Button.module.css */
+.button {
+  color: red;
+}
+```
+
+```jsx
+import styles from "./Button.module.css";
+
+function Button() {
+  return <button className={styles.button}>Click</button>;
+}
+```
+
+The build tool generates a unique class name, which avoids global naming collisions.
+
+Benefits:
+
+* scoped styles
+* fewer class name conflicts
+* easier component maintenance
+* better code navigation
+* good fit for React component architecture
+
+Drawbacks of normal/global CSS in large React apps:
+
+* style leakage
+* accidental overwrites
+* hard-to-track source of styles
+* harder maintenance as app grows
+
+Use CSS Modules when:
+
+* styling component-level UI
+* you want style encapsulation
+* the app is component-based
+* you are not using another scoped styling approach
+
+---
+
+# 8.1 Sass / SCSS Practical Notes
+
+Install Dart Sass:
+
+```bash
+npm install -D sass
+```
+
+Use `.scss` partials with a leading underscore:
+
+```text
+styles/
+  _tokens.scss
+  _mixins.scss
+  main.scss
+```
+
+```scss
+// _tokens.scss
+$brand-color: #2563eb;
+
+// main.scss
+@use "tokens";
+
+.button {
+  color: tokens.$brand-color;
+}
+```
+
+Useful Sass features:
+
+* variables
+* nesting
+* mixins
+* functions
+* partials/modules
+* conditionals and loops
+
+Prefer modern CSS custom properties for runtime theming. Use Sass when the project already has a Sass architecture or needs build-time utilities.
+
+Visual notes from `htmlCss.docx`:
+
+<img src="../assets/htmlCss_docx/image22.jpg" alt="What is Sass slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image17.jpg" alt="How Sass works slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image9.jpg" alt="What Sass offers slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image14.jpg" alt="SCSS vs Sass slide from htmlCss.docx" width="720">
+
+---
+
+# 9. Senior Deep Dive
 
 ## When to Use
 

@@ -74,6 +74,53 @@ console.log("D");
 
 ---
 
+# 7.1 React Context and Event Loop
+
+JavaScript runs one piece of synchronous code at a time. Browser work such as timers, DOM events, and network requests completes later, then callbacks return through task or microtask queues.
+
+React implications:
+
+* `setState`/`useState` updates are scheduled and may be batched, so logging state immediately after setting it often shows the old value.
+* `useEffect` runs after React has committed the DOM update and the browser has had a chance to paint.
+* `useLayoutEffect` runs after DOM mutation but before paint, so heavy work there can block the frame.
+* Long synchronous loops freeze the UI because the browser cannot process rendering or input while the call stack is busy.
+
+```jsx
+function Example() {
+  const [count, setCount] = React.useState(0);
+
+  function increment() {
+    setCount(count + 1);
+    console.log(count); // old value from this render
+  }
+
+  return <button onClick={increment}>{count}</button>;
+}
+```
+
+Async effect example:
+
+```jsx
+React.useEffect(() => {
+  let active = true;
+
+  async function loadData() {
+    const response = await fetch("/data");
+    const data = await response.json();
+
+    if (active) {
+      setData(data);
+    }
+  }
+
+  loadData();
+
+  return () => {
+    active = false;
+  };
+}, []);
+```
+
 # 8. Senior Deep Dive
 
 ## When to Use

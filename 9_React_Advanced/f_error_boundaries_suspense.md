@@ -84,6 +84,65 @@ export default function OrdersPage({ orders }) {
 
 ---
 
+# 7.1 Error Boundaries and Lazy Loading
+
+## Error Boundary Scope
+
+Error boundaries catch errors during:
+
+* rendering
+* lifecycle methods
+* constructors of child components
+
+They do not catch:
+
+* event handler errors
+* async errors from timers/promises/fetch
+* server-side rendering errors
+* errors thrown inside the error boundary itself
+
+Use small boundaries around fragile parts such as charts, third-party widgets, profile panels, and analytics modules.
+
+```jsx
+<ErrorBoundary>
+  <AnalyticsWidget />
+</ErrorBoundary>
+```
+
+Native React error boundaries are class components. In function-component codebases, teams often use a small class boundary wrapper or a library such as `react-error-boundary`.
+
+Best practice: show a useful fallback UI and log errors to monitoring tools such as Sentry, LogRocket, or Datadog.
+
+## Lazy Loading and Named Exports
+
+`React.lazy` expects the dynamically imported module to expose a default export.
+
+```jsx
+const SettingsPage = React.lazy(() => import("./SettingsPage"));
+```
+
+For a named export, map it to `default`:
+
+```jsx
+const SettingsPage = React.lazy(() =>
+  import("./SettingsPage").then((module) => ({
+    default: module.SettingsPage,
+  }))
+);
+```
+
+Code splitting breaks the app bundle into chunks so non-critical routes or heavy components can download only when needed.
+
+### Visual Notes from `react_1.docx`
+
+<img src="../assets/react_1_docx/image17.png" alt="React lazy loading route code screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image40.png" alt="Suspense fallback screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image23.png" alt="React.lazy named export screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image13.png" alt="Error boundary class component screenshot from react_1.docx" width="720">
+
 # 8. Senior Deep Dive
 
 ## When to Use

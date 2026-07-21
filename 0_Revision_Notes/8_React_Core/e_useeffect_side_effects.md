@@ -58,3 +58,12 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* `useEffect` runs after commit and synchronizes with external systems.
+* `useMemo` runs during render and returns a cached calculated value.
+* Use `useMemo` for expensive derived values, not side effects.
+* Use `useEffect` for network calls, subscriptions, timers, DOM APIs, logging, and cleanup.

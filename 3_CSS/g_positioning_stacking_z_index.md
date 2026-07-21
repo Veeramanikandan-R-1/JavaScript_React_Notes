@@ -81,6 +81,42 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Sticky Navbar Example
+
+```html
+<header class="site-header">
+  <a href="/" class="logo">Frontend Notes</a>
+  <nav aria-label="Primary">
+    <a href="/html">HTML</a>
+    <a href="/css">CSS</a>
+    <a href="/react">React</a>
+  </nav>
+</header>
+```
+
+```css
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-bottom: 1px solid #d0d7de;
+}
+```
+
+If sticky does not work, check parent `overflow`, the scroll container, and whether an inset such as `top: 0` is set.
+
+Visual note from `htmlCss.docx`:
+
+<img src="../assets/htmlCss_docx/image6.png" alt="CSS position values slide from htmlCss.docx" width="720">
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

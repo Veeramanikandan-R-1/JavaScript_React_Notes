@@ -78,6 +78,56 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Practical Reset and Overflow Notes
+
+Common starter reset:
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+```
+
+`border-box` makes width easier to reason about because padding and border are included in the declared width.
+
+```css
+.card {
+  width: 300px;
+  padding: 24px;
+  border: 1px solid #d0d7de;
+  box-sizing: border-box;
+}
+```
+
+With `content-box`, the actual rendered box becomes wider than `300px` because padding and border are added outside the content width.
+
+`overflow: auto` can create a scroll container and a block formatting context. Old float-based layouts sometimes used it to make a parent contain floated children, but modern layouts should usually use flex/grid or `display: flow-root`.
+
+```css
+.float-wrapper {
+  display: flow-root;
+}
+```
+
+Use `overflow: auto` when scrolling is actually desired.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

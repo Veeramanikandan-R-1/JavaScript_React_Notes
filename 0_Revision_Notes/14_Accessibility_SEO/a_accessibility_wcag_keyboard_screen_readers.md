@@ -56,3 +56,12 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* Start with semantic HTML before ARIA.
+* Use `aria-live` or `role="alert"` for important dynamic updates.
+* Manage focus when modals, panels, or routes change.
+* Test with keyboard, Lighthouse, axe, JSX a11y linting, and screen readers such as NVDA, VoiceOver, and JAWS.

@@ -84,6 +84,88 @@ export default function OrdersPage({ orders }) {
 
 ---
 
+# 7.1 Practical `useRef` Notes
+
+`useRef` stores a mutable value that persists across renders without causing a re-render when it changes.
+
+Good uses:
+
+* focus an input
+* read uncontrolled form values
+* store previous state/props
+* store timer IDs
+* count renders for debugging
+* integrate with third-party DOM libraries
+
+```jsx
+function RenderCounter() {
+  const renderCount = React.useRef(0);
+  renderCount.current += 1;
+
+  return <p>Rendered {renderCount.current} times</p>;
+}
+```
+
+Previous value example:
+
+```jsx
+function Price({ value }) {
+  const previousValue = React.useRef(value);
+
+  React.useEffect(() => {
+    previousValue.current = value;
+  }, [value]);
+
+  return <p>Previous: {previousValue.current}, Current: {value}</p>;
+}
+```
+
+Do not use refs as your main UI state store. If a value should appear in the UI and update the screen, use state.
+
+Focus example:
+
+```jsx
+function SearchBox() {
+  const inputRef = React.useRef(null);
+
+  function focusSearch() {
+    inputRef.current?.focus();
+  }
+
+  return (
+    <>
+      <input ref={inputRef} type="search" placeholder="Search devices" />
+      <button type="button" onClick={focusSearch}>
+        Focus search
+      </button>
+    </>
+  );
+}
+```
+
+Uncontrolled submit example:
+
+```jsx
+function QuickNoteForm() {
+  const noteRef = React.useRef(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(noteRef.current.value);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="note">Note</label>
+      <input id="note" ref={noteRef} name="note" />
+      <button type="submit">Save</button>
+    </form>
+  );
+}
+```
+
+Use this when you only need the value at submit time. Use controlled state when the UI must react as the user types.
+
 # 8. Senior Deep Dive
 
 ## When to Use

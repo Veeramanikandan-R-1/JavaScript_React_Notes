@@ -84,6 +84,94 @@ export default function OrdersPage({ orders }) {
 
 ---
 
+# 7.1 Memoization Quick Map
+
+| Tool | What it memoizes | Use when |
+| ---- | ---------------- | -------- |
+| `React.memo` | Component result based on props | Child rerenders are expensive and props are often unchanged |
+| `useMemo` | Calculated value | Calculation is expensive or a stable object/array reference is needed |
+| `useCallback` | Function reference | Passing callbacks to memoized children or hook dependencies |
+| `React.PureComponent` | Class component render decision | Legacy/class components need shallow prop/state comparison |
+
+```jsx
+const VisibleList = React.memo(function VisibleList({ items, onSelect }) {
+  return items.map((item) => (
+    <button key={item.id} onClick={() => onSelect(item.id)}>
+      {item.name}
+    </button>
+  ));
+});
+```
+
+`React.PureComponent` is similar to `React.Component`, but it implements `shouldComponentUpdate` using shallow comparison of props and state.
+
+Memoization is not automatically good. If props are always new references, `React.memo` cannot help much.
+
+`useCallback(fn, deps)` is roughly equivalent to `useMemo(() => fn, deps)`, but `useCallback` communicates the intent more clearly.
+
+Expensive calculation example:
+
+```jsx
+function ProductSearch({ products }) {
+  const [query, setQuery] = React.useState("");
+  const [note, setNote] = React.useState("");
+
+  const filteredProducts = React.useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [products, query]);
+
+  return (
+    <>
+      <input value={query} onChange={(event) => setQuery(event.target.value)} />
+      <input value={note} onChange={(event) => setNote(event.target.value)} />
+      <p>Draft note: {note}</p>
+      {filteredProducts.map((product) => (
+        <div key={product.id}>{product.name}</div>
+      ))}
+    </>
+  );
+}
+```
+
+Here, changing `note` should not recalculate the filtered products.
+
+Stable callback for a memoized child:
+
+```jsx
+const UserRow = React.memo(function UserRow({ user, onSelect }) {
+  return <button onClick={() => onSelect(user.id)}>{user.name}</button>;
+});
+
+function UserList({ users }) {
+  const [selectedId, setSelectedId] = React.useState(null);
+
+  const handleSelect = React.useCallback((id) => {
+    setSelectedId(id);
+  }, []);
+
+  return (
+    <>
+      <p>Selected: {selectedId ?? "none"}</p>
+      {users.map((user) => (
+        <UserRow key={user.id} user={user} onSelect={handleSelect} />
+      ))}
+    </>
+  );
+}
+```
+
+`useCallback` matters here because `UserRow` is memoized. Without a stable callback, the child receives a new function prop on every parent render.
+
+### Visual Notes from `react_1.docx`
+
+<img src="../assets/react_1_docx/image16.png" alt="React.memo feature comparison screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image33.png" alt="React memoization comparison table screenshot from react_1.docx" width="720">
+
+<img src="../assets/react_1_docx/image15.png" alt="React.memo usage screenshot from react_1.docx" width="720">
+
 # 8. Senior Deep Dive
 
 ## When to Use

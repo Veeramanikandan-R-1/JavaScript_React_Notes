@@ -11,6 +11,10 @@
 * Avoid: Committing local secrets.
 * Avoid: Assuming dev behavior equals production behavior.
 * Avoid: Ignoring build warnings.
+* Babel transpiles syntax such as JSX and modern JavaScript.
+* Webpack bundles modules and assets into deployable files.
+* Babel can be used inside Webpack through `babel-loader`.
+* Build flow: entry file -> dependency graph -> Babel transform -> optimized bundle -> browser.
 
 ---
 
@@ -23,6 +27,31 @@
 | Transpiler | Transforms source syntax. |
 | Linter | Finds suspicious code patterns. |
 | Build mode | Different configuration for development, test, staging, and production. |
+
+---
+
+# TypeScript React Practice
+
+Focus on:
+
+* `type`
+* `interface`
+* Generics
+* Typing props
+* Typing state
+* Typing form/input/click events
+* Replacing `any`
+* Converting existing React projects to TypeScript
+
+Example:
+
+```ts
+type ApiState<T> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: Error };
+```
 
 ---
 

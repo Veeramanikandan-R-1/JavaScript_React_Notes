@@ -77,6 +77,34 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Modern HTML Elements
+
+Useful native elements:
+
+| Element | Use |
+| ------- | --- |
+| `details` / `summary` | Disclosure UI without custom JavaScript. |
+| `dialog` | Native modal/non-modal dialog behavior. |
+| `template` | Inert HTML cloned later with JavaScript. |
+| `slot` | Placeholder for Web Component children. |
+| `progress` | Completion progress, such as upload percentage. |
+| `meter` | Scalar measurement within a known range, such as disk usage. |
+
+Examples:
+
+```html
+<progress max="100" value="40">40%</progress>
+<meter min="0" max="100" low="30" high="80" optimum="60" value="72">72</meter>
+
+<template id="row-template">
+  <li><span data-name></span></li>
+</template>
+```
+
+Experimental elements and proposals change over time. If old notes mention items such as `<portal>`, verify browser support before using them in production.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

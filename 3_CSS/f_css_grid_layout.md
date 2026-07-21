@@ -77,6 +77,46 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Practical Grid Examples
+
+Auto-fit card grid:
+
+```css
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+```
+
+Grid placement:
+
+```css
+.summary {
+  grid-column: span 2;
+}
+
+.hero {
+  grid-column: 1 / -1;
+}
+```
+
+Use grid for outer layouts or when rows and columns both matter. Use flexbox for a single row/column alignment problem.
+
+Visual notes from `htmlCss.docx`:
+
+<img src="../assets/htmlCss_docx/image20.jpg" alt="What is CSS Grid slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image21.jpg" alt="Two dimensional layouts slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image23.jpg" alt="CSS Grid how it works slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image15.png" alt="Grid flex container and items slide from htmlCss.docx" width="720">
+
+<img src="../assets/htmlCss_docx/image19.jpg" alt="Spanning rows and columns slide from htmlCss.docx" width="720">
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

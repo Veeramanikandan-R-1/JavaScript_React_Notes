@@ -78,6 +78,44 @@ async function postJson(url, body) {
 
 ---
 
+# 7.1 API vs REST API
+
+An API is any contract that lets one piece of software talk to another. In frontend work, people often use "API" to mean a backend endpoint the UI calls.
+
+REST is one common style of web API. REST APIs usually expose resources through URLs and use HTTP methods to express actions.
+
+```http
+GET /users/1
+POST /users
+PUT /users/1
+PATCH /users/1
+DELETE /users/1
+```
+
+Practical REST principles:
+
+* use nouns for resource URLs, such as `/users` and `/orders`
+* use HTTP methods for actions
+* return meaningful status codes
+* keep requests stateless
+* send predictable JSON response shapes
+
+Not every API is REST. Other API styles include GraphQL, SOAP, RPC, and WebSocket protocols.
+
+HTTP method interview notes:
+
+| Method | Use | Should request body change data? |
+| ------ | --- | -------------------------------- |
+| `GET` | Read data | No |
+| `POST` | Create or trigger a non-idempotent action | Yes |
+| `PUT` | Replace a resource | Yes |
+| `PATCH` | Partially update a resource | Yes |
+| `DELETE` | Delete a resource | Yes |
+
+Do not use `POST` just because a request has many filters. If the operation is a read, prefer `GET` with query params when practical, because it works better with caching, links, browser history, and observability.
+
+Avoid putting business data in headers. Headers are for metadata such as auth, content type, trace IDs, language, and idempotency keys. Put request data in the URL query for reads or the JSON body for writes.
+
 # 8. Senior Deep Dive
 
 ## When to Use

@@ -11,6 +11,11 @@
 * Avoid: Ignoring error paths in async code.
 * Avoid: Using loose equality without a deliberate reason.
 * Avoid: Treating objects and arrays as if they are deep-copied by spread.
+* TDZ: `let` and `const` are hoisted but cannot be read before initialization.
+* `var` can be read before assignment as `undefined`; `let`/`const` throw `ReferenceError`.
+* Lexical environment means where scope is written; execution context means what is running now.
+* Modern JavaScript uses interpretation plus JIT compilation for optimized hot code.
+* `"use strict"` catches unsafe legacy patterns like accidental globals.
 
 ---
 
@@ -23,6 +28,23 @@
 | Execution context | The environment where code runs. |
 | Reference | A way objects and arrays are shared by identity. |
 | Module | A file-level boundary for imports and exports. |
+
+---
+
+# Must-Know Examples
+
+```js
+console.log(a); // ReferenceError
+let a = 10;
+
+console.log(b); // undefined
+var b = 20;
+```
+
+```text
+Lexical environment = where code is written
+Execution context   = what runs at runtime
+```
 
 ---
 

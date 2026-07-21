@@ -69,6 +69,79 @@ const grandTotal = totals.reduce((sum, value) => sum + value, 0);
 
 ---
 
+# 7.1 Practical Revision Notes from Pasted Notes
+
+## `slice` vs `splice`
+
+| Method | Mutates original? | Use for |
+| ------ | ----------------- | ------- |
+| `slice(start, end)` | No | Copy part of an array |
+| `splice(start, deleteCount, ...items)` | Yes | Remove, replace, or insert items |
+
+```js
+const items = ["a", "b", "c", "d"];
+
+console.log(items.slice(1, 3)); // ["b", "c"]
+console.log(items); // unchanged
+
+items.splice(1, 2, "x");
+console.log(items); // ["a", "x", "d"]
+```
+
+## `shift` vs `unshift`
+
+```js
+const queue = ["first", "second"];
+
+const removed = queue.shift(); // removes from start
+queue.unshift("new first"); // adds to start
+```
+
+Both mutate the original array. In React state updates, prefer creating a new array instead:
+
+```js
+setItems((items) => ["new first", ...items]);
+setItems((items) => items.slice(1));
+```
+
+## `Map` vs Object
+
+Use an object for plain records with known string keys. Use `Map` when keys can be any value, insertion order matters, or you often add/remove entries.
+
+```js
+const cache = new Map();
+const user = { id: 1 };
+
+cache.set(user, { permissions: ["read"] });
+console.log(cache.get(user));
+console.log(cache.size);
+```
+
+| Feature | Object | `Map` |
+| ------- | ------ | ----- |
+| Key types | Strings and symbols | Any value |
+| Size | Manual count | `.size` |
+| Iteration | `Object.keys`, `Object.entries` | `for...of`, `.forEach` |
+| Best for | Plain structured data | Dynamic key-value collections |
+
+## Enum-Like Constants in JavaScript
+
+JavaScript does not have native enums like TypeScript. Use frozen objects for simple enum-like constants.
+
+```js
+const Status = Object.freeze({
+  Idle: "idle",
+  Loading: "loading",
+  Success: "success",
+  Error: "error",
+});
+
+function renderStatus(status) {
+  if (status === Status.Loading) return "Loading...";
+  return status;
+}
+```
+
 # 8. Senior Deep Dive
 
 ## When to Use

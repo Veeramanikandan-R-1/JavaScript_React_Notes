@@ -82,6 +82,52 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Semantic HTML in React
+
+React does not replace HTML fundamentals. JSX still becomes real DOM, so semantic mistakes become accessibility and behavior mistakes in the browser.
+
+Avoid div soup:
+
+```jsx
+function BadDashboard() {
+  return (
+    <div>
+      <div>Dashboard</div>
+      <div onClick={save}>Save</div>
+    </div>
+  );
+}
+```
+
+Prefer meaningful elements:
+
+```jsx
+function Dashboard() {
+  return (
+    <>
+      <header>
+        <nav aria-label="Primary">
+          <a href="/inventory">Inventory</a>
+          <a href="/assurance">Assurance</a>
+        </nav>
+      </header>
+
+      <main>
+        <h1>Dashboard</h1>
+        <section aria-labelledby="devices-title">
+          <h2 id="devices-title">Device health</h2>
+          <button type="button" onClick={save}>Save</button>
+        </section>
+      </main>
+    </>
+  );
+}
+```
+
+`section` should normally have a heading. Use `article` for content that can stand alone, such as a post, notification, card, or report item.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

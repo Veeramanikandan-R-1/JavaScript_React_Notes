@@ -11,6 +11,11 @@
 * Avoid: Letting stale requests overwrite newer results.
 * Avoid: Treating every fetch resolution as successful HTTP status.
 * Avoid: Retrying non-idempotent operations blindly.
+* JS is single-threaded at the call-stack level.
+* Microtasks such as promise callbacks run before later macrotasks such as `setTimeout`.
+* React state updates are scheduled/batched; immediate logs can show old render values.
+* `useEffect` runs after commit/paint; `useLayoutEffect` runs before paint and can block it.
+* Long synchronous work freezes rendering and input.
 
 ---
 
@@ -23,6 +28,18 @@
 | Promise | Represents eventual success or failure. |
 | Cancellation | Stopping work that is no longer needed. |
 | Race condition | A bug where timing changes the result. |
+
+---
+
+# React Event Loop Notes
+
+```text
+setState now       -> schedules update
+console.log(state) -> old value from current render
+next render        -> new value appears
+```
+
+Use cleanup flags or `AbortController` so async effects do not update stale/unmounted UI.
 
 ---
 

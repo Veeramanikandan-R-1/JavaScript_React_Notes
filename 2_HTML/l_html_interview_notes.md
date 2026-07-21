@@ -73,6 +73,29 @@ ARIA should supplement native HTML only when native semantics are not enough.
 
 ---
 
+# 7.1 High-Frequency Senior HTML Traps
+
+| Question | Strong short answer |
+| -------- | ------------------- |
+| Does React replace HTML fundamentals? | No. JSX still renders real DOM, so semantics, labels, forms, focus, metadata, and loading still matter. |
+| `readonly` vs `disabled`? | `readonly` values submit; `disabled` controls do not submit and are skipped in focus. |
+| `section` vs `article`? | `section` groups a themed area, usually with a heading. `article` is self-contained content. |
+| `srcset` vs `picture`? | `srcset` helps the browser choose image resolution. `picture` changes source by media condition or format. |
+| `async` vs `defer`? | `async` runs when ready and order is not guaranteed. `defer` runs after parsing and preserves order. |
+| `robots.txt` vs robots meta? | `robots.txt` guides crawling by path; robots meta gives page-level indexing/following hints. |
+| `button` vs `a`? | Button performs an action. Anchor navigates to a URL or page fragment. |
+| Is client validation enough? | No. It improves UX; server validation is required for correctness and security. |
+
+Practical audit flow:
+
+1. Disable CSS mentally: does the content order still make sense?
+2. Use keyboard only: can every control be reached and operated?
+3. Inspect the accessibility tree: do controls have names and states?
+4. Submit the form: are `name`, method, payload, and validation correct?
+5. Check initial HTML: title, description, canonical, language, viewport, and share metadata.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

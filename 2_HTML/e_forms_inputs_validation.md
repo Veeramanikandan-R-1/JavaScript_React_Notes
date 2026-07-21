@@ -88,6 +88,53 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Practical Form Attributes
+
+| Attribute | Where | Practical use |
+| --------- | ----- | ------------- |
+| `action` | `form` | URL where the browser submits the form. |
+| `method` | `form` | Usually `get` for reads and `post` for writes. |
+| `enctype` | `form` | Use `multipart/form-data` for file upload. |
+| `novalidate` | `form` | Disable native validation when custom validation owns the flow. |
+| `autocomplete` | inputs | Helps browser/password manager fill values correctly. |
+| `accept` | file input | Suggest allowed file types. |
+| `multiple` | file/select/email | Allow multiple values. |
+| `readonly` | input | Value is submitted but user cannot edit it. |
+| `disabled` | form controls | Value is not submitted and control is skipped. |
+
+File upload:
+
+```html
+<form action="/profile/avatar" method="post" enctype="multipart/form-data">
+  <label for="avatar">Avatar</label>
+  <input id="avatar" name="avatar" type="file" accept="image/png,image/jpeg">
+  <button type="submit">Upload</button>
+</form>
+```
+
+`readonly` vs `disabled` interview trap:
+
+```html
+<input name="accountId" value="A123" readonly>
+<input name="internalNote" value="Draft" disabled>
+```
+
+`accountId` is submitted. `internalNote` is not submitted.
+
+`datalist` example:
+
+```html
+<label for="city">City</label>
+<input id="city" name="city" list="city-options">
+<datalist id="city-options">
+  <option value="Chennai">
+  <option value="Bengaluru">
+  <option value="Hyderabad">
+</datalist>
+```
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

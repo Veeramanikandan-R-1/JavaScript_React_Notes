@@ -58,3 +58,13 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* Use functional state updates when next state depends on previous state: `setCount((count) => count + 1)`.
+* Functional updaters avoid stale values during batched updates.
+* Lift state to the closest common parent when sibling components share changing data.
+* Do not lift state higher than needed.
+* Class component methods need `this` binding unless using arrow class fields.

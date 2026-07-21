@@ -84,6 +84,26 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Script Loading Comparison
+
+| Script | Parsing behavior | Execution timing | Common use |
+| ------ | ---------------- | ---------------- | ---------- |
+| normal classic script | blocks parser | immediately when reached | small critical inline behavior |
+| `defer` | downloads while parsing | after HTML parsing, in order | app scripts and dependent scripts |
+| `async` | downloads while parsing | as soon as ready, order not guaranteed | independent analytics/widgets |
+| `type="module"` | deferred by default | after parsing, supports imports | modern app entry point |
+
+```html
+<script src="/legacy-critical.js"></script>
+<script defer src="/app.js"></script>
+<script async src="/analytics.js"></script>
+<script type="module" src="/src/main.js"></script>
+```
+
+For React app bundles, prefer module scripts or deferred scripts so HTML parsing is not blocked unnecessarily.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

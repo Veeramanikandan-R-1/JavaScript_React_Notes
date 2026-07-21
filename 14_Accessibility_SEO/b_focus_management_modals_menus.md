@@ -74,6 +74,43 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 React Modal Focus Checklist
+
+When a React modal opens:
+
+* move focus into the modal
+* keep tab focus inside the modal while open
+* close on Escape when appropriate
+* restore focus to the trigger when the modal closes
+* hide or inert background content when required
+
+```jsx
+function Modal({ onClose, children }) {
+  const closeButtonRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const previous = document.activeElement;
+    closeButtonRef.current?.focus();
+
+    return () => previous?.focus?.();
+  }, []);
+
+  return (
+    <div role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 id="modal-title">Confirm action</h2>
+      {children}
+      <button ref={closeButtonRef} type="button" onClick={onClose}>
+        Close
+      </button>
+    </div>
+  );
+}
+```
+
+For production modals, use a well-tested component or accessibility utility unless your team is prepared to handle focus trapping and edge cases fully.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

@@ -75,6 +75,39 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 SEO Details for Interviews
+
+Robots meta vs `robots.txt`:
+
+| Tool | Use |
+| ---- | --- |
+| `robots.txt` | Tells crawlers which paths they should not crawl. |
+| `<meta name="robots">` | Gives page-level indexing/following hints. |
+
+```html
+<meta name="robots" content="index,follow">
+<link rel="alternate" hreflang="en-IN" href="https://example.com/en-in/product">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon.ico">
+```
+
+Structured data example:
+
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "React Hooks Notes",
+  "author": { "@type": "Person", "name": "Frontend Team" }
+}
+</script>
+```
+
+`meta name="keywords"` appears in old notes and old tutorials, but modern SEO does not depend on it. Spend time on helpful content, titles, descriptions, headings, links, performance, and crawlability.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

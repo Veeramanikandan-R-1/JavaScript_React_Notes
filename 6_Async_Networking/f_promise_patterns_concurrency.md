@@ -84,6 +84,35 @@ async function loadDashboard() {
 
 ---
 
+# 7.1 Promise Methods
+
+| Method | Resolves when | Rejects when | Common use |
+| ------ | ------------- | ------------ | ---------- |
+| `Promise.all` | Every promise resolves | First promise rejects | Load required data in parallel |
+| `Promise.allSettled` | Every promise finishes | Never rejects for individual failures | Show partial results |
+| `Promise.race` | First promise settles | First promise rejects if it settles first | Timeout or first response wins |
+| `Promise.any` | First promise resolves | All promises reject | Use first successful fallback |
+
+```js
+const [profile, permissions] = await Promise.all([
+  fetchJson("/api/profile"),
+  fetchJson("/api/permissions"),
+]);
+```
+
+```js
+const results = await Promise.allSettled([
+  fetchJson("/api/orders"),
+  fetchJson("/api/alerts"),
+]);
+
+const successful = results
+  .filter((result) => result.status === "fulfilled")
+  .map((result) => result.value);
+```
+
+Practical rule: use `Promise.all` when all data is required. Use `Promise.allSettled` when partial UI is acceptable.
+
 # 8. Senior Deep Dive
 
 ## When to Use

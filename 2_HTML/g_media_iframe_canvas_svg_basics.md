@@ -78,6 +78,40 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Media and iframe Checklist
+
+Video:
+
+```html
+<video controls poster="/media/course-poster.jpg">
+  <source src="/media/course.webm" type="video/webm">
+  <source src="/media/course.mp4" type="video/mp4">
+  <track kind="captions" src="/media/course-en.vtt" srclang="en" label="English">
+</video>
+```
+
+Iframe:
+
+```html
+<iframe
+  src="https://example.com/embed"
+  title="Network health report"
+  loading="lazy"
+  sandbox="allow-scripts allow-same-origin"
+  allow="fullscreen">
+</iframe>
+```
+
+Rules:
+
+* `poster` improves video loading experience.
+* `track` provides captions/subtitles.
+* every meaningful `iframe` needs a `title`
+* use `sandbox` and `allow` intentionally
+* lazy-load below-the-fold embeds
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

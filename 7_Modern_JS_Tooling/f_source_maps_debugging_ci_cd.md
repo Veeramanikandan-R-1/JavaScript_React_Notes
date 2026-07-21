@@ -82,6 +82,39 @@ jobs:
 
 ---
 
+# 7.1 Production Mode in React Builds
+
+Production mode removes development-only warnings, enables minification, and lets bundlers remove unreachable development branches.
+
+Modern workflow:
+
+```bash
+npm run build
+npm run preview
+```
+
+In Webpack projects:
+
+```js
+module.exports = {
+  mode: "production",
+};
+```
+
+Older interview notes may mention DefinePlugin manually setting `process.env.NODE_ENV` to `"production"`. That still matters in custom Webpack setups, but modern tools usually configure it through the build command.
+
+Production checklist:
+
+* run lint/tests/build in CI
+* inspect bundle warnings
+* verify env vars are safe for frontend exposure
+* test the production build, not only dev server
+* keep source maps policy intentional
+
+Visual note:
+
+<img src="../assets/react_1_docx/image39.png" alt="React production mode screenshot from react_1.docx" width="720">
+
 # 8. Senior Deep Dive
 
 ## When to Use

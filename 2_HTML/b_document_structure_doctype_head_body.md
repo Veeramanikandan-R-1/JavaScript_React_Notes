@@ -81,6 +81,33 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 Global Attributes to Remember
+
+| Attribute | Practical use |
+| --------- | ------------- |
+| `id` | Unique identifier for labels, fragments, and scripting. |
+| `class` | CSS hook. In React JSX, write `className`. |
+| `lang` | Language for pronunciation, translation, and search. |
+| `dir` | Text direction such as `ltr`, `rtl`, or `auto`. |
+| `hidden` | Hide content from display and accessibility tree until needed. |
+| `tabindex` | Manage keyboard focus only when native order is insufficient. |
+| `contenteditable` | Make content editable; requires careful keyboard/a11y handling. |
+| `draggable` | Enable drag behavior; still needs accessible alternatives. |
+| `data-*` | Store small custom metadata for scripts/tests. |
+
+React JSX reminders:
+
+```jsx
+<label htmlFor="email" className="field-label">
+  Email
+</label>
+<input id="email" data-testid="email-input" />
+```
+
+Use `tabindex="0"` rarely to include custom interactive elements in focus order. Avoid positive tabindex values because they create confusing keyboard order.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

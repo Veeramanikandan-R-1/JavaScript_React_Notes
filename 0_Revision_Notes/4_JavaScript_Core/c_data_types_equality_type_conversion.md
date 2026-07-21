@@ -11,6 +11,13 @@
 * Avoid: Ignoring error paths in async code.
 * Avoid: Using loose equality without a deliberate reason.
 * Avoid: Treating objects and arrays as if they are deep-copied by spread.
+* Primitive values are compared by value.
+* Objects, arrays, functions, dates, maps, and sets are compared by reference identity.
+* `typeof null` is `"object"` and `typeof NaN` is `"number"`.
+* Use `Array.isArray(value)` for arrays.
+* In React, initialize state with the shape the UI expects: `0`, `null`, `[]`, `{}`.
+* `0` renders in JSX; `null` and `undefined` do not.
+* Convert API/form strings before storing them as numbers or booleans in state.
 
 ---
 
@@ -23,6 +30,17 @@
 | Execution context | The environment where code runs. |
 | Reference | A way objects and arrays are shared by identity. |
 | Module | A file-level boundary for imports and exports. |
+
+---
+
+# Type Check Cheats
+
+| Need | Use |
+| ---- | --- |
+| Primitive | `typeof` |
+| Array | `Array.isArray` |
+| Class instance | `instanceof` |
+| Built-in tag | `Object.prototype.toString.call(value)` |
 
 ---
 

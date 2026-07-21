@@ -73,6 +73,36 @@ console.log(user.preferences.theme); // dark
 
 ---
 
+# 7.1 OOP Interview Answer
+
+How does JavaScript support OOP?
+
+JavaScript supports OOP through prototypes and ES6 classes. The four main concepts are encapsulation, abstraction, inheritance, and polymorphism. Encapsulation hides internal state, abstraction exposes only the needed behavior, inheritance reuses parent behavior, and polymorphism lets different objects respond to the same method in different ways. Under the hood, class syntax still uses JavaScript's prototype model.
+
+```js
+class Animal {
+  speak() {
+    return "sound";
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    return "bark";
+  }
+}
+
+class Cat extends Animal {
+  speak() {
+    return "meow";
+  }
+}
+
+[new Dog(), new Cat()].forEach((animal) => console.log(animal.speak()));
+```
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

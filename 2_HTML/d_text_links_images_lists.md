@@ -83,6 +83,40 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 ---
 
+# 7.1 `srcset`, `sizes`, and `picture`
+
+Use `srcset` + `sizes` when the same image should be served at different resolutions.
+
+```html
+<img
+  src="/images/card-800.jpg"
+  srcset="/images/card-400.jpg 400w, /images/card-800.jpg 800w, /images/card-1200.jpg 1200w"
+  sizes="(max-width: 600px) 100vw, 400px"
+  alt="Analytics card preview"
+  width="800"
+  height="500">
+```
+
+Browser mental model:
+
+```text
+viewport + sizes + device pixel ratio + available srcset candidates -> best image file
+```
+
+Use `picture` when the art direction or format changes:
+
+```html
+<picture>
+  <source media="(max-width: 600px)" srcset="/images/team-mobile.jpg">
+  <source type="image/avif" srcset="/images/team.avif">
+  <img src="/images/team.jpg" alt="Team reviewing a dashboard" width="1200" height="800">
+</picture>
+```
+
+Interview answer: `srcset` is mainly for resolution choice; `picture` is for choosing different sources by media condition or format.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

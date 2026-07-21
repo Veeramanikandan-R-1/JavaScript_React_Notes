@@ -75,6 +75,31 @@ export function AppRoute() {
 
 ---
 
+# 7.1 Critical Rendering Path
+
+Browser rendering flow:
+
+```text
+HTML -> DOM
+CSS -> CSSOM
+DOM + CSSOM -> render tree
+render tree -> layout
+layout -> paint
+painted layers -> compositing
+```
+
+Performance traps:
+
+* blocking CSS delays first render
+* render-blocking scripts delay parsing unless deferred or loaded as modules
+* layout reads after layout writes can force synchronous layout
+* animating `width`, `height`, `top`, or `left` can trigger layout/paint work
+* animating `transform` and `opacity` is usually cheaper
+
+Senior debugging line: first identify whether the bottleneck is network, parsing, scripting, style calculation, layout, paint, compositing, or React rendering. Then optimize that layer.
+
+---
+
 # 8. Senior Deep Dive
 
 ## When to Use

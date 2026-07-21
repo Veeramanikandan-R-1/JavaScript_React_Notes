@@ -74,6 +74,120 @@ cart.printLater();
 
 ---
 
+# 7.1 Practical Revision Notes from Pasted Notes
+
+## Normal Function vs Arrow Function
+
+| Feature | Normal function | Arrow function |
+| ------- | --------------- | -------------- |
+| `this` | Depends on how the function is called | Captures `this` from surrounding scope |
+| `arguments` | Has its own `arguments` object | Does not have its own `arguments` |
+| Constructor | Can be used with `new` | Cannot be used with `new` |
+| Good for | Object methods, constructors, dynamic `this` | Callbacks, short pure functions, preserving outer `this` |
+
+```js
+const user = {
+  name: "Mani",
+  normal() {
+    return this.name;
+  },
+  arrow: () => this.name,
+};
+
+console.log(user.normal()); // "Mani"
+console.log(user.arrow()); // usually undefined in modules
+```
+
+## `call`, `apply`, and `bind`
+
+All three help control `this` for a function.
+
+| Method | Runs immediately? | Arguments |
+| ------ | ----------------- | --------- |
+| `call` | Yes | comma-separated |
+| `apply` | Yes | array |
+| `bind` | No, returns a new function | comma-separated |
+
+```js
+function printFullName(city) {
+  console.log(`${this.firstName} ${this.lastName} - ${city}`);
+}
+
+const person = { firstName: "Mani", lastName: "Kandan" };
+
+printFullName.call(person, "Chennai");
+printFullName.apply(person, ["Chennai"]);
+
+const boundPrint = printFullName.bind(person, "Chennai");
+boundPrint();
+```
+
+Use `bind` when passing a method as a callback and you must preserve its `this`.
+
+```js
+const account = {
+  name: "Primary",
+  print() {
+    console.log(this.name);
+  },
+};
+
+setTimeout(account.print.bind(account), 1000);
+```
+
+## Closure Applications
+
+Closures are useful for:
+
+* data privacy
+* callback functions
+* factory functions
+* event handlers
+* memoization
+* keeping state without exposing a variable globally
+
+```js
+function createCounter() {
+  let value = 0;
+
+  return {
+    increment() {
+      value += 1;
+      return value;
+    },
+    getValue() {
+      return value;
+    },
+  };
+}
+```
+
+In React, each render creates a new function scope. This is why stale closures can happen inside effects, timers, and callbacks when dependencies are wrong.
+
+## Currying and Partial Application
+
+Currying turns a function that needs multiple arguments into a chain of unary functions.
+
+```js
+const multiply = (a) => (b) => a * b;
+
+const double = multiply(2);
+console.log(double(5)); // 10
+```
+
+The practical use is partial application: pass the repeated argument once, then reuse the returned function.
+
+```js
+const withCurrency = (currency) => (amount) =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+  }).format(amount);
+
+const formatUsd = withCurrency("USD");
+console.log(formatUsd(120));
+```
+
 # 8. Senior Deep Dive
 
 ## When to Use

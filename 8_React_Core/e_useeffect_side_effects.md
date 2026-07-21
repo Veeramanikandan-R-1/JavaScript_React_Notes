@@ -101,6 +101,28 @@ function UserProfile({ userId }) {
 
 ---
 
+# 7.1 `useEffect` vs `useMemo`
+
+Both can depend on a dependency array, but they solve different problems.
+
+| Hook | Runs when | Use for | Returns |
+| ---- | --------- | ------- | ------- |
+| `useEffect` | After render is committed | Synchronizing with external systems | optional cleanup |
+| `useMemo` | During render when dependencies change | Caching a calculated value | memoized value |
+
+```jsx
+const filteredItems = useMemo(
+  () => items.filter((item) => item.active),
+  [items]
+);
+
+useEffect(() => {
+  document.title = `${filteredItems.length} active items`;
+}, [filteredItems.length]);
+```
+
+Practical rule: use `useMemo` for expensive derived values. Use `useEffect` for DOM APIs, network calls, subscriptions, timers, logging, and other external synchronization.
+
 # 8. Senior Deep Dive
 
 ## When to Use

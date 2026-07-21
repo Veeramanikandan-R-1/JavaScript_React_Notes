@@ -58,3 +58,16 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* `React.memo` memoizes a component render result based on props.
+* `useMemo` memoizes a calculated value.
+* `useCallback` memoizes a function reference.
+* `React.PureComponent` gives class components shallow prop/state comparison.
+* Memoization helps only when references are stable and the measured cost justifies it.
+* `useCallback(fn, deps)` is roughly `useMemo(() => fn, deps)`, but clearer.
+* Use `useMemo` when unrelated state changes should not redo an expensive calculation.
+* Use `useCallback` with `React.memo` children when function identity would otherwise force child rerenders.

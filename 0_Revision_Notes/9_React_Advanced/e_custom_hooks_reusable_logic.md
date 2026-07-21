@@ -58,3 +58,12 @@ They should check the mental model, edge cases, accessibility, performance cost,
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.
+
+---
+
+# Added from `react_1.docx`
+
+* Custom hooks start with `use` and can call other hooks.
+* Use custom hooks to share stateful logic, not markup.
+* Examples: `useLocalStorage`, `useCounter`, `useDocumentTitle`, `useDebouncedValue`, `useAuthUser`, `useWindowSize`.
+* Custom hooks often replace HOC/render-prop nesting in modern React.
