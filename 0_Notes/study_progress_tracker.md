@@ -25,6 +25,7 @@ Dates are kept in the original `day/month` style from the pasted notes.
 | OOPs | Done |  |  |
 | React + TypeScript | Done |  |  |
 | Micro frontend | Not started |  |  |
+| React 5-year interview final pack | Done |  | Modern React, concurrency, SSR/RSC, system design, and machine coding notes added. |
 | EVPN revision | Done |  |  |
 | Express.js | Not started |  |  |
 | MongoDB | Not started |  |  |
@@ -80,6 +81,7 @@ Dates are kept in the original `day/month` style from the pasted notes.
 * Thunk Saga revision
 * OOPs
 * React + TypeScript
+* React 5-year interview final pack
 * EVPN revision
 
 ---
@@ -109,4 +111,3 @@ Next 3 tasks:
 Interview practice done:
 Project progress:
 ```
-

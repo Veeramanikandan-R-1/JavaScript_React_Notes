@@ -259,3 +259,12 @@ These notes follow a consistent senior frontend engineer format:
 * [Micro Frontend Manifest and Runtime Patterns](./21_Enterprise_Frontend/b_micro_frontend_manifest_runtime_patterns.md)
 * [Enterprise Auth, Feature Flags, and Session Notes](./21_Enterprise_Frontend/c_enterprise_auth_feature_flags_session_notes.md)
 * [Enterprise Testing and Observability Practical Patterns](./21_Enterprise_Frontend/d_enterprise_testing_observability_practical_patterns.md)
+
+## 22_React_Interview_5_Years
+
+* [Modern React 19, Actions, and React Compiler](./22_React_Interview_5_Years/a_modern_react_19_actions_compiler.md)
+* [React Concurrent Rendering and Scheduling Hooks](./22_React_Interview_5_Years/b_concurrent_rendering_scheduling_hooks.md)
+* [SSR, Hydration, React Server Components, and Next.js Interview Notes](./22_React_Interview_5_Years/c_ssr_hydration_rsc_nextjs_interview.md)
+* [React System Design Interview Playbook](./22_React_Interview_5_Years/d_react_system_design_interview_playbook.md)
+* [React Machine Coding Rounds for 5-Year Interviews](./22_React_Interview_5_Years/e_react_machine_coding_rounds.md)
+* [React 5-Year Interview Master Checklist](./22_React_Interview_5_Years/f_react_5_year_master_checklist.md)
