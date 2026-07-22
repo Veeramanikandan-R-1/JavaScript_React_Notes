@@ -125,25 +125,25 @@ test("submits the search term", async () => {
 
 # Interview Questions with Answers
 
-### 1. Why does Accessible query matter in React Testing Library?
+### 1. Why does React Testing Library encourage querying by role, label, and text?
 
-Accessible query means Finding elements the way users and assistive tech identify them. In interviews, connect it to React Testing Library by explaining the concrete UI behavior, failure state, and tradeoff.
+Those queries match how users and assistive technology understand the UI. They also catch accessibility regressions, such as missing labels or buttons that are not actually buttons.
 
-### 2. How does User event affect the implementation?
+### 2. Why use `userEvent` instead of only `fireEvent`?
 
-User event means A realistic interaction such as typing, clicking, or tabbing. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+`userEvent` models real interactions more closely, including focus, keyboard, pointer, and typing behavior. `fireEvent` is lower-level and useful for specific events, but can skip important browser-like behavior.
 
-### 3. What mistake should you avoid around testing implementation details?
+### 3. How do you test async UI with React Testing Library?
 
-Avoid testing implementation details. Test user-visible behavior.
+Trigger the user action, await visible outcomes with `findBy...` or `waitFor`, and assert loading/error/success states. Avoid arbitrary sleeps; wait for the behavior that matters.
 
-### 4. How would you debug a production issue related to React Testing Library?
+### 4. When is `data-testid` acceptable?
 
-Read the failure message as a user story. Inspect rendered DOM output and accessible roles.
+Use it when there is no good user-facing selector, such as chart regions, virtualized rows, or repeated decorative containers. Prefer role, label, text, and accessible name when possible.
 
-### 5. What would you check in code review for React Testing Library?
+### 5. What RTL test issues do you flag in review?
 
-Does the test fail for the bug it is meant to prevent? Does it query like a user would find the element?
+Testing component internals, overusing test ids, not awaiting async updates, missing keyboard interactions, no error-state coverage, and assertions that do not match what the user sees.
 
 ---
 

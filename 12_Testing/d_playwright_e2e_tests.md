@@ -125,25 +125,25 @@ test("submits the search term", async () => {
 
 # Interview Questions with Answers
 
-### 1. Why does Browser flow matter in Playwright End-to-End Tests?
+### 1. What user journeys deserve Playwright E2E coverage?
 
-Browser flow means A real user path executed in a browser. In interviews, connect it to Playwright End-to-End Tests by explaining the concrete UI behavior, failure state, and tradeoff.
+Critical journeys that must work after deployment: login, route protection, checkout or submit flows, primary CRUD, search/filter, and core navigation. E2E tests are expensive, so choose flows that justify browser-level confidence.
 
-### 2. How does Locator affect the implementation?
+### 2. Why are Playwright locators better than brittle CSS selectors?
 
-Locator means A resilient way to find elements by role, label, text, or test id. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Role, label, text, and test-id locators are more stable and closer to user behavior. Deep CSS selectors couple tests to markup structure and break during harmless refactors.
 
-### 3. What mistake should you avoid around testing implementation details?
+### 3. How do you make E2E tests less flaky?
 
-Avoid testing implementation details. Test user-visible behavior.
+Use reliable locators, control test data, wait for user-visible states instead of timeouts, isolate tests, mock only external unstable dependencies when appropriate, and capture traces/screenshots for failure diagnosis.
 
-### 4. How would you debug a production issue related to Playwright End-to-End Tests?
+### 4. When should an E2E test use real APIs versus mocked APIs?
 
-Read the failure message as a user story. Inspect rendered DOM output and accessible roles.
+Use real APIs for deployment smoke confidence when stable test data exists. Use mocked APIs for deterministic edge cases, rare failures, or third-party dependencies that should not control frontend test reliability.
 
-### 5. What would you check in code review for Playwright End-to-End Tests?
+### 5. What Playwright issues do you flag in review?
 
-Does the test fail for the bug it is meant to prevent? Does it query like a user would find the element?
+Fixed sleeps, brittle selectors, shared state between tests, no trace on failure, tests that repeat unit coverage at high cost, and flows that cannot explain what user risk they protect.
 
 ---
 
