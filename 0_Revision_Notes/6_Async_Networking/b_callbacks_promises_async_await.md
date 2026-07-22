@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Promise chain matter in Callbacks, Promises, and async-await?
+### 1. What problem did promises solve compared with nested callbacks?
 
-Promise chain means A sequence of async steps connected through fulfillment and rejection. In interviews, connect it to Callbacks, Promises, and async-await by explaining the concrete UI behavior, failure state, and tradeoff.
+Promises make async results composable: you can return values, chain steps, handle errors in one path, and combine work with APIs like `Promise.all`. They do not remove the need to model loading, cancellation, or stale responses.
 
-### 2. How does async/await affect the implementation?
+### 2. What does `async` do to a function's return value?
 
-async/await means Syntax that makes promise code read like sequential flow. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+An `async` function always returns a promise. Returning a value resolves the promise with that value, and throwing an error rejects it. This matters when callers forget to `await` or attach error handling.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why does `try/catch` sometimes fail to catch an async error?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+If you start a promise inside `try` but do not `await` it or return it, the rejection happens after the `try/catch` has finished. Use `await`, return the promise chain, or attach a `.catch` where ownership is clear.
 
-### 4. How would you debug a production issue related to Callbacks, Promises, and async-await?
+### 4. What is the difference between sequential and parallel awaits?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Sequential awaits wait for one request before starting the next. Parallel awaits start independent work first, then await together with `Promise.all` or a similar helper. The right choice depends on dependencies and failure behavior.
 
-### 5. What would you check in code review for Callbacks, Promises, and async-await?
+### 5. What async code issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Floating promises, missing error paths, serial requests that could be parallel, parallel requests that should be ordered, stale UI updates after unmount/navigation, and loading states that never settle.
 
 ---
 

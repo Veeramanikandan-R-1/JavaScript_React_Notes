@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Source map matter in Source Maps, Debugging, CI, and Frontend Delivery?
+### 1. What are source maps used for in production debugging?
 
-Source map means A mapping from bundled code back to original source files. In interviews, connect it to Source Maps, Debugging, CI, and Frontend Delivery by explaining the concrete UI behavior, failure state, and tradeoff.
+They map minified bundle locations back to the original source files, making stack traces and DevTools debugging usable. They are most useful when tied to the exact release/commit that produced the deployed assets.
 
-### 2. How does Minified stack trace affect the implementation?
+### 2. What are the security and operational tradeoffs of publishing source maps?
 
-Minified stack trace means A production error trace that needs mapping to be readable. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Public source maps can expose source structure and comments. Private upload to an error-monitoring tool gives debugging value while reducing exposure. The right choice depends on product risk and observability needs.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What should CI verify before deploying a frontend app?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Install from the lockfile, typecheck, lint, test, build, run key smoke or E2E checks, validate assets, and attach the release id/source maps. The pipeline should fail before deployment when the app cannot be built reproducibly.
 
-### 4. How would you debug a production issue related to Source Maps, Debugging, CI, and Frontend Delivery?
+### 4. How do you debug a bug that appears only after deployment?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Start from the release id, compare the deployed commit and lockfile, inspect production env values, reproduce with a production build locally, check source-mapped stack traces, and review CDN/cache behavior.
 
-### 5. What would you check in code review for Source Maps, Debugging, CI, and Frontend Delivery?
+### 5. What delivery-pipeline issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Skipping lockfile installs, deploying without build/test evidence, source maps not matching releases, long-lived cached HTML, missing rollback plan, and CI scripts that differ from local package scripts without a reason.
 
 ---
 

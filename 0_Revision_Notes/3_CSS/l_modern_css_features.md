@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Logical properties matter in Modern CSS Features?
+### 1. When would you use `:is()`, `:where()`, and `:has()`?
 
-Logical properties means Use writing-mode-aware properties like `margin-inline`. Use Modern CSS Features to solve the specific problem described in this note.
+Use `:is()` to group selector alternatives without repeating long selectors. Use `:where()` for grouping when you want zero specificity, often in resets or design-system base styles. Use `:has()` when a parent needs styling based on its children or state.
 
-### 2. How does `:is()` affect the implementation?
+### 2. What is a practical use case for `:has()` in component styling?
 
-`:is()` means Groups selector alternatives. Understand the browser, runtime, or React behavior behind Modern CSS Features before choosing an implementation.
+You can style a form row when it contains an invalid input, a card when it contains a selected checkbox, or a navigation item when it contains the active link. It can remove small JavaScript state plumbing, but you should still check browser support and selector cost.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why do logical properties matter in modern frontend work?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Logical properties like `margin-inline`, `padding-block`, and `inset-inline-start` adapt to writing mode and direction. They make components easier to internationalize for RTL languages and vertical writing modes.
 
-### 4. How would you debug a production issue related to Modern CSS Features?
+### 4. How do container queries change responsive component design?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Media queries react to viewport size; container queries react to the component's available space. They are useful when the same component appears in a sidebar, grid, modal, and full-width page with different layouts.
 
-### 5. What would you check in code review for Modern CSS Features?
+### 5. How do you decide whether a modern CSS feature is safe to ship?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Check the product's browser support matrix, analytics, graceful fallback path, and test coverage. I also look for whether the feature simplifies the implementation enough to justify using it.
 
 ---
 

@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does State updater matter in State, useState, and Events?
+### 1. Why should React state be treated as immutable?
 
-State updater means The function that schedules the next value for component state. In interviews, connect it to State, useState, and Events by explaining the concrete UI behavior, failure state, and tradeoff.
+React uses reference changes to know when state changed and to support predictable rendering. Mutating the existing object or array can cause skipped renders, stale UI, and bugs that are hard to trace.
 
-### 2. How does Event handler affect the implementation?
+### 2. When should you use the functional form of `setState`?
 
-Event handler means The callback where user actions usually request state changes. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Use it when the next state depends on the previous state, especially with repeated clicks, timers, async callbacks, or batched updates: `setCount((count) => count + 1)`.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why might `console.log(state)` after `setState` show the old value?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+State updates are scheduled; they do not synchronously replace the variable in the current render. The logged value belongs to the current closure. Inspect the next render or use an effect when you need to observe committed state.
 
-### 4. How would you debug a production issue related to State, useState, and Events?
+### 4. How do you decide whether something should be state or a derived value?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+If it can be calculated from props or existing state during render, derive it instead of storing another copy. Extra state creates synchronization bugs, especially with filters, totals, selected labels, and validation summaries.
 
-### 5. What would you check in code review for State, useState, and Events?
+### 5. What state/event bugs do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Direct mutation, duplicated derived state, stale closures in handlers, state owned too high or too low, event handlers doing too much work, and updates after async ownership has changed.
 
 ---
 

@@ -22,25 +22,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Custom element matter in Web Components and Shadow DOM?
+### 1. When would you choose Web Components over framework components?
 
-Custom element means A named reusable HTML element. Use Web Components and Shadow DOM to solve the specific problem described in this note.
+Choose Web Components when a component must work across frameworks, inside legacy pages, or as an embeddable widget. If the product is fully inside one React app, framework components are often simpler for state, routing, testing, and team conventions.
 
-### 2. How does Shadow DOM affect the implementation?
+### 2. What does Shadow DOM encapsulate and what does it not fully isolate?
 
-Shadow DOM means Encapsulated DOM subtree. Understand the browser, runtime, or React behavior behind Web Components and Shadow DOM before choosing an implementation.
+Shadow DOM encapsulates markup and styles from normal document selectors. It does not isolate JavaScript execution, network access, layout size, inherited CSS custom properties, or accessibility responsibilities.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do slots work in a custom element?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Slots define insertion points inside the shadow tree where light-DOM children are rendered. They let consumers provide content while the component controls structure, styling boundaries, and fallback content.
 
-### 4. How would you debug a production issue related to Web Components and Shadow DOM?
+### 4. What lifecycle cleanup matters in custom elements?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Anything started in `connectedCallback`, such as event listeners, timers, observers, subscriptions, or network work, should be cleaned up in `disconnectedCallback` when appropriate.
 
-### 5. What would you check in code review for Web Components and Shadow DOM?
+### 5. What accessibility issues do you watch for in Web Components?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Custom elements still need names, roles, keyboard behavior, focus management, form participation when relevant, and screen-reader testing. Encapsulation should not make the component invisible or awkward to operate.
 
 ---
 

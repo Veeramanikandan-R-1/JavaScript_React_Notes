@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Source map matter in CSS Debugging, Performance, and Browser Support?
+### 1. A style works locally but not in production. How do you debug it?
 
-Source map means A mapping from bundled code back to original source files. In interviews, connect it to CSS Debugging, Performance, and Browser Support by explaining the concrete UI behavior, failure state, and tradeoff.
+First compare the computed styles in DevTools, not just the source CSS. Then check CSS order, hashed class names, missing build output, PurgeCSS/tree-shaking, minification, prefixes, environment-specific feature flags, and whether a later rule overrides the expected one.
 
-### 2. How does Minified stack trace affect the implementation?
+### 2. How would you debug layout shift caused by CSS?
 
-Minified stack trace means A production error trace that needs mapping to be readable. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Use the Performance panel or layout shift tooling to identify the moving element. Common causes are images without dimensions, late-loading fonts, injected banners, async content, changing scrollbar presence, and components that render skeletons with different final dimensions.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What CSS patterns can hurt rendering performance?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Animating layout properties, using expensive filters or shadows on large areas, triggering frequent style recalculation with broad selectors, and forcing large repaints. The answer should include measurement because CSS performance problems are often browser- and page-specific.
 
-### 4. How would you debug a production issue related to CSS Debugging, Performance, and Browser Support?
+### 4. What is your browser support workflow before using a newer CSS feature?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Check the product support matrix, usage analytics, MDN or Can I Use, and whether the feature has a graceful fallback. For critical layout behavior, I test in the oldest supported browsers and add a fallback or progressive enhancement path.
 
-### 5. What would you check in code review for CSS Debugging, Performance, and Browser Support?
+### 5. How do source maps help with CSS debugging?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+They map bundled or minified CSS back to the original source, which helps find the real file and rule during production debugging. They should be configured intentionally so the team gets useful diagnostics without exposing anything the product should keep private.
 
 ---
 

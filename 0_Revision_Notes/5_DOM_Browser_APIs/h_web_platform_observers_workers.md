@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does DOM matter in Web Platform APIs, Observers, and Workers?
+### 1. When would you use `IntersectionObserver` instead of a scroll listener?
 
-DOM means Live tree representation of the document. Use Web Platform APIs, Observers, and Workers to solve the specific problem described in this note.
+Use `IntersectionObserver` when you need to know whether elements enter or leave a viewport/container, such as lazy loading, analytics impressions, or infinite scroll sentinels. It avoids doing manual geometry checks on every scroll event.
 
-### 2. How does Node affect the implementation?
+### 2. What is `ResizeObserver` useful for?
 
-Node means A unit in the DOM tree. Understand the browser, runtime, or React behavior behind Web Platform APIs, Observers, and Workers before choosing an implementation.
+It observes element size changes, not viewport changes. It is useful for charts, virtualized containers, responsive components, and layout logic that depends on the rendered size of a specific element.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When should frontend work move to a Web Worker?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Move CPU-heavy work that does not need direct DOM access: parsing large files, data processing, search indexing, compression, image processing, or expensive calculations. Workers communicate by messages, so data transfer cost matters.
 
-### 4. How would you debug a production issue related to Web Platform APIs, Observers, and Workers?
+### 4. What cleanup do observers and workers need?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Disconnect observers when the observed element is no longer relevant, remove listeners, abort in-flight work where possible, and terminate workers when their lifecycle ends. Leaking these can create memory and performance issues.
 
-### 5. What would you check in code review for Web Platform APIs, Observers, and Workers?
+### 5. What problems do you look for in observer/worker code?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Observers that watch too many nodes, callbacks that mutate layout repeatedly, missing cleanup, workers used for trivial work, large object copies across worker boundaries, and no fallback for unsupported APIs where the product needs one.
 
 ---
 

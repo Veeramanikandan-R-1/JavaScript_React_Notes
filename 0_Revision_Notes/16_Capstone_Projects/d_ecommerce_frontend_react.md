@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Requirements matter in Capstone: E-commerce Frontend in React?
+### 1. What user journeys must an e-commerce frontend cover?
 
-Requirements means What the app must do. Use Capstone: E-commerce Frontend in React to solve the specific problem described in this note.
+Browse products, search/filter/sort, view product detail, manage cart, handle inventory/price changes, checkout or checkout handoff, auth/session state, order confirmation, and recovery from payment/API errors.
 
-### 2. How does Architecture affect the implementation?
+### 2. What state belongs in the cart?
 
-Architecture means How files, data, UI, and state are organized. Understand the browser, runtime, or React behavior behind Capstone: E-commerce Frontend in React before choosing an implementation.
+Store item identity and quantity, then reconcile price, inventory, promotions, shipping, and tax with the server. The client cart should not be the final authority for money or availability.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What edge cases should checkout handle?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Out-of-stock items, changed prices, expired sessions, duplicate submit, failed payment, slow network, address validation, coupon failure, abandoned cart restore, and retry without double-ordering.
 
-### 4. How would you debug a production issue related to Capstone: E-commerce Frontend in React?
+### 4. How do you make product listing pages performant?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Optimize images, paginate or infinite-load responsibly, include filter params in cache keys, avoid expensive client filtering of huge datasets, lazy-load noncritical widgets, and preserve layout stability.
 
-### 5. What would you check in code review for Capstone: E-commerce Frontend in React?
+### 5. What would you check in an e-commerce frontend review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Cart correctness, server validation, accessible forms, loading/error/retry states, protected routes, price/inventory reconciliation, analytics that does not block UX, and tests for checkout failure paths.
 
 ---
 

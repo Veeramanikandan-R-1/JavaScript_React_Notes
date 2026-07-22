@@ -22,25 +22,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Same-origin policy matter in Browser Security, CORS, CSP, and XSS?
+### 1. What problem does CORS solve, and what does it not solve?
 
-Same-origin policy means Restricts how documents and scripts interact across origins. Use Browser Security, CORS, CSP, and XSS to solve the specific problem described in this note.
+CORS lets a server decide which browser origins are allowed to read its cross-origin responses. It is not authentication, authorization, or backend security; non-browser clients can still call the server unless the server protects the resource.
 
-### 2. How does CORS affect the implementation?
+### 2. Why is XSS dangerous in a frontend app?
 
-CORS means Server-controlled permission for cross-origin reads. Understand the browser, runtime, or React behavior behind Browser Security, CORS, CSP, and XSS before choosing an implementation.
+Injected script can act as the user, read accessible tokens/data, change the page, submit requests, and steal sensitive information. Prevent it by escaping output, avoiding unsafe HTML insertion, sanitizing trusted rich text, and using CSP as defense in depth.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What does CSP protect against?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+CSP limits where scripts, styles, images, frames, and other resources can load from and can block inline script execution. It reduces the impact of injection bugs, but it does not replace correct escaping and safe rendering.
 
-### 4. How would you debug a production issue related to Browser Security, CORS, CSP, and XSS?
+### 4. How do you debug a CORS failure?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Read the browser console and Network tab, inspect preflight `OPTIONS`, `Access-Control-Allow-Origin`, allowed methods/headers, credentials mode, and whether the API is returning the headers on both success and error responses.
 
-### 5. What would you check in code review for Browser Security, CORS, CSP, and XSS?
+### 5. What frontend security issues do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unsafe `innerHTML`, rendering untrusted markdown without sanitization, secrets in client code, relaxed CSP, storing auth tokens in risky places, missing `rel="noopener"` on external links, and trusting client-side checks for authorization.
 
 ---
 

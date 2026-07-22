@@ -39,25 +39,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does BEM matter in CSS Architecture, BEM, and CSS Modules?
+### 1. How do you prevent global CSS from breaking unrelated screens?
 
-BEM means Block, element, modifier naming convention. Use CSS Architecture, BEM, and CSS Modules to solve the specific problem described in this note.
+Use clear ownership boundaries: component-scoped styles, CSS Modules, BEM, or a controlled utility system. Avoid broad selectors like `.content button`, keep selectors shallow, and define where global reset, tokens, typography, and layout rules are allowed.
 
-### 2. How does CSS Modules affect the implementation?
+### 2. How would you compare BEM, CSS Modules, and utility classes in an interview?
 
-CSS Modules means Build-time local class name scoping. Understand the browser, runtime, or React behavior behind CSS Architecture, BEM, and CSS Modules before choosing an implementation.
+BEM gives readable global class names but relies on discipline. CSS Modules give local scoping at build time. Utility classes create consistency through constrained primitives but can make markup dense if the team has no extraction strategy.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What does a good class name communicate?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It communicates component ownership and purpose, not the current visual implementation. `.product-card__price` is more maintainable than `.large-blue-text` because the design can change while the role stays stable.
 
-### 4. How would you debug a production issue related to CSS Architecture, BEM, and CSS Modules?
+### 4. How would you structure CSS for a large app with a design system?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Keep global files limited to reset, tokens, base typography, and app shell rules. Put component styles near components, expose documented variants through props/classes, and centralize shared patterns in design-system components instead of copying CSS between features.
 
-### 5. What would you check in code review for CSS Architecture, BEM, and CSS Modules?
+### 5. What CSS architecture smells do you look for in a pull request?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Deep selectors, repeated magic values, `!important`, global overrides for one screen, class names tied to color or position, and copied component styles. I also check that new variants do not bypass tokens, accessibility states, or existing component APIs.
 
 ---
 

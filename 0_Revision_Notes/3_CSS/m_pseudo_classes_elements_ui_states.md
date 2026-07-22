@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Persistent connection matter in Pseudo-classes, Pseudo-elements, and UI States?
+### 1. What is the difference between `:hover`, `:focus`, `:focus-visible`, and `:active`?
 
-Persistent connection means A long-lived channel for receiving updates. In interviews, connect it to Pseudo-classes, Pseudo-elements, and UI States by explaining the concrete UI behavior, failure state, and tradeoff.
+`:hover` is pointer proximity, `:focus` is keyboard/programmatic focus, `:focus-visible` is focus that should show a visible ring, and `:active` is the pressed state during activation. A solid component handles all of them intentionally.
 
-### 2. How does Reconnection affect the implementation?
+### 2. Why is relying only on hover a problem?
 
-Reconnection means Recovery logic after network loss. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Touch users, keyboard users, and assistive technology users may never trigger hover. Critical information and controls must also be available through focus, click/tap, semantic markup, and visible text where needed.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How would you style invalid form controls without making the UX noisy?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Use native validation states like `:invalid` carefully, usually after interaction or submit. Pair color with text or icons, preserve accessible error messages, and avoid showing errors before the user has had a chance to type.
 
-### 4. How would you debug a production issue related to Pseudo-classes, Pseudo-elements, and UI States?
+### 4. What are good uses of `::before` and `::after`, and what is the accessibility caveat?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+They are useful for decorative marks, counters, separators, overlays, and small visual affordances. Do not put essential content only in pseudo-elements because it may not be exposed consistently to assistive technology or translation workflows.
 
-### 5. What would you check in code review for Pseudo-classes, Pseudo-elements, and UI States?
+### 5. What states should a reusable button or input component support?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Default, hover, active, focus-visible, disabled, loading, error, and high-contrast states. I also check keyboard behavior, hit target size, reduced motion, and whether disabled styling matches actual disabled semantics.
 
 ---
 

@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Unit test matter in Vitest, Jest, and Unit Tests?
+### 1. What logic is best suited for unit tests in frontend apps?
 
-Unit test means A fast test for isolated logic or a small component behavior. In interviews, connect it to Vitest, Jest, and Unit Tests by explaining the concrete UI behavior, failure state, and tradeoff.
+Pure functions, reducers, validators, formatters, parsers, feature-flag decisions, permission logic, and edge-case-heavy business rules. These tests should be fast, focused, and not require a browser.
 
-### 2. How does Mock affect the implementation?
+### 2. When is mocking helpful, and when does it hurt?
 
-Mock means A controlled replacement for time, network, storage, or modules. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Mock time, network, storage, or expensive boundaries when needed. Avoid mocking the thing you are trying to verify or recreating implementation details so thoroughly that the test cannot catch integration bugs.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you test timer-based code?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Use fake timers when they make the test deterministic, advance time intentionally, and assert visible result or callback behavior. Clean up timers so tests do not leak into each other.
 
-### 4. How would you debug a production issue related to Vitest, Jest, and Unit Tests?
+### 4. What makes a unit test hard to maintain?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Testing private structure, over-mocking, unclear setup, huge fixtures, snapshots without intent, and assertions that do not describe the behavior being protected.
 
-### 5. What would you check in code review for Vitest, Jest, and Unit Tests?
+### 5. What unit-test issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+No edge cases, tests that pass even if the implementation is broken, shared mutable fixtures, no failure-path coverage, and assertions that only check that a function was called instead of checking the result.
 
 ---
 

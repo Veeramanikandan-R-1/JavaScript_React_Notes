@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Scope and closure matter in JavaScript Interview Questions?
+### 1. What is the output of this closure code, and why?
 
-Scope and closure means How functions remember lexical variables and why that affects callbacks. In interviews, connect it to JavaScript Interview Questions by explaining the concrete UI behavior, failure state, and tradeoff.
+If a loop uses `var`, callbacks created inside the loop share the same function-scoped binding, so they often all see the final value. With `let`, each iteration gets its own block-scoped binding. I would answer by drawing the binding lifetime, not by saying "`var` is bad"; legacy code and interview snippets still use it.
 
-### 2. How does Event loop affect the implementation?
+### 2. In what order do `console.log`, `Promise.then`, `queueMicrotask`, and `setTimeout` run?
 
-Event loop means The scheduling model behind synchronous code, microtasks, and timers. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Synchronous logs run first. Then microtasks run, including promise continuations and `queueMicrotask`, before the browser moves to the next task such as `setTimeout`. In frontend work this matters because too many microtasks can delay rendering and make the UI feel stuck even when code is "async".
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is the difference between shallow copy and deep copy in JavaScript?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+A shallow copy copies the top-level container but keeps nested object references shared. Spread, `Object.assign`, and array spread are shallow. A deep copy recursively copies nested data, but it has tradeoffs around Dates, Maps, functions, class instances, circular references, and performance. In React state updates, shallow structural copying is usually the right pattern.
 
-### 4. How would you debug a production issue related to JavaScript Interview Questions?
+### 4. Why can `await` inside a `try/catch` catch an error, but returning a promise sometimes does not?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+`await` unwraps the promise inside the `try` block, so a rejection becomes a thrown error there. If you just return a promise without awaiting it, the rejection happens after the function has returned and may be handled by the caller instead. In code review I look for missing `await` in `try/catch` blocks that are supposed to handle async failures locally.
 
-### 5. What would you check in code review for JavaScript Interview Questions?
+### 5. When would you use `Map` instead of a plain object?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I use `Map` when keys are not limited to strings/symbols, insertion order matters clearly, frequent add/delete operations are expected, or the data is naturally a lookup table. For simple JSON-like records, a plain object is often clearer. A senior answer should mention readability, serialization, prototype-key hazards, and the expected access pattern.
 
 ---
 

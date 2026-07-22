@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Reusable hook matter in Custom Hooks and Reusable Logic?
+### 1. When should you extract a custom hook?
 
-Reusable hook means A function that packages stateful React logic behind a clear API. In interviews, connect it to Custom Hooks and Reusable Logic by explaining the concrete UI behavior, failure state, and tradeoff.
+Extract a custom hook when stateful logic is reused, when a component is becoming hard to read, or when an external system needs a clean React API. Do not extract only to make a file look smaller if the abstraction has no clear purpose.
 
-### 2. How does Hook dependencies affect the implementation?
+### 2. What makes a custom hook API good?
 
-Hook dependencies means Values that control callbacks, effects, and derived values. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It has clear inputs and outputs, owns cleanup, documents async/error states, avoids surprising side effects, and keeps stable references where consumers reasonably depend on them.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you test a custom hook?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Test through a small component or hook-testing utility, depending on the stack. Cover initial state, updates, cleanup, async success/failure, stale responses, and dependency changes.
 
-### 4. How would you debug a production issue related to Custom Hooks and Reusable Logic?
+### 4. What can go wrong when a hook hides too much?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Consumers may not understand when network calls happen, how errors are handled, what triggers rerenders, or how cleanup works. A reusable hook should reduce complexity, not move it into a black box.
 
-### 5. What would you check in code review for Custom Hooks and Reusable Logic?
+### 5. What custom-hook issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing dependency handling, no cleanup, returning unstable objects/functions unnecessarily, mixing unrelated responsibilities, hiding product decisions, and hooks that are reusable in name only.
 
 ---
 

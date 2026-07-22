@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Error boundary matter in Error Boundaries and Suspense?
+### 1. What do React error boundaries catch?
 
-Error boundary means A React boundary that catches render-time errors below it. In interviews, connect it to Error Boundaries and Suspense by explaining the concrete UI behavior, failure state, and tradeoff.
+They catch errors during rendering, lifecycle methods, and constructors below the boundary. They do not catch errors in event handlers, async callbacks, server code, or errors thrown inside the boundary itself.
 
-### 2. How does Fallback UI affect the implementation?
+### 2. Where should error boundaries be placed?
 
-Fallback UI means The UI shown while a subtree is loading or failed. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Place them around areas that can fail independently, such as routes, panels, widgets, or data-heavy feature boundaries. One app-level boundary prevents a blank screen, but smaller boundaries improve recovery.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What makes a good fallback UI?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It explains what failed, preserves surrounding context, offers a retry or recovery action when possible, and reports useful diagnostics. A fallback should not create a confusing layout shift or trap keyboard users.
 
-### 4. How would you debug a production issue related to Error Boundaries and Suspense?
+### 4. How is Suspense different from an error boundary?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Suspense handles waiting/loading for supported async rendering patterns and shows a loading fallback. Error boundaries handle rendering failures and show an error fallback. Production screens often need both.
 
-### 5. What would you check in code review for Error Boundaries and Suspense?
+### 5. What error-boundary/Suspense issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+A single vague fallback for every failure, no retry path, swallowed errors, loading spinners with no layout stability, boundaries placed too high, and no logging tied to the failing route/component.
 
 ---
 

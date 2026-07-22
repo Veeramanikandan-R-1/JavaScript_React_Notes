@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does `picture` matter in Media, iframe, Canvas, and SVG Basics?
+### 1. When would you use `picture` instead of just `img srcset`?
 
-`picture` means Selects image sources for art direction or format fallback. Use Media, iframe, Canvas, and SVG Basics to solve the specific problem described in this note.
+Use `srcset`/`sizes` when the same image is served at different resolutions. Use `picture` when the actual source should change by format or art direction, such as WebP vs JPEG, or a cropped mobile image versus a wide desktop image.
 
-### 2. How does `video` affect the implementation?
+### 2. What security concerns do you check before adding an iframe?
 
-`video` means Embeds playable video with controls, captions, and sources. Understand the browser, runtime, or React behavior behind Media, iframe, Canvas, and SVG Basics before choosing an implementation.
+I check the source, sandbox requirements, allowed permissions, referrer policy, `allow` attributes, loading behavior, and whether the iframe needs a useful `title`. Untrusted iframes should be tightly sandboxed.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why can canvas be an accessibility problem?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Canvas draws pixels; it does not naturally expose semantic structure to assistive tech. If the canvas conveys information or interaction, I provide fallback text, an accessible alternative, keyboard support, and sometimes a separate DOM representation of the same data.
 
-### 4. How would you debug a production issue related to Media, iframe, Canvas, and SVG Basics?
+### 4. Inline SVG or SVG as an image: how do you choose?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use inline SVG when you need styling, animation, currentColor, or accessible internal structure. Use `<img src="icon.svg">` for simple static images. For decorative icons, hide them from assistive tech; for meaningful icons, provide an accessible name.
 
-### 5. What would you check in code review for Media, iframe, Canvas, and SVG Basics?
+### 5. What do you check for video accessibility?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Captions for spoken content, transcripts when useful, keyboard-operable controls, no unexpected autoplay with sound, visible focus, and a fallback for unsupported formats. I also check file size and preload behavior because media can easily dominate performance.
 
 ---
 

@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Grid container matter in CSS Grid Layout?
+### 1. When would you choose CSS Grid over Flexbox?
 
-Grid container means Parent with `display: grid`. Use CSS Grid Layout to solve the specific problem described in this note.
+I choose Grid when rows and columns both matter: dashboards, galleries, page shells, comparison layouts, and forms with aligned labels/fields. Flexbox is better for one-dimensional alignment. The interview answer should be about layout shape, not personal preference.
 
-### 2. How does Track affect the implementation?
+### 2. How does `minmax()` help responsive layouts?
 
-Track means A row or column. Understand the browser, runtime, or React behavior behind CSS Grid Layout before choosing an implementation.
+`minmax()` lets a track have a minimum usable size and a flexible maximum. A common pattern is `repeat(auto-fit, minmax(16rem, 1fr))`, which creates responsive card grids without hard-coded breakpoints.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is the difference between explicit and implicit grid tracks?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Explicit tracks are defined by `grid-template-columns` or `grid-template-rows`. Implicit tracks are created when items are placed outside the defined grid. I check implicit tracks when items appear in unexpected rows or columns.
 
-### 4. How would you debug a production issue related to CSS Grid Layout?
+### 4. How do named grid areas help maintainability?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Named areas make page-region placement readable, especially for responsive layouts that rearrange header, sidebar, content, and footer. They are less useful for highly dynamic lists where line or auto-placement is clearer.
 
-### 5. What would you check in code review for CSS Grid Layout?
+### 5. What grid bugs do you look for on real content?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I check overflow from long content, too-small `minmax()` values, implicit tracks, keyboard/focus order versus visual order, and whether CSS rearrangement changes the reading order in a confusing way.
 
 ---
 

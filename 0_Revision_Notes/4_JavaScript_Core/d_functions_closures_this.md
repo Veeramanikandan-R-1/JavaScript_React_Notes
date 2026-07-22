@@ -48,25 +48,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Value matter in Functions, Closures, and this?
+### 1. What is a closure, and where does it show up in frontend code?
 
-Value means Data your program works with. Use Functions, Closures, and this to solve the specific problem described in this note.
+A closure is a function retaining access to variables from its lexical scope after that outer scope has run. It shows up in event handlers, timers, async callbacks, hooks, memoized functions, debounced handlers, and module-level private state.
 
-### 2. How does Binding affect the implementation?
+### 2. Why does `this` behave differently in arrow functions?
 
-Binding means A named reference created by `let`, `const`, `var`, function, or import. Understand the browser, runtime, or React behavior behind Functions, Closures, and this before choosing an implementation.
+Arrow functions do not create their own `this`; they capture it lexically from the surrounding scope. Normal functions receive `this` from how they are called, which is why method extraction, callbacks, and event handlers can change behavior.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What can go wrong when passing an object method as a callback?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+The method may lose its receiver, so `this` becomes `undefined` in strict mode or points somewhere unexpected. Fixes include binding the method, wrapping the call, or designing the function to accept explicit arguments instead of relying on `this`.
 
-### 4. How would you debug a production issue related to Functions, Closures, and this?
+### 4. How would you debug a stale value inside a click handler or timer?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Find where the function was created and what variables it captured. Then check whether the value changes after creation, whether the handler is re-registered, and whether the code needs a fresh closure, a ref, a dependency update, or a functional state update.
 
-### 5. What would you check in code review for Functions, Closures, and this?
+### 5. What function-related issues do you look for in code review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Hidden side effects, unclear return values, accidental dependency on `this`, callbacks that capture stale state, unnecessary function recreation in hot paths, and utility functions that mix pure logic with DOM or network work.
 
 ---
 

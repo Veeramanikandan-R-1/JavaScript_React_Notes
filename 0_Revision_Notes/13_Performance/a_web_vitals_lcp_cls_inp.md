@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does LCP matter in Web Vitals, LCP, CLS, and INP?
+### 1. What do LCP, CLS, and INP measure?
 
-LCP means Largest Contentful Paint. Use Web Vitals, LCP, CLS, and INP to solve the specific problem described in this note.
+LCP measures when the main content appears, CLS measures unexpected layout movement, and INP measures interaction responsiveness. Together they connect performance work to user-visible loading, stability, and input delay.
 
-### 2. How does CLS affect the implementation?
+### 2. How would you improve a poor LCP score?
 
-CLS means Cumulative Layout Shift. Understand the browser, runtime, or React behavior behind Web Vitals, LCP, CLS, and INP before choosing an implementation.
+Identify the LCP element, then improve server response, resource priority, image sizing/format, CSS delivery, font loading, and JavaScript blocking. Do not guess; inspect field data and a trace.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What causes CLS in real apps?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Images without dimensions, late-loading ads/banners, web fonts swapping, injected content above existing content, skeletons with different final sizes, and route transitions that do not reserve space.
 
-### 4. How would you debug a production issue related to Web Vitals, LCP, CLS, and INP?
+### 4. How do you debug poor INP?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use field data to find affected interactions, then capture a Performance trace. Look for long tasks, expensive event handlers, heavy React renders, layout thrashing, and synchronous work blocking the next paint.
 
-### 5. What would you check in code review for Web Vitals, LCP, CLS, and INP?
+### 5. What performance checks do you do in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Image dimensions and priority, font strategy, bundle impact, route-level lazy loading, third-party scripts, loading states that reserve space, and whether the change has before/after measurement when performance risk is real.
 
 ---
 

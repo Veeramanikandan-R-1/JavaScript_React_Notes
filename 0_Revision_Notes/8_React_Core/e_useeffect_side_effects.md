@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Effect synchronization matter in useEffect and Side Effects?
+### 1. When do you actually need `useEffect`?
 
-Effect synchronization means React work that connects rendering to external systems such as network, timers, subscriptions, or DOM APIs. In interviews, connect it to useEffect and Side Effects by explaining the concrete UI behavior, failure state, and tradeoff.
+Use it to synchronize React with something outside render: network requests, subscriptions, timers, imperative DOM APIs, browser storage, or third-party widgets. Do not use it just to calculate derived data from props/state.
 
-### 2. How does Dependency array affect the implementation?
+### 2. Why is an incorrect dependency array dangerous?
 
-Dependency array means The values React uses to decide when an effect should run again. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Missing dependencies create stale closures. Extra unstable dependencies can rerun effects too often. The correct dependencies describe the values the effect reads from render scope.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What should an effect cleanup do?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It should undo subscriptions, timers, event listeners, observers, in-flight async ownership, or imperative library work started by the effect. Cleanup should make reruns and unmounts safe.
 
-### 4. How would you debug a production issue related to useEffect and Side Effects?
+### 4. How do you avoid race conditions in data fetching effects?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Abort the old request or track whether the response still belongs to the latest render. Also represent loading, error, empty, cancelled, and stale states so old responses cannot silently overwrite newer UI.
 
-### 5. What would you check in code review for useEffect and Side Effects?
+### 5. What effect issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Effects used for derived state, missing cleanup, disabled dependency linting, async functions defined carelessly, event listeners that re-register repeatedly, and effects that combine unrelated responsibilities.
 
 ---
 

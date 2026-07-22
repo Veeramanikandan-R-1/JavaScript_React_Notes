@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Semantic HTML matter in Accessibility, WCAG, Keyboard, and Screen Readers?
+### 1. How do you audit a page for keyboard accessibility?
 
-Semantic HTML means Native meaning and behavior. Use Accessibility, WCAG, Keyboard, and Screen Readers to solve the specific problem described in this note.
+Use only the keyboard to reach every interactive control, operate it, see focus clearly, move in a logical order, escape overlays, and avoid traps. Then confirm behavior with screen-reader and automated checks where appropriate.
 
-### 2. How does Focus affect the implementation?
+### 2. What is an accessible name?
 
-Focus means Current keyboard interaction target. Understand the browser, runtime, or React behavior behind Accessibility, WCAG, Keyboard, and Screen Readers before choosing an implementation.
+It is the text assistive technology uses to identify a control. It can come from a visible label, button text, `aria-label`, `aria-labelledby`, image alt text, or related semantics.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When is ARIA useful, and when is it risky?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+ARIA is useful when native HTML cannot express a needed role, state, or relationship. It is risky when used to fake semantics without implementing keyboard behavior or when it overrides useful native semantics.
 
-### 4. How would you debug a production issue related to Accessibility, WCAG, Keyboard, and Screen Readers?
+### 4. How do you test color contrast and non-color cues?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Check contrast ratios for text and UI states, but also ensure errors, selection, required state, and status are not communicated by color alone. Use text, icons, borders, patterns, or announcements where needed.
 
-### 5. What would you check in code review for Accessibility, WCAG, Keyboard, and Screen Readers?
+### 5. What accessibility issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Non-semantic clickable elements, missing labels, hidden focus, keyboard traps, color-only feedback, inaccessible custom controls, poor heading structure, and dynamic updates that are not announced.
 
 ---
 

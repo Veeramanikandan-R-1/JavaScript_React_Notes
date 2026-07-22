@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Debounce delay matter in Debounce, Throttle, Rate Limiting, and Queues?
+### 1. What is the difference between debounce and throttle?
 
-Debounce delay means Waiting for quiet time before running work. In interviews, connect it to Debounce, Throttle, Rate Limiting, and Queues by explaining the concrete UI behavior, failure state, and tradeoff.
+Debounce waits until events stop for a period before running work. Throttle runs at most once per interval while events continue. Search input usually wants debounce; scroll progress or resize tracking often wants throttle.
 
-### 2. How does Throttle interval affect the implementation?
+### 2. What are leading and trailing debounce calls?
 
-Throttle interval means Running at most once per time window. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+A leading call runs immediately at the start of the burst. A trailing call runs after the quiet period with the latest value. Autocomplete often uses trailing behavior; instant UI feedback may use leading plus trailing.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do debounce and cancellation work together in search?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Debounce reduces how many searches start. Cancellation or request ids prevent older searches from updating the UI after a newer query has started. You usually need both for a polished search experience.
 
-### 4. How would you debug a production issue related to Debounce, Throttle, Rate Limiting, and Queues?
+### 4. When do you need a queue instead of simple throttling?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use a queue when every job must eventually run but concurrency must be controlled, such as uploads or background sync. Throttling is better when repeated events can be sampled or skipped.
 
-### 5. What would you check in code review for Debounce, Throttle, Rate Limiting, and Queues?
+### 5. What debounce/throttle bugs do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Timers not cleared, handlers recreated so debouncing does not work, stale closures, lost final updates, no cancellation for in-flight work, and no tests with rapid repeated events.
 
 ---
 

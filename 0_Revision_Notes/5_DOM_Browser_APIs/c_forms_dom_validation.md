@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does DOM matter in DOM Forms and Validation?
+### 1. Why should form fields use real labels instead of placeholders only?
 
-DOM means Live tree representation of the document. Use DOM Forms and Validation to solve the specific problem described in this note.
+Labels provide a persistent accessible name, increase the clickable target, and remain visible after typing. Placeholders are hints, not labels, and can disappear exactly when the user needs context.
 
-### 2. How does Node affect the implementation?
+### 2. How does native constraint validation help frontend apps?
 
-Node means A unit in the DOM tree. Understand the browser, runtime, or React behavior behind DOM Forms and Validation before choosing an implementation.
+Attributes like `required`, `type`, `min`, `max`, and `pattern` give baseline validation, keyboard hints, and browser semantics. Custom validation can build on top of that, but server validation is still required.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you make validation errors accessible?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Associate the error text with the input using `aria-describedby`, update invalid state thoughtfully, and move focus only when it helps the user recover. Error messages should be specific and not rely on color alone.
 
-### 4. How would you debug a production issue related to DOM Forms and Validation?
+### 4. What can go wrong with custom select or date-picker controls?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+They can lose keyboard behavior, accessible names, focus management, mobile input support, form submission semantics, and validation integration. A senior answer starts by asking whether native controls can meet the requirement.
 
-### 5. What would you check in code review for DOM Forms and Validation?
+### 5. What form bugs do you look for during review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing labels, unclear required/optional state, errors not connected to fields, submit buttons disabled without recovery, client-only validation, and form state that breaks browser autofill or password managers.
 
 ---
 

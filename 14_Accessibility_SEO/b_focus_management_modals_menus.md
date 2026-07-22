@@ -159,25 +159,25 @@ For production modals, use a well-tested component or accessibility utility unle
 
 # Interview Questions with Answers
 
-### 1. Why does Portal target matter in Focus Management, Modals, and Menus?
+### 1. What should happen to focus when a modal opens and closes?
 
-Portal target means A DOM location outside the visual parent where overlay content is mounted. In interviews, connect it to Focus Management, Modals, and Menus by explaining the concrete UI behavior, failure state, and tradeoff.
+Focus should move into the modal on open, remain inside while the modal is active, and return to the element that opened it on close. Background content should not be reachable while the modal is blocking interaction.
 
-### 2. How does Focus trap affect the implementation?
+### 2. How is a menu different from a modal dialog?
 
-Focus trap means Keyboard focus management that keeps modal interaction contained. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+A modal blocks interaction with the rest of the page. A menu is usually a transient control tied to a trigger, with arrow-key navigation patterns depending on menu type. The expected keyboard behavior is different.
 
-### 3. What mistake should you avoid around removing focus outlines?
+### 3. What can go wrong with click-outside handling?
 
-Avoid removing focus outlines. Use semantic elements.
+It can close before inner controls run, conflict with portals, break nested overlays, ignore keyboard users, or close when focus moves for legitimate reasons. Pointer and focus behavior should be designed together.
 
-### 4. How would you debug a production issue related to Focus Management, Modals, and Menus?
+### 4. How do you debug focus getting lost after closing an overlay?
 
-Navigate using only the keyboard. Inspect accessible names, roles, states, and relationships.
+Find the opener, track where focus moves on open/close, check conditional rendering/remounts, ensure the opener still exists, and test keyboard, mouse, and route-change close paths.
 
-### 5. What would you check in code review for Focus Management, Modals, and Menus?
+### 5. What overlay accessibility issues do you flag in review?
 
-Can users identify, reach, operate, and understand every control? Does focus move predictably when UI opens or closes?
+Missing accessible names, no focus restore, background still tabbable, Escape behavior missing or conflicting, body scroll not restored, and menu keyboard behavior that only supports mouse users.
 
 ---
 

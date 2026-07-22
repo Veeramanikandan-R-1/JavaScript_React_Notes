@@ -166,25 +166,25 @@ Senior rule: accessibility is not only ARIA. It is semantics, labels, focus, key
 
 # Interview Questions with Answers
 
-### 1. Why does Semantic HTML matter in Accessibility, WCAG, Keyboard, and Screen Readers?
+### 1. How do you audit a page for keyboard accessibility?
 
-Semantic HTML means Native meaning and behavior. Use accessibility checks during implementation, not as a final cleanup pass.
+Use only the keyboard to reach every interactive control, operate it, see focus clearly, move in a logical order, escape overlays, and avoid traps. Then confirm behavior with screen-reader and automated checks where appropriate.
 
-### 2. How does Focus affect the implementation?
+### 2. What is an accessible name?
 
-Focus means Current keyboard interaction target. Browsers derive the accessibility tree from DOM, roles, labels, states, and relationships.
+It is the text assistive technology uses to identify a control. It can come from a visible label, button text, `aria-label`, `aria-labelledby`, image alt text, or related semantics.
 
-### 3. What mistake should you avoid around removing focus outlines?
+### 3. When is ARIA useful, and when is it risky?
 
-Avoid removing focus outlines. Use semantic elements.
+ARIA is useful when native HTML cannot express a needed role, state, or relationship. It is risky when used to fake semantics without implementing keyboard behavior or when it overrides useful native semantics.
 
-### 4. How would you debug a production issue related to Accessibility, WCAG, Keyboard, and Screen Readers?
+### 4. How do you test color contrast and non-color cues?
 
-Navigate using only the keyboard. Inspect accessible names, roles, states, and relationships.
+Check contrast ratios for text and UI states, but also ensure errors, selection, required state, and status are not communicated by color alone. Use text, icons, borders, patterns, or announcements where needed.
 
-### 5. What would you check in code review for Accessibility, WCAG, Keyboard, and Screen Readers?
+### 5. What accessibility issues do you flag in review?
 
-Can users identify, reach, operate, and understand every control? Does focus move predictably when UI opens or closes?
+Non-semantic clickable elements, missing labels, hidden focus, keyboard traps, color-only feedback, inaccessible custom controls, poor heading structure, and dynamic updates that are not announced.
 
 ---
 

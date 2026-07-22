@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Selector matter in CSS Layout Patterns?
+### 1. How would you build an app layout with a sticky header, sidebar, and scrollable content?
 
-Selector means Targets elements for styling. Use CSS Layout Patterns to solve the specific problem described in this note.
+Use a top-level grid or flex layout with explicit regions. Keep the page height constrained with `min-height: 100dvh`, make only the content region scroll when needed, and test mobile where the sidebar may become a drawer or bottom navigation.
 
-### 2. How does Cascade affect the implementation?
+### 2. What are a few reliable ways to center content, and when would you choose each?
 
-Cascade means Chooses winning declarations. Understand the browser, runtime, or React behavior behind CSS Layout Patterns before choosing an implementation.
+Use flex or grid centering for one item inside a container. Use auto margins for fixed-width blocks in normal flow. For absolute overlays, combine positioning with transforms carefully, but avoid absolute positioning when normal layout can solve it.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How would you build a responsive card grid without hardcoded breakpoints everywhere?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Use CSS Grid with `repeat(auto-fit, minmax(...))`, sensible gaps, and content-driven min/max constraints. Test long titles, missing images, zoom, and narrow containers before adding breakpoints.
 
-### 4. How would you debug a production issue related to CSS Layout Patterns?
+### 4. How do you design layouts that handle unknown content height?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Avoid fixed heights unless the design truly requires clipping. Use min/max sizes, flexible tracks, overflow rules, and content wrapping. For equal-height visual groups, let grid or flex align items instead of forcing every card to a fixed size.
 
-### 5. What would you check in code review for CSS Layout Patterns?
+### 5. What layout choices usually signal future maintenance problems?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Nested layout wrappers with unclear purpose, absolute positioning for normal content, fixed heights on text-heavy areas, breakpoints that target one device, and duplicated layout rules across screens.
 
 ---
 

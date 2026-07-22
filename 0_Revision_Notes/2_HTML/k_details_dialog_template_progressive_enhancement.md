@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Semantic element matter in details, dialog, template, and Progressive Enhancement?
+### 1. When would you choose native `details/summary` instead of building an accordion from scratch?
 
-Semantic element means An element chosen for meaning, not visual appearance. Use details, dialog, template, and Progressive Enhancement to solve the specific problem described in this note.
+When the requirement is a simple disclosure that should work with minimal JavaScript. Native `details/summary` gives built-in toggle behavior and accessibility semantics. I would build custom only if design or behavior requirements exceed what the native element can reliably support.
 
-### 2. How does Native behavior affect the implementation?
+### 2. What does the native `dialog` element give you, and what must you still verify?
 
-Native behavior means Built-in browser interaction such as form submission, disclosure, or dialog behavior. Understand the browser, runtime, or React behavior behind details, dialog, template, and Progressive Enhancement before choosing an implementation.
+`dialog` gives a browser-supported dialog primitive, `showModal()`, backdrop behavior, and better semantics than a random div. I still verify focus movement, close behavior, accessible name, scroll locking, browser support, and how nested or stacked modals are handled.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is progressive enhancement?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Progressive enhancement means starting with working HTML and then layering CSS and JavaScript enhancements. If JavaScript fails or loads slowly, the core content or form should still be understandable and usable where possible.
 
-### 4. How would you debug a production issue related to details, dialog, template, and Progressive Enhancement?
+### 4. When is the `template` element useful?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+`template` stores inert markup that is not rendered until cloned. It is useful for lightweight browser-native examples, repeated markup, or progressive enhancement without immediately executing scripts or loading media inside the template.
 
-### 5. What would you check in code review for details, dialog, template, and Progressive Enhancement?
+### 5. A modal works visually but screen-reader users are confused. What do you inspect?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I inspect the accessible name, role, focus placement, tab containment, background inertness, Escape/close behavior, return focus, and whether important content is announced. Visual overlay alone does not make a dialog accessible.
 
 ---
 

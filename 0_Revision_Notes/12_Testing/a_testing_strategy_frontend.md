@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Test pyramid matter in Frontend Testing Strategy?
+### 1. How do you decide what to test with unit, component, integration, and E2E tests?
 
-Test pyramid means Balancing fast unit tests, integration tests, and slower end-to-end tests. In interviews, connect it to Frontend Testing Strategy by explaining the concrete UI behavior, failure state, and tradeoff.
+Use unit tests for pure logic, component tests for UI behavior, integration tests for connected flows, and E2E tests for the highest-value user journeys. The goal is confidence with fast feedback and clear failures.
 
-### 2. How does Behavior coverage affect the implementation?
+### 2. What makes a frontend test valuable?
 
-Behavior coverage means Testing user-visible outcomes instead of implementation details. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It fails when important user behavior breaks, is understandable from the failure message, avoids implementation details, and is cheap enough to run often. Coverage percentage alone does not prove value.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What belongs in an E2E smoke suite?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Critical paths such as login, core navigation, major CRUD flow, checkout/payment-safe path, and app boot. Keep smoke tests small and stable so they protect deployments instead of becoming noise.
 
-### 4. How would you debug a production issue related to Frontend Testing Strategy?
+### 4. How do you handle flaky tests?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Treat flakiness as a product-quality problem. Find whether it comes from timing, network, selectors, shared state, test data, environment, or real race conditions. Quarantine only as a short-term containment step.
 
-### 5. What would you check in code review for Frontend Testing Strategy?
+### 5. What testing issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Tests that assert implementation details, mocks that hide real behavior, missing failure states, snapshots used as a substitute for behavior, and E2E tests that cover trivial paths while critical flows remain untested.
 
 ---
 

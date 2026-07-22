@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Content box matter in Box Model, Display, and Overflow?
+### 1. Why do many teams set `box-sizing: border-box` globally?
 
-Content box means The area where content is drawn. Use Box Model, Display, and Overflow to solve the specific problem described in this note.
+With `border-box`, the declared width includes content, padding, and border, which makes component sizing easier to reason about. Without it, adding padding can make an element wider than expected and cause overflow.
 
-### 2. How does Padding affect the implementation?
+### 2. A flex child with long text overflows its container. What is the common fix?
 
-Padding means Space inside the border. Understand the browser, runtime, or React behavior behind Box Model, Display, and Overflow before choosing an implementation.
+Inspect the flex item and try `min-width: 0` on the flexible child. Flex items default to `min-width: auto`, which can prevent shrinking below content size. Then apply appropriate text wrapping, ellipsis, or overflow behavior based on the UI requirement.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is the difference between `display: none`, `visibility: hidden`, and `opacity: 0`?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+`display: none` removes the element from layout and the accessibility tree. `visibility: hidden` keeps layout space but hides the element. `opacity: 0` makes it transparent but it can still take space and may still receive events unless controlled. These differences matter for animations and accessibility.
 
-### 4. How would you debug a production issue related to Box Model, Display, and Overflow?
+### 4. When would you use `overflow: auto` instead of hiding overflow?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use `overflow: auto` when the content may legitimately exceed the available space and users still need access to it. Hiding overflow is appropriate for clipping effects, masks, and intentional truncation, but it can hide real content and focus outlines if used casually.
 
-### 5. What would you check in code review for Box Model, Display, and Overflow?
+### 5. Why is fixed `height` risky for content cards?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Real content changes with translations, user settings, dynamic data, and validation messages. Fixed height often causes clipping or overlap. I prefer `min-height`, flexible layout, and explicit overflow behavior only when the design truly needs it.
 
 ---
 

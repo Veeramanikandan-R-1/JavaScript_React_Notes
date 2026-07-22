@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Loading state matter in Data Fetching Patterns?
+### 1. What states should a data-fetching component represent?
 
-Loading state means The visible state while remote data is being requested. In interviews, connect it to Data Fetching Patterns by explaining the concrete UI behavior, failure state, and tradeoff.
+Initial loading, success, empty, error, background refetching, retrying, unauthorized, and stale/cancelled states where relevant. A blank screen is usually a missing state, not a design choice.
 
-### 2. How does Race condition affect the implementation?
+### 2. How do you prevent race conditions in data fetching?
 
-Race condition means A stale response arriving after a newer request. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Abort stale requests or track request identity so only the latest response updates state. This matters for search, filters, route changes, dependent dropdowns, and fast navigation.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When should data be fetched at route level instead of component level?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Route-level fetching is useful when data is required for the page, should block or coordinate navigation, or needs route-level error/loading boundaries. Component-level fetching is fine for optional panels or independently loaded widgets.
 
-### 4. How would you debug a production issue related to Data Fetching Patterns?
+### 4. How do you avoid duplicate requests?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Centralize server-state ownership, use stable cache/query keys, avoid fetching the same data in parent and child, and watch effect dependencies that refetch because object/function identities change.
 
-### 5. What would you check in code review for Data Fetching Patterns?
+### 5. What data-fetching issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+No error/empty state, ignoring HTTP statuses, no cancellation/stale-response handling, duplicated cache state, infinite refetch loops, and optimistic updates without rollback.
 
 ---
 

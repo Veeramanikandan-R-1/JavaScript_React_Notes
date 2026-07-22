@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Cache key matter in Caching, Offline Basics, and Service Workers?
+### 1. What makes a good cache key?
 
-Cache key means The identity used to store and retrieve cached data. In interviews, connect it to Caching, Offline Basics, and Service Workers by explaining the concrete UI behavior, failure state, and tradeoff.
+A good cache key includes the data identity and any inputs that change the response, such as user, locale, filters, pagination, auth scope, and version. Missing inputs create wrong-data bugs.
 
-### 2. How does Stale data affect the implementation?
+### 2. What is the difference between cache-first and network-first strategies?
 
-Stale data means Cached content that may no longer match the server. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Cache-first prioritizes speed/offline support and falls back to the network when missing. Network-first prioritizes freshness and falls back to cache on failure. The right strategy depends on whether stale data is acceptable.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What can go wrong with service worker updates?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Users can keep running an old service worker, cached assets can mismatch the new app shell, and update prompts can be disruptive. Versioning, cache cleanup, and a deliberate activation strategy matter.
 
-### 4. How would you debug a production issue related to Caching, Offline Basics, and Service Workers?
+### 4. How would you debug a user seeing an old version of the app?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Check DevTools Application for service workers and Cache Storage, inspect response headers, confirm asset hashes, unregister the service worker to isolate the issue, and verify CDN/browser cache behavior.
 
-### 5. What would you check in code review for Caching, Offline Basics, and Service Workers?
+### 5. What caching issues do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Wrong cache keys, no invalidation path, caching user-specific data too broadly, storing sensitive responses, no offline fallback state, and service worker changes without an update/rollback plan.
 
 ---
 

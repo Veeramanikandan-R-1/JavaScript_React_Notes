@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does `table` matter in Tables and Structured Data?
+### 1. When is a real HTML table better than CSS grid or divs?
 
-`table` means Container for tabular data. Use Tables and Structured Data to solve the specific problem described in this note.
+Use a table when the data is truly row-and-column data and cells need relationships with headers. CSS grid is for layout; tables are for data. Screen readers can navigate real table headers and cells much better than a div-based imitation.
 
-### 2. How does `caption` affect the implementation?
+### 2. What do `th`, `scope`, `caption`, `thead`, and `tbody` add?
 
-`caption` means Accessible table title or summary. Understand the browser, runtime, or React behavior behind Tables and Structured Data before choosing an implementation.
+They describe structure. `th` identifies header cells, `scope` clarifies row or column relationships, `caption` names the table, and `thead`/`tbody` group sections. This makes large tables easier to understand and maintain.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you make a wide table usable on mobile?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+I first ask whether all columns are needed on mobile. Options include horizontal scroll with a visible affordance, priority columns, row expansion, card transformation with labels, or server-side export. I avoid destroying the header-cell relationship without providing an accessible alternative.
 
-### 4. How would you debug a production issue related to Tables and Structured Data?
+### 4. How would you handle sortable table headers accessibly?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use a button inside the header cell for the sort action, keep focus behavior normal, and expose sort state with `aria-sort` on the relevant `th`. The visual arrow alone is not enough.
 
-### 5. What would you check in code review for Tables and Structured Data?
+### 5. When does structured data matter for frontend work?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Structured data matters when pages need better search understanding, rich results, product/event/article metadata, or machine-readable content. I validate it with tooling and keep it consistent with visible content so SEO metadata does not lie.
 
 ---
 

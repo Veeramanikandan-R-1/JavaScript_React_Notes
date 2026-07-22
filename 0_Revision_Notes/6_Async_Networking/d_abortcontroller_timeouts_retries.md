@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does AbortSignal matter in AbortController, Timeouts, and Retries?
+### 1. What does `AbortController` actually cancel?
 
-AbortSignal means The cancellation signal passed into fetch or async work. In interviews, connect it to AbortController, Timeouts, and Retries by explaining the concrete UI behavior, failure state, and tradeoff.
+It signals cancellation to APIs that support `AbortSignal`, such as `fetch`. It does not magically stop every promise or undo already completed work; your code must pass the signal and handle the abort error intentionally.
 
-### 2. How does Timeout affect the implementation?
+### 2. How would you implement a request timeout with `fetch`?
 
-Timeout means A deadline that prevents waiting forever. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Create an `AbortController`, start a timer that calls `abort()`, pass `signal` to `fetch`, and clear the timer in `finally`. The UI should distinguish timeout from validation, auth, server, and offline errors when that helps recovery.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When should a frontend retry a request?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Retry transient failures, usually with backoff and a limit. Be careful with non-idempotent actions such as payments, orders, or form submissions unless the backend supports idempotency keys.
 
-### 4. How would you debug a production issue related to AbortController, Timeouts, and Retries?
+### 4. How do you avoid stale responses overwriting newer UI state?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Abort old requests when possible, or track a request id/version and ignore responses that are no longer current. This is common in search, filters, route changes, and dependent dropdowns.
 
-### 5. What would you check in code review for AbortController, Timeouts, and Retries?
+### 5. What retry/cancellation bugs do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Infinite retries, retrying user mistakes, duplicate writes, not clearing timeout timers, treating abort as a user-facing error, and state updates after the screen no longer owns the request.
 
 ---
 

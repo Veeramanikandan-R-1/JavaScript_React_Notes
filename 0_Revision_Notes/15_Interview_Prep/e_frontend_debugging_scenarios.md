@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Source map matter in Frontend Debugging Scenarios?
+### 1. A React screen shows old data after quickly changing filters. How do you debug it?
 
-Source map means A mapping from bundled code back to original source files. In interviews, connect it to Frontend Debugging Scenarios by explaining the concrete UI behavior, failure state, and tradeoff.
+I first reproduce it with slow network throttling and watch the request order. The usual cause is a stale response winning after a newer request. I would check query keys, effect dependencies, AbortController usage, cache invalidation, and whether the UI ties the response to the latest filter state before rendering it.
 
-### 2. How does Minified stack trace affect the implementation?
+### 2. A button click does nothing in production, but works locally. What do you inspect?
 
-Minified stack trace means A production error trace that needs mapping to be readable. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+I check the browser console with source maps, network errors, feature flags, environment variables, minified stack traces, and whether the production bundle is serving stale assets. I also inspect whether the element is actually receiving the click or if an overlay, disabled state, pointer-events rule, or hydration mismatch is blocking interaction.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. A layout breaks only when the customer name is very long. What is your CSS debugging flow?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+I inspect the element and parent layout mode, then check `min-width`, `max-width`, `overflow`, `white-space`, flex shrink behavior, grid tracks, and word-breaking. For flex children, `min-width: 0` is a common missing fix. I would also add a long-text regression example because real content is part of the requirement.
 
-### 4. How would you debug a production issue related to Frontend Debugging Scenarios?
+### 4. A modal opens, but keyboard users can tab to content behind it. What is the bug?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+The modal is missing proper focus management. Opening should move focus into the modal, tab should be contained while it is open, Escape should close when appropriate, the trigger should regain focus on close, and background content should be inert or otherwise unavailable to assistive tech.
 
-### 5. What would you check in code review for Frontend Debugging Scenarios?
+### 5. How do you answer when you do not know the root cause yet?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I say what I know, what I need to prove, and what evidence I will collect next. A senior debugging answer is not guessing quickly; it is reducing uncertainty with reproduction steps, logs, DevTools, network traces, DOM inspection, and a small fix backed by a regression test or checklist.
 
 ---
 

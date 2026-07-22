@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Persistent connection matter in WebSockets, SSE, and Realtime UI?
+### 1. When would you choose WebSockets over Server-Sent Events?
 
-Persistent connection means A long-lived channel for receiving updates. In interviews, connect it to WebSockets, SSE, and Realtime UI by explaining the concrete UI behavior, failure state, and tradeoff.
+Use WebSockets when the client and server both need to send frequent messages, such as collaboration, chat, or multiplayer-style interaction. Use SSE when the server mainly pushes updates to the browser over a simpler one-way stream.
 
-### 2. How does Reconnection affect the implementation?
+### 2. What should a realtime UI show when the connection drops?
 
-Reconnection means Recovery logic after network loss. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Show connection state, preserve usable existing data, retry with backoff, and reconcile missed updates after reconnect. Avoid silently pretending the UI is live when it is not.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you avoid duplicate realtime messages?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Use stable message ids, sequence numbers, timestamps, or server versions. The client should make message handling idempotent because reconnects and retries can deliver repeated data.
 
-### 4. How would you debug a production issue related to WebSockets, SSE, and Realtime UI?
+### 4. What problems happen when realtime state and fetched state disagree?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+The UI can flicker, show stale counts, duplicate items, or overwrite optimistic updates. Decide which source is authoritative and define a reconciliation strategy for initial load, updates, reconnect, and refetch.
 
-### 5. What would you check in code review for WebSockets, SSE, and Realtime UI?
+### 5. What realtime code review issues do you look for?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing cleanup, no heartbeat or reconnect policy, unbounded message queues, duplicate subscriptions, no backoff, no auth-refresh handling, and UI states that do not explain disconnected or syncing behavior.
 
 ---
 

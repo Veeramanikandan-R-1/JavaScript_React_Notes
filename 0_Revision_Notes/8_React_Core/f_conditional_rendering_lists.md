@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Conditional branch matter in Conditional Rendering and Lists?
+### 1. What UI states should a data-driven list usually render?
 
-Conditional branch means Choosing which UI to render from current state. In interviews, connect it to Conditional Rendering and Lists by explaining the concrete UI behavior, failure state, and tradeoff.
+Loading, success with items, empty, error, background refetching, permission/auth blocked, and sometimes partial data. Senior candidates should mention that each state needs accessible text and stable layout.
 
-### 2. How does Stable key affect the implementation?
+### 2. Why should conditional rendering avoid hiding important state transitions?
 
-Stable key means A persistent identity for each item in a changing list. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+If loading, empty, and error states collapse into `null`, users get blank screens and debugging becomes harder. Clear conditional branches make behavior testable and easier to review.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do keys affect list item state?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Keys tell React which item identity should be preserved across renders. Bad keys cause item-local state, focus, animations, and input values to attach to the wrong item after changes.
 
-### 4. How would you debug a production issue related to Conditional Rendering and Lists?
+### 4. How do you render a large list without freezing the page?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Start with pagination or server-side filtering if product flow allows it. For large client-side lists, use virtualization, memoized row data where useful, stable keys, and measured render performance.
 
-### 5. What would you check in code review for Conditional Rendering and Lists?
+### 5. What list rendering issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Index keys, missing empty/error states, nested ternaries that hide behavior, expensive filtering/sorting on every render, inaccessible loading text, and item actions that lose focus or state after reorder.
 
 ---
 

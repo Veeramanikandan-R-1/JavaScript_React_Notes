@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does DOM matter in Accessibility with JavaScript?
+### 1. What accessibility behavior can JavaScript accidentally break?
 
-DOM means Live tree representation of the document. Use Accessibility with JavaScript to solve the specific problem described in this note.
+JavaScript can break focus order, keyboard activation, native form behavior, announcements, scroll position, browser history, and semantic relationships. The more custom the interaction, the more responsibility the script takes on.
 
-### 2. How does Node affect the implementation?
+### 2. How should focus behave when opening and closing a modal?
 
-Node means A unit in the DOM tree. Understand the browser, runtime, or React behavior behind Accessibility with JavaScript before choosing an implementation.
+Move focus into the modal when it opens, keep keyboard focus inside while it is modal, close on expected actions, and return focus to the triggering element when it closes. The rest of the page should not be reachable to assistive tech while blocked.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When should you use ARIA?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Use native HTML first. Add ARIA when native semantics are not enough, and only when you also implement the required keyboard behavior and state updates. ARIA changes meaning; it does not create behavior.
 
-### 4. How would you debug a production issue related to Accessibility with JavaScript?
+### 4. How do you make dynamic updates understandable to screen-reader users?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use appropriate live regions for status updates, keep messages concise, avoid constantly changing announcements, and ensure focus moves only when the user's task requires it.
 
-### 5. What would you check in code review for Accessibility with JavaScript?
+### 5. What accessibility checks do you expect before shipping custom interaction?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Keyboard-only operation, visible focus, accessible names, correct roles/states, screen-reader behavior, reduced motion, zoom support, and that native semantics were preserved wherever possible.
 
 ---
 

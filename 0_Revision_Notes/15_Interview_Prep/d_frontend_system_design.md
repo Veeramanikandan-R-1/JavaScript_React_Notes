@@ -45,25 +45,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Data flow matter in Frontend System Design?
+### 1. Design a frontend for a dashboard with filters, charts, tables, and export. How do you start?
 
-Data flow means How data enters, moves through, and updates the interface. In interviews, connect it to Frontend System Design by explaining the concrete UI behavior, failure state, and tradeoff.
+I start by clarifying users, data sources, freshness requirements, filter behavior, permissions, and performance budget. Then I define routes, URL state for shareable filters, server-state caching, component boundaries, loading/error/empty states, and observability. I would not start with component names before understanding data and user workflows.
 
-### 2. How does State ownership affect the implementation?
+### 2. Where would you store table filters: component state, URL params, Redux, or server?
 
-State ownership means Which layer owns local, shared, server, and URL state. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+If filters should be shareable, bookmarkable, or survive refresh, I put them in URL search params. If they are temporary UI-only controls, local state is enough. If multiple distant widgets need the same client-only filter state, a store can help. The server owns persisted preferences or canonical query results.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How would you design frontend performance for a large list?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+I would combine backend pagination or cursor loading, stable query keys, virtualization for large visible lists, memoized row rendering only when measured, and careful column/cell composition. I would also discuss skeletons, empty/error states, keyboard navigation, and avoiding layout shift.
 
-### 4. How would you debug a production issue related to Frontend System Design?
+### 4. How do you compare CSR, SSR, and SSG in an interview?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+CSR is simpler for app-like authenticated screens but waits for JavaScript before meaningful UI. SSR improves first render and SEO but adds hydration, server cost, and caching complexity. SSG is great for mostly static content but needs a strategy for freshness. The right answer depends on content, auth, SEO, latency, and team operations.
 
-### 5. What would you check in code review for Frontend System Design?
+### 5. What failure states do senior interviewers expect you to mention?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Slow network, partial data, empty data, stale data, auth expiry, permission denial, retry behavior, offline behavior where relevant, feature-flag rollback, API shape changes, and accessibility failures. A system design answer feels senior when it treats these as first-class states, not afterthoughts.
 
 ---
 

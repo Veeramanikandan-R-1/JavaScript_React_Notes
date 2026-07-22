@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Lint rule matter in ESLint, Prettier, and Code Quality?
+### 1. What is the difference between ESLint and Prettier?
 
-Lint rule means A static check for correctness, consistency, or risk. In interviews, connect it to ESLint, Prettier, and Code Quality by explaining the concrete UI behavior, failure state, and tradeoff.
+ESLint finds code-quality, correctness, and consistency issues using rules. Prettier formats code layout automatically. They overlap less when Prettier owns formatting and ESLint owns suspicious code patterns.
 
-### 2. How does Formatter affect the implementation?
+### 2. What lint rules are especially valuable in React/frontend projects?
 
-Formatter means A tool that removes style debates by rewriting code layout. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Rules for hooks dependencies, unused variables, accessibility, imports, no-floating-promises where TypeScript supports it, no accidental globals, and team-specific boundaries such as feature import rules.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When would you disable a lint rule?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Only when the rule is wrong for the specific case and the exception is documented. A broad config disable should require a team decision because it changes the quality bar for everyone.
 
-### 4. How would you debug a production issue related to ESLint, Prettier, and Code Quality?
+### 4. How do linting and formatting fit into CI?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+CI should run install, typecheck, lint, tests, and build in a deterministic environment. Formatting can be checked in CI, but most teams also run it pre-commit or in the editor to keep feedback fast.
 
-### 5. What would you check in code review for ESLint, Prettier, and Code Quality?
+### 5. What code-quality tooling issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Disabling rules to merge faster, adding format-only churn with logic changes, inconsistent local/CI scripts, missing accessibility linting, and custom rules that create noise without catching real problems.
 
 ---
 

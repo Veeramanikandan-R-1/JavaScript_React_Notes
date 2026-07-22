@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Semantic HTML matter in SEO for React Apps?
+### 1. Why can SEO be harder in a client-rendered React app?
 
-Semantic HTML means Native meaning and behavior. Use SEO for React Apps to solve the specific problem described in this note.
+If meaningful content, links, titles, and metadata appear only after JavaScript runs, crawlers and link previews may miss or delay understanding the page. Server rendering or pre-rendering often helps content-heavy pages.
 
-### 2. How does Focus affect the implementation?
+### 2. What metadata should a React route manage?
 
-Focus means Current keyboard interaction target. Understand the browser, runtime, or React behavior behind SEO for React Apps before choosing an implementation.
+Title, description, canonical URL, robots directives where needed, Open Graph/Twitter metadata, structured data when appropriate, and route-specific headings/content that match search intent.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do performance and SEO connect?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Slow pages can hurt crawling, ranking signals, and user engagement. LCP, image optimization, JavaScript size, server response time, and stable layout all matter for search and real users.
 
-### 4. How would you debug a production issue related to SEO for React Apps?
+### 4. How do you debug incorrect link previews?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Inspect the rendered HTML and response source for Open Graph tags, clear CDN/social caches, verify absolute image URLs, status codes, canonical URL, and whether metadata changes only after client-side JavaScript.
 
-### 5. What would you check in code review for SEO for React Apps?
+### 5. What SEO issues do you flag in React reviews?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing route titles/descriptions, duplicate canonical URLs, content hidden behind client-only fetches, broken semantic heading structure, images without useful alt text, and links implemented as buttons or click handlers.
 
 ---
 

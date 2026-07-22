@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Registered field matter in React Hook Form and Validation?
+### 1. Why do teams use React Hook Form for large forms?
 
-Registered field means An input connected to the form controller. In interviews, connect it to React Hook Form and Validation by explaining the concrete UI behavior, failure state, and tradeoff.
+It minimizes rerenders by leaning on uncontrolled inputs, has good field registration APIs, integrates with schema resolvers, and handles touched/dirty/error state without hand-rolling everything.
 
-### 2. How does Resolver affect the implementation?
+### 2. What does registering a field mean?
 
-Resolver means A validation bridge between form data and a schema. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Registration connects the input to the form controller so value, validation rules, refs, and events can be tracked. Custom components need to forward the right props/ref or use a controller pattern.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When do you validate: on change, blur, or submit?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It depends on the field and user experience. Expensive or noisy validation often belongs on blur or submit; lightweight formatting may happen on change. Errors should not punish users while they are still typing.
 
-### 4. How would you debug a production issue related to React Hook Form and Validation?
+### 4. How do schema resolvers fit into form validation?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+A resolver adapts a schema result into form errors. It keeps validation rules centralized, but you still need UI-specific behavior for focus, messages, async checks, and server-side errors.
 
-### 5. What would you check in code review for React Hook Form and Validation?
+### 5. What React Hook Form issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Custom inputs not forwarding refs, validation mode that creates noisy UX, errors not connected accessibly, default values missing, server errors not mapped back to fields, and form state causing unnecessary rerenders.
 
 ---
 

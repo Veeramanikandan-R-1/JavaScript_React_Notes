@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Fluid layout matter in Responsive Design, Media Queries, and Container Queries?
+### 1. How do you choose breakpoints?
 
-Fluid layout means Uses percentages, flexible tracks, and intrinsic sizing. Use Responsive Design, Media Queries, and Container Queries to solve the specific problem described in this note.
+I choose breakpoints where the content or layout breaks, not because of a specific device name. I start fluid, test real content, zoom, and narrow widths, then add breakpoints only when the current layout stops working well.
 
-### 2. How does Breakpoint affect the implementation?
+### 2. When are container queries better than media queries?
 
-Breakpoint means A CSS condition where layout changes. Understand the browser, runtime, or React behavior behind Responsive Design, Media Queries, and Container Queries before choosing an implementation.
+Container queries are better for reusable components whose layout depends on their parent size, not the viewport. A card in a sidebar and the same card in a wide main area may need different layouts on the same screen width.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What does mobile-first CSS mean in practice?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Base styles support the simplest/narrowest layout first, then media queries enhance for more space. It usually reduces overrides and makes the default experience more resilient on constrained devices.
 
-### 4. How would you debug a production issue related to Responsive Design, Media Queries, and Container Queries?
+### 4. What responsive issues do you test beyond viewport width?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+I test zoom, text scaling, long translated strings, touch versus mouse, reduced motion, portrait/landscape, slow networks, high-density images, and keyboard navigation. Responsive design is more than making the browser narrow.
 
-### 5. What would you check in code review for Responsive Design, Media Queries, and Container Queries?
+### 5. How do responsive images fit into responsive design?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+The layout can be responsive but still waste bandwidth if images are oversized. I check `srcset`, `sizes`, art direction with `picture` when needed, width/height or aspect ratio to prevent CLS, and whether the LCP image is prioritized correctly.
 
 ---
 

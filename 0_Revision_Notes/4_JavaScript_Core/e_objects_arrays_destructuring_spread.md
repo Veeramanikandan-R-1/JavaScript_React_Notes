@@ -47,25 +47,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Value matter in Objects, Arrays, Destructuring, and Spread?
+### 1. What is the difference between shallow copy and deep copy?
 
-Value means Data your program works with. Use Objects, Arrays, Destructuring, and Spread to solve the specific problem described in this note.
+A shallow copy copies the top-level object or array but keeps nested objects by reference. A deep copy duplicates nested data too. Spread syntax is shallow, which is a common source of state mutation bugs.
 
-### 2. How does Binding affect the implementation?
+### 2. Why can `{ ...user }` still allow accidental mutation?
 
-Binding means A named reference created by `let`, `const`, `var`, function, or import. Understand the browser, runtime, or React behavior behind Objects, Arrays, Destructuring, and Spread before choosing an implementation.
+Nested objects are still shared. If `user.address` is an object, mutating `copy.address.city` also mutates `user.address.city`. In UI state updates, copy each level that changes or use a helper that preserves immutability.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When would you avoid destructuring?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Avoid it when it hides where values come from, creates very long parameter lists, renames too many properties, or makes optional data harder to read. Clear code beats clever destructuring in shared frontend code.
 
-### 4. How would you debug a production issue related to Objects, Arrays, Destructuring, and Spread?
+### 4. How do object identity bugs affect React rendering?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+If you mutate an existing object, React may not see a changed reference and may skip updates. If you recreate objects unnecessarily, memoized children may re-render. Debug by checking reference equality and where objects are created.
 
-### 5. What would you check in code review for Objects, Arrays, Destructuring, and Spread?
+### 5. What array update mistakes do you watch for?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Using mutating methods like `sort`, `reverse`, `splice`, or `push` directly on state, using array indexes as stable identities, and doing expensive transformations repeatedly during render without measurement.
 
 ---
 

@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Critical CSS matter in HTML Performance and Resource Loading?
+### 1. What is the difference between `async`, `defer`, and `type="module"` scripts?
 
-Critical CSS means Styles needed for above-the-fold content. Use HTML Performance and Resource Loading to solve the specific problem described in this note.
+A normal script blocks parsing while it downloads and executes. `defer` downloads in parallel and executes after HTML parsing, in order. `async` downloads in parallel and executes as soon as ready, not guaranteed in order. `type="module"` supports imports/exports and is deferred by default.
 
-### 2. How does `defer` affect the implementation?
+### 2. When would you use `preload` and when would you use `preconnect`?
 
-`defer` means Loads script during parsing and executes after document parsing. Understand the browser, runtime, or React behavior behind HTML Performance and Resource Loading before choosing an implementation.
+Use `preload` for a specific critical resource the browser may discover too late, such as a hero font or image. Use `preconnect` to warm up a connection to a third-party origin needed soon. Both can hurt performance if overused.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do images affect LCP and CLS?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+A large hero image is often the LCP element, so it needs the right format, dimensions, priority, and server/CDN behavior. Missing width/height or aspect ratio can cause CLS when the image loads. I avoid lazy-loading the likely LCP image.
 
-### 4. How would you debug a production issue related to HTML Performance and Resource Loading?
+### 4. What do you check when a page is blank for several seconds?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+I inspect the network waterfall, main-thread blocking, render-blocking CSS/JS, bundle size, server response time, font loading, and whether hydration or client data fetching is delaying useful content. I compare dev and production builds because they behave differently.
 
-### 5. What would you check in code review for HTML Performance and Resource Loading?
+### 5. How do you load third-party scripts responsibly?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I ask whether the script is needed, whether it can load after interaction or consent, whether it blocks rendering, and what failure looks like. I prefer async/defer, feature flags for risky scripts, and monitoring for performance impact.
 
 ---
 

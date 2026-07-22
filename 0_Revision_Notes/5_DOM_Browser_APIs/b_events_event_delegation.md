@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does DOM matter in Events and Event Delegation?
+### 1. Explain event bubbling and capturing with a click inside a nested button area.
 
-DOM means Live tree representation of the document. Use Events and Event Delegation to solve the specific problem described in this note.
+In capture, the event travels from the document down toward the target. At target, handlers on the clicked element run. In bubble, it travels back up through ancestors. Most UI event handlers rely on bubbling.
 
-### 2. How does Node affect the implementation?
+### 2. What is event delegation, and when is it useful?
 
-Node means A unit in the DOM tree. Understand the browser, runtime, or React behavior behind Events and Event Delegation before choosing an implementation.
+Event delegation attaches one listener to a stable ancestor and uses the event target to decide what action occurred. It is useful for large lists, dynamic content, menus, tables, and framework-free interactions.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is the difference between `event.target` and `event.currentTarget`?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+`target` is the deepest element where the event originated. `currentTarget` is the element whose listener is currently running. Delegated handlers often need `target.closest(...)` and then a containment check.
 
-### 4. How would you debug a production issue related to Events and Event Delegation?
+### 4. When is `stopPropagation()` a bad fix?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+It can hide ownership problems and break analytics, global shortcuts, menus, overlays, or parent components. Use it only when the interaction genuinely should not reach ancestors, and document the boundary.
 
-### 5. What would you check in code review for Events and Event Delegation?
+### 5. What event-listener bugs do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Listeners added repeatedly, missing cleanup, passive listeners missing on scroll/touch where appropriate, handlers doing heavy synchronous work, and mouse-only behavior without keyboard or touch support.
 
 ---
 

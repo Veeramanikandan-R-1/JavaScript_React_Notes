@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Schema matter in Schema Validation with Zod or Yup?
+### 1. What problem does schema validation solve in frontend forms?
 
-Schema means A single definition of expected data shape and constraints. In interviews, connect it to Schema Validation with Zod or Yup by explaining the concrete UI behavior, failure state, and tradeoff.
+It centralizes expected shape, constraints, transformations, and error generation for form/API data. It is especially useful at runtime boundaries where TypeScript alone cannot verify incoming values.
 
-### 2. How does Resolver affect the implementation?
+### 2. How is schema validation different from TypeScript types?
 
-Resolver means Code that turns schema results into form errors. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+TypeScript checks code at compile time. Schemas validate actual runtime data, such as form input, API responses, local storage, and URL params. Many teams infer TypeScript types from schemas to avoid duplication.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Where should server validation errors appear in the UI?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Field-specific errors should attach to the relevant field. Form-level errors should appear in a summary or alert area. The UI should preserve user input and make recovery clear.
 
-### 4. How would you debug a production issue related to Schema Validation with Zod or Yup?
+### 4. What can go wrong with schema transforms?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Transforms can change types or values in ways the UI does not expect, especially with empty strings, numbers, dates, and optional fields. Keep raw input and submitted payload expectations clear.
 
-### 5. What would you check in code review for Schema Validation with Zod or Yup?
+### 5. What schema-validation issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Duplicated client/server rules, vague error messages, schemas that reject valid partial input too early, unchecked API responses, and form code that ignores resolver output or server errors.
 
 ---
 

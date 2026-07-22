@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does DOM matter in Rendering, Reflow, Repaint, and Layout Thrashing?
+### 1. What is the difference between style calculation, layout, paint, and compositing?
 
-DOM means Live tree representation of the document. Use Rendering, Reflow, Repaint, and Layout Thrashing to solve the specific problem described in this note.
+Style calculation resolves CSS rules. Layout computes element geometry. Paint fills pixels for text, backgrounds, borders, shadows, and images. Compositing combines layers into the final frame.
 
-### 2. How does Node affect the implementation?
+### 2. What is layout thrashing?
 
-Node means A unit in the DOM tree. Understand the browser, runtime, or React behavior behind Rendering, Reflow, Repaint, and Layout Thrashing before choosing an implementation.
+Layout thrashing happens when code repeatedly writes to the DOM and then reads layout-dependent values, forcing the browser to recalculate layout again and again. Batch reads before writes to avoid it.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Which animations are usually cheaper: `transform` or `height`?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+`transform` is usually cheaper because it can often be composited without recalculating layout. Animating `height` changes layout and can affect surrounding elements, so it should be used carefully and measured.
 
-### 4. How would you debug a production issue related to Rendering, Reflow, Repaint, and Layout Thrashing?
+### 4. How would you debug a scroll or drag interaction that feels slow?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Record the interaction in DevTools Performance, look for long tasks, forced reflow, heavy paint, and event handlers running too often. Then check whether work can be throttled, moved off the main thread, simplified, or batched.
 
-### 5. What would you check in code review for Rendering, Reflow, Repaint, and Layout Thrashing?
+### 5. What rendering-performance issues do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Layout reads inside loops, measuring immediately after writes, expensive animation properties, large repaint areas, unnecessary DOM churn, and scroll handlers doing synchronous work on every event.
 
 ---
 

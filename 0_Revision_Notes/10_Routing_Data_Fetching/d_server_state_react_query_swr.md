@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Query key matter in Server State with React Query or SWR?
+### 1. What makes a good React Query or SWR key?
 
-Query key means The stable cache identity for a server-state request. In interviews, connect it to Server State with React Query or SWR by explaining the concrete UI behavior, failure state, and tradeoff.
+A good key includes every input that changes the returned data: resource id, filters, pagination, locale, user scope, and feature mode. Missing inputs create wrong-cache bugs.
 
-### 2. How does Stale time affect the implementation?
+### 2. What is the difference between stale data and cached data?
 
-Stale time means How long cached data is considered fresh. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Cached data is stored for reuse. Stale data is cached data that the library considers old enough to refetch. Stale does not always mean unusable; it depends on product freshness requirements.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you update cached data after a mutation?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Invalidate affected queries, refetch, or update the cache directly when the new value is known. For optimistic updates, snapshot previous data and roll back on failure.
 
-### 4. How would you debug a production issue related to Server State with React Query or SWR?
+### 4. When should you not use a server-state library?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+For simple static data, one-off local interactions, or state that is purely client-owned. Server-state libraries shine when caching, invalidation, retries, background refetching, and deduplication matter.
 
-### 5. What would you check in code review for Server State with React Query or SWR?
+### 5. What server-state issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Weak query keys, duplicated local copies of cached data, missing invalidation, unsafe optimistic updates, aggressive stale times, and UI that treats background refetch as full-page loading.
 
 ---
 

@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Conditional branch matter in Text, Links, Images, and Lists?
+### 1. Can heading levels be skipped because the design makes the text look smaller?
 
-Conditional branch means Choosing which UI to render from current state. In interviews, connect it to Text, Links, Images, and Lists by explaining the concrete UI behavior, failure state, and tradeoff.
+No. Heading levels describe document outline, not visual size. If a design needs a smaller visual style, use CSS while keeping heading order meaningful. I check this because screen-reader users often navigate by headings.
 
-### 2. How does Stable key affect the implementation?
+### 2. What is the difference between an empty `alt=""` and missing `alt`?
 
-Stable key means A persistent identity for each item in a changing list. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Empty `alt=""` intentionally marks the image as decorative, so assistive tech can skip it. Missing `alt` is usually a bug; the screen reader may announce the file name or URL. The right answer depends on image purpose in context.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When should a link open in a new tab?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Rarely, and only when it is clearly useful, such as external documentation or preserving a long-running workflow. If it opens a new tab, I prefer making that clear to users. I avoid forcing new tabs for normal navigation because users can choose that themselves.
 
-### 4. How would you debug a production issue related to Text, Links, Images, and Lists?
+### 4. When would you use `ul`, `ol`, and `dl`?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use `ul` for unordered groups, `ol` where order matters, and `dl` for name/value or term/description relationships. Interviewers ask this because lists are often styled away visually, but the semantics still help assistive tech and maintainability.
 
-### 5. What would you check in code review for Text, Links, Images, and Lists?
+### 5. How do you make image-heavy content perform well without breaking UX?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I use correct dimensions to avoid layout shift, responsive image sources where needed, lazy loading for below-the-fold images, meaningful `alt`, and modern formats when supported. I avoid lazy-loading the LCP image because that can slow the first meaningful view.
 
 ---
 

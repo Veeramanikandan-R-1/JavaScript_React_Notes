@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Flex container matter in Flexbox Layout?
+### 1. When is Flexbox the right layout choice?
 
-Flex container means Parent with `display: flex`. Use Flexbox Layout to solve the specific problem described in this note.
+Flexbox is right when the layout is mostly one-dimensional: a row or a column. Toolbars, nav groups, media objects, button rows, and cards with flexible content are good examples. If both rows and columns need coordinated control, I reach for Grid instead.
 
-### 2. How does Main axis affect the implementation?
+### 2. Why does `justify-content` sometimes feel like it is working on the wrong axis?
 
-Main axis means Direction controlled by `flex-direction`. Understand the browser, runtime, or React behavior behind Flexbox Layout before choosing an implementation.
+Because `justify-content` works on the main axis, and the main axis changes with `flex-direction`. In a row it controls horizontal distribution; in a column it controls vertical distribution. `align-items` controls the cross axis.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. A flex item with long text refuses to shrink. What do you check?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+I check the child’s `min-width`. Flex items default to `min-width: auto`, which can make long content overflow. Setting `min-width: 0` on the flexible child often allows ellipsis, wrapping, or shrinking to work correctly.
 
-### 4. How would you debug a production issue related to Flexbox Layout?
+### 4. Why is `gap` usually better than margins between flex items?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+`gap` expresses spacing between items without first/last-child cleanup, margin-collapsing surprises, or direction-specific hacks. It also works cleanly when the layout wraps.
 
-### 5. What would you check in code review for Flexbox Layout?
+### 5. What do you check before approving a flex layout?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I test long text, wrapping, narrow widths, zoom, RTL if relevant, and whether `flex-basis`, `grow`, and `shrink` match the intent. I also check that flex is not being used as a poor substitute for grid.
 
 ---
 

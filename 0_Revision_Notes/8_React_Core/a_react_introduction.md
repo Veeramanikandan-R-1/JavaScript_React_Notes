@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Component matter in React Introduction?
+### 1. What problem does React solve in a frontend application?
 
-Component means A reusable piece of UI. Use React Introduction to solve the specific problem described in this note.
+React helps describe UI as a function of state and props, split the interface into reusable components, and update the DOM predictably when data changes. The main value is not JSX; it is the rendering model and component composition.
 
-### 2. How does Props affect the implementation?
+### 2. What does “render should be pure” mean in React?
 
-Props means Inputs passed from parent to child. Understand the browser, runtime, or React behavior behind React Introduction before choosing an implementation.
+A component should calculate UI from props, state, and context without causing side effects during render. Network calls, subscriptions, DOM mutation, timers, and logging that affects behavior belong outside render, usually in effects or event handlers.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you decide where state should live?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Put state in the smallest component that owns the interaction. Lift it when siblings need coordination, use context for scoped shared values, use server-state tools for remote cache, and use global client state only when many unrelated areas truly need it.
 
-### 4. How would you debug a production issue related to React Introduction?
+### 4. What is the difference between React state and server state?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+React state is client-owned UI/application state. Server state is remote data with loading, caching, refetching, invalidation, and stale-data concerns. Treating server data as simple local state often creates duplicated fetches and inconsistent screens.
 
-### 5. What would you check in code review for React Introduction?
+### 5. What do you inspect first when reviewing a React component?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+State ownership, render purity, prop contract, accessibility, effect necessity/cleanup, error/loading/empty states, and whether the component follows existing patterns before adding new abstraction.
 
 ---
 

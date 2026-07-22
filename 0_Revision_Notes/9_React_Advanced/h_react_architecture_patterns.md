@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does State ownership matter in React Architecture Patterns?
+### 1. How do you decide component boundaries in a large React feature?
 
-State ownership means Choosing the smallest boundary that should own changing data. In interviews, connect it to React Architecture Patterns by explaining the concrete UI behavior, failure state, and tradeoff.
+Boundaries should follow product responsibilities, state ownership, reuse needs, and testing seams. A good component has a clear purpose and API; it is not split only because the file got long.
 
-### 2. How does Component boundary affect the implementation?
+### 2. What is the difference between UI state, server state, and derived state?
 
-Component boundary means A UI/API division that keeps responsibilities understandable. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+UI state is owned by the client interaction, server state comes from remote data and needs caching/invalidation, and derived state can be calculated from existing values. Mixing them creates unnecessary effects and synchronization bugs.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When would you introduce a shared design-system component?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Introduce one when the pattern is reused, needs consistent accessibility/visual behavior, or carries product-wide interaction rules. Avoid premature shared components that freeze a pattern before the use cases are understood.
 
-### 4. How would you debug a production issue related to React Architecture Patterns?
+### 4. What architecture signs tell you state is in the wrong place?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Many props passed through uninterested components, duplicated state that drifts, effects that sync siblings, global stores for local behavior, and components that cannot be tested without booting a large part of the app.
 
-### 5. What would you check in code review for React Architecture Patterns?
+### 5. What React architecture issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unclear ownership, over-generalized components, mixed server/client state, unnecessary global state, effects used as data plumbing, inaccessible shared components, and feature code reaching into another feature's internals.
 
 ---
 

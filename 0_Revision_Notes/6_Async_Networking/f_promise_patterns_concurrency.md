@@ -43,25 +43,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Promise.all matter in Promise Patterns and Concurrency?
+### 1. What is the difference between `Promise.all`, `allSettled`, `race`, and `any`?
 
-Promise.all means Running independent async work together and failing if one rejects. In interviews, connect it to Promise Patterns and Concurrency by explaining the concrete UI behavior, failure state, and tradeoff.
+`Promise.all` succeeds only if all succeed and rejects on the first failure. `allSettled` waits for every result. `race` settles with the first settled promise. `any` fulfills with the first successful promise and rejects only if all fail.
 
-### 2. How does Concurrency limit affect the implementation?
+### 2. When is `Promise.all` the wrong choice?
 
-Concurrency limit means A cap that prevents too many async jobs from running at once. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It is wrong when partial results are useful, when one failure should not hide other results, or when starting all work at once can overload the browser, network, or backend. Use `allSettled`, batching, or a concurrency limit instead.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How would you process 500 images with only five uploads running at once?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Use a concurrency-limited queue/pool. Start five uploads, begin the next one when one finishes, collect successes and failures, and make cancellation/retry behavior explicit.
 
-### 4. How would you debug a production issue related to Promise Patterns and Concurrency?
+### 4. What is a floating promise?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+A floating promise is created but not awaited, returned, or caught. It can cause unhandled rejections, hidden failures, and work that continues after the caller thinks the flow is complete.
 
-### 5. What would you check in code review for Promise Patterns and Concurrency?
+### 5. What concurrency bugs do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Accidental sequential awaits, unbounded parallel requests, missing cancellation, partial-failure handling that loses useful data, and promises that update state after ownership has changed.
 
 ---
 

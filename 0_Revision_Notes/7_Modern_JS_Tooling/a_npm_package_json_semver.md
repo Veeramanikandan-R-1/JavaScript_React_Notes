@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does HTTP status matter in npm, package.json, and SemVer?
+### 1. What is the difference between `dependencies` and `devDependencies`?
 
-HTTP status means The protocol result that tells whether the request succeeded semantically. In interviews, connect it to npm, package.json, and SemVer by explaining the concrete UI behavior, failure state, and tradeoff.
+`dependencies` are needed by the app/package at runtime or by consumers. `devDependencies` are needed to develop, test, lint, build, or type-check. For a frontend app, the final bundle can still include code from dependencies if it is imported.
 
-### 2. How does response.ok affect the implementation?
+### 2. What does `^1.2.3` mean in SemVer?
 
-response.ok means The browser flag for 2xx HTTP responses. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It allows compatible minor and patch updates up to, but not including, `2.0.0`. That can still introduce regressions, so lockfiles and CI are important for deterministic installs.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why should you review a new dependency carefully?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Dependencies add bundle size, supply-chain risk, maintenance burden, transitive dependencies, licensing questions, and upgrade work. I ask whether the package is mature, actively maintained, tree-shakable, typed, and genuinely worth the cost.
 
-### 4. How would you debug a production issue related to npm, package.json, and SemVer?
+### 4. How do lockfiles help production stability?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+They pin the exact resolved dependency tree so installs are repeatable across machines and CI. If production changed after an install, comparing lockfile diffs is one of the first debugging steps.
 
-### 5. What would you check in code review for npm, package.json, and SemVer?
+### 5. What package.json changes do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unnecessary dependencies, broad script changes, unpinned tool assumptions, lifecycle scripts, package upgrades with no test evidence, duplicate libraries, and dependencies that should be dev-only.
 
 ---
 

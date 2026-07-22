@@ -43,25 +43,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does HTTP status matter in Fetch API, HTTP, JSON, and Errors?
+### 1. Does `fetch` reject on HTTP 404 or 500?
 
-HTTP status means The protocol result that tells whether the request succeeded semantically. In interviews, connect it to Fetch API, HTTP, JSON, and Errors by explaining the concrete UI behavior, failure state, and tradeoff.
+No. `fetch` rejects for network-level failures, not HTTP error statuses. You must check `response.ok` or the status code and decide how the UI should handle 400, 401, 403, 404, 409, 422, and 500-class responses.
 
-### 2. How does response.ok affect the implementation?
+### 2. How do you design a fetch wrapper for a frontend app?
 
-response.ok means The browser flag for 2xx HTTP responses. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Keep it small and explicit: base URL, headers, credentials if needed, JSON parsing, `response.ok` handling, typed/structured errors, abort support, and auth/session handling hooks. Avoid hiding product-specific behavior in a generic helper.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you handle an API that returns an empty body?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Do not blindly call `response.json()` for every response. Check status codes like `204`, content length, or content type, and handle empty successful responses separately.
 
-### 4. How would you debug a production issue related to Fetch API, HTTP, JSON, and Errors?
+### 4. How would you debug “Unexpected token < in JSON”?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+The response is probably HTML, often an error page, auth redirect, CDN fallback, or wrong route. Inspect the Network tab status, response body, content type, request URL, auth headers, and server logs.
 
-### 5. What would you check in code review for Fetch API, HTTP, JSON, and Errors?
+### 5. What network states should a UI represent?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Initial loading, background refetching, success, empty, validation error, auth error, server error, offline/network error, timeout, retrying, and cancelled or stale request states where relevant.
 
 ---
 

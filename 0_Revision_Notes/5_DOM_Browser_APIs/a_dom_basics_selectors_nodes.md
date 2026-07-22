@@ -43,25 +43,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does DOM matter in DOM Basics, Selectors, and Nodes?
+### 1. What is the DOM, and why is it not the same as the HTML source?
 
-DOM means Live tree representation of the document. Use DOM Basics, Selectors, and Nodes to solve the specific problem described in this note.
+The DOM is the browser's live object tree after parsing, correction, script changes, and runtime updates. The HTML source is only the initial text. DevTools shows the current DOM, which may include browser-inserted elements and JavaScript mutations.
 
-### 2. How does Node affect the implementation?
+### 2. What is the difference between `querySelector` and `getElementById`?
 
-Node means A unit in the DOM tree. Understand the browser, runtime, or React behavior behind DOM Basics, Selectors, and Nodes before choosing an implementation.
+`getElementById` finds one element by id and is very direct. `querySelector` accepts any CSS selector and returns the first match, which is more flexible but depends on selector correctness and scope.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why can repeated DOM reads and writes make an interaction slow?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Layout-dependent reads like `offsetHeight` can force the browser to calculate layout. If code alternates reads and writes in a loop, it can cause layout thrashing. Batch reads first, then writes.
 
-### 4. How would you debug a production issue related to DOM Basics, Selectors, and Nodes?
+### 4. When would you use `DocumentFragment` or template cloning?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use them when preparing multiple DOM nodes before insertion, especially in framework-free code. They reduce repeated live DOM work and keep construction separate from rendering.
 
-### 5. What would you check in code review for DOM Basics, Selectors, and Nodes?
+### 5. What DOM code review issues do you look for?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unsafe `innerHTML`, broad selectors, missing cleanup, repeated layout reads/writes, custom controls without semantics, and code that fights the framework's ownership of the DOM.
 
 ---
 

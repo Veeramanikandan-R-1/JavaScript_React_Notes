@@ -57,25 +57,25 @@ type ApiState<T> =
 
 # Interview Questions with Answers
 
-### 1. Why does Transpilation matter in Babel, TypeScript, and Transpilation?
+### 1. What is the difference between transpilation and type checking?
 
-Transpilation means Converting source syntax into code the target environment can run. In interviews, connect it to Babel, TypeScript, and Transpilation by explaining the concrete UI behavior, failure state, and tradeoff.
+Transpilation changes source syntax into runnable JavaScript for target browsers or runtimes. Type checking analyzes TypeScript for type errors but does not change runtime behavior. Many toolchains do these as separate steps.
 
-### 2. How does Type checking affect the implementation?
+### 2. Why can TypeScript pass but the app still fail at runtime?
 
-Type checking means Validating TypeScript types without changing runtime behavior. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Types can be wrong at boundaries such as APIs, local storage, URL params, feature flags, and third-party scripts. TypeScript does not validate runtime data unless you add parsing or schema validation.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When do you need Babel in a modern frontend stack?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+You may need Babel for JSX transforms, syntax transforms, plugins, legacy browser support, or specific framework/tooling requirements. Some stacks use esbuild or SWC for speed, so the answer should match the project setup.
 
-### 4. How would you debug a production issue related to Babel, TypeScript, and Transpilation?
+### 4. How do browser targets affect output code?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Targets decide which syntax must be transformed and which polyfills may be needed. A modern-only target can ship smaller code, while supporting older browsers may require transforms that change performance and bundle size.
 
-### 5. What would you check in code review for Babel, TypeScript, and Transpilation?
+### 5. What TypeScript/tooling issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unchecked `any`, unsafe assertions, disabled type errors, inconsistent build/typecheck scripts, runtime data trusted without validation, and transpiler changes without verifying the production build.
 
 ---
 

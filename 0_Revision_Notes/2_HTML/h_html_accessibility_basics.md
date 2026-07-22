@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Accessible name matter in HTML Accessibility Basics?
+### 1. What is an accessible name, and how do you debug it?
 
-Accessible name means The label or text assistive tech announces for a control. Use HTML Accessibility Basics to solve the specific problem described in this note.
+An accessible name is the text assistive tech uses to identify a control. It can come from a label, text content, `alt`, `aria-label`, or `aria-labelledby` depending on the element. I debug it with the browser accessibility tree and by checking the computed name, not only the visible UI.
 
-### 2. How does Focus order affect the implementation?
+### 2. When should you use ARIA?
 
-Focus order means The sequence keyboard users move through interactive elements. Understand the browser, runtime, or React behavior behind HTML Accessibility Basics before choosing an implementation.
+Use ARIA when native HTML cannot express the needed semantics. Do not use ARIA to cover up poor element choice. A real `button` is better than `div role="button"` because native behavior comes with semantics, keyboard support, and browser expectations.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is wrong with positive `tabindex` values?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Positive `tabindex` creates a custom focus order that quickly becomes confusing and hard to maintain. I prefer natural DOM order, use `tabindex="0"` sparingly for custom focusable elements, and `tabindex="-1"` for programmatic focus targets like modal containers or error summaries.
 
-### 4. How would you debug a production issue related to HTML Accessibility Basics?
+### 4. A toast appears after save. Should it use `aria-live`?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+If it communicates important status, yes, usually with a polite live region. If it is an urgent error, `role="alert"` may be appropriate. I avoid overusing live regions because too many announcements can make the experience noisy.
 
-### 5. What would you check in code review for HTML Accessibility Basics?
+### 5. What is your minimum accessibility checklist for a feature?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Keyboard completion, visible focus, meaningful labels, correct link/button usage, heading order, error association, color contrast, reduced-motion behavior where relevant, and screen-reader names for icon-only controls. I also test the main workflow without a mouse.
 
 ---
 

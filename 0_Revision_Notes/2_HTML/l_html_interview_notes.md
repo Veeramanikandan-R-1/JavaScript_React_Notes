@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Mental model matter in HTML Interview Notes?
+### 1. What are the top HTML mistakes you see in React codebases?
 
-Mental model means How the feature really works. Use HTML Interview Notes to solve the specific problem described in this note.
+Clickable `div`s, missing labels, poor heading order, invalid nesting, wrong link/button usage, missing image `alt`, and custom controls without keyboard support. These issues often pass visual review but fail accessibility, SEO, and production usability.
 
-### 2. How does Tradeoff affect the implementation?
+### 2. How do you explain semantic HTML to a junior developer?
 
-Tradeoff means What you gain and lose. Understand the browser, runtime, or React behavior behind HTML Interview Notes before choosing an implementation.
+Semantic HTML means choosing the element that matches the purpose of the content or interaction. Start with meaning, then style it. A button can look like a link and a link can look like a button, but their behavior and user expectations are different.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What do you inspect in the accessibility tree?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+I inspect roles, accessible names, states, descriptions, landmark names, heading structure, and whether hidden content is actually hidden from assistive tech. The DOM and the accessibility tree can reveal issues that are invisible in screenshots.
 
-### 4. How would you debug a production issue related to HTML Interview Notes?
+### 4. What HTML knowledge matters most for SEO?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Useful titles, headings, crawlable links, metadata, canonical URLs, image alt where relevant, structured data when appropriate, and content present in initial HTML for pages that need indexing. SEO is not only meta tags; it starts with readable content structure.
 
-### 5. What would you check in code review for HTML Interview Notes?
+### 5. How do you handle disagreement with a designer about native controls?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I explain the built-in behavior we get from native controls, then try to match the design with CSS before replacing semantics. If a custom control is unavoidable, I make the accessibility and keyboard requirements explicit so the team understands the cost.
 
 ---
 

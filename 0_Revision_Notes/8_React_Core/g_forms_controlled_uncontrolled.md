@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Controlled input matter in React Forms, Controlled and Uncontrolled Inputs?
+### 1. What is the difference between controlled and uncontrolled inputs in React?
 
-Controlled input means A form control whose value is owned by React state. In interviews, connect it to React Forms, Controlled and Uncontrolled Inputs by explaining the concrete UI behavior, failure state, and tradeoff.
+A controlled input gets its value from React state and updates through React handlers. An uncontrolled input keeps its current value in the DOM and is read with a ref or form submission. Controlled inputs give more control; uncontrolled inputs can be simpler and faster for some forms.
 
-### 2. How does Uncontrolled input affect the implementation?
+### 2. When would you avoid making every field controlled?
 
-Uncontrolled input means A form control whose current value is read from the DOM when needed. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Very large forms, file inputs, third-party widgets, or simple submit-only forms may not need every keystroke in React state. The choice should balance validation, conditional UI, performance, and simplicity.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why do controlled inputs sometimes feel laggy?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Every keystroke schedules React work. Lag can come from expensive parent renders, validation on every input, formatting logic, large lists, or uncontrolled re-renders. Isolate field state, defer expensive work, or validate on blur/change with care.
 
-### 4. How would you debug a production issue related to React Forms, Controlled and Uncontrolled Inputs?
+### 4. How do you make form errors accessible in React?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Connect error text to fields with `aria-describedby`, use clear messages, preserve labels, avoid color-only errors, and focus the first invalid field on submit only when it helps the user recover.
 
-### 5. What would you check in code review for React Forms, Controlled and Uncontrolled Inputs?
+### 5. What form issues do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing labels, controlled/uncontrolled warnings, validation that fights user typing, disabled submit with no explanation, client-only validation, poor autofill support, and no loading/error state during submit.
 
 ---
 

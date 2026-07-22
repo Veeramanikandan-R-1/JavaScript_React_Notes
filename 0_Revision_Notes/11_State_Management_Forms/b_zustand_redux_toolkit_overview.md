@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Store matter in Zustand and Redux Toolkit Overview?
+### 1. When would you choose Redux Toolkit over Zustand?
 
-Store means A central state container outside individual components. In interviews, connect it to Zustand and Redux Toolkit Overview by explaining the concrete UI behavior, failure state, and tradeoff.
+Redux Toolkit fits teams that need strict conventions, serializable actions, strong DevTools workflows, middleware, and predictable patterns at scale. Zustand is lighter and ergonomic for smaller or more localized global-client-state needs.
 
-### 2. How does Selector affect the implementation?
+### 2. Why are selectors important in global state?
 
-Selector means A function that reads only the state a component needs. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Selectors let components subscribe to only the data they need, which reduces rerenders and keeps components decoupled from full store shape. Poor selectors can make the whole screen rerender on unrelated changes.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What state should not go into Redux or Zustand?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Most server state, route state, one-off local input, ephemeral hover/open state, and derived values usually do not belong there. A store should solve sharing and coordination, not become a dumping ground.
 
-### 4. How would you debug a production issue related to Zustand and Redux Toolkit Overview?
+### 4. How do you debug a store update that causes too many rerenders?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use React Profiler and store DevTools/logging, inspect selectors, check object identity, and verify whether updates are too broad. Split slices/selectors or normalize state if needed.
 
-### 5. What would you check in code review for Zustand and Redux Toolkit Overview?
+### 5. What store-related issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unclear ownership, non-serializable Redux state where tooling expects serializable data, store writes from random components, selectors returning new objects every time, and server data copied into global client state.
 
 ---
 

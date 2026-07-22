@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Rule matter in CSS Introduction?
+### 1. A component looks correct in isolation but breaks inside another page. What CSS causes do you check?
 
-Rule means A selector plus declarations. Use CSS Introduction to solve the specific problem described in this note.
+I check inherited styles, global resets, selector specificity, parent layout constraints, width/min-width, overflow, and whether the component assumes a fixed container. Senior CSS debugging starts from the computed styles and box model, not from guessing which class "should" win.
 
-### 2. How does Declaration affect the implementation?
+### 2. What does it mean that CSS is declarative?
 
-Declaration means A property-value pair. Understand the browser, runtime, or React behavior behind CSS Introduction before choosing an implementation.
+You describe the desired presentation, and the browser resolves the final result through cascade, inheritance, layout, paint, and compositing. That means multiple rules can target the same element, and the answer is determined by CSS rules, not execution order like JavaScript.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you decide between normal flow, flex, grid, and positioning?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Normal flow is best for document content. Flexbox is for one-axis alignment and distribution. Grid is for two-dimensional layout. Positioning is for intentional offsets and overlays. A strong answer also mentions long text, zoom, localization, and responsive behavior.
 
-### 4. How would you debug a production issue related to CSS Introduction?
+### 4. Why do developers use a reset or normalize stylesheet?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Browsers have useful but inconsistent default styles. A reset/normalize strategy creates a predictable baseline, but it should be intentional. I do not blindly remove all native behavior because defaults like focus outlines, form behavior, and semantic spacing can be valuable.
 
-### 5. What would you check in code review for CSS Introduction?
+### 5. What is your CSS review checklist for a reusable component?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I check real content, narrow and wide containers, long words, keyboard focus, hover/active/disabled states, color contrast, reduced motion, selector ownership, and whether the component leaks styles outside itself. I also check that the CSS is simpler than the problem.
 
 ---
 

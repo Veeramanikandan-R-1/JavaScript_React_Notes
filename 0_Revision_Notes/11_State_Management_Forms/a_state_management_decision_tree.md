@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Local state matter in State Management Decision Tree?
+### 1. How do you decide where state should live in a React app?
 
-Local state means UI data owned by one small area. In interviews, connect it to State Management Decision Tree by explaining the concrete UI behavior, failure state, and tradeoff.
+Start local. Lift state when siblings need it, use context for scoped shared values, use server-state tools for remote data, and use a global store for cross-cutting client state that many unrelated areas need.
 
-### 2. How does Server state affect the implementation?
+### 2. What is the difference between client state and server state?
 
-Server state means Remote data that needs caching, refetching, and invalidation. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Client state is owned by browser interaction, such as open panels or unsaved form input. Server state is remote data that needs fetching, caching, invalidation, refetching, and stale-data handling.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When is global state a bad choice?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It is bad when the state is local, temporary, or only shared by nearby components. Global state makes ownership less obvious and can create unnecessary rerenders, stale data, and harder tests.
 
-### 4. How would you debug a production issue related to State Management Decision Tree?
+### 4. What is duplicated derived state, and why is it risky?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+It stores a value that can be calculated from other state, such as totals, filtered lists, or selected labels. The copies can drift, leading to effects that only exist to synchronize state that should have been derived.
 
-### 5. What would you check in code review for State Management Decision Tree?
+### 5. What state-management issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+State owned too high, global stores for local UI, duplicated server data, effects used for synchronization, unclear update ownership, and selectors that subscribe components to more state than they need.
 
 ---
 

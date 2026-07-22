@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Source map matter in Error Handling and Debugging?
+### 1. How do you decide whether to catch an error locally or let it bubble up?
 
-Source map means A mapping from bundled code back to original source files. In interviews, connect it to Error Handling and Debugging by explaining the concrete UI behavior, failure state, and tradeoff.
+Catch locally when the component can recover, show a specific message, retry, or provide fallback UI. Let it bubble when a higher boundary owns the failure experience, logging, or navigation-level recovery.
 
-### 2. How does Minified stack trace affect the implementation?
+### 2. What should a good frontend error message include?
 
-Minified stack trace means A production error trace that needs mapping to be readable. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+For users, it should explain what happened in plain language and what they can do next. For developers, logs should include context such as request id, route, user action, feature flag, browser, and original stack through source maps.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why is swallowing errors in `catch` dangerous?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It hides failures from users, monitoring, and tests. If code catches an error, it should either recover deliberately, transform and rethrow it, or report it with enough context to debug.
 
-### 4. How would you debug a production issue related to Error Handling and Debugging?
+### 4. How do you debug a minified production stack trace?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use source maps in the error-monitoring tool or browser, map the release to the exact deployed commit, reproduce with matching environment flags, and inspect the async boundary that triggered the error.
 
-### 5. What would you check in code review for Error Handling and Debugging?
+### 5. What error-handling issues do you flag in pull requests?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing failure states, `catch` blocks that only `console.log`, retry loops without limits, exposing internal error text to users, losing original stack/context, and tests that cover only the happy path.
 
 ---
 

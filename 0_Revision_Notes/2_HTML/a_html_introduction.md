@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Element matter in HTML Introduction?
+### 1. Why do interviewers care about semantic HTML when CSS can make anything look right?
 
-Element means A meaningful unit such as `p`, `button`, `main`, `img`, or `form`. Use HTML Introduction to solve the specific problem described in this note.
+Because HTML is not only visual structure. The element choice affects keyboard behavior, form behavior, accessibility APIs, browser defaults, SEO, and maintainability. A `button` already supports focus and keyboard activation; a clickable `div` has to rebuild all of that manually and is easy to get wrong.
 
-### 2. How does Attribute affect the implementation?
+### 2. What is the practical difference between a link and a button?
 
-Attribute means Extra information attached to an element, such as `href`, `alt`, `type`, or `aria-label`. Understand the browser, runtime, or React behavior behind HTML Introduction before choosing an implementation.
+A link navigates to a URL or page location. A button performs an action on the current page, such as submit, save, open, close, or toggle. If an interviewer gives me a clickable UI, I decide by user intent first, not by how the control looks.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What happens if the browser receives invalid nested HTML?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+The HTML parser is forgiving and will repair the DOM using parser rules, but the final DOM may not match what the developer expected. That can break CSS selectors, event handling, accessibility relationships, and hydration in React apps.
 
-### 4. How would you debug a production issue related to HTML Introduction?
+### 4. How do you decide good `alt` text for an image?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+If the image conveys information, the `alt` should describe the information in context. If the image is decorative, use empty `alt=""` so assistive tech can skip it. I do not repeat nearby text, and for complex charts I provide a nearby text summary or table.
 
-### 5. What would you check in code review for HTML Introduction?
+### 5. What do you check before approving basic HTML in a React component?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I check heading order, labels, form names, link/button purpose, `alt` text, valid nesting, language/title metadata when page-level, and whether the component still works with keyboard and real content. JSX still becomes HTML, so React does not remove these responsibilities.
 
 ---
 

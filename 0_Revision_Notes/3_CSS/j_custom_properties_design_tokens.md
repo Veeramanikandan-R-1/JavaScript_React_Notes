@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Custom property matter in Custom Properties and Design Tokens?
+### 1. How are CSS custom properties different from Sass variables?
 
-Custom property means A CSS variable such as `--color-bg`. Use Custom Properties and Design Tokens to solve the specific problem described in this note.
+Sass variables are resolved at build time. CSS custom properties exist in the browser, participate in cascade and inheritance, and can change at runtime, which makes them useful for themes, component APIs, and user preferences.
 
-### 2. How does Token affect the implementation?
+### 2. How would you name design tokens for a real product?
 
-Token means A named design decision for color, spacing, typography, radius, or shadow. Understand the browser, runtime, or React behavior behind Custom Properties and Design Tokens before choosing an implementation.
+Use raw scale tokens for primitives, such as `--color-blue-600`, and semantic tokens for usage, such as `--color-action-primary-bg` or `--color-text-danger`. Components should depend mostly on semantic tokens so themes can change without rewriting component CSS.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How would you implement light and dark theme support with custom properties?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Define default tokens on `:root`, override semantic tokens under a theme selector such as `[data-theme="dark"]`, and update the attribute from app state or system preference. Test contrast, focus states, charts, disabled states, and third-party embedded surfaces in both themes.
 
-### 4. How would you debug a production issue related to Custom Properties and Design Tokens?
+### 4. What can go wrong with runtime theming?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Variables may inherit from an unexpected ancestor, fallback values may hide missing tokens, theme changes can flash during app startup, and color combinations can fail contrast. Inspect computed values in DevTools rather than only reading the source CSS.
 
-### 5. What would you check in code review for Custom Properties and Design Tokens?
+### 5. How do design tokens help a frontend team beyond reusing colors?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+They create a shared contract for spacing, typography, radius, elevation, motion, density, and states. Good tokens reduce visual drift, make redesigns cheaper, and give design, engineering, and QA the same language for reviewing UI.
 
 ---
 

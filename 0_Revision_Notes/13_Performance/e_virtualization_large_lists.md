@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Conditional branch matter in Virtualization and Large Lists?
+### 1. When should you use list virtualization?
 
-Conditional branch means Choosing which UI to render from current state. In interviews, connect it to Virtualization and Large Lists by explaining the concrete UI behavior, failure state, and tradeoff.
+Use virtualization when rendering many rows/cards creates slow initial render, scrolling jank, or high memory use. It renders only the visible window plus overscan instead of the entire list.
 
-### 2. How does Stable key affect the implementation?
+### 2. What are the tradeoffs of virtualization?
 
-Stable key means A persistent identity for each item in a changing list. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It adds complexity around dynamic row heights, keyboard navigation, screen readers, find-in-page, sticky headers, scroll restoration, and measuring. It should be used when the performance gain justifies those costs.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why are stable item keys still important in virtualized lists?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Rows are reused as the user scrolls. Stable keys and item identities prevent wrong row state, focus jumps, incorrect selection, and stale rendered content.
 
-### 4. How would you debug a production issue related to Virtualization and Large Lists?
+### 4. How do you handle variable-height rows?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use a virtualization library that supports measurement, cache row heights carefully, update measurements when content changes, and test images, expanded rows, wrapping text, and responsive widths.
 
-### 5. What would you check in code review for Virtualization and Large Lists?
+### 5. What large-list issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Rendering thousands of nodes, filtering/sorting every render, index keys, no empty/loading states, inaccessible virtualized content, broken scroll restoration, and virtualization added before measuring the real bottleneck.
 
 ---
 

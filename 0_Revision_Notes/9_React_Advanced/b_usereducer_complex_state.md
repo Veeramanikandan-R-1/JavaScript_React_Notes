@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Reducer matter in useReducer and Complex State?
+### 1. When would you choose `useReducer` over multiple `useState` calls?
 
-Reducer means A pure function that turns current state and an action into next state. In interviews, connect it to useReducer and Complex State by explaining the concrete UI behavior, failure state, and tradeoff.
+Use `useReducer` when state transitions are related, complex, or easier to understand as named events. It works well for wizards, forms, async state machines, undo/redo, and flows with several coordinated fields.
 
-### 2. How does Action affect the implementation?
+### 2. What makes a reducer good?
 
-Action means A named event that describes what happened. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+A good reducer is pure, returns new state without mutation, uses meaningful action names, handles unknown actions deliberately, and keeps side effects outside the reducer.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why should actions describe events instead of setters?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+An action like `shippingAddressUpdated` explains what happened and lets the reducer own the transition. Setter-style actions can scatter business rules across event handlers and make complex flows harder to audit.
 
-### 4. How would you debug a production issue related to useReducer and Complex State?
+### 4. How do you test reducer logic?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Test the reducer as a pure function with current state, action, and expected next state. Include invalid actions, edge cases, reset behavior, and transitions that must preserve parts of state.
 
-### 5. What would you check in code review for useReducer and Complex State?
+### 5. What reducer issues do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Mutation, side effects inside reducers, action names that hide intent, duplicated derived state, too many unrelated concerns in one reducer, and missing tests for important transitions.
 
 ---
 

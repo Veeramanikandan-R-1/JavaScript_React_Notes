@@ -45,25 +45,25 @@ Use cleanup flags or `AbortController` so async effects do not update stale/unmo
 
 # Interview Questions with Answers
 
-### 1. Why does Task matter in Event Loop, Tasks, and Microtasks?
+### 1. What is the output order of synchronous code, a resolved promise, and `setTimeout`?
 
-Task means A scheduled unit such as a timer or browser event. In interviews, connect it to Event Loop, Tasks, and Microtasks by explaining the concrete UI behavior, failure state, and tradeoff.
+Synchronous code runs first, promise callbacks run next as microtasks, and `setTimeout` callbacks run later as tasks. A senior answer should also mention that microtasks are drained before the browser moves to the next task/render opportunity.
 
-### 2. How does Microtask affect the implementation?
+### 2. Why can too many microtasks make the UI feel stuck?
 
-Microtask means Promise continuation work that runs before the next task. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+The browser drains the microtask queue before handling the next task. If code keeps scheduling microtasks, it can delay rendering and user input even though the code is “async.”
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is the difference between a task and a microtask in UI behavior?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+A task can come from timers, user events, network callbacks, or script loading. A microtask usually comes from promise continuation work. This matters when reasoning about when state updates, DOM changes, and rendering can happen.
 
-### 4. How would you debug a production issue related to Event Loop, Tasks, and Microtasks?
+### 4. How would you debug an event-loop issue that blocks clicks?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Record a Performance trace, look for long tasks, inspect promise chains/timers, and find synchronous work inside handlers or microtasks. Then split work, defer noncritical processing, or move heavy computation to a worker.
 
-### 5. What would you check in code review for Event Loop, Tasks, and Microtasks?
+### 5. What event-loop misconceptions do you watch for in interviews?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Thinking promises run on another thread, assuming `setTimeout(..., 0)` runs immediately, forgetting that microtasks run before timers, and using async code while still doing heavy synchronous work.
 
 ---
 

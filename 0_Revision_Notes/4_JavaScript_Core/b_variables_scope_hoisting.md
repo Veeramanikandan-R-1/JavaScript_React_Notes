@@ -50,25 +50,25 @@ Execution context   = what runs at runtime
 
 # Interview Questions with Answers
 
-### 1. Why does Value matter in Variables, Scope, and Hoisting?
+### 1. What is the difference between `var`, `let`, and `const`?
 
-Value means Data your program works with. Use Variables, Scope, and Hoisting to solve the specific problem described in this note.
+`var` is function-scoped and hoisted with `undefined`. `let` and `const` are block-scoped and have a temporal dead zone before initialization. `const` prevents reassignment of the binding, not mutation of the object it points to.
 
-### 2. How does Binding affect the implementation?
+### 2. What will this print and why: `for (var i = 0; i < 3; i++) setTimeout(() => console.log(i))`?
 
-Binding means A named reference created by `let`, `const`, `var`, function, or import. Understand the browser, runtime, or React behavior behind Variables, Scope, and Hoisting before choosing an implementation.
+It prints `3` three times because all callbacks close over the same function-scoped `var i`, and the callbacks run after the loop completes. Using `let` creates a new block-scoped binding per iteration, so it prints `0`, `1`, `2`.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is hoisting, and what do candidates often get wrong about it?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Hoisting means declarations are processed before execution, but initialization rules differ. Function declarations are callable before their line, `var` exists as `undefined`, and `let`/`const` are hoisted but unavailable in the temporal dead zone.
 
-### 4. How would you debug a production issue related to Variables, Scope, and Hoisting?
+### 4. How can stale closures show up in frontend code?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+A callback can capture an older value and run later in a timer, event listener, promise, or React effect. Debug by checking where the function is created, what variables it closes over, and whether the code needs a dependency update, ref, or functional state update.
 
-### 5. What would you check in code review for Variables, Scope, and Hoisting?
+### 5. What variable-related issues do you flag during review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Accidental globals, broad mutable state, confusing shadowing, `var` in modern app code, mutation hidden behind `const`, and closures that outlive the state they depend on.
 
 ---
 

@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does State ownership matter in React Interview Questions?
+### 1. A child component needs to update a value shown in a sibling. Where should the state live?
 
-State ownership means Choosing the smallest place that should own changing UI data. In interviews, connect it to React Interview Questions by explaining the concrete UI behavior, failure state, and tradeoff.
+The state should move to the closest common parent that owns both siblings. I would not jump directly to Redux or context unless the state is needed across distant parts of the app. A senior answer should separate local UI state, URL state, server state, and global client state.
 
-### 2. How does Rendering model affect the implementation?
+### 2. Why are array indexes risky as React keys?
 
-Rendering model means React calling components, reconciling output, and committing DOM changes. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Indexes are risky when items can be inserted, removed, sorted, or filtered because React may preserve the wrong component state for a different item. They are acceptable only for truly static lists. In real apps this shows up as wrong input values, incorrect focus, broken animations, or stale row state.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When is `useEffect` the wrong tool?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+`useEffect` is wrong for values that can be calculated during render, for event-specific logic that belongs in an event handler, and for derived state that duplicates props/state. Effects are for synchronizing with external systems: network, subscriptions, timers, DOM APIs, logging, or imperative widgets.
 
-### 4. How would you debug a production issue related to React Interview Questions?
+### 4. A component re-renders too often. What is your debugging flow?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+First I confirm whether the re-render is actually expensive. Then I use React DevTools Profiler, inspect prop identity, check parent state changes, review context provider values, and look for unnecessary derived objects/functions. I memoize only after I know the cause; otherwise memoization can hide design problems.
 
-### 5. What would you check in code review for React Interview Questions?
+### 5. How do you handle loading, empty, error, and permission states in React?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I model them explicitly instead of relying on `null` and scattered booleans. The UI should show a useful loading state, a clear empty state, actionable errors, and access-denied states where relevant. I also check accessibility: alerts for errors, focus behavior after transitions, and buttons disabled only when necessary.
 
 ---
 

@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Static matter in Positioning, Stacking, and z-index?
+### 1. Why does increasing `z-index` sometimes not bring an element to the front?
 
-Static means Default position in normal flow. Use Positioning, Stacking, and z-index to solve the specific problem described in this note.
+Because the element may be inside a different stacking context. `z-index` is only compared within the same stacking context. Properties like `position` with `z-index`, `opacity < 1`, `transform`, `filter`, and `isolation` can create new contexts.
 
-### 2. How does Relative affect the implementation?
+### 2. What is the difference between `relative`, `absolute`, `fixed`, and `sticky`?
 
-Relative means Keeps space but offsets visually. Understand the browser, runtime, or React behavior behind Positioning, Stacking, and z-index before choosing an implementation.
+`relative` keeps its normal space and offsets visually. `absolute` is removed from normal flow and positioned against its containing block. `fixed` is positioned against the viewport. `sticky` behaves like relative until a scroll threshold, then sticks within its scroll container.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why does `position: sticky` fail?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Common causes are a parent with an unexpected overflow value, no scrollable space, missing `top`/`bottom` offset, or the sticky element being inside the wrong scroll container. I inspect ancestors and scroll containers before changing random values.
 
-### 4. How would you debug a production issue related to Positioning, Stacking, and z-index?
+### 4. When should positioning not be used?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Do not use positioning as the main page layout tool. Normal flow, flexbox, and grid are more resilient. Positioning is for overlays, badges, popovers, sticky headers, anchored controls, and deliberate visual offsets.
 
-### 5. What would you check in code review for Positioning, Stacking, and z-index?
+### 5. How do you manage z-index in a design system?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I prefer named layering tokens like dropdown, sticky header, modal, toast, and tooltip instead of arbitrary huge numbers. I also check stacking context creation so a token can actually work where it is used.
 
 ---
 

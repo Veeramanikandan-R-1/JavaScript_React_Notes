@@ -46,25 +46,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Value matter in Data Types, Equality, and Type Conversion?
+### 1. What is the difference between primitive values and objects in JavaScript?
 
-Value means Data your program works with. Use Data Types, Equality, and Type Conversion to solve the specific problem described in this note.
+Primitives such as strings, numbers, booleans, `null`, `undefined`, symbols, and bigints are compared by value. Objects, arrays, functions, dates, and maps are compared by reference identity, which affects equality checks, memoization, and state updates.
 
-### 2. How does Binding affect the implementation?
+### 2. Why do most frontend codebases prefer `===` over `==`?
 
-Binding means A named reference created by `let`, `const`, `var`, function, or import. Understand the browser, runtime, or React behavior behind Data Types, Equality, and Type Conversion before choosing an implementation.
+`===` avoids implicit type coercion, so the comparison is easier to reason about. `==` has edge cases that can surprise reviewers, especially around `null`, `undefined`, empty strings, booleans, and arrays.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When is `Number(value)` safer than relying on implicit conversion?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+When parsing form values, URL params, API strings, or local storage values, explicit conversion makes the intent clear and gives you a place to handle `NaN`, empty input, decimals, and invalid values.
 
-### 4. How would you debug a production issue related to Data Types, Equality, and Type Conversion?
+### 4. Why is `NaN` tricky in validation code?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+`NaN` is not equal to itself, so `value === NaN` is always false. Use `Number.isNaN(value)` after explicit conversion and decide how empty strings, whitespace, and partially typed numbers should behave in the UI.
 
-### 5. What would you check in code review for Data Types, Equality, and Type Conversion?
+### 5. What type-conversion bugs commonly appear in frontend apps?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+String numbers from forms or query params, booleans stored as strings, invalid dates, object identity checks that should compare ids, and truthy/falsy checks that accidentally treat `0` or empty strings as missing data.
 
 ---
 

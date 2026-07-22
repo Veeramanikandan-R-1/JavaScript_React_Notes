@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Referential equality matter in Memory, References, and Mutation?
+### 1. What is referential equality, and why does React care about it?
 
-Referential equality means Whether React sees a value or function as the same reference between renders. In interviews, connect it to Memory, References, and Mutation by explaining the concrete UI behavior, failure state, and tradeoff.
+Referential equality checks whether two values point to the same object or function. React state updates, memoized components, dependency arrays, and cache updates often rely on reference changes to know whether work should happen.
 
-### 2. How does Memoization cost affect the implementation?
+### 2. What is the difference between mutation and reassignment?
 
-Memoization cost means The tradeoff between caching work and adding comparison overhead. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Reassignment changes which value a variable points to. Mutation changes the contents of an existing object or array. `const` blocks reassignment, but it does not make objects immutable.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How can shared references create hard-to-find bugs?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Two parts of the app may hold the same object and one part mutates it without the other knowing. The UI can then show stale data, skip renders, or change unexpectedly after a seemingly unrelated action.
 
-### 4. How would you debug a production issue related to Memory, References, and Mutation?
+### 4. How do you debug an accidental mutation?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Track where the object is created, passed, and changed. Use breakpoints, object snapshots, `Object.freeze` in development, reducer tests, and reference comparisons before and after the suspected update.
 
-### 5. What would you check in code review for Memory, References, and Mutation?
+### 5. When is mutation acceptable?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Mutation is acceptable when it is local, clearly owned, and not observable by other code, such as building a temporary object inside a function. Shared app state, cache data, props, and reducer inputs should be treated as immutable.
 
 ---
 

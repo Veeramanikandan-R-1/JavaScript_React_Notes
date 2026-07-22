@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does JSX expression matter in JSX, Components, and Props?
+### 1. What is JSX actually compiled into?
 
-JSX expression means JavaScript syntax that describes the UI React should render. In interviews, connect it to JSX, Components, and Props by explaining the concrete UI behavior, failure state, and tradeoff.
+JSX is syntax that tooling transforms into JavaScript calls that describe React elements. It is not HTML, which is why attributes, expressions, casing, and component names follow JavaScript/React rules.
 
-### 2. How does Props contract affect the implementation?
+### 2. What makes a good component prop API?
 
-Props contract means The inputs a component expects from its parent. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It is explicit, minimal, hard to misuse, and shaped around product behavior rather than internal implementation. Good props make states and variants clear without forcing every parent to know component internals.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When is prop drilling acceptable?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It is acceptable for a few levels when the data is local to that branch and the flow is clear. Context or a store is better when many distant components need the same value or prop chains are hiding ownership.
 
-### 4. How would you debug a production issue related to JSX, Components, and Props?
+### 4. Why should components avoid mutating props?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Props are owned by the parent. Mutating them creates hidden side effects, breaks React's data flow, and can cause skipped renders or confusing state changes. Components should request changes through callbacks.
 
-### 5. What would you check in code review for JSX, Components, and Props?
+### 5. What prop/component issues do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Boolean prop explosions, unclear children usage, unstable callback contracts, missing accessibility props, duplicated component variants, and props that expose internal styling details instead of supported behavior.
 
 ---
 

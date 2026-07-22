@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does `<!doctype html>` matter in Document Structure, Doctype, Head, and Body?
+### 1. What problem does `<!doctype html>` solve?
 
-`<!doctype html>` means Enables standards mode so the browser uses modern layout behavior. Use Document Structure, Doctype, Head, and Body to solve the specific problem described in this note.
+It tells the browser to use standards mode instead of quirks mode. Without it, browsers may emulate older layout behavior, which can create strange CSS sizing and alignment bugs. In interviews I usually connect this to production debugging: a missing doctype can make correct CSS behave incorrectly.
 
-### 2. How does `html lang` affect the implementation?
+### 2. Why should every page set `<html lang="en">` or the correct language?
 
-`html lang` means Declares document language for screen readers, translation, and search engines. Understand the browser, runtime, or React behavior behind Document Structure, Doctype, Head, and Body before choosing an implementation.
+The `lang` attribute helps screen readers choose pronunciation, helps browsers and translation tools understand the page, and gives search engines useful context. It is a small line with real accessibility impact.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why is the viewport meta tag important on mobile?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Without it, mobile browsers may use a wide layout viewport and scale the page down, making text and controls tiny. With `width=device-width, initial-scale=1`, responsive CSS behaves against the actual device width.
 
-### 4. How would you debug a production issue related to Document Structure, Doctype, Head, and Body?
+### 4. Where should scripts go, and when would you use `defer` or `type="module"`?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Critical metadata belongs in `head`; visible content belongs in `body`. For normal scripts, `defer` downloads in parallel and runs after parsing. ES modules already defer by default, so `<script type="module" src="/main.js"></script>` is the normal modern choice.
 
-### 5. What would you check in code review for Document Structure, Doctype, Head, and Body?
+### 5. A page has visible text inside `head`. What happens?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+That is invalid document structure. Browsers may move or ignore nodes while repairing the DOM, and the result can differ from what the developer intended. I would fix the structure instead of relying on browser recovery.
 
 ---
 

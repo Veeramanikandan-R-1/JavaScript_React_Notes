@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does LCP matter in Rendering Performance, Layout, and Paint?
+### 1. What is the difference between layout and paint?
 
-LCP means Largest Contentful Paint. Use Rendering Performance, Layout, and Paint to solve the specific problem described in this note.
+Layout calculates geometry: where elements are and how big they are. Paint draws pixels for text, images, shadows, borders, and backgrounds. Some changes trigger both; some composited changes can avoid layout and paint.
 
-### 2. How does CLS affect the implementation?
+### 2. What is forced synchronous layout?
 
-CLS means Cumulative Layout Shift. Understand the browser, runtime, or React behavior behind Rendering Performance, Layout, and Paint before choosing an implementation.
+It happens when JavaScript writes to the DOM and then immediately reads layout values, forcing the browser to calculate layout early. In loops or frequent events, this becomes layout thrashing.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Which CSS/DOM changes are usually cheaper to animate?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+`transform` and `opacity` are usually cheaper because they can often be composited. Animating dimensions, position, filters, or large shadows can trigger layout/paint and should be measured.
 
-### 4. How would you debug a production issue related to Rendering Performance, Layout, and Paint?
+### 4. How do you debug a slow scroll interaction?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Record a trace, inspect long tasks, paint time, forced reflow warnings, and event handlers. Then reduce main-thread work, batch layout reads/writes, use passive listeners where appropriate, and simplify expensive visual effects.
 
-### 5. What would you check in code review for Rendering Performance, Layout, and Paint?
+### 5. What rendering issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Layout reads inside loops, scroll handlers doing heavy work, unnecessary DOM churn, expensive animations, huge box shadows/filters, and code that measures layout without accounting for fonts, images, and responsive changes.
 
 ---
 

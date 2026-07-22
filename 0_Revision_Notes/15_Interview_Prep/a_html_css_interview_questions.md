@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Semantic HTML matter in HTML and CSS Interview Questions?
+### 1. You see a design where a clickable card navigates to details and also has a favorite icon inside. How would you mark it up?
 
-Semantic HTML means Using elements that describe structure and behavior before styling. In interviews, connect it to HTML and CSS Interview Questions by explaining the concrete UI behavior, failure state, and tradeoff.
+I would avoid nesting a `button` inside an `a` because interactive elements should not be nested. A practical solution is to make the card layout a container, use a normal link for the title/details area, and a separate `button` for favorite. If the whole card must feel clickable, I would stretch the link with CSS while keeping the favorite button above it in stacking order and keyboard order.
 
-### 2. How does Cascade and specificity affect the implementation?
+### 2. A production page looks correct on desktop but text overflows and buttons become tiny on mobile. What do you check first?
 
-Cascade and specificity means The rules that decide which CSS declaration wins. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+I check the viewport meta tag, fixed widths, long unbroken text, flex/grid min-width behavior, and whether media queries are written around content instead of device names. I also inspect computed styles on the overflowing element because the real cause is often `width`, `min-width`, `white-space`, or a parent flex item missing `min-width: 0`.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When should you use Flexbox and when should you use CSS Grid?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Flexbox is better for one-dimensional layout: a row or a column where content size can drive distribution. Grid is better when rows and columns both matter, such as dashboards, galleries, and page-level layout. In interviews I mention that the choice is not about which is newer; it is about whether the layout problem is one-axis or two-axis.
 
-### 4. How would you debug a production issue related to HTML and CSS Interview Questions?
+### 4. A button is visually disabled but screen-reader users can still activate it. What is wrong?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Only styling it with a gray color or `opacity` is not enough. A native `button` should use the `disabled` attribute when it truly cannot be used. For links or custom controls, I would reconsider whether they should be buttons, and if a disabled-like state is needed, handle focus, click prevention, `aria-disabled`, and visual styling deliberately.
 
-### 5. What would you check in code review for HTML and CSS Interview Questions?
+### 5. How do you explain CSS specificity without just reciting the formula?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I explain it as the browser deciding which matching declaration wins after considering origin, importance, cascade layers, specificity, and source order. Then I give a real example: a component class losing to an ID selector or inline style. A senior answer should also say how to avoid specificity fights: shallow selectors, design tokens, layers where useful, and fewer overrides.
 
 ---
 

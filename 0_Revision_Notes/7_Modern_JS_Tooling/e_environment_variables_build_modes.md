@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Build mode matter in Environment Variables and Build Modes?
+### 1. Why are frontend environment variables not secret?
 
-Build mode means The environment profile used by the bundler. In interviews, connect it to Environment Variables and Build Modes by explaining the concrete UI behavior, failure state, and tradeoff.
+Values embedded into client JavaScript can be viewed by users in the built assets or network behavior. Frontend env vars are configuration, not secret storage; secrets belong on the server.
 
-### 2. How does Public variable affect the implementation?
+### 2. What can differ between development, staging, and production builds?
 
-Public variable means A value embedded into client code and visible to users. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+API base URLs, feature flags, analytics keys, logging behavior, source map settings, minification, browser targets, and security headers. These differences are why production-like testing matters.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do build-time env vars differ from runtime config?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Build-time vars are baked into the generated files and require a rebuild to change. Runtime config is loaded by the deployed app, often from an endpoint or injected file, and can change without rebuilding the bundle.
 
-### 4. How would you debug a production issue related to Environment Variables and Build Modes?
+### 4. How would you debug a wrong API URL in production?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Inspect the built JavaScript or runtime config, check CI/deployment variables, verify the mode used by the build command, compare staging and production values, and confirm the network request in DevTools.
 
-### 5. What would you check in code review for Environment Variables and Build Modes?
+### 5. What env/config issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Secrets in client variables, inconsistent naming, missing defaults, config read at module load when it should be runtime, feature flags without cleanup plans, and build commands that use the wrong mode.
 
 ---
 

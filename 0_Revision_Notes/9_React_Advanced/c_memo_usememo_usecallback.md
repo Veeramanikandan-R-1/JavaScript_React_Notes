@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Referential equality matter in memo, useMemo, and useCallback?
+### 1. When should you use `React.memo`, `useMemo`, or `useCallback`?
 
-Referential equality means Whether React sees a value or function as the same reference between renders. In interviews, connect it to memo, useMemo, and useCallback by explaining the concrete UI behavior, failure state, and tradeoff.
+Use them when measurement or component structure shows avoidable expensive work or unnecessary child renders. They are optimization tools, not default styling. First make the render correct and simple.
 
-### 2. How does Memoization cost affect the implementation?
+### 2. Why can memoization make code worse?
 
-Memoization cost means The tradeoff between caching work and adding comparison overhead. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It adds dependency maintenance, comparison overhead, stale closure risk, and cognitive load. If the calculation is cheap or the component always re-renders for other reasons, memoization may add cost without benefit.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why does a memoized child still re-render when passed an inline object?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+An inline object creates a new reference every render, so shallow comparison sees the prop as changed. Move stable objects outside render, derive them with `useMemo` when needed, or redesign the child API.
 
-### 4. How would you debug a production issue related to memo, useMemo, and useCallback?
+### 4. How do you find the real cause of excessive React renders?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Use React DevTools Profiler, check which props changed, inspect parent state ownership, and verify whether the slow part is rendering, expensive calculation, layout, or network work. Then optimize the bottleneck.
 
-### 5. What would you check in code review for memo, useMemo, and useCallback?
+### 5. What memoization issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Memo everywhere without measurement, missing dependencies, using `useCallback` only to silence lint, unstable objects passed to memoized children, and custom comparison functions that ignore important props.
 
 ---
 

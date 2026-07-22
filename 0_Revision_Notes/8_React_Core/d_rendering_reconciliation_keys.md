@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Reconciliation matter in Rendering, Reconciliation, and Keys?
+### 1. What does React reconciliation do?
 
-Reconciliation means React comparing the previous and next element trees. In interviews, connect it to Rendering, Reconciliation, and Keys by explaining the concrete UI behavior, failure state, and tradeoff.
+React compares the previous and next element trees to decide what needs to change in the host environment. It uses component type and keys to preserve or replace component instances and their state.
 
-### 2. How does Stable key affect the implementation?
+### 2. Why are array indexes risky as keys?
 
-Stable key means A persistent identity that lets React preserve the right list item state. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Indexes break when items are inserted, removed, filtered, or reordered because React may preserve state for the wrong item. This shows up as wrong input values, broken animations, or selected state moving to another row.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When is using an index as a key acceptable?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It is acceptable for a static list that never reorders, filters, inserts, or deletes and has no item-local state. Even then, a stable id is usually clearer if one exists.
 
-### 4. How would you debug a production issue related to Rendering, Reconciliation, and Keys?
+### 4. Why can changing a component's key reset its state?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+A different key tells React it is a different component instance, so React unmounts the old one and mounts a new one. This can be useful for resetting forms, but accidental key changes cause lost state.
 
-### 5. What would you check in code review for Rendering, Reconciliation, and Keys?
+### 5. What rendering/key issues do you look for in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unstable keys from indexes or random values, state stored in list rows without stable identity, expensive work during render, accidental remounts, and components relying on effects to fix data that could be derived during render.
 
 ---
 

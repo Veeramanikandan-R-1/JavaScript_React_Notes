@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Portal target matter in Portals, Modals, and Overlays?
+### 1. Why are portals useful for modals and overlays?
 
-Portal target means A DOM location outside the visual parent where overlay content is mounted. In interviews, connect it to Portals, Modals, and Overlays by explaining the concrete UI behavior, failure state, and tradeoff.
+Portals let React render overlay content outside the parent DOM hierarchy while keeping it in the React tree. This helps with stacking, clipping, and app shell layout without losing React context.
 
-### 2. How does Focus trap affect the implementation?
+### 2. What accessibility behavior does a modal need?
 
-Focus trap means Keyboard focus management that keeps modal interaction contained. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It needs an accessible name, focus moved into it on open, focus contained while open, Escape/close behavior where appropriate, background content hidden from interaction, and focus restored to the opener on close.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What overlay bugs happen because of stacking contexts?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Parents with transforms, opacity, filters, isolation, or positioned z-index can create stacking contexts that trap overlays behind other UI. Portals and a z-index system help avoid random one-off fixes.
 
-### 4. How would you debug a production issue related to Portals, Modals, and Overlays?
+### 4. How should body scroll behave when a modal is open?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Usually background scroll should be locked while preserving scroll position and avoiding layout shift from scrollbar changes. Mobile browsers need special care because fixed positioning and viewport units can behave differently.
 
-### 5. What would you check in code review for Portals, Modals, and Overlays?
+### 5. What modal/overlay issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing focus management, click-outside bugs, Escape behavior conflicts, z-index magic numbers, body scroll leaks, no cleanup, inaccessible names, and overlays that cannot handle nested or concurrent dialogs.
 
 ---
 

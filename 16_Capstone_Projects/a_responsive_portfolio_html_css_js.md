@@ -121,25 +121,25 @@ Project checklist:
 
 # Interview Questions with Answers
 
-### 1. Why does Requirements matter in Capstone: Responsive Portfolio?
+### 1. If I review your portfolio project, what frontend decisions should you be ready to defend?
 
-Requirements means What the app must do. Use capstones to prove integrated skill, not to collect random features.
+Be ready to explain semantic structure, responsive layout choices, image optimization, navigation, accessibility, contact-form behavior, performance budget, and how the page supports scanning by recruiters or hiring managers.
 
-### 2. How does Architecture affect the implementation?
+### 2. How would you make a portfolio responsive without chasing device-specific breakpoints?
 
-Architecture means How files, data, UI, and state are organized. Capstone quality comes from integrating many small decisions: semantic markup, resilient layout, predictable state, error handling, tests, and performance budgets.
+Use content-driven breakpoints, flexible grid/flex layouts, fluid media, sensible max-widths, and test long text, zoom, and narrow screens. The layout should adapt to content, not only to named devices.
 
-### 3. What mistake should you avoid around building only the happy path?
+### 3. What accessibility checks would you perform before sharing it?
 
-Avoid building only the happy path. Write requirements before coding.
+Keyboard navigation, visible focus, heading order, landmarks, link text, image alt text, color contrast, form labels/errors, reduced motion, and zoom support.
 
-### 4. How would you debug a production issue related to Capstone: Responsive Portfolio?
+### 4. What performance issues are common in portfolio sites?
 
-Test the full happy path, then every major failure path. Use browser DevTools, React DevTools, accessibility checks, and performance traces.
+Oversized hero images, render-blocking fonts, unused libraries, animation on expensive properties, layout shift from images without dimensions, and contact widgets or analytics that load too early.
 
-### 5. What would you check in code review for Capstone: Responsive Portfolio?
+### 5. What would make this portfolio feel senior rather than decorative?
 
-Are all user journeys complete? Are states, accessibility, responsiveness, and tests present?
+Clear content hierarchy, real project tradeoffs, polished responsive behavior, fast loading, accessible interactions, readable code organization, and proof that the UI was tested with real content.
 
 ---
 

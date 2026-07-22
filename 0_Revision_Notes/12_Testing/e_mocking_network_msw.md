@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Request handler matter in Mocking Network Requests with MSW?
+### 1. Why use MSW instead of mocking `fetch` directly?
 
-Request handler means A mocked API response for a specific method and URL. In interviews, connect it to Mocking Network Requests with MSW by explaining the concrete UI behavior, failure state, and tradeoff.
+MSW intercepts requests at the network boundary, so the app still uses its real fetch/client code. This catches integration issues that direct function mocks can hide.
 
-### 2. How does Mock server affect the implementation?
+### 2. What API states should network mocks cover?
 
-Mock server means A test boundary that intercepts network calls. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Success, empty, validation error, auth error, server error, slow response, timeout/cancel if relevant, malformed data, and pagination/filter combinations that affect UI behavior.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you avoid mocks drifting from the real API?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Share schemas/fixtures where possible, keep handlers close to API contracts, review mocks when API contracts change, and include some integration/E2E coverage against real backend or contract tests.
 
-### 4. How would you debug a production issue related to Mocking Network Requests with MSW?
+### 4. What is the risk of over-mocking network behavior?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Tests can pass while real auth headers, credentials, CORS, status codes, response shapes, or timing fail. Mocks should simulate important behavior, not an idealized API.
 
-### 5. What would you check in code review for Mocking Network Requests with MSW?
+### 5. What MSW issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Handlers that match too broadly, missing error scenarios, fixtures unrelated to real contracts, tests that assert implementation details, and mocks that make impossible product states look valid.
 
 ---
 

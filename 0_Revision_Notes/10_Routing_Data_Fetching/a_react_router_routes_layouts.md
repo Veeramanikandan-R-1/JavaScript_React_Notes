@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Route hierarchy matter in React Router, Routes, and Layouts?
+### 1. How do you decide a React Router route hierarchy?
 
-Route hierarchy means The nested structure that maps URL segments to UI boundaries. In interviews, connect it to React Router, Routes, and Layouts by explaining the concrete UI behavior, failure state, and tradeoff.
+Match route boundaries to product sections, shared layouts, data ownership, and error/loading boundaries. Nested routes are useful when parent UI stays mounted while child content changes.
 
-### 2. How does Layout route affect the implementation?
+### 2. What problem does a layout route solve?
 
-Layout route means A shared wrapper that renders child routes through an outlet. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It keeps shared UI such as navigation, sidebars, tabs, and route-level providers in one place while child routes render through an outlet. This avoids duplicating shell layout across pages.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you handle a not-found route?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Add a route-level 404 experience that preserves navigation, explains the missing page, and gives a recovery path. In data routers, distinguish route-not-found from data-not-found where the URL exists but the resource does not.
 
-### 4. How would you debug a production issue related to React Router, Routes, and Layouts?
+### 4. What route bugs do you commonly see?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+State resets because layout boundaries are wrong, duplicate data fetching across parent/child routes, relative links pointing to unexpected paths, missing pending states, and redirects that lose the intended destination.
 
-### 5. What would you check in code review for React Router, Routes, and Layouts?
+### 5. What do you check in a routing pull request?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Route hierarchy, layout ownership, loading/error boundaries, accessible page titles/headings, redirect behavior, deep-link support, and whether URL changes preserve expected state.
 
 ---
 

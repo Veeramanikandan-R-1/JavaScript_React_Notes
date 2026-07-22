@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does `form` matter in Forms, Inputs, and Validation?
+### 1. Why should inputs have real labels instead of only placeholders?
 
-`form` means Groups controls and defines submission behavior. Use Forms, Inputs, and Validation to solve the specific problem described in this note.
+A placeholder is a hint, not a label. It disappears while typing, may have poor contrast, and does not replace a programmatic label for assistive tech. I use `<label for="email">Email</label>` or an equivalent accessible label.
 
-### 2. How does `label` affect the implementation?
+### 2. What is the difference between `disabled` and `readonly`?
 
-`label` means Gives an input an accessible name and larger click target. Understand the browser, runtime, or React behavior behind Forms, Inputs, and Validation before choosing an implementation.
+`disabled` controls cannot be focused, changed, or submitted with the form. `readonly` controls can usually be focused and submitted, but not edited. This matters when displaying server-provided values that still need to be sent.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do native validation and custom validation work together?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Native validation gives useful browser behavior through `required`, `type`, `min`, `max`, `pattern`, and constraint APIs. Custom validation is useful for business rules and better messages. I still keep accessible error text connected to the field with `aria-describedby` when needed.
 
-### 4. How would you debug a production issue related to Forms, Inputs, and Validation?
+### 4. How would you collect form values without controlling every input in React?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+For simple forms, I can use `FormData` on submit and read values from `event.currentTarget`. Controlled inputs are best when the UI must react to every keystroke, but uncontrolled inputs can reduce complexity for straightforward submit flows.
 
-### 5. What would you check in code review for Forms, Inputs, and Validation?
+### 5. A form shows an error message, but screen-reader users do not hear it. What do you check?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I check whether the error is associated with the input using `aria-describedby`, whether invalid state is exposed with `aria-invalid`, and whether a submit-level error needs `role="alert"` or focus management. I also check that the message is specific and visible near the field.
 
 ---
 

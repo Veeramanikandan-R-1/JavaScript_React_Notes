@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Transition matter in Transitions, Animations, and Transforms?
+### 1. When would you use a transition instead of a keyframe animation?
 
-Transition means Interpolates property changes. Use Transitions, Animations, and Transforms to solve the specific problem described in this note.
+Use a transition when the UI moves between two states, such as hover, focus, expand, or selected. Use a keyframe animation when the motion has multiple steps, needs to run independently, repeats, or represents a timeline.
 
-### 2. How does Animation affect the implementation?
+### 2. Which CSS properties are safest to animate in a production UI?
 
-Animation means Runs keyframes over time. Understand the browser, runtime, or React behavior behind Transitions, Animations, and Transforms before choosing an implementation.
+`transform` and `opacity` are usually the safest because browsers can often handle them on the compositor. Animating `width`, `height`, `top`, `left`, margins, or heavy shadows can trigger layout and paint, so measure before shipping.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you handle users who prefer reduced motion?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Use `@media (prefers-reduced-motion: reduce)` to remove or shorten nonessential motion. Keep the state change clear even without animation, especially for navigation, modals, drawers, and validation feedback.
 
-### 4. How would you debug a production issue related to Transitions, Animations, and Transforms?
+### 4. Why is `transform: translate()` often better than changing `top` or `left`?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Changing `top` or `left` can force layout for positioned elements. `transform` changes the visual position without affecting surrounding layout, so it is often smoother and less likely to cause layout thrashing.
 
-### 5. What would you check in code review for Transitions, Animations, and Transforms?
+### 5. A hover animation feels janky on a mid-range phone. How would you debug it?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Record it in DevTools Performance, check for layout and paint cost, enable paint flashing, and inspect layer/compositing behavior. Also check whether JavaScript, large images, filters, box shadows, or layout-changing properties are competing with the animation.
 
 ---
 

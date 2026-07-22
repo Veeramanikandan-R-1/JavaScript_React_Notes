@@ -36,25 +36,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Persistent connection matter in Prototypes, Classes, and OOP?
+### 1. How would you explain JavaScript prototypes to someone who knows classes?
 
-Persistent connection means A long-lived channel for receiving updates. In interviews, connect it to Prototypes, Classes, and OOP by explaining the concrete UI behavior, failure state, and tradeoff.
+Objects can delegate property lookup to another object through the prototype chain. `class` syntax is mostly a cleaner way to define constructor functions and prototype methods, not a separate inheritance system like in many classical OOP languages.
 
-### 2. How does Reconnection affect the implementation?
+### 2. What happens when JavaScript cannot find a property directly on an object?
 
-Reconnection means Recovery logic after network loss. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It walks up the prototype chain until it finds the property or reaches `null`. This matters when debugging inherited methods, monkey patches, `Object.create`, class instances, and unexpected properties from third-party objects.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When would you use a class in frontend JavaScript?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Classes can be useful for domain objects, SDK wrappers, state machines, custom errors, or APIs with lifecycle and instance methods. For simple data transformation or UI composition, functions and plain objects are often clearer.
 
-### 4. How would you debug a production issue related to Prototypes, Classes, and OOP?
+### 4. What is the difference between instance fields and prototype methods?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Instance fields are created per instance. Prototype methods are shared through the prototype chain. Shared prototype methods usually use less memory, while per-instance arrow methods can preserve lexical `this` but create a new function for each instance.
 
-### 5. What would you check in code review for Prototypes, Classes, and OOP?
+### 5. What OOP-related problems do you look for in frontend code?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Overuse of inheritance, mutable shared prototype state, unclear lifecycle cleanup, class instances stored in serializable app state, and methods that depend on `this` in ways that break when passed as callbacks.
 
 ---
 

@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Route hierarchy matter in Auth, Protected Routes, and Loading States?
+### 1. What states should a protected route handle?
 
-Route hierarchy means The nested structure that maps URL segments to UI boundaries. In interviews, connect it to Auth, Protected Routes, and Loading States by explaining the concrete UI behavior, failure state, and tradeoff.
+Unknown auth/loading, authenticated allowed, authenticated forbidden, unauthenticated redirect/login, expired session, and server/auth-check failure. Treating unknown as logged out causes flicker and bad redirects.
 
-### 2. How does Layout route affect the implementation?
+### 2. Why is client-side route protection not enough for security?
 
-Layout route means A shared wrapper that renders child routes through an outlet. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Client routing controls UI, not data access. The backend must still enforce authorization for every protected resource because users can call APIs outside the app.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you preserve the intended destination after login?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Store the attempted URL in router state or a safe return parameter, then navigate back after successful login. Validate return URLs so login cannot become an open redirect.
 
-### 4. How would you debug a production issue related to Auth, Protected Routes, and Loading States?
+### 4. How do auth checks interact with loading UI?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+The app should show a pending state while auth is unknown, avoid rendering protected content before authorization is known, and avoid redirect loops while token/session refresh is in progress.
 
-### 5. What would you check in code review for Auth, Protected Routes, and Loading States?
+### 5. What protected-route issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+UI-only authorization assumptions, flicker of protected content, redirect loops, losing destination, missing forbidden state, stale user permissions, and error states that force unnecessary logout.
 
 ---
 

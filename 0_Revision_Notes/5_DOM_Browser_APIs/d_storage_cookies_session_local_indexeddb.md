@@ -33,25 +33,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does DOM matter in Storage, Cookies, localStorage, sessionStorage, and IndexedDB?
+### 1. When would you use cookies, `localStorage`, `sessionStorage`, or IndexedDB?
 
-DOM means Live tree representation of the document. Use Storage, Cookies, localStorage, sessionStorage, and IndexedDB to solve the specific problem described in this note.
+Use cookies when the server must receive a small value on requests, usually auth/session related. Use `localStorage` for small persistent client preferences, `sessionStorage` for tab-scoped temporary data, and IndexedDB for larger structured offline data.
 
-### 2. How does Node affect the implementation?
+### 2. Why should sensitive tokens usually not be stored in `localStorage`?
 
-Node means A unit in the DOM tree. Understand the browser, runtime, or React behavior behind Storage, Cookies, localStorage, sessionStorage, and IndexedDB before choosing an implementation.
+Any successful XSS can read `localStorage`. For many auth flows, an HttpOnly, Secure, SameSite cookie reduces token exposure to JavaScript, though the full design still needs CSRF and session handling.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What are the limitations of `localStorage`?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It is synchronous, string-only, relatively small, and can be unavailable or cleared depending on browser settings. It can block the main thread if used heavily and should not be treated as a reliable database.
 
-### 4. How would you debug a production issue related to Storage, Cookies, localStorage, sessionStorage, and IndexedDB?
+### 4. How would you debug a cookie not being sent to an API?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Check domain, path, `Secure`, `SameSite`, expiry, whether the request is cross-site, credentials mode in fetch, HTTPS, and the response `Set-Cookie` header. DevTools Application and Network tabs usually reveal the issue.
 
-### 5. What would you check in code review for Storage, Cookies, localStorage, sessionStorage, and IndexedDB?
+### 5. What storage issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Sensitive data in web storage, missing migration/versioning for persisted shapes, large synchronous reads during startup, no quota/error handling, and stale cached data with no invalidation strategy.
 
 ---
 

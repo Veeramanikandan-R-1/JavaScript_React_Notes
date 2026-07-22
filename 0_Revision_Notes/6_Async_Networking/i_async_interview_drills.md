@@ -29,25 +29,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Scope and closure matter in Async JavaScript Interview Drills?
+### 1. What does this output: `setTimeout(() => console.log('timer')); Promise.resolve().then(() => console.log('promise')); console.log('sync');`?
 
-Scope and closure means How functions remember lexical variables and why that affects callbacks. In interviews, connect it to Async JavaScript Interview Drills by explaining the concrete UI behavior, failure state, and tradeoff.
+It logs `sync`, then `promise`, then `timer`. Synchronous code runs first, promise callbacks run in the microtask queue, and timers run later as tasks.
 
-### 2. How does Event loop affect the implementation?
+### 2. How do you prevent old search results from replacing newer search results?
 
-Event loop means The scheduling model behind synchronous code, microtasks, and timers. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Track the latest request id or abort the old request when a new query starts. When a response returns, update state only if it still belongs to the latest query.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why is `Promise.all(users.map(fetchUser))` risky for a large list?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+It starts every request at once, which can overload the browser or backend and make failures harder to recover from. Use batching or concurrency limits when the list is large.
 
-### 4. How would you debug a production issue related to Async JavaScript Interview Drills?
+### 4. How do you explain a timeout versus a retry?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+A timeout sets a maximum wait for one attempt. A retry starts another attempt after a failure or timeout. Retrying should be bounded, often use backoff, and be safe for the operation.
 
-### 5. What would you check in code review for Async JavaScript Interview Drills?
+### 5. What makes an async interview answer senior-level?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+It covers execution order, ownership, cancellation, stale responses, failure states, and user impact. It also says how the behavior would be tested under slow network and out-of-order responses.
 
 ---
 

@@ -155,25 +155,25 @@ Important correction: SSR does not automatically mean slower initial loading. It
 
 # Interview Questions with Answers
 
-### 1. Why does Semantic HTML matter in SEO for React Apps?
+### 1. Why can SEO be harder in a client-rendered React app?
 
-Semantic HTML means Native meaning and behavior. Use accessibility checks during implementation, not as a final cleanup pass.
+If meaningful content, links, titles, and metadata appear only after JavaScript runs, crawlers and link previews may miss or delay understanding the page. Server rendering or pre-rendering often helps content-heavy pages.
 
-### 2. How does Focus affect the implementation?
+### 2. What metadata should a React route manage?
 
-Focus means Current keyboard interaction target. Browsers derive the accessibility tree from DOM, roles, labels, states, and relationships.
+Title, description, canonical URL, robots directives where needed, Open Graph/Twitter metadata, structured data when appropriate, and route-specific headings/content that match search intent.
 
-### 3. What mistake should you avoid around removing focus outlines?
+### 3. How do performance and SEO connect?
 
-Avoid removing focus outlines. Use semantic elements.
+Slow pages can hurt crawling, ranking signals, and user engagement. LCP, image optimization, JavaScript size, server response time, and stable layout all matter for search and real users.
 
-### 4. How would you debug a production issue related to SEO for React Apps?
+### 4. How do you debug incorrect link previews?
 
-Navigate using only the keyboard. Inspect accessible names, roles, states, and relationships.
+Inspect the rendered HTML and response source for Open Graph tags, clear CDN/social caches, verify absolute image URLs, status codes, canonical URL, and whether metadata changes only after client-side JavaScript.
 
-### 5. What would you check in code review for SEO for React Apps?
+### 5. What SEO issues do you flag in React reviews?
 
-Can users identify, reach, operate, and understand every control? Does focus move predictably when UI opens or closes?
+Missing route titles/descriptions, duplicate canonical URLs, content hidden behind client-only fetches, broken semantic heading structure, images without useful alt text, and links implemented as buttons or click handlers.
 
 ---
 

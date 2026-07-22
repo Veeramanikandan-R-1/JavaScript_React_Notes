@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Value matter in Modules, import, and export?
+### 1. What is the difference between default exports and named exports?
 
-Value means Data your program works with. Use Modules, import, and export to solve the specific problem described in this note.
+Named exports make imports explicit and easier to refactor across a large app. Default exports can be convenient for one-main-thing modules, but they allow arbitrary import names and can make search/refactor weaker.
 
-### 2. How does Binding affect the implementation?
+### 2. What does it mean that ES module imports are live bindings?
 
-Binding means A named reference created by `let`, `const`, `var`, function, or import. Understand the browser, runtime, or React behavior behind Modules, import, and export before choosing an implementation.
+An imported binding reflects the current exported value from the module, not a copied snapshot. You cannot reassign the import locally, and circular dependencies can expose partially initialized bindings if modules are structured poorly.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do circular dependencies usually show up in frontend apps?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+They often appear when feature modules import from each other, or when barrel files re-export too much. Symptoms include `undefined` imports, initialization-order bugs, broken tests, and bundles that become harder to split.
 
-### 4. How would you debug a production issue related to Modules, import, and export?
+### 4. What is tree shaking, and what code prevents it from working well?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Tree shaking removes unused exports from the bundle. It works best with static ES module imports/exports and is hurt by side-effectful modules, dynamic require patterns, broad barrel imports, and packages that do not advertise side-effect behavior correctly.
 
-### 5. What would you check in code review for Modules, import, and export?
+### 5. What do you review in module boundaries?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+I check that imports point in the right architectural direction, feature code is not depending on internals from another feature, shared modules are genuinely shared, and side effects do not run just because a module was imported.
 
 ---
 

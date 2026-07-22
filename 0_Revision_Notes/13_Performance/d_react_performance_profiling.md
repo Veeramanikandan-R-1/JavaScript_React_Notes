@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does LCP matter in React Performance and Profiling?
+### 1. How do you know a React performance problem is actually a React problem?
 
-LCP means Largest Contentful Paint. Use React Performance and Profiling to solve the specific problem described in this note.
+Profile first. The bottleneck may be React rendering, JavaScript outside React, layout/paint, network, images, or third-party scripts. Use React Profiler and browser Performance traces together.
 
-### 2. How does CLS affect the implementation?
+### 2. What does the React Profiler tell you?
 
-CLS means Cumulative Layout Shift. Understand the browser, runtime, or React behavior behind React Performance and Profiling before choosing an implementation.
+It shows which components rendered, how long they took, and why commits happened. It helps identify expensive renders, unnecessary parent updates, and props/state changes that cascade through the tree.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What are common causes of unnecessary React renders?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+State owned too high, context values changing identity, unstable object/function props, selectors returning new references, key changes, and effects that set derived state.
 
-### 4. How would you debug a production issue related to React Performance and Profiling?
+### 4. When is `useMemo` not the right fix?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+When the calculation is cheap, dependencies change every render, the bottleneck is elsewhere, or the complexity outweighs the gain. Often the better fix is moving state down, splitting components, or reducing work.
 
-### 5. What would you check in code review for React Performance and Profiling?
+### 5. What React performance issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Premature memoization, expensive work in render, large context providers, avoidable list rerenders, effects that trigger render loops, and no measurement for risky performance changes.
 
 ---
 

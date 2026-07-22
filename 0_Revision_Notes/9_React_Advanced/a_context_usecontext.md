@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Provider value matter in Context and useContext?
+### 1. When is React Context a good choice?
 
-Provider value means The shared value made available to descendants inside a context boundary. In interviews, connect it to Context and useContext by explaining the concrete UI behavior, failure state, and tradeoff.
+Context is good for values that many descendants need within a boundary, such as theme, locale, auth session, feature flags, or current workspace. It is not automatically a replacement for all state management.
 
-### 2. How does Consumer re-render affect the implementation?
+### 2. Why can Context cause unnecessary re-renders?
 
-Consumer re-render means Consumers update when the provider value identity changes. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Consumers re-render when the provider value changes identity. Passing a newly created object or function every render can update many descendants. Split contexts, memoize values carefully, or move frequently changing state closer to where it is used.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. When should you not use Context?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Avoid Context for highly local state, frequently changing values used by a small subtree, server-state caching, or anything that needs selectors/subscriptions. A store or server-state library may fit better.
 
-### 4. How would you debug a production issue related to Context and useContext?
+### 4. How do you design a provider API?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Keep provider responsibilities clear, expose stable values and actions, handle missing-provider errors intentionally, and avoid mixing unrelated concerns like theme, auth, and data cache in one context.
 
-### 5. What would you check in code review for Context and useContext?
+### 5. What Context issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Huge provider values, providers wrapped around the whole app without need, frequently changing values, missing memoization where it matters, and Context used to avoid passing two simple props.
 
 ---
 

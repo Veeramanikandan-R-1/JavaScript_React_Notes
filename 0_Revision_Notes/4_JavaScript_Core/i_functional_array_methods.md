@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Value matter in Functional Array Methods?
+### 1. When would you use `map`, `filter`, `reduce`, `some`, and `find`?
 
-Value means Data your program works with. Use Functional Array Methods to solve the specific problem described in this note.
+Use `map` to transform every item, `filter` to keep some items, `reduce` to accumulate, `some` to test whether any item matches, and `find` to return the first matching item. Choose the method that states the intent most clearly.
 
-### 2. How does Binding affect the implementation?
+### 2. Why can `reduce` make code harder to review?
 
-Binding means A named reference created by `let`, `const`, `var`, function, or import. Understand the browser, runtime, or React behavior behind Functional Array Methods before choosing an implementation.
+`reduce` can hide multiple operations in one callback, especially when accumulating objects or doing conditional branching. It is great for clear aggregation, but for complex transformations a loop or named helper can be easier to debug.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is the difference between `forEach` and `map`?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+`map` returns a new array of transformed values. `forEach` runs side effects and returns `undefined`. Using `map` only for side effects is a code smell because it communicates the wrong intent.
 
-### 4. How would you debug a production issue related to Functional Array Methods?
+### 4. How do array methods affect rendering performance?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Repeated filtering, sorting, grouping, or mapping during every render can become expensive with large lists. Measure first, then consider memoization, precomputed indexes, pagination, virtualization, or moving work closer to the data layer.
 
-### 5. What would you check in code review for Functional Array Methods?
+### 5. What bugs do you look for in array transformations?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Mutating the original array with `sort` or `reverse`, missing return statements inside callbacks, unstable keys derived from indexes, incorrect handling of empty arrays, and transformations that assume API fields are always present.
 
 ---
 

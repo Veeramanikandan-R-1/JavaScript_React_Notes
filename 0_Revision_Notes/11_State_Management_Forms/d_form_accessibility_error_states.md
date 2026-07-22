@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Label association matter in Form Accessibility and Error States?
+### 1. What makes a form field accessible?
 
-Label association means A programmatic connection between a label and its control. In interviews, connect it to Form Accessibility and Error States by explaining the concrete UI behavior, failure state, and tradeoff.
+It has a programmatic label, clear instructions, valid input semantics, keyboard support, visible focus, and any help/error text connected to the field with accessible relationships.
 
-### 2. How does Error message affect the implementation?
+### 2. How should errors be announced after submit?
 
-Error message means Clear feedback tied to the invalid field. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Show a summary when useful, connect each field error to its input, and move focus to the first invalid field or summary depending on form complexity. The user should understand what failed and how to fix it.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. Why is disabling the submit button often not enough?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+A disabled button may not explain what is wrong and may be skipped by assistive technology. If submit is disabled, the UI should still communicate requirements and errors clearly.
 
-### 4. How would you debug a production issue related to Form Accessibility and Error States?
+### 4. How do you handle async validation accessibly?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Show pending state near the field, avoid stealing focus, cancel stale checks, and announce final errors clearly. Username/email availability checks are a common example.
 
-### 5. What would you check in code review for Form Accessibility and Error States?
+### 5. What form-accessibility issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Missing labels, placeholder-only fields, color-only errors, errors not associated with inputs, focus lost after submit, inaccessible custom controls, and validation that changes layout unpredictably.
 
 ---
 

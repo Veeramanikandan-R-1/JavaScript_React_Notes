@@ -28,25 +28,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Dev server matter in Vite, Bundling, and Dev Server?
+### 1. Why can code work in the Vite dev server but fail after production build?
 
-Dev server means The local server that transforms modules during development. In interviews, connect it to Vite, Bundling, and Dev Server by explaining the concrete UI behavior, failure state, and tradeoff.
+Development uses fast transforms and native ESM; production bundles, minifies, tree-shakes, hashes assets, and applies different environment modes. Bugs often come from env variables, dynamic imports, asset paths, side effects, or browser-target differences.
 
-### 2. How does HMR affect the implementation?
+### 2. What is HMR, and what bugs can it hide?
 
-HMR means Updating changed modules without a full reload. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Hot Module Replacement updates changed modules without a full reload. It can hide initialization, cleanup, and full-page-load bugs because state may survive in development when it would be recreated in production.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. What is code splitting?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Code splitting breaks the app into chunks that can load on demand. It helps initial load when route, feature, or heavy-library code is not needed immediately, but it adds loading states and failure cases for chunk loading.
 
-### 4. How would you debug a production issue related to Vite, Bundling, and Dev Server?
+### 4. How do you inspect whether a dependency is hurting bundle size?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+Build the app, inspect generated chunks with a bundle analyzer or visualizer, check whether imports are tree-shaken, and look for duplicate packages or accidentally importing a whole library for one function.
 
-### 5. What would you check in code review for Vite, Bundling, and Dev Server?
+### 5. What build-tooling changes do you review carefully?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Changes to aliases, env loading, output paths, plugin order, chunking, browser targets, polyfills, and dev server proxy settings because they can change both local behavior and deployed assets.
 
 ---
 

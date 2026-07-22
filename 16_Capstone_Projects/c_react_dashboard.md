@@ -121,25 +121,25 @@ Project checklist:
 
 # Interview Questions with Answers
 
-### 1. Why does Requirements matter in Capstone: React Dashboard?
+### 1. What are the core states a React dashboard must handle?
 
-Requirements means What the app must do. Use capstones to prove integrated skill, not to collect random features.
+Initial loading, partial loading, success, empty, error, stale/background refetch, permission denied, and offline/network failure. Dashboards often fail when they only handle the ideal data-loaded state.
 
-### 2. How does Architecture affect the implementation?
+### 2. How would you structure data fetching for dashboard widgets?
 
-Architecture means How files, data, UI, and state are organized. Capstone quality comes from integrating many small decisions: semantic markup, resilient layout, predictable state, error handling, tests, and performance budgets.
+Use stable query keys per widget/data scope, avoid duplicate requests, let widgets fail independently when product allows it, and separate server state from local UI state like selected filters or expanded panels.
 
-### 3. What mistake should you avoid around building only the happy path?
+### 3. What performance risks do dashboards have?
 
-Avoid building only the happy path. Write requirements before coding.
+Large chart libraries, frequent polling, heavy data transforms, unnecessary rerenders, layout shift in metric cards, and too much JavaScript in the first route. Measure with React Profiler and browser traces.
 
-### 4. How would you debug a production issue related to Capstone: React Dashboard?
+### 4. How do filters belong in dashboard state?
 
-Test the full happy path, then every major failure path. Use browser DevTools, React DevTools, accessibility checks, and performance traces.
+Shareable filters often belong in the URL. Purely local display choices may stay in component state. Query keys must include filter inputs so cached data matches the visible view.
 
-### 5. What would you check in code review for Capstone: React Dashboard?
+### 5. What would you check in a dashboard code review?
 
-Are all user journeys complete? Are states, accessibility, responsiveness, and tests present?
+Widget boundaries, loading/error/empty states, accessible charts/tables, responsive layout, query-key correctness, memoization only where measured, and tests for filtering and failure cases.
 
 ---
 

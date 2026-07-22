@@ -30,25 +30,25 @@
 
 # Interview Questions with Answers
 
-### 1. Why does Path parameter matter in URL Params and Search Params?
+### 1. What belongs in path params versus search params?
 
-Path parameter means A required URL segment used to identify a resource. In interviews, connect it to URL Params and Search Params by explaining the concrete UI behavior, failure state, and tradeoff.
+Path params identify required resources, such as `/products/:id`. Search params represent optional view state such as filters, sort, search text, tab, and pagination.
 
-### 2. How does Search parameter affect the implementation?
+### 2. Why store filters in the URL?
 
-Search parameter means A query-string value used for filters, sorting, pagination, or view state. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+URL filters make the state shareable, bookmarkable, restorable on reload, and compatible with browser history. The tradeoff is that parsing, defaults, validation, and URL update frequency must be designed.
 
-### 3. What mistake should you avoid around skipping real edge cases?
+### 3. How do you handle invalid URL params?
 
-Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
+Parse them explicitly, validate the shape, fall back to defaults or show a not-found/error state, and avoid trusting params as typed values. Route params and query params arrive as strings.
 
-### 4. How would you debug a production issue related to URL Params and Search Params?
+### 4. What bug happens when state and search params are duplicated?
 
-Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
+They can drift: the UI shows one filter while the URL says another. Prefer deriving view state from the URL or using a single well-defined synchronization path.
 
-### 5. What would you check in code review for URL Params and Search Params?
+### 5. What URL-state issues do you flag in review?
 
-Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
+Unvalidated params, update loops, noisy history entries on every keystroke, missing defaults, losing params during navigation, and query keys that do not include URL-driven inputs.
 
 ---
 
