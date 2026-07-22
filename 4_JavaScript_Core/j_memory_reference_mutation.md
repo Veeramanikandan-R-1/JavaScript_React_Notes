@@ -122,25 +122,25 @@ const immutableUpdate = {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Memory, References, and Mutation in a real project?
+### 1. What is referential equality, and why does React care about it?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Referential equality checks whether two values point to the same object or function. React state updates, memoized components, dependency arrays, and cache updates often rely on reference changes to know whether work should happen.
 
-### 2. What happens internally when Memory, References, and Mutation is involved?
+### 2. What is the difference between mutation and reassignment?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+Reassignment changes which value a variable points to. Mutation changes the contents of an existing object or array. `const` blocks reassignment, but it does not make objects immutable.
 
-### 3. How do you debug issues related to Memory, References, and Mutation?
+### 3. How can shared references create hard-to-find bugs?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Two parts of the app may hold the same object and one part mutates it without the other knowing. The UI can then show stale data, skip renders, or change unexpectedly after a seemingly unrelated action.
 
-### 4. What is the biggest production risk with Memory, References, and Mutation?
+### 4. How do you debug an accidental mutation?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Track where the object is created, passed, and changed. Use breakpoints, object snapshots, `Object.freeze` in development, reducer tests, and reference comparisons before and after the suspected update.
 
-### 5. What should a senior engineer look for in code review?
+### 5. When is mutation acceptable?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Mutation is acceptable when it is local, clearly owned, and not observable by other code, such as building a temporary object inside a function. Shared app state, cache data, props, and reducer inputs should be treated as immutable.
 
 ---
 

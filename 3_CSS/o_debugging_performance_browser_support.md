@@ -124,25 +124,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain CSS Debugging, Performance, and Browser Support in a real project?
+### 1. A style works locally but not in production. How do you debug it?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+First compare the computed styles in DevTools, not just the source CSS. Then check CSS order, hashed class names, missing build output, PurgeCSS/tree-shaking, minification, prefixes, environment-specific feature flags, and whether a later rule overrides the expected one.
 
-### 2. What happens internally when CSS Debugging, Performance, and Browser Support is involved?
+### 2. How would you debug layout shift caused by CSS?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Use the Performance panel or layout shift tooling to identify the moving element. Common causes are images without dimensions, late-loading fonts, injected banners, async content, changing scrollbar presence, and components that render skeletons with different final dimensions.
 
-### 3. How do you debug issues related to CSS Debugging, Performance, and Browser Support?
+### 3. What CSS patterns can hurt rendering performance?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Animating layout properties, using expensive filters or shadows on large areas, triggering frequent style recalculation with broad selectors, and forcing large repaints. The answer should include measurement because CSS performance problems are often browser- and page-specific.
 
-### 4. What is the biggest production risk with CSS Debugging, Performance, and Browser Support?
+### 4. What is your browser support workflow before using a newer CSS feature?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Check the product support matrix, usage analytics, MDN or Can I Use, and whether the feature has a graceful fallback. For critical layout behavior, I test in the oldest supported browsers and add a fallback or progressive enhancement path.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do source maps help with CSS debugging?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+They map bundled or minified CSS back to the original source, which helps find the real file and rule during production debugging. They should be configured intentionally so the team gets useful diagnostics without exposing anything the product should keep private.
 
 ---
 

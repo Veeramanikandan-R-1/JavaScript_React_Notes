@@ -215,25 +215,25 @@ Use this when you only need the value at submit time. Use controlled state when 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Refs, forwardRef, and Imperative Handles in a real project?
+### 1. When should you use a ref in React?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Use refs for DOM access, focus management, measuring, integrating imperative libraries, storing mutable values that should not trigger render, and keeping ids/timers. Do not use refs to bypass normal state flow for rendered data.
 
-### 2. What happens internally when Refs, forwardRef, and Imperative Handles is involved?
+### 2. What is the difference between state and ref?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+State changes trigger rendering and represent UI data. Ref changes do not trigger rendering and are best for imperative handles or mutable values that React does not need to display.
 
-### 3. How do you debug issues related to Refs, forwardRef, and Imperative Handles?
+### 3. When would you expose an imperative handle?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Expose a small imperative API when a parent must call actions like `focus`, `scrollToItem`, `open`, or `reset` on a reusable component. Keep the handle narrow so parent components do not take over child internals.
 
-### 4. What is the biggest production risk with Refs, forwardRef, and Imperative Handles?
+### 4. What can go wrong with measuring DOM in React?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Measurements can be stale if layout changes after render, fonts/images load later, or CSS changes at breakpoints. Use the right timing, such as layout effects where needed, and consider `ResizeObserver` for ongoing size changes.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What ref issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Refs used as hidden state, imperative APIs that expose too much, missing cleanup for third-party widgets, unsafe focus changes, and measuring code that can cause layout thrashing.
 
 ---
 

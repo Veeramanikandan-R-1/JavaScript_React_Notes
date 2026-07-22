@@ -124,25 +124,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain CSS Layout Patterns in a real project?
+### 1. How would you build an app layout with a sticky header, sidebar, and scrollable content?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Use a top-level grid or flex layout with explicit regions. Keep the page height constrained with `min-height: 100dvh`, make only the content region scroll when needed, and test mobile where the sidebar may become a drawer or bottom navigation.
 
-### 2. What happens internally when CSS Layout Patterns is involved?
+### 2. What are a few reliable ways to center content, and when would you choose each?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Use flex or grid centering for one item inside a container. Use auto margins for fixed-width blocks in normal flow. For absolute overlays, combine positioning with transforms carefully, but avoid absolute positioning when normal layout can solve it.
 
-### 3. How do you debug issues related to CSS Layout Patterns?
+### 3. How would you build a responsive card grid without hardcoded breakpoints everywhere?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Use CSS Grid with `repeat(auto-fit, minmax(...))`, sensible gaps, and content-driven min/max constraints. Test long titles, missing images, zoom, and narrow containers before adding breakpoints.
 
-### 4. What is the biggest production risk with CSS Layout Patterns?
+### 4. How do you design layouts that handle unknown content height?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Avoid fixed heights unless the design truly requires clipping. Use min/max sizes, flexible tracks, overflow rules, and content wrapping. For equal-height visual groups, let grid or flex align items instead of forcing every card to a fixed size.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What layout choices usually signal future maintenance problems?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Nested layout wrappers with unclear purpose, absolute positioning for normal content, fixed heights on text-heavy areas, breakpoints that target one device, and duplicated layout rules across screens.
 
 ---
 

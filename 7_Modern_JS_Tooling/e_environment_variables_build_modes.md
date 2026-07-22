@@ -123,25 +123,25 @@ export const config = {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Environment Variables and Build Modes in a real project?
+### 1. Why are frontend environment variables not secret?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+Values embedded into client JavaScript can be viewed by users in the built assets or network behavior. Frontend env vars are configuration, not secret storage; secrets belong on the server.
 
-### 2. What happens internally when Environment Variables and Build Modes is involved?
+### 2. What can differ between development, staging, and production builds?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+API base URLs, feature flags, analytics keys, logging behavior, source map settings, minification, browser targets, and security headers. These differences are why production-like testing matters.
 
-### 3. How do you debug issues related to Environment Variables and Build Modes?
+### 3. How do build-time env vars differ from runtime config?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Build-time vars are baked into the generated files and require a rebuild to change. Runtime config is loaded by the deployed app, often from an endpoint or injected file, and can change without rebuilding the bundle.
 
-### 4. What is the biggest production risk with Environment Variables and Build Modes?
+### 4. How would you debug a wrong API URL in production?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Inspect the built JavaScript or runtime config, check CI/deployment variables, verify the mode used by the build command, compare staging and production values, and confirm the network request in DevTools.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What env/config issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Secrets in client variables, inconsistent naming, missing defaults, config read at module load when it should be runtime, feature flags without cleanup plans, and build commands that use the wrong mode.
 
 ---
 

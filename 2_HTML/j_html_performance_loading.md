@@ -153,25 +153,25 @@ For React app bundles, prefer module scripts or deferred scripts so HTML parsing
 
 # Interview Questions with Answers
 
-### 1. How would you explain HTML Performance and Resource Loading in a real project?
+### 1. What is the difference between `async`, `defer`, and `type="module"` scripts?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+A normal script blocks parsing while it downloads and executes. `defer` downloads in parallel and executes after HTML parsing, in order. `async` downloads in parallel and executes as soon as ready, not guaranteed in order. `type="module"` supports imports/exports and is deferred by default.
 
-### 2. What happens internally when HTML Performance and Resource Loading is involved?
+### 2. When would you use `preload` and when would you use `preconnect`?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+Use `preload` for a specific critical resource the browser may discover too late, such as a hero font or image. Use `preconnect` to warm up a connection to a third-party origin needed soon. Both can hurt performance if overused.
 
-### 3. How do you debug issues related to HTML Performance and Resource Loading?
+### 3. How do images affect LCP and CLS?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+A large hero image is often the LCP element, so it needs the right format, dimensions, priority, and server/CDN behavior. Missing width/height or aspect ratio can cause CLS when the image loads. I avoid lazy-loading the likely LCP image.
 
-### 4. What is the biggest production risk with HTML Performance and Resource Loading?
+### 4. What do you check when a page is blank for several seconds?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+I inspect the network waterfall, main-thread blocking, render-blocking CSS/JS, bundle size, server response time, font loading, and whether hydration or client data fetching is delaying useful content. I compare dev and production builds because they behave differently.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you load third-party scripts responsibly?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I ask whether the script is needed, whether it can load after interaction or consent, whether it blocks rendering, and what failure looks like. I prefer async/defer, feature flags for risky scripts, and monitoring for performance impact.
 
 ---
 

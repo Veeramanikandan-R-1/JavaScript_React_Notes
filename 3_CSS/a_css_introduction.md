@@ -124,25 +124,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain CSS Introduction in a real project?
+### 1. A component looks correct in isolation but breaks inside another page. What CSS causes do you check?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+I check inherited styles, global resets, selector specificity, parent layout constraints, width/min-width, overflow, and whether the component assumes a fixed container. Senior CSS debugging starts from the computed styles and box model, not from guessing which class "should" win.
 
-### 2. What happens internally when CSS Introduction is involved?
+### 2. What does it mean that CSS is declarative?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+You describe the desired presentation, and the browser resolves the final result through cascade, inheritance, layout, paint, and compositing. That means multiple rules can target the same element, and the answer is determined by CSS rules, not execution order like JavaScript.
 
-### 3. How do you debug issues related to CSS Introduction?
+### 3. How do you decide between normal flow, flex, grid, and positioning?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Normal flow is best for document content. Flexbox is for one-axis alignment and distribution. Grid is for two-dimensional layout. Positioning is for intentional offsets and overlays. A strong answer also mentions long text, zoom, localization, and responsive behavior.
 
-### 4. What is the biggest production risk with CSS Introduction?
+### 4. Why do developers use a reset or normalize stylesheet?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Browsers have useful but inconsistent default styles. A reset/normalize strategy creates a predictable baseline, but it should be intentional. I do not blindly remove all native behavior because defaults like focus outlines, form behavior, and semantic spacing can be valuable.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What is your CSS review checklist for a reusable component?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I check real content, narrow and wide containers, long words, keyboard focus, hover/active/disabled states, color contrast, reduced motion, selector ownership, and whether the component leaks styles outside itself. I also check that the CSS is simpler than the problem.
 
 ---
 

@@ -125,25 +125,25 @@ function LargeOrderList({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Virtualization and Large Lists in a real project?
+### 1. Why does Conditional branch matter in Virtualization and Large Lists?
 
-Performance work starts with measurement: Web Vitals, DevTools traces, bundle analysis, React Profiler, and real-user metrics.
+Conditional branch means Choosing which UI to render from current state. In interviews, connect it to Virtualization and Large Lists by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Virtualization and Large Lists is involved?
+### 2. How does Stable key affect the implementation?
 
-The bottleneck might be network, parsing, JavaScript execution, rendering, images, fonts, server latency, or too many React renders.
+Stable key means A persistent identity for each item in a changing list. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Virtualization and Large Lists?
+### 3. What mistake should you avoid around optimizing random code without profiling?
 
-I optimize the biggest measured issue first and protect it with a budget, test, or monitoring signal.
+Avoid optimizing random code without profiling. Measure with DevTools, Lighthouse, React Profiler, and real-user metrics.
 
-### 4. What is the biggest production risk with Virtualization and Large Lists?
+### 4. How would you debug a production issue related to Virtualization and Large Lists?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Capture a trace before changing code. Identify whether time is spent in network, parse, scripting, style, layout, paint, or React rendering.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Virtualization and Large Lists?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Is the initial bundle reasonable? Are images and fonts optimized?
 
 ---
 

@@ -146,25 +146,25 @@ Useful closing questions:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Frontend Debugging Scenarios in a real project?
+### 1. A React screen shows old data after quickly changing filters. How do you debug it?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+I first reproduce it with slow network throttling and watch the request order. The usual cause is a stale response winning after a newer request. I would check query keys, effect dependencies, AbortController usage, cache invalidation, and whether the UI ties the response to the latest filter state before rendering it.
 
-### 2. What happens internally when Frontend Debugging Scenarios is involved?
+### 2. A button click does nothing in production, but works locally. What do you inspect?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+I check the browser console with source maps, network errors, feature flags, environment variables, minified stack traces, and whether the production bundle is serving stale assets. I also inspect whether the element is actually receiving the click or if an overlay, disabled state, pointer-events rule, or hydration mismatch is blocking interaction.
 
-### 3. How do you debug issues related to Frontend Debugging Scenarios?
+### 3. A layout breaks only when the customer name is very long. What is your CSS debugging flow?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+I inspect the element and parent layout mode, then check `min-width`, `max-width`, `overflow`, `white-space`, flex shrink behavior, grid tracks, and word-breaking. For flex children, `min-width: 0` is a common missing fix. I would also add a long-text regression example because real content is part of the requirement.
 
-### 4. What is the biggest production risk with Frontend Debugging Scenarios?
+### 4. A modal opens, but keyboard users can tab to content behind it. What is the bug?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+The modal is missing proper focus management. Opening should move focus into the modal, tab should be contained while it is open, Escape should close when appropriate, the trigger should regain focus on close, and background content should be inert or otherwise unavailable to assistive tech.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you answer when you do not know the root cause yet?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I say what I know, what I need to prove, and what evidence I will collect next. A senior debugging answer is not guessing quickly; it is reducing uncertainty with reproduction steps, logs, DevTools, network traces, DOM inspection, and a small fix backed by a regression test or checklist.
 
 ---
 

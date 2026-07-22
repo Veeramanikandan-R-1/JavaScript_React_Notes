@@ -148,25 +148,25 @@ Senior debugging line: first identify whether the bottleneck is network, parsing
 
 # Interview Questions with Answers
 
-### 1. How would you explain Rendering Performance, Layout, and Paint in a real project?
+### 1. Why does LCP matter in Rendering Performance, Layout, and Paint?
 
-Performance work starts with measurement: Web Vitals, DevTools traces, bundle analysis, React Profiler, and real-user metrics.
+LCP means Largest Contentful Paint. Use performance work when measurement shows a user-facing problem or a budget risk.
 
-### 2. What happens internally when Rendering Performance, Layout, and Paint is involved?
+### 2. How does CLS affect the implementation?
 
-The bottleneck might be network, parsing, JavaScript execution, rendering, images, fonts, server latency, or too many React renders.
+CLS means Cumulative Layout Shift. The browser has limited time per frame; long JavaScript, forced layout, heavy paint, and excessive network cost reduce responsiveness.
 
-### 3. How do you debug issues related to Rendering Performance, Layout, and Paint?
+### 3. What mistake should you avoid around optimizing random code without profiling?
 
-I optimize the biggest measured issue first and protect it with a budget, test, or monitoring signal.
+Avoid optimizing random code without profiling. Measure with DevTools, Lighthouse, React Profiler, and real-user metrics.
 
-### 4. What is the biggest production risk with Rendering Performance, Layout, and Paint?
+### 4. How would you debug a production issue related to Rendering Performance, Layout, and Paint?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Capture a trace before changing code. Identify whether time is spent in network, parse, scripting, style, layout, paint, or React rendering.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Rendering Performance, Layout, and Paint?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Is the initial bundle reasonable? Are images and fonts optimized?
 
 ---
 

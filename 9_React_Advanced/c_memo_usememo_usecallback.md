@@ -221,25 +221,25 @@ function UserList({ users }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain memo, useMemo, and useCallback in a real project?
+### 1. When should you use `React.memo`, `useMemo`, or `useCallback`?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Use them when measurement or component structure shows avoidable expensive work or unnecessary child renders. They are optimization tools, not default styling. First make the render correct and simple.
 
-### 2. What happens internally when memo, useMemo, and useCallback is involved?
+### 2. Why can memoization make code worse?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+It adds dependency maintenance, comparison overhead, stale closure risk, and cognitive load. If the calculation is cheap or the component always re-renders for other reasons, memoization may add cost without benefit.
 
-### 3. How do you debug issues related to memo, useMemo, and useCallback?
+### 3. Why does a memoized child still re-render when passed an inline object?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+An inline object creates a new reference every render, so shallow comparison sees the prop as changed. Move stable objects outside render, derive them with `useMemo` when needed, or redesign the child API.
 
-### 4. What is the biggest production risk with memo, useMemo, and useCallback?
+### 4. How do you find the real cause of excessive React renders?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use React DevTools Profiler, check which props changed, inspect parent state ownership, and verify whether the slow part is rendering, expensive calculation, layout, or network work. Then optimize the bottleneck.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What memoization issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Memo everywhere without measurement, missing dependencies, using `useCallback` only to silence lint, unstable objects passed to memoized children, and custom comparison functions that ignore important props.
 
 ---
 

@@ -119,25 +119,25 @@ socket.addEventListener("message", (event) => {
 
 # Interview Questions with Answers
 
-### 1. How would you explain WebSockets, SSE, and Realtime UI in a real project?
+### 1. When would you choose WebSockets over Server-Sent Events?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+Use WebSockets when the client and server both need to send frequent messages, such as collaboration, chat, or multiplayer-style interaction. Use SSE when the server mainly pushes updates to the browser over a simpler one-way stream.
 
-### 2. What happens internally when WebSockets, SSE, and Realtime UI is involved?
+### 2. What should a realtime UI show when the connection drops?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+Show connection state, preserve usable existing data, retry with backoff, and reconcile missed updates after reconnect. Avoid silently pretending the UI is live when it is not.
 
-### 3. How do you debug issues related to WebSockets, SSE, and Realtime UI?
+### 3. How do you avoid duplicate realtime messages?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+Use stable message ids, sequence numbers, timestamps, or server versions. The client should make message handling idempotent because reconnects and retries can deliver repeated data.
 
-### 4. What is the biggest production risk with WebSockets, SSE, and Realtime UI?
+### 4. What problems happen when realtime state and fetched state disagree?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+The UI can flicker, show stale counts, duplicate items, or overwrite optimistic updates. Decide which source is authoritative and define a reconciliation strategy for initial load, updates, reconnect, and refetch.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What realtime code review issues do you look for?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Missing cleanup, no heartbeat or reconnect policy, unbounded message queues, duplicate subscriptions, no backoff, no auth-refresh handling, and UI states that do not explain disconnected or syncing behavior.
 
 ---
 

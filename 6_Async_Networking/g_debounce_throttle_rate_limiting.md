@@ -129,25 +129,25 @@ input.addEventListener("input", (event) => {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Debounce, Throttle, Rate Limiting, and Queues in a real project?
+### 1. What is the difference between debounce and throttle?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+Debounce waits until events stop for a period before running work. Throttle runs at most once per interval while events continue. Search input usually wants debounce; scroll progress or resize tracking often wants throttle.
 
-### 2. What happens internally when Debounce, Throttle, Rate Limiting, and Queues is involved?
+### 2. What are leading and trailing debounce calls?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+A leading call runs immediately at the start of the burst. A trailing call runs after the quiet period with the latest value. Autocomplete often uses trailing behavior; instant UI feedback may use leading plus trailing.
 
-### 3. How do you debug issues related to Debounce, Throttle, Rate Limiting, and Queues?
+### 3. How do debounce and cancellation work together in search?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+Debounce reduces how many searches start. Cancellation or request ids prevent older searches from updating the UI after a newer query has started. You usually need both for a polished search experience.
 
-### 4. What is the biggest production risk with Debounce, Throttle, Rate Limiting, and Queues?
+### 4. When do you need a queue instead of simple throttling?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use a queue when every job must eventually run but concurrency must be controlled, such as uploads or background sync. Throttling is better when repeated events can be sampled or skipped.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What debounce/throttle bugs do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Timers not cleared, handlers recreated so debouncing does not work, stale closures, lost final updates, no cancellation for in-flight work, and no tests with rapid repeated events.
 
 ---
 

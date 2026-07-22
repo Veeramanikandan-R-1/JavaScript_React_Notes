@@ -121,25 +121,25 @@ async function loadUser(id) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Error Handling and Debugging in a real project?
+### 1. How do you decide whether to catch an error locally or let it bubble up?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Catch locally when the component can recover, show a specific message, retry, or provide fallback UI. Let it bubble when a higher boundary owns the failure experience, logging, or navigation-level recovery.
 
-### 2. What happens internally when Error Handling and Debugging is involved?
+### 2. What should a good frontend error message include?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+For users, it should explain what happened in plain language and what they can do next. For developers, logs should include context such as request id, route, user action, feature flag, browser, and original stack through source maps.
 
-### 3. How do you debug issues related to Error Handling and Debugging?
+### 3. Why is swallowing errors in `catch` dangerous?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+It hides failures from users, monitoring, and tests. If code catches an error, it should either recover deliberately, transform and rethrow it, or report it with enough context to debug.
 
-### 4. What is the biggest production risk with Error Handling and Debugging?
+### 4. How do you debug a minified production stack trace?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use source maps in the error-monitoring tool or browser, map the release to the exact deployed commit, reproduce with matching environment flags, and inspect the async boundary that triggered the error.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What error-handling issues do you flag in pull requests?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Missing failure states, `catch` blocks that only `console.log`, retry loops without limits, exposing internal error text to users, losing original stack/context, and tests that cover only the happy path.
 
 ---
 

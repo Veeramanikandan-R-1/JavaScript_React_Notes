@@ -122,25 +122,25 @@ export default [
 
 # Interview Questions with Answers
 
-### 1. How would you explain ESLint, Prettier, and Code Quality in a real project?
+### 1. What is the difference between ESLint and Prettier?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+ESLint finds code-quality, correctness, and consistency issues using rules. Prettier formats code layout automatically. They overlap less when Prettier owns formatting and ESLint owns suspicious code patterns.
 
-### 2. What happens internally when ESLint, Prettier, and Code Quality is involved?
+### 2. What lint rules are especially valuable in React/frontend projects?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+Rules for hooks dependencies, unused variables, accessibility, imports, no-floating-promises where TypeScript supports it, no accidental globals, and team-specific boundaries such as feature import rules.
 
-### 3. How do you debug issues related to ESLint, Prettier, and Code Quality?
+### 3. When would you disable a lint rule?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Only when the rule is wrong for the specific case and the exception is documented. A broad config disable should require a team decision because it changes the quality bar for everyone.
 
-### 4. What is the biggest production risk with ESLint, Prettier, and Code Quality?
+### 4. How do linting and formatting fit into CI?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+CI should run install, typecheck, lint, tests, and build in a deterministic environment. Formatting can be checked in CI, but most teams also run it pre-commit or in the editor to keep feedback fast.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What code-quality tooling issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Disabling rules to merge faster, adding format-only churn with logic changes, inconsistent local/CI scripts, missing accessibility linting, and custom rules that create noise without catching real problems.
 
 ---
 

@@ -26,33 +26,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Functional Array Methods in a real project?
+### 1. Why does Value matter in Functional Array Methods?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Value means Data your program works with. Use Functional Array Methods to solve the specific problem described in this note.
 
-### 2. What happens internally when Functional Array Methods is involved?
+### 2. How does Binding affect the implementation?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+Binding means A named reference created by `let`, `const`, `var`, function, or import. Understand the browser, runtime, or React behavior behind Functional Array Methods before choosing an implementation.
 
-### 3. How do you debug issues related to Functional Array Methods?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Functional Array Methods?
+### 4. How would you debug a production issue related to Functional Array Methods?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Functional Array Methods?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Functional Array Methods in two minutes.
+1. Explain one realistic production use case for Functional Array Methods in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

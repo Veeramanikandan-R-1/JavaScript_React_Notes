@@ -121,25 +121,25 @@ for (const card of cards) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Rendering, Reflow, Repaint, and Layout Thrashing in a real project?
+### 1. What is the difference between style calculation, layout, paint, and compositing?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+Style calculation resolves CSS rules. Layout computes element geometry. Paint fills pixels for text, backgrounds, borders, shadows, and images. Compositing combines layers into the final frame.
 
-### 2. What happens internally when Rendering, Reflow, Repaint, and Layout Thrashing is involved?
+### 2. What is layout thrashing?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+Layout thrashing happens when code repeatedly writes to the DOM and then reads layout-dependent values, forcing the browser to recalculate layout again and again. Batch reads before writes to avoid it.
 
-### 3. How do you debug issues related to Rendering, Reflow, Repaint, and Layout Thrashing?
+### 3. Which animations are usually cheaper: `transform` or `height`?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+`transform` is usually cheaper because it can often be composited without recalculating layout. Animating `height` changes layout and can affect surrounding elements, so it should be used carefully and measured.
 
-### 4. What is the biggest production risk with Rendering, Reflow, Repaint, and Layout Thrashing?
+### 4. How would you debug a scroll or drag interaction that feels slow?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Record the interaction in DevTools Performance, look for long tasks, forced reflow, heavy paint, and event handlers running too often. Then check whether work can be throttled, moved off the main thread, simplified, or batched.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What rendering-performance issues do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Layout reads inside loops, measuring immediately after writes, expensive animation properties, large repaint areas, unnecessary DOM churn, and scroll handlers doing synchronous work on every event.
 
 ---
 

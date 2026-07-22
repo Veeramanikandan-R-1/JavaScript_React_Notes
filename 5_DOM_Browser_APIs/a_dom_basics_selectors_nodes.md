@@ -162,25 +162,25 @@ function SearchBox() {
 
 # Interview Questions with Answers
 
-### 1. How would you explain DOM Basics, Selectors, and Nodes in a real project?
+### 1. What is the DOM, and why is it not the same as the HTML source?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+The DOM is the browser's live object tree after parsing, correction, script changes, and runtime updates. The HTML source is only the initial text. DevTools shows the current DOM, which may include browser-inserted elements and JavaScript mutations.
 
-### 2. What happens internally when DOM Basics, Selectors, and Nodes is involved?
+### 2. What is the difference between `querySelector` and `getElementById`?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+`getElementById` finds one element by id and is very direct. `querySelector` accepts any CSS selector and returns the first match, which is more flexible but depends on selector correctness and scope.
 
-### 3. How do you debug issues related to DOM Basics, Selectors, and Nodes?
+### 3. Why can repeated DOM reads and writes make an interaction slow?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+Layout-dependent reads like `offsetHeight` can force the browser to calculate layout. If code alternates reads and writes in a loop, it can cause layout thrashing. Batch reads first, then writes.
 
-### 4. What is the biggest production risk with DOM Basics, Selectors, and Nodes?
+### 4. When would you use `DocumentFragment` or template cloning?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use them when preparing multiple DOM nodes before insertion, especially in framework-free code. They reduce repeated live DOM work and keep construction separate from rendering.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What DOM code review issues do you look for?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Unsafe `innerHTML`, broad selectors, missing cleanup, repeated layout reads/writes, custom controls without semantics, and code that fights the framework's ownership of the DOM.
 
 ---
 

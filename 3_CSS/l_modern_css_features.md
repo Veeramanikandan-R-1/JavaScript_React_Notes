@@ -123,25 +123,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Modern CSS Features in a real project?
+### 1. When would you use `:is()`, `:where()`, and `:has()`?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Use `:is()` to group selector alternatives without repeating long selectors. Use `:where()` for grouping when you want zero specificity, often in resets or design-system base styles. Use `:has()` when a parent needs styling based on its children or state.
 
-### 2. What happens internally when Modern CSS Features is involved?
+### 2. What is a practical use case for `:has()` in component styling?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+You can style a form row when it contains an invalid input, a card when it contains a selected checkbox, or a navigation item when it contains the active link. It can remove small JavaScript state plumbing, but you should still check browser support and selector cost.
 
-### 3. How do you debug issues related to Modern CSS Features?
+### 3. Why do logical properties matter in modern frontend work?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Logical properties like `margin-inline`, `padding-block`, and `inset-inline-start` adapt to writing mode and direction. They make components easier to internationalize for RTL languages and vertical writing modes.
 
-### 4. What is the biggest production risk with Modern CSS Features?
+### 4. How do container queries change responsive component design?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Media queries react to viewport size; container queries react to the component's available space. They are useful when the same component appears in a sidebar, grid, modal, and full-width page with different layouts.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you decide whether a modern CSS feature is safe to ship?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check the product's browser support matrix, analytics, graceful fallback path, and test coverage. I also look for whether the feature simplifies the implementation enough to justify using it.
 
 ---
 

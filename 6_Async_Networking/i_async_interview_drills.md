@@ -124,25 +124,25 @@ console.log("end");
 
 # Interview Questions with Answers
 
-### 1. How would you explain Async JavaScript Interview Drills in a real project?
+### 1. What does this output: `setTimeout(() => console.log('timer')); Promise.resolve().then(() => console.log('promise')); console.log('sync');`?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+It logs `sync`, then `promise`, then `timer`. Synchronous code runs first, promise callbacks run in the microtask queue, and timers run later as tasks.
 
-### 2. What happens internally when Async JavaScript Interview Drills is involved?
+### 2. How do you prevent old search results from replacing newer search results?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+Track the latest request id or abort the old request when a new query starts. When a response returns, update state only if it still belongs to the latest query.
 
-### 3. How do you debug issues related to Async JavaScript Interview Drills?
+### 3. Why is `Promise.all(users.map(fetchUser))` risky for a large list?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+It starts every request at once, which can overload the browser or backend and make failures harder to recover from. Use batching or concurrency limits when the list is large.
 
-### 4. What is the biggest production risk with Async JavaScript Interview Drills?
+### 4. How do you explain a timeout versus a retry?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+A timeout sets a maximum wait for one attempt. A retry starts another attempt after a failure or timeout. Retrying should be bounded, often use backoff, and be safe for the operation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What makes an async interview answer senior-level?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+It covers execution order, ownership, cancellation, stale responses, failure states, and user impact. It also says how the behavior would be tested under slow network and out-of-order responses.
 
 ---
 

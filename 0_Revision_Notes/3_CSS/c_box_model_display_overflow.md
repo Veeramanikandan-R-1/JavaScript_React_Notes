@@ -27,33 +27,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Box Model, Display, and Overflow in a real project?
+### 1. Why does Content box matter in Box Model, Display, and Overflow?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Content box means The area where content is drawn. Use Box Model, Display, and Overflow to solve the specific problem described in this note.
 
-### 2. What happens internally when Box Model, Display, and Overflow is involved?
+### 2. How does Padding affect the implementation?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Padding means Space inside the border. Understand the browser, runtime, or React behavior behind Box Model, Display, and Overflow before choosing an implementation.
 
-### 3. How do you debug issues related to Box Model, Display, and Overflow?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Box Model, Display, and Overflow?
+### 4. How would you debug a production issue related to Box Model, Display, and Overflow?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Box Model, Display, and Overflow?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Box Model, Display, and Overflow in two minutes.
+1. Explain one realistic production use case for Box Model, Display, and Overflow in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

@@ -124,25 +124,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Pseudo-classes, Pseudo-elements, and UI States in a real project?
+### 1. What is the difference between `:hover`, `:focus`, `:focus-visible`, and `:active`?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+`:hover` is pointer proximity, `:focus` is keyboard/programmatic focus, `:focus-visible` is focus that should show a visible ring, and `:active` is the pressed state during activation. A solid component handles all of them intentionally.
 
-### 2. What happens internally when Pseudo-classes, Pseudo-elements, and UI States is involved?
+### 2. Why is relying only on hover a problem?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Touch users, keyboard users, and assistive technology users may never trigger hover. Critical information and controls must also be available through focus, click/tap, semantic markup, and visible text where needed.
 
-### 3. How do you debug issues related to Pseudo-classes, Pseudo-elements, and UI States?
+### 3. How would you style invalid form controls without making the UX noisy?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Use native validation states like `:invalid` carefully, usually after interaction or submit. Pair color with text or icons, preserve accessible error messages, and avoid showing errors before the user has had a chance to type.
 
-### 4. What is the biggest production risk with Pseudo-classes, Pseudo-elements, and UI States?
+### 4. What are good uses of `::before` and `::after`, and what is the accessibility caveat?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+They are useful for decorative marks, counters, separators, overlays, and small visual affordances. Do not put essential content only in pseudo-elements because it may not be exposed consistently to assistive technology or translation workflows.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What states should a reusable button or input component support?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Default, hover, active, focus-visible, disabled, loading, error, and high-contrast states. I also check keyboard behavior, hit target size, reduced motion, and whether disabled styling matches actual disabled semantics.
 
 ---
 

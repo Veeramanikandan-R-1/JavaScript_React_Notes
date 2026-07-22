@@ -39,6 +39,36 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 * Putting visible page content in the `head`.
 * Loading non-critical scripts before the document can render useful content.
 
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+This tells the browser **how to display the webpage on mobile devices**.
+
+### Breakdown
+
+* **`width=device-width`**
+
+  * Sets the webpage width to match the device's screen width.
+  * Example: On a phone with a 390px-wide screen, the viewport becomes **390px**.
+
+* **`initial-scale=1`**
+
+  * Sets the initial zoom level to **100% (1:1)** when the page first loads.
+
+### Why is it needed?
+
+Without this tag, mobile browsers may assume a much wider viewport (e.g., around 980px) and shrink the page to fit, making text and buttons appear tiny.
+
+With this tag:
+
+* ✅ Responsive CSS (`@media` queries, Flexbox, Grid) works correctly.
+* ✅ The page fits the device width.
+* ✅ Users see the page at a readable size without automatic zooming.
+
+**In one line:**
+The viewport meta tag makes a webpage **responsive by matching the viewport to the device width and loading it at normal zoom (100%)**.
+
 ---
 
 # 5. Best Practices
@@ -70,6 +100,95 @@ Before going deeper into frameworks or libraries, understand this topic as part 
   </body>
 </html>
 ```
+```html
+<script type="module" src="/main.js"></script>
+```
+
+### Why `type="module"`?
+
+It tells the browser that this JavaScript file is an **ES Module**.
+
+Benefits:
+
+* ✅ Can use `import` and `export`.
+* ✅ Each file has its own scope (variables don't pollute the global scope).
+* ✅ Modules are loaded only once.
+* ✅ They are **automatically deferred** (executed after the HTML is parsed).
+
+Example:
+
+```js
+// main.js
+import { sum } from "./math.js";
+```
+
+---
+
+### Why `defer`?
+
+```html
+<script defer src="main.js"></script>
+```
+
+Without `defer`:
+
+* Browser stops parsing HTML.
+* Downloads and executes the script immediately.
+* Page rendering is delayed.
+
+With `defer`:
+
+* Browser continues parsing HTML.
+* Downloads the script in parallel.
+* Executes it **after the HTML is fully parsed**.
+
+This improves page loading and ensures DOM elements exist before the script runs.
+
+---
+
+### `module` vs `defer`
+
+| `type="module"`                         | `defer`                          |
+| --------------------------------------- | -------------------------------- |
+| Supports `import`/`export`              | Doesn't support modules          |
+| Automatically behaves like `defer`      | Only delays execution            |
+| Used for modern JavaScript applications | Used for normal JavaScript files |
+
+**Rule of thumb:**
+
+* Use **`type="module"`** for modern applications (React, Vue, Vite, etc.).
+* Use **`defer`** for traditional JavaScript files that don't use modules.
+
+is it possible to use both defer and module in same script?
+Yes, it is possible, but **it's unnecessary**.
+
+```html
+<script type="module" defer src="main.js"></script>
+```
+
+This is valid HTML, but `defer` has **no effect** because:
+
+* `type="module"` **already behaves as if `defer` is present**.
+* The browser downloads the module in parallel and executes it after the HTML has been parsed.
+
+So these two are effectively equivalent:
+
+```html
+<script type="module" src="main.js"></script>
+```
+
+```html
+<script type="module" defer src="main.js"></script>
+```
+
+**Recommendation:** Use just:
+
+```html
+<script type="module" src="main.js"></script>
+```
+
+It's cleaner and is the standard practice.
+
 
 ---
 
@@ -105,6 +224,93 @@ React JSX reminders:
 ```
 
 Use `tabindex="0"` rarely to include custom interactive elements in focus order. Avoid positive tabindex values because they create confusing keyboard order.
+
+---
+tab index
+
+`tabindex` controls **whether an element can receive keyboard focus and in what order when the user presses the `Tab` key**.
+
+### Syntax
+
+```html
+<button tabindex="0">Save</button>
+```
+
+### Common values
+
+| Value              | Meaning                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| `0`                | Focusable in the natural tab order (recommended).                                  |
+| `-1`               | Not reachable with `Tab`, but can be focused using JavaScript (`element.focus()`). |
+| `1`, `2`, `3`, ... | Custom tab order (avoid using).                                                    |
+
+### Examples
+
+**1. Natural tab order (Recommended)**
+
+```html
+<input type="text">
+<button tabindex="0">Submit</button>
+```
+
+The browser follows the normal document order.
+
+---
+
+**2. Programmatic focus**
+
+```html
+<div tabindex="-1" id="error">
+  Invalid input
+</div>
+```
+
+```js
+document.getElementById("error").focus();
+```
+
+Useful for moving focus to:
+
+* Error messages
+* Dialogs/Modals
+* Notifications
+
+---
+
+**3. Custom tab order (Avoid)**
+
+```html
+<input tabindex="2">
+<button tabindex="1">Save</button>
+```
+
+Pressing `Tab`:
+
+```
+Save → Input
+```
+
+This can confuse users and becomes hard to maintain.
+
+### Best Practices
+
+* ✅ Use **`tabindex="0"`** to make custom interactive elements keyboard accessible.
+* ✅ Use **`tabindex="-1"`** for elements that should receive focus only via JavaScript.
+* ❌ Avoid positive values (`1`, `2`, `3`, ...). Let the browser handle the natural order.
+
+### When to add `tabindex`
+
+Add it only when an element is **not naturally focusable** but should be.
+
+Example:
+
+```html
+<div tabindex="0" role="button">Click Me</div>
+```
+
+Without `tabindex`, a `<div>` cannot receive keyboard focus. With `tabindex="0"`, users can tab to it.
+
+> **Note:** If an element is already interactive (e.g., `<button>`, `<input>`, `<a href="">`, `<select>`, `<textarea>`), **do not add `tabindex`** unless you have a specific accessibility reason.
 
 ---
 
@@ -156,25 +362,25 @@ Use `tabindex="0"` rarely to include custom interactive elements in focus order.
 
 # Interview Questions with Answers
 
-### 1. How would you explain Document Structure, Doctype, Head, and Body in a real project?
+### 1. What problem does `<!doctype html>` solve?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+It tells the browser to use standards mode instead of quirks mode. Without it, browsers may emulate older layout behavior, which can create strange CSS sizing and alignment bugs. In interviews I usually connect this to production debugging: a missing doctype can make correct CSS behave incorrectly.
 
-### 2. What happens internally when Document Structure, Doctype, Head, and Body is involved?
+### 2. Why should every page set `<html lang="en">` or the correct language?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+The `lang` attribute helps screen readers choose pronunciation, helps browsers and translation tools understand the page, and gives search engines useful context. It is a small line with real accessibility impact.
 
-### 3. How do you debug issues related to Document Structure, Doctype, Head, and Body?
+### 3. Why is the viewport meta tag important on mobile?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+Without it, mobile browsers may use a wide layout viewport and scale the page down, making text and controls tiny. With `width=device-width, initial-scale=1`, responsive CSS behaves against the actual device width.
 
-### 4. What is the biggest production risk with Document Structure, Doctype, Head, and Body?
+### 4. Where should scripts go, and when would you use `defer` or `type="module"`?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Critical metadata belongs in `head`; visible content belongs in `body`. For normal scripts, `defer` downloads in parallel and runs after parsing. ES modules already defer by default, so `<script type="module" src="/main.js"></script>` is the normal modern choice.
 
-### 5. What should a senior engineer look for in code review?
+### 5. A page has visible text inside `head`. What happens?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+That is invalid document structure. Browsers may move or ignore nodes while repairing the DOM, and the result can differ from what the developer intended. I would fix the structure instead of relying on browser recovery.
 
 ---
 

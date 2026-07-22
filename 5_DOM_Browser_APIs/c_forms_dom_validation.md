@@ -157,25 +157,25 @@ Server-side validation is still required.
 
 # Interview Questions with Answers
 
-### 1. How would you explain DOM Forms and Validation in a real project?
+### 1. Why should form fields use real labels instead of placeholders only?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+Labels provide a persistent accessible name, increase the clickable target, and remain visible after typing. Placeholders are hints, not labels, and can disappear exactly when the user needs context.
 
-### 2. What happens internally when DOM Forms and Validation is involved?
+### 2. How does native constraint validation help frontend apps?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+Attributes like `required`, `type`, `min`, `max`, and `pattern` give baseline validation, keyboard hints, and browser semantics. Custom validation can build on top of that, but server validation is still required.
 
-### 3. How do you debug issues related to DOM Forms and Validation?
+### 3. How do you make validation errors accessible?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+Associate the error text with the input using `aria-describedby`, update invalid state thoughtfully, and move focus only when it helps the user recover. Error messages should be specific and not rely on color alone.
 
-### 4. What is the biggest production risk with DOM Forms and Validation?
+### 4. What can go wrong with custom select or date-picker controls?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+They can lose keyboard behavior, accessible names, focus management, mobile input support, form submission semantics, and validation integration. A senior answer starts by asking whether native controls can meet the requirement.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What form bugs do you look for during review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Missing labels, unclear required/optional state, errors not connected to fields, submit buttons disabled without recovery, client-only validation, and form state that breaks browser autofill or password managers.
 
 ---
 

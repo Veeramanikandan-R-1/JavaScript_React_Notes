@@ -132,6 +132,53 @@ File upload:
   <option value="Hyderabad">
 </datalist>
 ```
+---
+Notes:
+
+You mean **`<select>` vs `<datalist>`**.
+
+| `<select>`                                       | `<datalist>`                                |
+| ------------------------------------------------ | ------------------------------------------- |
+| User can **only choose** from the given options. | User can **choose or type a custom value**. |
+| Dropdown is mandatory.                           | Suggestions are optional.                   |
+| Cannot enter new values.                         | Can enter values not in the list.           |
+| Better browser support.                          | Slightly less consistent across browsers.   |
+
+### `<select>`
+
+```html
+<select>
+  <option>India</option>
+  <option>USA</option>
+</select>
+```
+
+* User **must** select either **India** or **USA**.
+
+---
+
+### `<datalist>`
+
+```html
+<input list="countries">
+
+<datalist id="countries">
+  <option value="India">
+  <option value="USA">
+</datalist>
+```
+
+* User gets suggestions.
+* They can choose **India/USA** **or type** **Japan**, **France**, etc.
+
+### When to use
+
+* ✅ **`<select>`** → Fixed set of values (Gender, Country, Payment Method).
+* ✅ **`<datalist>`** → Autocomplete suggestions (City names, Skills, Product search).
+
+### Interview answer (1 line)
+
+* **`<select>`** restricts the user to predefined options, whereas **`<datalist>`** provides autocomplete suggestions while still allowing custom input.
 
 ---
 
@@ -184,25 +231,25 @@ File upload:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Forms, Inputs, and Validation in a real project?
+### 1. Why should inputs have real labels instead of only placeholders?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+A placeholder is a hint, not a label. It disappears while typing, may have poor contrast, and does not replace a programmatic label for assistive tech. I use `<label for="email">Email</label>` or an equivalent accessible label.
 
-### 2. What happens internally when Forms, Inputs, and Validation is involved?
+### 2. What is the difference between `disabled` and `readonly`?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+`disabled` controls cannot be focused, changed, or submitted with the form. `readonly` controls can usually be focused and submitted, but not edited. This matters when displaying server-provided values that still need to be sent.
 
-### 3. How do you debug issues related to Forms, Inputs, and Validation?
+### 3. How do native validation and custom validation work together?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+Native validation gives useful browser behavior through `required`, `type`, `min`, `max`, `pattern`, and constraint APIs. Custom validation is useful for business rules and better messages. I still keep accessible error text connected to the field with `aria-describedby` when needed.
 
-### 4. What is the biggest production risk with Forms, Inputs, and Validation?
+### 4. How would you collect form values without controlling every input in React?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+For simple forms, I can use `FormData` on submit and read values from `event.currentTarget`. Controlled inputs are best when the UI must react to every keystroke, but uncontrolled inputs can reduce complexity for straightforward submit flows.
 
-### 5. What should a senior engineer look for in code review?
+### 5. A form shows an error message, but screen-reader users do not hear it. What do you check?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I check whether the error is associated with the input using `aria-describedby`, whether invalid state is exposed with `aria-invalid`, and whether a submit-level error needs `role="alert"` or focus management. I also check that the message is specific and visible near the field.
 
 ---
 

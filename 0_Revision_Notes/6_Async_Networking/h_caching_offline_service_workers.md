@@ -26,33 +26,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Caching, Offline Basics, and Service Workers in a real project?
+### 1. Why does Cache key matter in Caching, Offline Basics, and Service Workers?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+Cache key means The identity used to store and retrieve cached data. In interviews, connect it to Caching, Offline Basics, and Service Workers by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Caching, Offline Basics, and Service Workers is involved?
+### 2. How does Stale data affect the implementation?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+Stale data means Cached content that may no longer match the server. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Caching, Offline Basics, and Service Workers?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Caching, Offline Basics, and Service Workers?
+### 4. How would you debug a production issue related to Caching, Offline Basics, and Service Workers?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Caching, Offline Basics, and Service Workers?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Caching, Offline Basics, and Service Workers in two minutes.
+1. Explain one realistic production use case for Caching, Offline Basics, and Service Workers in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

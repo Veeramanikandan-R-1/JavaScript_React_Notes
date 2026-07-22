@@ -190,25 +190,25 @@ function renderStatus(status) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Objects, Arrays, Destructuring, and Spread in a real project?
+### 1. What is the difference between shallow copy and deep copy?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+A shallow copy copies the top-level object or array but keeps nested objects by reference. A deep copy duplicates nested data too. Spread syntax is shallow, which is a common source of state mutation bugs.
 
-### 2. What happens internally when Objects, Arrays, Destructuring, and Spread is involved?
+### 2. Why can `{ ...user }` still allow accidental mutation?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+Nested objects are still shared. If `user.address` is an object, mutating `copy.address.city` also mutates `user.address.city`. In UI state updates, copy each level that changes or use a helper that preserves immutability.
 
-### 3. How do you debug issues related to Objects, Arrays, Destructuring, and Spread?
+### 3. When would you avoid destructuring?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Avoid it when it hides where values come from, creates very long parameter lists, renames too many properties, or makes optional data harder to read. Clear code beats clever destructuring in shared frontend code.
 
-### 4. What is the biggest production risk with Objects, Arrays, Destructuring, and Spread?
+### 4. How do object identity bugs affect React rendering?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+If you mutate an existing object, React may not see a changed reference and may skip updates. If you recreate objects unnecessarily, memoized children may re-render. Debug by checking reference equality and where objects are created.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What array update mistakes do you watch for?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Using mutating methods like `sort`, `reverse`, `splice`, or `push` directly on state, using array indexes as stable identities, and doing expensive transformations repeatedly during render without measurement.
 
 ---
 

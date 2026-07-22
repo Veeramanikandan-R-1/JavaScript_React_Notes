@@ -266,25 +266,25 @@ Limitations:
 
 # Interview Questions with Answers
 
-### 1. How would you explain JSX, Components, and Props in a real project?
+### 1. What is JSX actually compiled into?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+JSX is syntax that tooling transforms into JavaScript calls that describe React elements. It is not HTML, which is why attributes, expressions, casing, and component names follow JavaScript/React rules.
 
-### 2. What happens internally when JSX, Components, and Props is involved?
+### 2. What makes a good component prop API?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+It is explicit, minimal, hard to misuse, and shaped around product behavior rather than internal implementation. Good props make states and variants clear without forcing every parent to know component internals.
 
-### 3. How do you debug issues related to JSX, Components, and Props?
+### 3. When is prop drilling acceptable?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+It is acceptable for a few levels when the data is local to that branch and the flow is clear. Context or a store is better when many distant components need the same value or prop chains are hiding ownership.
 
-### 4. What is the biggest production risk with JSX, Components, and Props?
+### 4. Why should components avoid mutating props?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Props are owned by the parent. Mutating them creates hidden side effects, breaks React's data flow, and can cause skipped renders or confusing state changes. Components should request changes through callbacks.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What prop/component issues do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Boolean prop explosions, unclear children usage, unstable callback contracts, missing accessibility props, duplicated component variants, and props that expose internal styling details instead of supported behavior.
 
 ---
 

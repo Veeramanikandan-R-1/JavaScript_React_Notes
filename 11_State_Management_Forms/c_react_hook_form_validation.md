@@ -161,25 +161,25 @@ Use the form library already chosen by the project. Do not mix Formik, React Hoo
 
 # Interview Questions with Answers
 
-### 1. How would you explain React Hook Form and Validation in a real project?
+### 1. Why does Registered field matter in React Hook Form and Validation?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Registered field means An input connected to the form controller. In interviews, connect it to React Hook Form and Validation by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when React Hook Form and Validation is involved?
+### 2. How does Resolver affect the implementation?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Resolver means A validation bridge between form data and a schema. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to React Hook Form and Validation?
+### 3. What mistake should you avoid around mutating state directly?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Avoid mutating state directly. Keep render pure.
 
-### 4. What is the biggest production risk with React Hook Form and Validation?
+### 4. How would you debug a production issue related to React Hook Form and Validation?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use React DevTools to inspect props, state, owners, and render causes. Check keys, effect dependencies, stale closures, and state mutation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for React Hook Form and Validation?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Is state owned by the smallest sensible component? Are effects necessary and cleaned up?
 
 ---
 

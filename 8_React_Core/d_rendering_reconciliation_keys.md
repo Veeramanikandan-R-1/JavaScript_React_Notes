@@ -169,25 +169,25 @@ React Fiber is React's internal reconciliation architecture introduced in React 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Rendering, Reconciliation, and Keys in a real project?
+### 1. What does React reconciliation do?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+React compares the previous and next element trees to decide what needs to change in the host environment. It uses component type and keys to preserve or replace component instances and their state.
 
-### 2. What happens internally when Rendering, Reconciliation, and Keys is involved?
+### 2. Why are array indexes risky as keys?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Indexes break when items are inserted, removed, filtered, or reordered because React may preserve state for the wrong item. This shows up as wrong input values, broken animations, or selected state moving to another row.
 
-### 3. How do you debug issues related to Rendering, Reconciliation, and Keys?
+### 3. When is using an index as a key acceptable?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+It is acceptable for a static list that never reorders, filters, inserts, or deletes and has no item-local state. Even then, a stable id is usually clearer if one exists.
 
-### 4. What is the biggest production risk with Rendering, Reconciliation, and Keys?
+### 4. Why can changing a component's key reset its state?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+A different key tells React it is a different component instance, so React unmounts the old one and mounts a new one. This can be useful for resetting forms, but accidental key changes cause lost state.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What rendering/key issues do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Unstable keys from indexes or random values, state stored in list rows without stable identity, expensive work during render, accidental remounts, and components relying on effects to fix data that could be derived during render.
 
 ---
 

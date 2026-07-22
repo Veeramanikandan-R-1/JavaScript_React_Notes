@@ -158,25 +158,25 @@ Do not rely only on disabling a button. Users can double-click, refresh, retry, 
 
 # Interview Questions with Answers
 
-### 1. How would you explain AbortController, Timeouts, and Retries in a real project?
+### 1. What does `AbortController` actually cancel?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+It signals cancellation to APIs that support `AbortSignal`, such as `fetch`. It does not magically stop every promise or undo already completed work; your code must pass the signal and handle the abort error intentionally.
 
-### 2. What happens internally when AbortController, Timeouts, and Retries is involved?
+### 2. How would you implement a request timeout with `fetch`?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+Create an `AbortController`, start a timer that calls `abort()`, pass `signal` to `fetch`, and clear the timer in `finally`. The UI should distinguish timeout from validation, auth, server, and offline errors when that helps recovery.
 
-### 3. How do you debug issues related to AbortController, Timeouts, and Retries?
+### 3. When should a frontend retry a request?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+Retry transient failures, usually with backoff and a limit. Be careful with non-idempotent actions such as payments, orders, or form submissions unless the backend supports idempotency keys.
 
-### 4. What is the biggest production risk with AbortController, Timeouts, and Retries?
+### 4. How do you avoid stale responses overwriting newer UI state?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Abort old requests when possible, or track a request id/version and ignore responses that are no longer current. This is common in search, filters, route changes, and dependent dropdowns.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What retry/cancellation bugs do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Infinite retries, retrying user mistakes, duplicate writes, not clearing timeout timers, treating abort as a user-facing error, and state updates after the screen no longer owns the request.
 
 ---
 

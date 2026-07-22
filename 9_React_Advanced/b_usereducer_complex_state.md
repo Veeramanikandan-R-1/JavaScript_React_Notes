@@ -133,25 +133,25 @@ export default function OrdersPage({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain useReducer and Complex State in a real project?
+### 1. When would you choose `useReducer` over multiple `useState` calls?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Use `useReducer` when state transitions are related, complex, or easier to understand as named events. It works well for wizards, forms, async state machines, undo/redo, and flows with several coordinated fields.
 
-### 2. What happens internally when useReducer and Complex State is involved?
+### 2. What makes a reducer good?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+A good reducer is pure, returns new state without mutation, uses meaningful action names, handles unknown actions deliberately, and keeps side effects outside the reducer.
 
-### 3. How do you debug issues related to useReducer and Complex State?
+### 3. Why should actions describe events instead of setters?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+An action like `shippingAddressUpdated` explains what happened and lets the reducer own the transition. Setter-style actions can scatter business rules across event handlers and make complex flows harder to audit.
 
-### 4. What is the biggest production risk with useReducer and Complex State?
+### 4. How do you test reducer logic?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Test the reducer as a pure function with current state, action, and expected next state. Include invalid actions, edge cases, reset behavior, and transitions that must preserve parts of state.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What reducer issues do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Mutation, side effects inside reducers, action names that hide intent, duplicated derived state, too many unrelated concerns in one reducer, and missing tests for important transitions.
 
 ---
 

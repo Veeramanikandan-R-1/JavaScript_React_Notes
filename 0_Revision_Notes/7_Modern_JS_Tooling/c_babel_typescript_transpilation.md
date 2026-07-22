@@ -55,33 +55,33 @@ type ApiState<T> =
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Babel, TypeScript, and Transpilation in a real project?
+### 1. Why does Transpilation matter in Babel, TypeScript, and Transpilation?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+Transpilation means Converting source syntax into code the target environment can run. In interviews, connect it to Babel, TypeScript, and Transpilation by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Babel, TypeScript, and Transpilation is involved?
+### 2. How does Type checking affect the implementation?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+Type checking means Validating TypeScript types without changing runtime behavior. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Babel, TypeScript, and Transpilation?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Babel, TypeScript, and Transpilation?
+### 4. How would you debug a production issue related to Babel, TypeScript, and Transpilation?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Babel, TypeScript, and Transpilation?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Babel, TypeScript, and Transpilation in two minutes.
+1. Explain one realistic production use case for Babel, TypeScript, and Transpilation in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

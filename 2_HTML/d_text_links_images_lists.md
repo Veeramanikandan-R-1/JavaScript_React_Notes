@@ -1,7 +1,5 @@
 # Text, Links, Images, and Lists (Senior Frontend Engineer Perspective)
 
-Before going deeper into frameworks or libraries, understand this topic as part of real frontend engineering: content primitives that carry most real web pages.
-
 ---
 
 # 1. Fundamentals
@@ -164,28 +162,27 @@ Interview answer: `srcset` is mainly for resolution choice; `picture` is for cho
 | Lists | `ul`, `ol`, and `dl` communicate grouped content. |
 
 ---
-
 # Interview Questions with Answers
 
-### 1. How would you explain Text, Links, Images, and Lists in a real project?
+### 1. Can heading levels be skipped because the design makes the text look smaller?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+No. Heading levels describe document outline, not visual size. If a design needs a smaller visual style, use CSS while keeping heading order meaningful. I check this because screen-reader users often navigate by headings.
 
-### 2. What happens internally when Text, Links, Images, and Lists is involved?
+### 2. What is the difference between an empty `alt=""` and missing `alt`?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+Empty `alt=""` intentionally marks the image as decorative, so assistive tech can skip it. Missing `alt` is usually a bug; the screen reader may announce the file name or URL. The right answer depends on image purpose in context.
 
-### 3. How do you debug issues related to Text, Links, Images, and Lists?
+### 3. When should a link open in a new tab?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+Rarely, and only when it is clearly useful, such as external documentation or preserving a long-running workflow. If it opens a new tab, I prefer making that clear to users. I avoid forcing new tabs for normal navigation because users can choose that themselves.
 
-### 4. What is the biggest production risk with Text, Links, Images, and Lists?
+### 4. When would you use `ul`, `ol`, and `dl`?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use `ul` for unordered groups, `ol` where order matters, and `dl` for name/value or term/description relationships. Interviewers ask this because lists are often styled away visually, but the semantics still help assistive tech and maintainability.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you make image-heavy content perform well without breaking UX?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I use correct dimensions to avoid layout shift, responsive image sources where needed, lazy loading for below-the-fold images, meaningful `alt`, and modern formats when supported. I avoid lazy-loading the LCP image because that can slow the first meaningful view.
 
 ---
 

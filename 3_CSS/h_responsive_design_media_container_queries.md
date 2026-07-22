@@ -190,25 +190,25 @@ Visual note from `htmlCss.docx`:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Responsive Design, Media Queries, and Container Queries in a real project?
+### 1. How do you choose breakpoints?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+I choose breakpoints where the content or layout breaks, not because of a specific device name. I start fluid, test real content, zoom, and narrow widths, then add breakpoints only when the current layout stops working well.
 
-### 2. What happens internally when Responsive Design, Media Queries, and Container Queries is involved?
+### 2. When are container queries better than media queries?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Container queries are better for reusable components whose layout depends on their parent size, not the viewport. A card in a sidebar and the same card in a wide main area may need different layouts on the same screen width.
 
-### 3. How do you debug issues related to Responsive Design, Media Queries, and Container Queries?
+### 3. What does mobile-first CSS mean in practice?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Base styles support the simplest/narrowest layout first, then media queries enhance for more space. It usually reduces overrides and makes the default experience more resilient on constrained devices.
 
-### 4. What is the biggest production risk with Responsive Design, Media Queries, and Container Queries?
+### 4. What responsive issues do you test beyond viewport width?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+I test zoom, text scaling, long translated strings, touch versus mouse, reduced motion, portrait/landscape, slow networks, high-density images, and keyboard navigation. Responsive design is more than making the browser narrow.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do responsive images fit into responsive design?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+The layout can be responsive but still waste bandwidth if images are oversized. I check `srcset`, `sizes`, art direction with `picture` when needed, width/height or aspect ratio to prevent CLS, and whether the LCP image is prioritized correctly.
 
 ---
 

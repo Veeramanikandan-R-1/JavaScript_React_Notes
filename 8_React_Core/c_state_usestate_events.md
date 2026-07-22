@@ -197,25 +197,25 @@ Arrow class fields avoid manual binding because they capture lexical `this`.
 
 # Interview Questions with Answers
 
-### 1. How would you explain State, useState, and Events in a real project?
+### 1. Why should React state be treated as immutable?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+React uses reference changes to know when state changed and to support predictable rendering. Mutating the existing object or array can cause skipped renders, stale UI, and bugs that are hard to trace.
 
-### 2. What happens internally when State, useState, and Events is involved?
+### 2. When should you use the functional form of `setState`?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Use it when the next state depends on the previous state, especially with repeated clicks, timers, async callbacks, or batched updates: `setCount((count) => count + 1)`.
 
-### 3. How do you debug issues related to State, useState, and Events?
+### 3. Why might `console.log(state)` after `setState` show the old value?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+State updates are scheduled; they do not synchronously replace the variable in the current render. The logged value belongs to the current closure. Inspect the next render or use an effect when you need to observe committed state.
 
-### 4. What is the biggest production risk with State, useState, and Events?
+### 4. How do you decide whether something should be state or a derived value?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+If it can be calculated from props or existing state during render, derive it instead of storing another copy. Extra state creates synchronization bugs, especially with filters, totals, selected labels, and validation summaries.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What state/event bugs do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Direct mutation, duplicated derived state, stale closures in handlers, state owned too high or too low, event handlers doing too much work, and updates after async ownership has changed.
 
 ---
 

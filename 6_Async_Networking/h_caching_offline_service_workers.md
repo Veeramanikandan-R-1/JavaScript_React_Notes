@@ -129,25 +129,25 @@ async function getUser(id) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Caching, Offline Basics, and Service Workers in a real project?
+### 1. What makes a good cache key?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+A good cache key includes the data identity and any inputs that change the response, such as user, locale, filters, pagination, auth scope, and version. Missing inputs create wrong-data bugs.
 
-### 2. What happens internally when Caching, Offline Basics, and Service Workers is involved?
+### 2. What is the difference between cache-first and network-first strategies?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+Cache-first prioritizes speed/offline support and falls back to the network when missing. Network-first prioritizes freshness and falls back to cache on failure. The right strategy depends on whether stale data is acceptable.
 
-### 3. How do you debug issues related to Caching, Offline Basics, and Service Workers?
+### 3. What can go wrong with service worker updates?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+Users can keep running an old service worker, cached assets can mismatch the new app shell, and update prompts can be disruptive. Versioning, cache cleanup, and a deliberate activation strategy matter.
 
-### 4. What is the biggest production risk with Caching, Offline Basics, and Service Workers?
+### 4. How would you debug a user seeing an old version of the app?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Check DevTools Application for service workers and Cache Storage, inspect response headers, confirm asset hashes, unregister the service worker to isolate the issue, and verify CDN/browser cache behavior.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What caching issues do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Wrong cache keys, no invalidation path, caching user-specific data too broadly, storing sensitive responses, no offline fallback state, and service worker changes without an update/rollback plan.
 
 ---
 

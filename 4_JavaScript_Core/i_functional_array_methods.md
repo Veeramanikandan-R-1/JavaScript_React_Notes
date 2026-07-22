@@ -121,25 +121,25 @@ const paidTotal = orders
 
 # Interview Questions with Answers
 
-### 1. How would you explain Functional Array Methods in a real project?
+### 1. When would you use `map`, `filter`, `reduce`, `some`, and `find`?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Use `map` to transform every item, `filter` to keep some items, `reduce` to accumulate, `some` to test whether any item matches, and `find` to return the first matching item. Choose the method that states the intent most clearly.
 
-### 2. What happens internally when Functional Array Methods is involved?
+### 2. Why can `reduce` make code harder to review?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+`reduce` can hide multiple operations in one callback, especially when accumulating objects or doing conditional branching. It is great for clear aggregation, but for complex transformations a loop or named helper can be easier to debug.
 
-### 3. How do you debug issues related to Functional Array Methods?
+### 3. What is the difference between `forEach` and `map`?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+`map` returns a new array of transformed values. `forEach` runs side effects and returns `undefined`. Using `map` only for side effects is a code smell because it communicates the wrong intent.
 
-### 4. What is the biggest production risk with Functional Array Methods?
+### 4. How do array methods affect rendering performance?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Repeated filtering, sorting, grouping, or mapping during every render can become expensive with large lists. Measure first, then consider memoization, precomputed indexes, pagination, virtualization, or moving work closer to the data layer.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What bugs do you look for in array transformations?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Mutating the original array with `sort` or `reverse`, missing return statements inside callbacks, unstable keys derived from indexes, incorrect handling of empty arrays, and transformations that assume API fields are always present.
 
 ---
 

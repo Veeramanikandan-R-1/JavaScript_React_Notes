@@ -172,25 +172,25 @@ Practical rule: use `useMemo` for expensive derived values. Use `useEffect` for 
 
 # Interview Questions with Answers
 
-### 1. How would you explain useEffect and Side Effects in a real project?
+### 1. When do you actually need `useEffect`?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Use it to synchronize React with something outside render: network requests, subscriptions, timers, imperative DOM APIs, browser storage, or third-party widgets. Do not use it just to calculate derived data from props/state.
 
-### 2. What happens internally when useEffect and Side Effects is involved?
+### 2. Why is an incorrect dependency array dangerous?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Missing dependencies create stale closures. Extra unstable dependencies can rerun effects too often. The correct dependencies describe the values the effect reads from render scope.
 
-### 3. How do you debug issues related to useEffect and Side Effects?
+### 3. What should an effect cleanup do?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+It should undo subscriptions, timers, event listeners, observers, in-flight async ownership, or imperative library work started by the effect. Cleanup should make reruns and unmounts safe.
 
-### 4. What is the biggest production risk with useEffect and Side Effects?
+### 4. How do you avoid race conditions in data fetching effects?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Abort the old request or track whether the response still belongs to the latest render. Also represent loading, error, empty, cancelled, and stale states so old responses cannot silently overwrite newer UI.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What effect issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Effects used for derived state, missing cleanup, disabled dependency linting, async functions defined carelessly, event listeners that re-register repeatedly, and effects that combine unrelated responsibilities.
 
 ---
 

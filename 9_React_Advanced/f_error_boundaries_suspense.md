@@ -192,25 +192,25 @@ Code splitting breaks the app bundle into chunks so non-critical routes or heavy
 
 # Interview Questions with Answers
 
-### 1. How would you explain Error Boundaries and Suspense in a real project?
+### 1. What do React error boundaries catch?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+They catch errors during rendering, lifecycle methods, and constructors below the boundary. They do not catch errors in event handlers, async callbacks, server code, or errors thrown inside the boundary itself.
 
-### 2. What happens internally when Error Boundaries and Suspense is involved?
+### 2. Where should error boundaries be placed?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Place them around areas that can fail independently, such as routes, panels, widgets, or data-heavy feature boundaries. One app-level boundary prevents a blank screen, but smaller boundaries improve recovery.
 
-### 3. How do you debug issues related to Error Boundaries and Suspense?
+### 3. What makes a good fallback UI?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+It explains what failed, preserves surrounding context, offers a retry or recovery action when possible, and reports useful diagnostics. A fallback should not create a confusing layout shift or trap keyboard users.
 
-### 4. What is the biggest production risk with Error Boundaries and Suspense?
+### 4. How is Suspense different from an error boundary?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Suspense handles waiting/loading for supported async rendering patterns and shows a loading fallback. Error boundaries handle rendering failures and show an error fallback. Production screens often need both.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What error-boundary/Suspense issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+A single vague fallback for every failure, no retry path, swallowed errors, loading spinners with no layout stability, boundaries placed too high, and no logging tied to the failing route/component.
 
 ---
 

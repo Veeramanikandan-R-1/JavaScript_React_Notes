@@ -133,25 +133,25 @@ export default function OrdersPage({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain React Introduction in a real project?
+### 1. What problem does React solve in a frontend application?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+React helps describe UI as a function of state and props, split the interface into reusable components, and update the DOM predictably when data changes. The main value is not JSX; it is the rendering model and component composition.
 
-### 2. What happens internally when React Introduction is involved?
+### 2. What does “render should be pure” mean in React?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+A component should calculate UI from props, state, and context without causing side effects during render. Network calls, subscriptions, DOM mutation, timers, and logging that affects behavior belong outside render, usually in effects or event handlers.
 
-### 3. How do you debug issues related to React Introduction?
+### 3. How do you decide where state should live?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Put state in the smallest component that owns the interaction. Lift it when siblings need coordination, use context for scoped shared values, use server-state tools for remote cache, and use global client state only when many unrelated areas truly need it.
 
-### 4. What is the biggest production risk with React Introduction?
+### 4. What is the difference between React state and server state?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+React state is client-owned UI/application state. Server state is remote data with loading, caching, refetching, invalidation, and stale-data concerns. Treating server data as simple local state often creates duplicated fetches and inconsistent screens.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What do you inspect first when reviewing a React component?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+State ownership, render purity, prop contract, accessibility, effect necessity/cleanup, error/loading/empty states, and whether the component follows existing patterns before adding new abstraction.
 
 ---
 

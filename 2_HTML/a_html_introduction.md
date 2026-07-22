@@ -128,25 +128,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain HTML Introduction in a real project?
+### 1. Why do interviewers care about semantic HTML when CSS can make anything look right?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+Because HTML is not only visual structure. The element choice affects keyboard behavior, form behavior, accessibility APIs, browser defaults, SEO, and maintainability. A `button` already supports focus and keyboard activation; a clickable `div` has to rebuild all of that manually and is easy to get wrong.
 
-### 2. What happens internally when HTML Introduction is involved?
+### 2. What is the practical difference between a link and a button?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+A link navigates to a URL or page location. A button performs an action on the current page, such as submit, save, open, close, or toggle. If an interviewer gives me a clickable UI, I decide by user intent first, not by how the control looks.
 
-### 3. How do you debug issues related to HTML Introduction?
+### 3. What happens if the browser receives invalid nested HTML?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+The HTML parser is forgiving and will repair the DOM using parser rules, but the final DOM may not match what the developer expected. That can break CSS selectors, event handling, accessibility relationships, and hydration in React apps.
 
-### 4. What is the biggest production risk with HTML Introduction?
+### 4. How do you decide good `alt` text for an image?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+If the image conveys information, the `alt` should describe the information in context. If the image is decorative, use empty `alt=""` so assistive tech can skip it. I do not repeat nearby text, and for complex charts I provide a nearby text summary or table.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What do you check before approving basic HTML in a React component?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I check heading order, labels, form names, link/button purpose, `alt` text, valid nesting, language/title metadata when page-level, and whether the component still works with keyboard and real content. JSX still becomes HTML, so React does not remove these responsibilities.
 
 ---
 

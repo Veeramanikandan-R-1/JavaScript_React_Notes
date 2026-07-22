@@ -123,25 +123,25 @@ console.log(formatCurrency(42));
 
 # Interview Questions with Answers
 
-### 1. How would you explain Modules, import, and export in a real project?
+### 1. What is the difference between default exports and named exports?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Named exports make imports explicit and easier to refactor across a large app. Default exports can be convenient for one-main-thing modules, but they allow arbitrary import names and can make search/refactor weaker.
 
-### 2. What happens internally when Modules, import, and export is involved?
+### 2. What does it mean that ES module imports are live bindings?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+An imported binding reflects the current exported value from the module, not a copied snapshot. You cannot reassign the import locally, and circular dependencies can expose partially initialized bindings if modules are structured poorly.
 
-### 3. How do you debug issues related to Modules, import, and export?
+### 3. How do circular dependencies usually show up in frontend apps?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+They often appear when feature modules import from each other, or when barrel files re-export too much. Symptoms include `undefined` imports, initialization-order bugs, broken tests, and bundles that become harder to split.
 
-### 4. What is the biggest production risk with Modules, import, and export?
+### 4. What is tree shaking, and what code prevents it from working well?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Tree shaking removes unused exports from the bundle. It works best with static ES module imports/exports and is hurt by side-effectful modules, dynamic require patterns, broad barrel imports, and packages that do not advertise side-effect behavior correctly.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What do you review in module boundaries?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I check that imports point in the right architectural direction, feature code is not depending on internals from another feature, shared modules are genuinely shared, and side effects do not run just because a module was imported.
 
 ---
 

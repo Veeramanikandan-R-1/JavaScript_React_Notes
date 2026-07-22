@@ -133,25 +133,25 @@ export default function OrdersPage({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Data Fetching Patterns in a real project?
+### 1. What states should a data-fetching component represent?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Initial loading, success, empty, error, background refetching, retrying, unauthorized, and stale/cancelled states where relevant. A blank screen is usually a missing state, not a design choice.
 
-### 2. What happens internally when Data Fetching Patterns is involved?
+### 2. How do you prevent race conditions in data fetching?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Abort stale requests or track request identity so only the latest response updates state. This matters for search, filters, route changes, dependent dropdowns, and fast navigation.
 
-### 3. How do you debug issues related to Data Fetching Patterns?
+### 3. When should data be fetched at route level instead of component level?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Route-level fetching is useful when data is required for the page, should block or coordinate navigation, or needs route-level error/loading boundaries. Component-level fetching is fine for optional panels or independently loaded widgets.
 
-### 4. What is the biggest production risk with Data Fetching Patterns?
+### 4. How do you avoid duplicate requests?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Centralize server-state ownership, use stable cache/query keys, avoid fetching the same data in parent and child, and watch effect dependencies that refetch because object/function identities change.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What data-fetching issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+No error/empty state, ignoring HTTP statuses, no cancellation/stale-response handling, duplicated cache state, infinite refetch loops, and optimistic updates without rollback.
 
 ---
 

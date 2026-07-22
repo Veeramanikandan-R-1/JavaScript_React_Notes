@@ -43,33 +43,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Frontend System Design in a real project?
+### 1. Why does Data flow matter in Frontend System Design?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Data flow means How data enters, moves through, and updates the interface. In interviews, connect it to Frontend System Design by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Frontend System Design is involved?
+### 2. How does State ownership affect the implementation?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+State ownership means Which layer owns local, shared, server, and URL state. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Frontend System Design?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Frontend System Design?
+### 4. How would you debug a production issue related to Frontend System Design?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Frontend System Design?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Frontend System Design in two minutes.
+1. Explain one realistic production use case for Frontend System Design in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

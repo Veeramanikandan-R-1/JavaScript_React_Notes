@@ -179,25 +179,25 @@ When API values arrive as strings, convert before saving to state if the UI expe
 
 # Interview Questions with Answers
 
-### 1. How would you explain Data Types, Equality, and Type Conversion in a real project?
+### 1. What is the difference between primitive values and objects in JavaScript?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Primitives such as strings, numbers, booleans, `null`, `undefined`, symbols, and bigints are compared by value. Objects, arrays, functions, dates, and maps are compared by reference identity, which affects equality checks, memoization, and state updates.
 
-### 2. What happens internally when Data Types, Equality, and Type Conversion is involved?
+### 2. Why do most frontend codebases prefer `===` over `==`?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+`===` avoids implicit type coercion, so the comparison is easier to reason about. `==` has edge cases that can surprise reviewers, especially around `null`, `undefined`, empty strings, booleans, and arrays.
 
-### 3. How do you debug issues related to Data Types, Equality, and Type Conversion?
+### 3. When is `Number(value)` safer than relying on implicit conversion?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+When parsing form values, URL params, API strings, or local storage values, explicit conversion makes the intent clear and gives you a place to handle `NaN`, empty input, decimals, and invalid values.
 
-### 4. What is the biggest production risk with Data Types, Equality, and Type Conversion?
+### 4. Why is `NaN` tricky in validation code?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+`NaN` is not equal to itself, so `value === NaN` is always false. Use `Number.isNaN(value)` after explicit conversion and decide how empty strings, whitespace, and partially typed numbers should behave in the UI.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What type-conversion bugs commonly appear in frontend apps?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+String numbers from forms or query params, booleans stored as strings, invalid dates, object identity checks that should compare ids, and truthy/falsy checks that accidentally treat `0` or empty strings as missing data.
 
 ---
 

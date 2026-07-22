@@ -159,25 +159,25 @@ For production modals, use a well-tested component or accessibility utility unle
 
 # Interview Questions with Answers
 
-### 1. How would you explain Focus Management, Modals, and Menus in a real project?
+### 1. Why does Portal target matter in Focus Management, Modals, and Menus?
 
-Accessibility means the feature works with keyboard, screen readers, zoom, reduced motion, color contrast needs, and different input devices.
+Portal target means A DOM location outside the visual parent where overlay content is mounted. In interviews, connect it to Focus Management, Modals, and Menus by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Focus Management, Modals, and Menus is involved?
+### 2. How does Focus trap affect the implementation?
 
-Browsers expose semantics through the accessibility tree. Bad markup, missing labels, broken focus, and incorrect ARIA create real blockers.
+Focus trap means Keyboard focus management that keeps modal interaction contained. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Focus Management, Modals, and Menus?
+### 3. What mistake should you avoid around removing focus outlines?
 
-I test keyboard flow, focus order, accessible names, labels, announcements, color contrast, motion preferences, and error recovery.
+Avoid removing focus outlines. Use semantic elements.
 
-### 4. What is the biggest production risk with Focus Management, Modals, and Menus?
+### 4. How would you debug a production issue related to Focus Management, Modals, and Menus?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Navigate using only the keyboard. Inspect accessible names, roles, states, and relationships.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Focus Management, Modals, and Menus?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Can users identify, reach, operate, and understand every control? Does focus move predictably when UI opens or closes?
 
 ---
 

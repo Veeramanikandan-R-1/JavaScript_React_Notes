@@ -116,25 +116,25 @@ customElements.define("user-badge", UserBadge);
 
 # Interview Questions with Answers
 
-### 1. How would you explain Web Components and Shadow DOM in a real project?
+### 1. When would you choose Web Components over framework components?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+Choose Web Components when a component must work across frameworks, inside legacy pages, or as an embeddable widget. If the product is fully inside one React app, framework components are often simpler for state, routing, testing, and team conventions.
 
-### 2. What happens internally when Web Components and Shadow DOM is involved?
+### 2. What does Shadow DOM encapsulate and what does it not fully isolate?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+Shadow DOM encapsulates markup and styles from normal document selectors. It does not isolate JavaScript execution, network access, layout size, inherited CSS custom properties, or accessibility responsibilities.
 
-### 3. How do you debug issues related to Web Components and Shadow DOM?
+### 3. How do slots work in a custom element?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+Slots define insertion points inside the shadow tree where light-DOM children are rendered. They let consumers provide content while the component controls structure, styling boundaries, and fallback content.
 
-### 4. What is the biggest production risk with Web Components and Shadow DOM?
+### 4. What lifecycle cleanup matters in custom elements?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Anything started in `connectedCallback`, such as event listeners, timers, observers, subscriptions, or network work, should be cleaned up in `disconnectedCallback` when appropriate.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What accessibility issues do you watch for in Web Components?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Custom elements still need names, roles, keyboard behavior, focus management, form participation when relevant, and screen-reader testing. Encapsulation should not make the component invisible or awkward to operate.
 
 ---
 

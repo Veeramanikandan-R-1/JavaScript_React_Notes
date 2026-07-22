@@ -27,33 +27,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain CSS Debugging, Performance, and Browser Support in a real project?
+### 1. Why does Source map matter in CSS Debugging, Performance, and Browser Support?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Source map means A mapping from bundled code back to original source files. In interviews, connect it to CSS Debugging, Performance, and Browser Support by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when CSS Debugging, Performance, and Browser Support is involved?
+### 2. How does Minified stack trace affect the implementation?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Minified stack trace means A production error trace that needs mapping to be readable. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to CSS Debugging, Performance, and Browser Support?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with CSS Debugging, Performance, and Browser Support?
+### 4. How would you debug a production issue related to CSS Debugging, Performance, and Browser Support?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for CSS Debugging, Performance, and Browser Support?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain CSS Debugging, Performance, and Browser Support in two minutes.
+1. Explain one realistic production use case for CSS Debugging, Performance, and Browser Support in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

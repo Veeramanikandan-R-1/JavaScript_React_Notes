@@ -14,6 +14,59 @@ git switch main
 git pull origin main
 git switch -c feature/login-form
 
+Short answer:
+
+| `git checkout`                                    | `git switch`                                                 |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| Older command (does multiple things)              | Newer command (Git 2.23+) dedicated only to branch switching |
+| Switch branches                                   | Switch branches only                                         |
+| Can also restore files                            | Cannot restore files                                         |
+| More error-prone because it has multiple purposes | Clearer and safer                                            |
+
+### Examples
+
+**Switch to an existing branch**
+
+```bash
+# Old
+git checkout feature/login
+
+# New (recommended)
+git switch feature/login
+```
+
+**Create and switch to a new branch**
+
+```bash
+# Old
+git checkout -b feature/login
+
+# New
+git switch -c feature/login
+```
+
+### Why was `git switch` introduced?
+
+`git checkout` was overloaded:
+
+* Switching branches
+* Restoring files
+* Checking out commits/tags
+
+This often confused users. Git introduced:
+
+* `git switch` → for **branches**
+* `git restore` → for **files**
+
+### Recommendation
+
+For modern Git, prefer:
+
+* ✅ `git switch` → branch operations
+* ✅ `git restore` → file operations
+* Use `git checkout` mainly when working with older Git versions or legacy documentation.
+
+
 # make changes
 
 git status
@@ -200,6 +253,10 @@ Delete a stash:
 git stash drop stash@{0}
 ```
 
+stash with specific message
+```bash
+git stash push -m "stash message for later ref"
+```
 ---
 
 # 9. Sync Feature Branch with Main

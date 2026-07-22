@@ -153,25 +153,25 @@ Use `rem` when you want consistent sizing across the page. Use `em` when spacing
 
 # Interview Questions with Answers
 
-### 1. How would you explain Units, Colors, and Typography in a real project?
+### 1. When do you use `px`, `rem`, `em`, `%`, and viewport units?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Use `px` for precise borders or assets, `rem` for scalable spacing/type tied to root font size, `em` for local proportional sizing, `%` for parent-relative sizing, and viewport units for viewport-relative areas. I avoid using viewport width to scale normal body text because it can become unreadable.
 
-### 2. What happens internally when Units, Colors, and Typography is involved?
+### 2. How do you choose a line-height?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+For body text I usually use a unitless line-height around `1.4` to `1.6`, depending on font and density. Unitless values inherit better because children multiply by their own font size. Tight UI labels can be smaller, but long prose needs breathing room.
 
-### 3. How do you debug issues related to Units, Colors, and Typography?
+### 3. How do you check color accessibility?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+I check contrast for normal text, large text, disabled states, focus indicators, and important icons. Color should not be the only way to communicate status; errors need text or icons, and charts need distinguishable patterns or labels.
 
-### 4. What is the biggest production risk with Units, Colors, and Typography?
+### 4. What causes layout shift when web fonts load?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+A fallback font and web font often have different metrics, so text can reflow when the web font loads. I check `font-display`, fallback font choice, font file size, preloading critical fonts, and whether the design can tolerate a system font stack.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you make typography robust for localization?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I avoid fixed-height text containers, test long words and longer translated strings, allow wrapping, avoid negative letter spacing in dense UI, and keep line-height readable. I also check that buttons and tabs can grow without breaking layout.
 
 ---
 

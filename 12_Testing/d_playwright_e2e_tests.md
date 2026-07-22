@@ -125,25 +125,25 @@ test("submits the search term", async () => {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Playwright End-to-End Tests in a real project?
+### 1. Why does Browser flow matter in Playwright End-to-End Tests?
 
-I test behavior that users and business rules depend on, using the smallest test level that gives confidence.
+Browser flow means A real user path executed in a browser. In interviews, connect it to Playwright End-to-End Tests by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Playwright End-to-End Tests is involved?
+### 2. How does Locator affect the implementation?
 
-Unit tests are fast for pure logic, component tests check interaction and accessibility, and E2E tests protect critical journeys in a real browser.
+Locator means A resilient way to find elements by role, label, text, or test id. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Playwright End-to-End Tests?
+### 3. What mistake should you avoid around testing implementation details?
 
-I avoid brittle implementation assertions and prefer accessible queries, realistic events, and clear setup data.
+Avoid testing implementation details. Test user-visible behavior.
 
-### 4. What is the biggest production risk with Playwright End-to-End Tests?
+### 4. How would you debug a production issue related to Playwright End-to-End Tests?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Read the failure message as a user story. Inspect rendered DOM output and accessible roles.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Playwright End-to-End Tests?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Does the test fail for the bug it is meant to prevent? Does it query like a user would find the element?
 
 ---
 

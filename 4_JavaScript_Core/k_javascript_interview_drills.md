@@ -123,25 +123,25 @@ for (let j = 0; j < 3; j += 1) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain JavaScript Interview Drills in a real project?
+### 1. What does this output, and why: `console.log(a); var a = 1;`?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+It logs `undefined` because the `var` declaration is hoisted and initialized to `undefined` before execution, while the assignment happens later. A strong answer explains declaration, initialization, and execution order separately.
 
-### 2. What happens internally when JavaScript Interview Drills is involved?
+### 2. What does this output: `Promise.resolve().then(() => console.log(1)); setTimeout(() => console.log(2)); console.log(3);`?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+It logs `3`, then `1`, then `2`. Synchronous code runs first, promise callbacks run in the microtask queue after the current call stack, and timers run later from the task queue.
 
-### 3. How do you debug issues related to JavaScript Interview Drills?
+### 3. How do you fix a function that mutates input data during sorting?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Copy before sorting: `const sorted = [...items].sort(compare)`. In review, also check whether `compare` is stable for equal values and whether sorting should happen once near data loading instead of on every render.
 
-### 4. What is the biggest production risk with JavaScript Interview Drills?
+### 4. How would you explain debounce versus throttle with an autocomplete example?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Debounce waits until typing pauses before calling the API, which fits autocomplete search. Throttle limits execution to a fixed rate, which fits scroll or resize tracking where you want periodic updates while the event continues.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What makes a JavaScript interview answer senior-level?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+It gives the result, explains the underlying model, names edge cases, and connects the behavior to real UI bugs. For example, closures are not only trivia; they affect timers, event listeners, hooks, and stale state.
 
 ---
 

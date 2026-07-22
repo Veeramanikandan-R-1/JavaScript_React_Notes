@@ -26,33 +26,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Mocking Network Requests with MSW in a real project?
+### 1. Why does Request handler matter in Mocking Network Requests with MSW?
 
-I test behavior that users and business rules depend on, using the smallest test level that gives confidence.
+Request handler means A mocked API response for a specific method and URL. In interviews, connect it to Mocking Network Requests with MSW by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Mocking Network Requests with MSW is involved?
+### 2. How does Mock server affect the implementation?
 
-Unit tests are fast for pure logic, component tests check interaction and accessibility, and E2E tests protect critical journeys in a real browser.
+Mock server means A test boundary that intercepts network calls. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Mocking Network Requests with MSW?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I avoid brittle implementation assertions and prefer accessible queries, realistic events, and clear setup data.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Mocking Network Requests with MSW?
+### 4. How would you debug a production issue related to Mocking Network Requests with MSW?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Mocking Network Requests with MSW?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Mocking Network Requests with MSW in two minutes.
+1. Explain one realistic production use case for Mocking Network Requests with MSW in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

@@ -210,25 +210,25 @@ Use this only for a clear product requirement. Avoid blocking password managers,
 
 # Interview Questions with Answers
 
-### 1. How would you explain React Forms, Controlled and Uncontrolled Inputs in a real project?
+### 1. What is the difference between controlled and uncontrolled inputs in React?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+A controlled input gets its value from React state and updates through React handlers. An uncontrolled input keeps its current value in the DOM and is read with a ref or form submission. Controlled inputs give more control; uncontrolled inputs can be simpler and faster for some forms.
 
-### 2. What happens internally when React Forms, Controlled and Uncontrolled Inputs is involved?
+### 2. When would you avoid making every field controlled?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Very large forms, file inputs, third-party widgets, or simple submit-only forms may not need every keystroke in React state. The choice should balance validation, conditional UI, performance, and simplicity.
 
-### 3. How do you debug issues related to React Forms, Controlled and Uncontrolled Inputs?
+### 3. Why do controlled inputs sometimes feel laggy?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Every keystroke schedules React work. Lag can come from expensive parent renders, validation on every input, formatting logic, large lists, or uncontrolled re-renders. Isolate field state, defer expensive work, or validate on blur/change with care.
 
-### 4. What is the biggest production risk with React Forms, Controlled and Uncontrolled Inputs?
+### 4. How do you make form errors accessible in React?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Connect error text to fields with `aria-describedby`, use clear messages, preserve labels, avoid color-only errors, and focus the first invalid field on submit only when it helps the user recover.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What form issues do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Missing labels, controlled/uncontrolled warnings, validation that fights user typing, disabled submit with no explanation, client-only validation, poor autofill support, and no loading/error state during submit.
 
 ---
 

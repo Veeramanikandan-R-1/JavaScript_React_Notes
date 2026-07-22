@@ -122,25 +122,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Transitions, Animations, and Transforms in a real project?
+### 1. When would you use a transition instead of a keyframe animation?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Use a transition when the UI moves between two states, such as hover, focus, expand, or selected. Use a keyframe animation when the motion has multiple steps, needs to run independently, repeats, or represents a timeline.
 
-### 2. What happens internally when Transitions, Animations, and Transforms is involved?
+### 2. Which CSS properties are safest to animate in a production UI?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+`transform` and `opacity` are usually the safest because browsers can often handle them on the compositor. Animating `width`, `height`, `top`, `left`, margins, or heavy shadows can trigger layout and paint, so measure before shipping.
 
-### 3. How do you debug issues related to Transitions, Animations, and Transforms?
+### 3. How do you handle users who prefer reduced motion?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Use `@media (prefers-reduced-motion: reduce)` to remove or shorten nonessential motion. Keep the state change clear even without animation, especially for navigation, modals, drawers, and validation feedback.
 
-### 4. What is the biggest production risk with Transitions, Animations, and Transforms?
+### 4. Why is `transform: translate()` often better than changing `top` or `left`?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Changing `top` or `left` can force layout for positioned elements. `transform` changes the visual position without affecting surrounding layout, so it is often smoother and less likely to cause layout thrashing.
 
-### 5. What should a senior engineer look for in code review?
+### 5. A hover animation feels janky on a mid-range phone. How would you debug it?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Record it in DevTools Performance, check for layout and paint cost, enable paint flashing, and inspect layer/compositing behavior. Also check whether JavaScript, large images, filters, box shadows, or layout-changing properties are competing with the animation.
 
 ---
 

@@ -27,33 +27,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Capstone: Todo App with Vanilla JavaScript in a real project?
+### 1. Why does Requirements matter in Capstone: Todo App with Vanilla JavaScript?
 
-A capstone should show complete frontend judgment: requirements, component design, state, data fetching, forms, routing, accessibility, tests, and performance.
+Requirements means What the app must do. Use Capstone: Todo App with Vanilla JavaScript to solve the specific problem described in this note.
 
-### 2. What happens internally when Capstone: Todo App with Vanilla JavaScript is involved?
+### 2. How does Architecture affect the implementation?
 
-A reviewer should be able to run it, understand the architecture, see non-happy-path states, and inspect clean code.
+Architecture means How files, data, UI, and state are organized. Understand the browser, runtime, or React behavior behind Capstone: Todo App with Vanilla JavaScript before choosing an implementation.
 
-### 3. How do you debug issues related to Capstone: Todo App with Vanilla JavaScript?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I would evaluate it by user journeys, responsiveness, error handling, accessibility, maintainability, and whether the README explains tradeoffs.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Capstone: Todo App with Vanilla JavaScript?
+### 4. How would you debug a production issue related to Capstone: Todo App with Vanilla JavaScript?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Capstone: Todo App with Vanilla JavaScript?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Capstone: Todo App with Vanilla JavaScript in two minutes.
+1. Explain one realistic production use case for Capstone: Todo App with Vanilla JavaScript in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

@@ -157,29 +157,30 @@ Rules:
 | `canvas` | Bitmap drawing surface controlled by JavaScript. |
 | SVG | Vector graphics that can be inline, linked, styled, and accessible. |
 
+
 ---
 
 # Interview Questions with Answers
 
-### 1. How would you explain Media, iframe, Canvas, and SVG Basics in a real project?
+### 1. When would you use `picture` instead of just `img srcset`?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+Use `srcset`/`sizes` when the same image is served at different resolutions. Use `picture` when the actual source should change by format or art direction, such as WebP vs JPEG, or a cropped mobile image versus a wide desktop image.
 
-### 2. What happens internally when Media, iframe, Canvas, and SVG Basics is involved?
+### 2. What security concerns do you check before adding an iframe?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+I check the source, sandbox requirements, allowed permissions, referrer policy, `allow` attributes, loading behavior, and whether the iframe needs a useful `title`. Untrusted iframes should be tightly sandboxed.
 
-### 3. How do you debug issues related to Media, iframe, Canvas, and SVG Basics?
+### 3. Why can canvas be an accessibility problem?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+Canvas draws pixels; it does not naturally expose semantic structure to assistive tech. If the canvas conveys information or interaction, I provide fallback text, an accessible alternative, keyboard support, and sometimes a separate DOM representation of the same data.
 
-### 4. What is the biggest production risk with Media, iframe, Canvas, and SVG Basics?
+### 4. Inline SVG or SVG as an image: how do you choose?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use inline SVG when you need styling, animation, currentColor, or accessible internal structure. Use `<img src="icon.svg">` for simple static images. For decorative icons, hide them from assistive tech; for meaningful icons, provide an accessible name.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What do you check for video accessibility?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Captions for spoken content, transcripts when useful, keyboard-operable controls, no unexpected autoplay with sound, visible focus, and a fallback for unsupported formats. I also check file size and preload behavior because media can easily dominate performance.
 
 ---
 

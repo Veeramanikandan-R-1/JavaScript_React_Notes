@@ -166,25 +166,25 @@ Visual note from `htmlCss.docx`:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Positioning, Stacking, and z-index in a real project?
+### 1. Why does increasing `z-index` sometimes not bring an element to the front?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Because the element may be inside a different stacking context. `z-index` is only compared within the same stacking context. Properties like `position` with `z-index`, `opacity < 1`, `transform`, `filter`, and `isolation` can create new contexts.
 
-### 2. What happens internally when Positioning, Stacking, and z-index is involved?
+### 2. What is the difference between `relative`, `absolute`, `fixed`, and `sticky`?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+`relative` keeps its normal space and offsets visually. `absolute` is removed from normal flow and positioned against its containing block. `fixed` is positioned against the viewport. `sticky` behaves like relative until a scroll threshold, then sticks within its scroll container.
 
-### 3. How do you debug issues related to Positioning, Stacking, and z-index?
+### 3. Why does `position: sticky` fail?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Common causes are a parent with an unexpected overflow value, no scrollable space, missing `top`/`bottom` offset, or the sticky element being inside the wrong scroll container. I inspect ancestors and scroll containers before changing random values.
 
-### 4. What is the biggest production risk with Positioning, Stacking, and z-index?
+### 4. When should positioning not be used?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Do not use positioning as the main page layout tool. Normal flow, flexbox, and grid are more resilient. Positioning is for overlays, badges, popovers, sticky headers, anchored controls, and deliberate visual offsets.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you manage z-index in a design system?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I prefer named layering tokens like dropdown, sticky header, modal, toast, and tooltip instead of arbitrary huge numbers. I also check stacking context creation so a token can actually work where it is used.
 
 ---
 

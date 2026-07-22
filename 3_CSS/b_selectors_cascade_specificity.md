@@ -131,25 +131,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Selectors, Cascade, Specificity, and Inheritance in a real project?
+### 1. A class style is not applying even though the selector matches. How do you debug it?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+I inspect computed styles and find which declaration is winning. Then I check cascade origin, `!important`, cascade layers, specificity, media/container conditions, and source order. I do not add a stronger selector until I understand why the current one lost.
 
-### 2. What happens internally when Selectors, Cascade, Specificity, and Inheritance is involved?
+### 2. Explain specificity with a real example.
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+`.card .title` beats `.title` because it is more specific. `#app .title` beats both because an ID has higher specificity. Inline styles beat author stylesheet rules unless `!important` changes priority. In production, the better fix is often reducing selector depth, not escalating the fight.
 
-### 3. How do you debug issues related to Selectors, Cascade, Specificity, and Inheritance?
+### 3. When is `!important` acceptable?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Rarely: utility overrides, third-party integration boundaries, user-agent accessibility fixes, or emergency containment where the reason is documented. If `!important` becomes normal application styling, it usually means the cascade architecture is weak.
 
-### 4. What is the biggest production risk with Selectors, Cascade, Specificity, and Inheritance?
+### 4. What is inheritance in CSS, and which properties commonly inherit?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Inheritance means some computed values flow from parent to child, commonly text-related properties like `color`, `font-family`, `font-size`, and `line-height`. Layout properties like `margin`, `padding`, and `display` usually do not inherit. I verify in computed styles rather than relying on memory.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do cascade layers help in a large app?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Layers let teams define ordering between groups of styles, such as reset, base, components, utilities, and overrides. They reduce accidental wins from source order alone. I still keep selectors shallow because layers do not replace good ownership.
 
 ---
 

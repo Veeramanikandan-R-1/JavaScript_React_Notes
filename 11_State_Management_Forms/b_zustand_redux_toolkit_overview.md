@@ -133,25 +133,25 @@ export default function OrdersPage({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Zustand and Redux Toolkit Overview in a real project?
+### 1. Why does Store matter in Zustand and Redux Toolkit Overview?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Store means A central state container outside individual components. In interviews, connect it to Zustand and Redux Toolkit Overview by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Zustand and Redux Toolkit Overview is involved?
+### 2. How does Selector affect the implementation?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Selector means A function that reads only the state a component needs. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Zustand and Redux Toolkit Overview?
+### 3. What mistake should you avoid around mutating state directly?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Avoid mutating state directly. Keep render pure.
 
-### 4. What is the biggest production risk with Zustand and Redux Toolkit Overview?
+### 4. How would you debug a production issue related to Zustand and Redux Toolkit Overview?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use React DevTools to inspect props, state, owners, and render causes. Check keys, effect dependencies, stale closures, and state mutation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Zustand and Redux Toolkit Overview?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Is state owned by the smallest sensible component? Are effects necessary and cleaned up?
 
 ---
 

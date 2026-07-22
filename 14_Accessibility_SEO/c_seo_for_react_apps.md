@@ -155,25 +155,25 @@ Important correction: SSR does not automatically mean slower initial loading. It
 
 # Interview Questions with Answers
 
-### 1. How would you explain SEO for React Apps in a real project?
+### 1. Why does Semantic HTML matter in SEO for React Apps?
 
-Accessibility means the feature works with keyboard, screen readers, zoom, reduced motion, color contrast needs, and different input devices.
+Semantic HTML means Native meaning and behavior. Use accessibility checks during implementation, not as a final cleanup pass.
 
-### 2. What happens internally when SEO for React Apps is involved?
+### 2. How does Focus affect the implementation?
 
-Browsers expose semantics through the accessibility tree. Bad markup, missing labels, broken focus, and incorrect ARIA create real blockers.
+Focus means Current keyboard interaction target. Browsers derive the accessibility tree from DOM, roles, labels, states, and relationships.
 
-### 3. How do you debug issues related to SEO for React Apps?
+### 3. What mistake should you avoid around removing focus outlines?
 
-I test keyboard flow, focus order, accessible names, labels, announcements, color contrast, motion preferences, and error recovery.
+Avoid removing focus outlines. Use semantic elements.
 
-### 4. What is the biggest production risk with SEO for React Apps?
+### 4. How would you debug a production issue related to SEO for React Apps?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Navigate using only the keyboard. Inspect accessible names, roles, states, and relationships.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for SEO for React Apps?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Can users identify, reach, operate, and understand every control? Does focus move predictably when UI opens or closes?
 
 ---
 

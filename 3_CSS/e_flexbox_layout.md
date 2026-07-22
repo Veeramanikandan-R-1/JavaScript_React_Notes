@@ -161,25 +161,25 @@ Visual notes from `htmlCss.docx`:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Flexbox Layout in a real project?
+### 1. When is Flexbox the right layout choice?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Flexbox is right when the layout is mostly one-dimensional: a row or a column. Toolbars, nav groups, media objects, button rows, and cards with flexible content are good examples. If both rows and columns need coordinated control, I reach for Grid instead.
 
-### 2. What happens internally when Flexbox Layout is involved?
+### 2. Why does `justify-content` sometimes feel like it is working on the wrong axis?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Because `justify-content` works on the main axis, and the main axis changes with `flex-direction`. In a row it controls horizontal distribution; in a column it controls vertical distribution. `align-items` controls the cross axis.
 
-### 3. How do you debug issues related to Flexbox Layout?
+### 3. A flex item with long text refuses to shrink. What do you check?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+I check the child’s `min-width`. Flex items default to `min-width: auto`, which can make long content overflow. Setting `min-width: 0` on the flexible child often allows ellipsis, wrapping, or shrinking to work correctly.
 
-### 4. What is the biggest production risk with Flexbox Layout?
+### 4. Why is `gap` usually better than margins between flex items?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+`gap` expresses spacing between items without first/last-child cleanup, margin-collapsing surprises, or direction-specific hacks. It also works cleanly when the layout wraps.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What do you check before approving a flex layout?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I test long text, wrapping, narrow widths, zoom, RTL if relevant, and whether `flex-basis`, `grow`, and `shrink` match the intent. I also check that flex is not being used as a poor substitute for grid.
 
 ---
 

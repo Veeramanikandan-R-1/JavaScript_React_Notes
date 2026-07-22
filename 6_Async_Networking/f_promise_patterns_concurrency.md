@@ -161,25 +161,25 @@ Practical rule: use `Promise.all` when all data is required. Use `Promise.allSet
 
 # Interview Questions with Answers
 
-### 1. How would you explain Promise Patterns and Concurrency in a real project?
+### 1. What is the difference between `Promise.all`, `allSettled`, `race`, and `any`?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+`Promise.all` succeeds only if all succeed and rejects on the first failure. `allSettled` waits for every result. `race` settles with the first settled promise. `any` fulfills with the first successful promise and rejects only if all fail.
 
-### 2. What happens internally when Promise Patterns and Concurrency is involved?
+### 2. When is `Promise.all` the wrong choice?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+It is wrong when partial results are useful, when one failure should not hide other results, or when starting all work at once can overload the browser, network, or backend. Use `allSettled`, batching, or a concurrency limit instead.
 
-### 3. How do you debug issues related to Promise Patterns and Concurrency?
+### 3. How would you process 500 images with only five uploads running at once?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+Use a concurrency-limited queue/pool. Start five uploads, begin the next one when one finishes, collect successes and failures, and make cancellation/retry behavior explicit.
 
-### 4. What is the biggest production risk with Promise Patterns and Concurrency?
+### 4. What is a floating promise?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+A floating promise is created but not awaited, returned, or caught. It can cause unhandled rejections, hidden failures, and work that continues after the caller thinks the flow is complete.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What concurrency bugs do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Accidental sequential awaits, unbounded parallel requests, missing cancellation, partial-failure handling that loses useful data, and promises that update state after ownership has changed.
 
 ---
 

@@ -125,25 +125,25 @@ function openDialog(dialog, trigger) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Accessibility with JavaScript in a real project?
+### 1. What accessibility behavior can JavaScript accidentally break?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+JavaScript can break focus order, keyboard activation, native form behavior, announcements, scroll position, browser history, and semantic relationships. The more custom the interaction, the more responsibility the script takes on.
 
-### 2. What happens internally when Accessibility with JavaScript is involved?
+### 2. How should focus behave when opening and closing a modal?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+Move focus into the modal when it opens, keep keyboard focus inside while it is modal, close on expected actions, and return focus to the triggering element when it closes. The rest of the page should not be reachable to assistive tech while blocked.
 
-### 3. How do you debug issues related to Accessibility with JavaScript?
+### 3. When should you use ARIA?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+Use native HTML first. Add ARIA when native semantics are not enough, and only when you also implement the required keyboard behavior and state updates. ARIA changes meaning; it does not create behavior.
 
-### 4. What is the biggest production risk with Accessibility with JavaScript?
+### 4. How do you make dynamic updates understandable to screen-reader users?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use appropriate live regions for status updates, keep messages concise, avoid constantly changing announcements, and ensure focus moves only when the user's task requires it.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What accessibility checks do you expect before shipping custom interaction?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Keyboard-only operation, visible focus, accessible names, correct roles/states, screen-reader behavior, reduced motion, zoom support, and that native semantics were preserved wherever possible.
 
 ---
 

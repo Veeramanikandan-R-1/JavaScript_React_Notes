@@ -128,25 +128,25 @@ function ProtectedRoute({ children }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Auth, Protected Routes, and Loading States in a real project?
+### 1. What states should a protected route handle?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Unknown auth/loading, authenticated allowed, authenticated forbidden, unauthenticated redirect/login, expired session, and server/auth-check failure. Treating unknown as logged out causes flicker and bad redirects.
 
-### 2. What happens internally when Auth, Protected Routes, and Loading States is involved?
+### 2. Why is client-side route protection not enough for security?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Client routing controls UI, not data access. The backend must still enforce authorization for every protected resource because users can call APIs outside the app.
 
-### 3. How do you debug issues related to Auth, Protected Routes, and Loading States?
+### 3. How do you preserve the intended destination after login?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Store the attempted URL in router state or a safe return parameter, then navigate back after successful login. Validate return URLs so login cannot become an open redirect.
 
-### 4. What is the biggest production risk with Auth, Protected Routes, and Loading States?
+### 4. How do auth checks interact with loading UI?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+The app should show a pending state while auth is unknown, avoid rendering protected content before authorization is known, and avoid redirect loops while token/session refresh is in progress.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What protected-route issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+UI-only authorization assumptions, flicker of protected content, redirect loops, losing destination, missing forbidden state, stale user permissions, and error states that force unnecessary logout.
 
 ---
 

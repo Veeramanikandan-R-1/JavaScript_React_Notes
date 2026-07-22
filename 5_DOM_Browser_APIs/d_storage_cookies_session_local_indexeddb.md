@@ -142,25 +142,25 @@ Important:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Storage, Cookies, localStorage, sessionStorage, and IndexedDB in a real project?
+### 1. When would you use cookies, `localStorage`, `sessionStorage`, or IndexedDB?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+Use cookies when the server must receive a small value on requests, usually auth/session related. Use `localStorage` for small persistent client preferences, `sessionStorage` for tab-scoped temporary data, and IndexedDB for larger structured offline data.
 
-### 2. What happens internally when Storage, Cookies, localStorage, sessionStorage, and IndexedDB is involved?
+### 2. Why should sensitive tokens usually not be stored in `localStorage`?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+Any successful XSS can read `localStorage`. For many auth flows, an HttpOnly, Secure, SameSite cookie reduces token exposure to JavaScript, though the full design still needs CSRF and session handling.
 
-### 3. How do you debug issues related to Storage, Cookies, localStorage, sessionStorage, and IndexedDB?
+### 3. What are the limitations of `localStorage`?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+It is synchronous, string-only, relatively small, and can be unavailable or cleared depending on browser settings. It can block the main thread if used heavily and should not be treated as a reliable database.
 
-### 4. What is the biggest production risk with Storage, Cookies, localStorage, sessionStorage, and IndexedDB?
+### 4. How would you debug a cookie not being sent to an API?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Check domain, path, `Secure`, `SameSite`, expiry, whether the request is cross-site, credentials mode in fetch, HTTPS, and the response `Set-Cookie` header. DevTools Application and Network tabs usually reveal the issue.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What storage issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Sensitive data in web storage, missing migration/versioning for persisted shapes, large synchronous reads during startup, no quota/error handling, and stale cached data with no invalidation strategy.
 
 ---
 

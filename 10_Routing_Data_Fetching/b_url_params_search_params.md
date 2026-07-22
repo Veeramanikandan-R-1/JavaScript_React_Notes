@@ -133,25 +133,25 @@ export default function OrdersPage({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain URL Params and Search Params in a real project?
+### 1. What belongs in path params versus search params?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Path params identify required resources, such as `/products/:id`. Search params represent optional view state such as filters, sort, search text, tab, and pagination.
 
-### 2. What happens internally when URL Params and Search Params is involved?
+### 2. Why store filters in the URL?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+URL filters make the state shareable, bookmarkable, restorable on reload, and compatible with browser history. The tradeoff is that parsing, defaults, validation, and URL update frequency must be designed.
 
-### 3. How do you debug issues related to URL Params and Search Params?
+### 3. How do you handle invalid URL params?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Parse them explicitly, validate the shape, fall back to defaults or show a not-found/error state, and avoid trusting params as typed values. Route params and query params arrive as strings.
 
-### 4. What is the biggest production risk with URL Params and Search Params?
+### 4. What bug happens when state and search params are duplicated?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+They can drift: the UI shows one filter while the URL says another. Prefer deriving view state from the URL or using a single well-defined synchronization path.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What URL-state issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Unvalidated params, update loops, noisy history entries on every keystroke, missing defaults, losing params during navigation, and query keys that do not include URL-driven inputs.
 
 ---
 

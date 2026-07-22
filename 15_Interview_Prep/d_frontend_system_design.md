@@ -157,25 +157,25 @@ Remote search: debounce input, cancel stale requests, and show loading/empty/err
 
 # Interview Questions with Answers
 
-### 1. How would you explain Frontend System Design in a real project?
+### 1. Design a frontend for a dashboard with filters, charts, tables, and export. How do you start?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+I start by clarifying users, data sources, freshness requirements, filter behavior, permissions, and performance budget. Then I define routes, URL state for shareable filters, server-state caching, component boundaries, loading/error/empty states, and observability. I would not start with component names before understanding data and user workflows.
 
-### 2. What happens internally when Frontend System Design is involved?
+### 2. Where would you store table filters: component state, URL params, Redux, or server?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+If filters should be shareable, bookmarkable, or survive refresh, I put them in URL search params. If they are temporary UI-only controls, local state is enough. If multiple distant widgets need the same client-only filter state, a store can help. The server owns persisted preferences or canonical query results.
 
-### 3. How do you debug issues related to Frontend System Design?
+### 3. How would you design frontend performance for a large list?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+I would combine backend pagination or cursor loading, stable query keys, virtualization for large visible lists, memoized row rendering only when measured, and careful column/cell composition. I would also discuss skeletons, empty/error states, keyboard navigation, and avoiding layout shift.
 
-### 4. What is the biggest production risk with Frontend System Design?
+### 4. How do you compare CSR, SSR, and SSG in an interview?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+CSR is simpler for app-like authenticated screens but waits for JavaScript before meaningful UI. SSR improves first render and SEO but adds hydration, server cost, and caching complexity. SSG is great for mostly static content but needs a strategy for freshness. The right answer depends on content, auth, SEO, latency, and team operations.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What failure states do senior interviewers expect you to mention?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Slow network, partial data, empty data, stale data, auth expiry, permission denial, retry behavior, offline behavior where relevant, feature-flag rollback, API shape changes, and accessibility failures. A system design answer feels senior when it treats these as first-class states, not afterthoughts.
 
 ---
 

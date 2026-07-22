@@ -26,33 +26,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Vite, Bundling, and Dev Server in a real project?
+### 1. Why does Dev server matter in Vite, Bundling, and Dev Server?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+Dev server means The local server that transforms modules during development. In interviews, connect it to Vite, Bundling, and Dev Server by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Vite, Bundling, and Dev Server is involved?
+### 2. How does HMR affect the implementation?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+HMR means Updating changed modules without a full reload. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Vite, Bundling, and Dev Server?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Vite, Bundling, and Dev Server?
+### 4. How would you debug a production issue related to Vite, Bundling, and Dev Server?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Vite, Bundling, and Dev Server?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Vite, Bundling, and Dev Server in two minutes.
+1. Explain one realistic production use case for Vite, Bundling, and Dev Server in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

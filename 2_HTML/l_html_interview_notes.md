@@ -144,25 +144,25 @@ Practical audit flow:
 
 # Interview Questions with Answers
 
-### 1. How would you explain HTML Interview Notes in a real project?
+### 1. What are the top HTML mistakes you see in React codebases?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+Clickable `div`s, missing labels, poor heading order, invalid nesting, wrong link/button usage, missing image `alt`, and custom controls without keyboard support. These issues often pass visual review but fail accessibility, SEO, and production usability.
 
-### 2. What happens internally when HTML Interview Notes is involved?
+### 2. How do you explain semantic HTML to a junior developer?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+Semantic HTML means choosing the element that matches the purpose of the content or interaction. Start with meaning, then style it. A button can look like a link and a link can look like a button, but their behavior and user expectations are different.
 
-### 3. How do you debug issues related to HTML Interview Notes?
+### 3. What do you inspect in the accessibility tree?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+I inspect roles, accessible names, states, descriptions, landmark names, heading structure, and whether hidden content is actually hidden from assistive tech. The DOM and the accessibility tree can reveal issues that are invisible in screenshots.
 
-### 4. What is the biggest production risk with HTML Interview Notes?
+### 4. What HTML knowledge matters most for SEO?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Useful titles, headings, crawlable links, metadata, canonical URLs, image alt where relevant, structured data when appropriate, and content present in initial HTML for pages that need indexing. SEO is not only meta tags; it starts with readable content structure.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you handle disagreement with a designer about native controls?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I explain the built-in behavior we get from native controls, then try to match the design with CSS before replacing semantics. If a custom control is unavoidable, I make the accessibility and keyboard requirements explicit so the team understands the cost.
 
 ---
 

@@ -133,25 +133,25 @@ export default function OrdersPage({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Conditional Rendering and Lists in a real project?
+### 1. What UI states should a data-driven list usually render?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Loading, success with items, empty, error, background refetching, permission/auth blocked, and sometimes partial data. Senior candidates should mention that each state needs accessible text and stable layout.
 
-### 2. What happens internally when Conditional Rendering and Lists is involved?
+### 2. Why should conditional rendering avoid hiding important state transitions?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+If loading, empty, and error states collapse into `null`, users get blank screens and debugging becomes harder. Clear conditional branches make behavior testable and easier to review.
 
-### 3. How do you debug issues related to Conditional Rendering and Lists?
+### 3. How do keys affect list item state?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Keys tell React which item identity should be preserved across renders. Bad keys cause item-local state, focus, animations, and input values to attach to the wrong item after changes.
 
-### 4. What is the biggest production risk with Conditional Rendering and Lists?
+### 4. How do you render a large list without freezing the page?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Start with pagination or server-side filtering if product flow allows it. For large client-side lists, use virtualization, memoized row data where useful, stable keys, and measured render performance.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What list rendering issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Index keys, missing empty/error states, nested ternaries that hide behavior, expensive filtering/sorting on every render, inaccessible loading text, and item actions that lose focus or state after reorder.
 
 ---
 

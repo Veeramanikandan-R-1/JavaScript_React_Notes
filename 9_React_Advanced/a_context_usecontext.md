@@ -177,25 +177,25 @@ Keep provider values stable with `useMemo` when passing objects/functions. Other
 
 # Interview Questions with Answers
 
-### 1. How would you explain Context and useContext in a real project?
+### 1. When is React Context a good choice?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Context is good for values that many descendants need within a boundary, such as theme, locale, auth session, feature flags, or current workspace. It is not automatically a replacement for all state management.
 
-### 2. What happens internally when Context and useContext is involved?
+### 2. Why can Context cause unnecessary re-renders?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Consumers re-render when the provider value changes identity. Passing a newly created object or function every render can update many descendants. Split contexts, memoize values carefully, or move frequently changing state closer to where it is used.
 
-### 3. How do you debug issues related to Context and useContext?
+### 3. When should you not use Context?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Avoid Context for highly local state, frequently changing values used by a small subtree, server-state caching, or anything that needs selectors/subscriptions. A store or server-state library may fit better.
 
-### 4. What is the biggest production risk with Context and useContext?
+### 4. How do you design a provider API?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Keep provider responsibilities clear, expose stable values and actions, handle missing-provider errors intentionally, and avoid mixing unrelated concerns like theme, auth, and data cache in one context.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What Context issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Huge provider values, providers wrapped around the whole app without need, frequently changing values, missing memoization where it matters, and Context used to avoid passing two simple props.
 
 ---
 

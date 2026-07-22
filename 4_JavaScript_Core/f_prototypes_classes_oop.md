@@ -276,25 +276,25 @@ Interview point: the caller uses the same method, `speak()`, without caring whet
 
 # Interview Questions with Answers
 
-### 1. How would you explain Prototypes, Classes, and OOP in a real project?
+### 1. How would you explain JavaScript prototypes to someone who knows classes?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+Objects can delegate property lookup to another object through the prototype chain. `class` syntax is mostly a cleaner way to define constructor functions and prototype methods, not a separate inheritance system like in many classical OOP languages.
 
-### 2. What happens internally when Prototypes, Classes, and OOP is involved?
+### 2. What happens when JavaScript cannot find a property directly on an object?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+It walks up the prototype chain until it finds the property or reaches `null`. This matters when debugging inherited methods, monkey patches, `Object.create`, class instances, and unexpected properties from third-party objects.
 
-### 3. How do you debug issues related to Prototypes, Classes, and OOP?
+### 3. When would you use a class in frontend JavaScript?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Classes can be useful for domain objects, SDK wrappers, state machines, custom errors, or APIs with lifecycle and instance methods. For simple data transformation or UI composition, functions and plain objects are often clearer.
 
-### 4. What is the biggest production risk with Prototypes, Classes, and OOP?
+### 4. What is the difference between instance fields and prototype methods?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Instance fields are created per instance. Prototype methods are shared through the prototype chain. Shared prototype methods usually use less memory, while per-instance arrow methods can preserve lexical `this` but create a new function for each instance.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What OOP-related problems do you look for in frontend code?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Overuse of inheritance, mutable shared prototype state, unclear lifecycle cleanup, class instances stored in serializable app state, and methods that depend on `this` in ways that break when passed as callbacks.
 
 ---
 

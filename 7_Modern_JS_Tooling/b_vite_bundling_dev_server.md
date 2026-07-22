@@ -122,25 +122,25 @@ export default defineConfig({
 
 # Interview Questions with Answers
 
-### 1. How would you explain Vite, Bundling, and Dev Server in a real project?
+### 1. Why can code work in the Vite dev server but fail after production build?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+Development uses fast transforms and native ESM; production bundles, minifies, tree-shakes, hashes assets, and applies different environment modes. Bugs often come from env variables, dynamic imports, asset paths, side effects, or browser-target differences.
 
-### 2. What happens internally when Vite, Bundling, and Dev Server is involved?
+### 2. What is HMR, and what bugs can it hide?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+Hot Module Replacement updates changed modules without a full reload. It can hide initialization, cleanup, and full-page-load bugs because state may survive in development when it would be recreated in production.
 
-### 3. How do you debug issues related to Vite, Bundling, and Dev Server?
+### 3. What is code splitting?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Code splitting breaks the app into chunks that can load on demand. It helps initial load when route, feature, or heavy-library code is not needed immediately, but it adds loading states and failure cases for chunk loading.
 
-### 4. What is the biggest production risk with Vite, Bundling, and Dev Server?
+### 4. How do you inspect whether a dependency is hurting bundle size?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Build the app, inspect generated chunks with a bundle analyzer or visualizer, check whether imports are tree-shaken, and look for duplicate packages or accidentally importing a whole library for one function.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What build-tooling changes do you review carefully?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Changes to aliases, env loading, output paths, plugin order, chunking, browser targets, polyfills, and dev server proxy settings because they can change both local behavior and deployed assets.
 
 ---
 

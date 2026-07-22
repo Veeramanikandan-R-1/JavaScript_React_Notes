@@ -26,33 +26,33 @@
 
 ---
 
-# Interview Questions & Answers
+# Interview Questions with Answers
 
-### 1. How would you explain Source Maps, Debugging, CI, and Frontend Delivery in a real project?
+### 1. Why does Source map matter in Source Maps, Debugging, CI, and Frontend Delivery?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+Source map means A mapping from bundled code back to original source files. In interviews, connect it to Source Maps, Debugging, CI, and Frontend Delivery by explaining the concrete UI behavior, failure state, and tradeoff.
 
-### 2. What happens internally when Source Maps, Debugging, CI, and Frontend Delivery is involved?
+### 2. How does Minified stack trace affect the implementation?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+Minified stack trace means A production error trace that needs mapping to be readable. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
 
-### 3. How do you debug issues related to Source Maps, Debugging, CI, and Frontend Delivery?
+### 3. What mistake should you avoid around skipping real edge cases?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Avoid skipping real edge cases. Prefer the simplest reliable approach and verify it with a small example.
 
-### 4. What is the biggest production risk with Source Maps, Debugging, CI, and Frontend Delivery?
+### 4. How would you debug a production issue related to Source Maps, Debugging, CI, and Frontend Delivery?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Reproduce the issue, inspect the relevant state or DOM, and reduce it to a small failing case. Check edge cases, browser behavior, and tests before changing the implementation.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Source Maps, Debugging, CI, and Frontend Delivery?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Check correctness, edge cases, readability, accessibility, performance, and test coverage. Confirm the chosen approach matches the problem and does not add unnecessary complexity.
 
 ---
 
 # Quick Practice
 
-1. Explain Source Maps, Debugging, CI, and Frontend Delivery in two minutes.
+1. Explain one realistic production use case for Source Maps, Debugging, CI, and Frontend Delivery in two minutes.
 2. Write a tiny code example from memory.
 3. Name one accessibility, performance, or maintainability risk.
 4. Describe how you would debug a related production issue.

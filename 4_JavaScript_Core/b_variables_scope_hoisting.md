@@ -189,25 +189,25 @@ In ES modules and modern bundler output, strict mode is already applied. Still u
 
 # Interview Questions with Answers
 
-### 1. How would you explain Variables, Scope, and Hoisting in a real project?
+### 1. What is the difference between `var`, `let`, and `const`?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+`var` is function-scoped and hoisted with `undefined`. `let` and `const` are block-scoped and have a temporal dead zone before initialization. `const` prevents reassignment of the binding, not mutation of the object it points to.
 
-### 2. What happens internally when Variables, Scope, and Hoisting is involved?
+### 2. What will this print and why: `for (var i = 0; i < 3; i++) setTimeout(() => console.log(i))`?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+It prints `3` three times because all callbacks close over the same function-scoped `var i`, and the callbacks run after the loop completes. Using `let` creates a new block-scoped binding per iteration, so it prints `0`, `1`, `2`.
 
-### 3. How do you debug issues related to Variables, Scope, and Hoisting?
+### 3. What is hoisting, and what do candidates often get wrong about it?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Hoisting means declarations are processed before execution, but initialization rules differ. Function declarations are callable before their line, `var` exists as `undefined`, and `let`/`const` are hoisted but unavailable in the temporal dead zone.
 
-### 4. What is the biggest production risk with Variables, Scope, and Hoisting?
+### 4. How can stale closures show up in frontend code?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+A callback can capture an older value and run later in a timer, event listener, promise, or React effect. Debug by checking where the function is created, what variables it closes over, and whether the code needs a dependency update, ref, or functional state update.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What variable-related issues do you flag during review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Accidental globals, broad mutable state, confusing shadowing, `var` in modern app code, mutation hidden behind `const`, and closures that outlive the state they depend on.
 
 ---
 

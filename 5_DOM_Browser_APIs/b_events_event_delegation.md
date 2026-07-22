@@ -157,25 +157,25 @@ React uses a SyntheticEvent wrapper around native events. You still need to unde
 
 # Interview Questions with Answers
 
-### 1. How would you explain Events and Event Delegation in a real project?
+### 1. Explain event bubbling and capturing with a click inside a nested button area.
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+In capture, the event travels from the document down toward the target. At target, handlers on the clicked element run. In bubble, it travels back up through ancestors. Most UI event handlers rely on bubbling.
 
-### 2. What happens internally when Events and Event Delegation is involved?
+### 2. What is event delegation, and when is it useful?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+Event delegation attaches one listener to a stable ancestor and uses the event target to decide what action occurred. It is useful for large lists, dynamic content, menus, tables, and framework-free interactions.
 
-### 3. How do you debug issues related to Events and Event Delegation?
+### 3. What is the difference between `event.target` and `event.currentTarget`?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+`target` is the deepest element where the event originated. `currentTarget` is the element whose listener is currently running. Delegated handlers often need `target.closest(...)` and then a containment check.
 
-### 4. What is the biggest production risk with Events and Event Delegation?
+### 4. When is `stopPropagation()` a bad fix?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+It can hide ownership problems and break analytics, global shortcuts, menus, overlays, or parent components. Use it only when the interaction genuinely should not reach ancestors, and document the boundary.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What event-listener bugs do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Listeners added repeatedly, missing cleanup, passive listeners missing on scroll/touch where appropriate, handlers doing heavy synchronous work, and mouse-only behavior without keyboard or touch support.
 
 ---
 

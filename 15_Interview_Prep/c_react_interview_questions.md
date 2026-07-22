@@ -124,25 +124,25 @@ function OrderList({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain React Interview Questions in a real project?
+### 1. A child component needs to update a value shown in a sibling. Where should the state live?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+The state should move to the closest common parent that owns both siblings. I would not jump directly to Redux or context unless the state is needed across distant parts of the app. A senior answer should separate local UI state, URL state, server state, and global client state.
 
-### 2. What happens internally when React Interview Questions is involved?
+### 2. Why are array indexes risky as React keys?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+Indexes are risky when items can be inserted, removed, sorted, or filtered because React may preserve the wrong component state for a different item. They are acceptable only for truly static lists. In real apps this shows up as wrong input values, incorrect focus, broken animations, or stale row state.
 
-### 3. How do you debug issues related to React Interview Questions?
+### 3. When is `useEffect` the wrong tool?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+`useEffect` is wrong for values that can be calculated during render, for event-specific logic that belongs in an event handler, and for derived state that duplicates props/state. Effects are for synchronizing with external systems: network, subscriptions, timers, DOM APIs, logging, or imperative widgets.
 
-### 4. What is the biggest production risk with React Interview Questions?
+### 4. A component re-renders too often. What is your debugging flow?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+First I confirm whether the re-render is actually expensive. Then I use React DevTools Profiler, inspect prop identity, check parent state changes, review context provider values, and look for unnecessary derived objects/functions. I memoize only after I know the cause; otherwise memoization can hide design problems.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you handle loading, empty, error, and permission states in React?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I model them explicitly instead of relying on `null` and scattered booleans. The UI should show a useful loading state, a clear empty state, actionable errors, and access-denied states where relevant. I also check accessibility: alerts for errors, focus behavior after transitions, and buttons disabled only when necessary.
 
 ---
 

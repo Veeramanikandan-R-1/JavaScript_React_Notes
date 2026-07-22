@@ -125,25 +125,25 @@ document.querySelectorAll("[data-lazy-section]").forEach((section) => {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Web Platform APIs, Observers, and Workers in a real project?
+### 1. When would you use `IntersectionObserver` instead of a scroll listener?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+Use `IntersectionObserver` when you need to know whether elements enter or leave a viewport/container, such as lazy loading, analytics impressions, or infinite scroll sentinels. It avoids doing manual geometry checks on every scroll event.
 
-### 2. What happens internally when Web Platform APIs, Observers, and Workers is involved?
+### 2. What is `ResizeObserver` useful for?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+It observes element size changes, not viewport changes. It is useful for charts, virtualized containers, responsive components, and layout logic that depends on the rendered size of a specific element.
 
-### 3. How do you debug issues related to Web Platform APIs, Observers, and Workers?
+### 3. When should frontend work move to a Web Worker?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+Move CPU-heavy work that does not need direct DOM access: parsing large files, data processing, search indexing, compression, image processing, or expensive calculations. Workers communicate by messages, so data transfer cost matters.
 
-### 4. What is the biggest production risk with Web Platform APIs, Observers, and Workers?
+### 4. What cleanup do observers and workers need?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Disconnect observers when the observed element is no longer relevant, remove listeners, abort in-flight work where possible, and terminate workers when their lifecycle ends. Leaking these can create memory and performance issues.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What problems do you look for in observer/worker code?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Observers that watch too many nodes, callbacks that mutate layout repeatedly, missing cleanup, workers used for trivial work, large object copies across worker boundaries, and no fallback for unsupported APIs where the product needs one.
 
 ---
 

@@ -121,25 +121,25 @@ Project checklist:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Capstone: E-commerce Frontend in React in a real project?
+### 1. Why does Requirements matter in Capstone: E-commerce Frontend in React?
 
-A capstone should show complete frontend judgment: requirements, component design, state, data fetching, forms, routing, accessibility, tests, and performance.
+Requirements means What the app must do. Use capstones to prove integrated skill, not to collect random features.
 
-### 2. What happens internally when Capstone: E-commerce Frontend in React is involved?
+### 2. How does Architecture affect the implementation?
 
-A reviewer should be able to run it, understand the architecture, see non-happy-path states, and inspect clean code.
+Architecture means How files, data, UI, and state are organized. Capstone quality comes from integrating many small decisions: semantic markup, resilient layout, predictable state, error handling, tests, and performance budgets.
 
-### 3. How do you debug issues related to Capstone: E-commerce Frontend in React?
+### 3. What mistake should you avoid around building only the happy path?
 
-I would evaluate it by user journeys, responsiveness, error handling, accessibility, maintainability, and whether the README explains tradeoffs.
+Avoid building only the happy path. Write requirements before coding.
 
-### 4. What is the biggest production risk with Capstone: E-commerce Frontend in React?
+### 4. How would you debug a production issue related to Capstone: E-commerce Frontend in React?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Test the full happy path, then every major failure path. Use browser DevTools, React DevTools, accessibility checks, and performance traces.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What would you check in code review for Capstone: E-commerce Frontend in React?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Are all user journeys complete? Are states, accessibility, responsiveness, and tests present?
 
 ---
 

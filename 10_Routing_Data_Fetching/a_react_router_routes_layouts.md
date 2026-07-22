@@ -133,25 +133,25 @@ export function App() {
 
 # Interview Questions with Answers
 
-### 1. How would you explain React Router, Routes, and Layouts in a real project?
+### 1. How do you decide a React Router route hierarchy?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Match route boundaries to product sections, shared layouts, data ownership, and error/loading boundaries. Nested routes are useful when parent UI stays mounted while child content changes.
 
-### 2. What happens internally when React Router, Routes, and Layouts is involved?
+### 2. What problem does a layout route solve?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+It keeps shared UI such as navigation, sidebars, tabs, and route-level providers in one place while child routes render through an outlet. This avoids duplicating shell layout across pages.
 
-### 3. How do you debug issues related to React Router, Routes, and Layouts?
+### 3. How do you handle a not-found route?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Add a route-level 404 experience that preserves navigation, explains the missing page, and gives a recovery path. In data routers, distinguish route-not-found from data-not-found where the URL exists but the resource does not.
 
-### 4. What is the biggest production risk with React Router, Routes, and Layouts?
+### 4. What route bugs do you commonly see?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+State resets because layout boundaries are wrong, duplicate data fetching across parent/child routes, relative links pointing to unexpected paths, missing pending states, and redirects that lose the intended destination.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What do you check in a routing pull request?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Route hierarchy, layout ownership, loading/error boundaries, accessible page titles/headings, redirect behavior, deep-link support, and whether URL changes preserve expected state.
 
 ---
 

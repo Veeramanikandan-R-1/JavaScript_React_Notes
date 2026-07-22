@@ -170,25 +170,25 @@ Use CRA knowledge for maintaining older projects, but practice Vite/framework se
 
 # Interview Questions with Answers
 
-### 1. How would you explain npm, package.json, and SemVer in a real project?
+### 1. What is the difference between `dependencies` and `devDependencies`?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+`dependencies` are needed by the app/package at runtime or by consumers. `devDependencies` are needed to develop, test, lint, build, or type-check. For a frontend app, the final bundle can still include code from dependencies if it is imported.
 
-### 2. What happens internally when npm, package.json, and SemVer is involved?
+### 2. What does `^1.2.3` mean in SemVer?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+It allows compatible minor and patch updates up to, but not including, `2.0.0`. That can still introduce regressions, so lockfiles and CI are important for deterministic installs.
 
-### 3. How do you debug issues related to npm, package.json, and SemVer?
+### 3. Why should you review a new dependency carefully?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Dependencies add bundle size, supply-chain risk, maintenance burden, transitive dependencies, licensing questions, and upgrade work. I ask whether the package is mature, actively maintained, tree-shakable, typed, and genuinely worth the cost.
 
-### 4. What is the biggest production risk with npm, package.json, and SemVer?
+### 4. How do lockfiles help production stability?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+They pin the exact resolved dependency tree so installs are repeatable across machines and CI. If production changed after an install, comparing lockfile diffs is one of the first debugging steps.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What package.json changes do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Unnecessary dependencies, broad script changes, unpinned tool assumptions, lifecycle scripts, package upgrades with no test evidence, duplicate libraries, and dependencies that should be dev-only.
 
 ---
 

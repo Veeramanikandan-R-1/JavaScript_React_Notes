@@ -164,25 +164,25 @@ Avoid putting business data in headers. Headers are for metadata such as auth, c
 
 # Interview Questions with Answers
 
-### 1. How would you explain Fetch API, HTTP, JSON, and Errors in a real project?
+### 1. Does `fetch` reject on HTTP 404 or 500?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+No. `fetch` rejects for network-level failures, not HTTP error statuses. You must check `response.ok` or the status code and decide how the UI should handle 400, 401, 403, 404, 409, 422, and 500-class responses.
 
-### 2. What happens internally when Fetch API, HTTP, JSON, and Errors is involved?
+### 2. How do you design a fetch wrapper for a frontend app?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+Keep it small and explicit: base URL, headers, credentials if needed, JSON parsing, `response.ok` handling, typed/structured errors, abort support, and auth/session handling hooks. Avoid hiding product-specific behavior in a generic helper.
 
-### 3. How do you debug issues related to Fetch API, HTTP, JSON, and Errors?
+### 3. How do you handle an API that returns an empty body?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+Do not blindly call `response.json()` for every response. Check status codes like `204`, content length, or content type, and handle empty successful responses separately.
 
-### 4. What is the biggest production risk with Fetch API, HTTP, JSON, and Errors?
+### 4. How would you debug “Unexpected token < in JSON”?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+The response is probably HTML, often an error page, auth redirect, CDN fallback, or wrong route. Inspect the Network tab status, response body, content type, request URL, auth headers, and server logs.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What network states should a UI represent?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Initial loading, background refetching, success, empty, validation error, auth error, server error, offline/network error, timeout, retrying, and cancelled or stale request states where relevant.
 
 ---
 

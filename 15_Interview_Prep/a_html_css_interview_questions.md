@@ -127,25 +127,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain HTML and CSS Interview Questions in a real project?
+### 1. You see a design where a clickable card navigates to details and also has a favorite icon inside. How would you mark it up?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+I would avoid nesting a `button` inside an `a` because interactive elements should not be nested. A practical solution is to make the card layout a container, use a normal link for the title/details area, and a separate `button` for favorite. If the whole card must feel clickable, I would stretch the link with CSS while keeping the favorite button above it in stacking order and keyboard order.
 
-### 2. What happens internally when HTML and CSS Interview Questions is involved?
+### 2. A production page looks correct on desktop but text overflows and buttons become tiny on mobile. What do you check first?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+I check the viewport meta tag, fixed widths, long unbroken text, flex/grid min-width behavior, and whether media queries are written around content instead of device names. I also inspect computed styles on the overflowing element because the real cause is often `width`, `min-width`, `white-space`, or a parent flex item missing `min-width: 0`.
 
-### 3. How do you debug issues related to HTML and CSS Interview Questions?
+### 3. When should you use Flexbox and when should you use CSS Grid?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Flexbox is better for one-dimensional layout: a row or a column where content size can drive distribution. Grid is better when rows and columns both matter, such as dashboards, galleries, and page-level layout. In interviews I mention that the choice is not about which is newer; it is about whether the layout problem is one-axis or two-axis.
 
-### 4. What is the biggest production risk with HTML and CSS Interview Questions?
+### 4. A button is visually disabled but screen-reader users can still activate it. What is wrong?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Only styling it with a gray color or `opacity` is not enough. A native `button` should use the `disabled` attribute when it truly cannot be used. For links or custom controls, I would reconsider whether they should be buttons, and if a disabled-like state is needed, handle focus, click prevention, `aria-disabled`, and visual styling deliberately.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do you explain CSS specificity without just reciting the formula?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I explain it as the browser deciding which matching declaration wins after considering origin, importance, cascade layers, specificity, and source order. Then I give a real example: a component class losing to an ID selector or inline style. A senior answer should also say how to avoid specificity fights: shallow selectors, design tokens, layers where useful, and fewer overrides.
 
 ---
 

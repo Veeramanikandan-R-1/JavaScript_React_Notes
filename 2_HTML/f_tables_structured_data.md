@@ -132,25 +132,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Tables and Structured Data in a real project?
+### 1. When is a real HTML table better than CSS grid or divs?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+Use a table when the data is truly row-and-column data and cells need relationships with headers. CSS grid is for layout; tables are for data. Screen readers can navigate real table headers and cells much better than a div-based imitation.
 
-### 2. What happens internally when Tables and Structured Data is involved?
+### 2. What do `th`, `scope`, `caption`, `thead`, and `tbody` add?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+They describe structure. `th` identifies header cells, `scope` clarifies row or column relationships, `caption` names the table, and `thead`/`tbody` group sections. This makes large tables easier to understand and maintain.
 
-### 3. How do you debug issues related to Tables and Structured Data?
+### 3. How do you make a wide table usable on mobile?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+I first ask whether all columns are needed on mobile. Options include horizontal scroll with a visible affordance, priority columns, row expansion, card transformation with labels, or server-side export. I avoid destroying the header-cell relationship without providing an accessible alternative.
 
-### 4. What is the biggest production risk with Tables and Structured Data?
+### 4. How would you handle sortable table headers accessibly?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Use a button inside the header cell for the sort action, keep focus behavior normal, and expose sort state with `aria-sort` on the relevant `th`. The visual arrow alone is not enough.
 
-### 5. What should a senior engineer look for in code review?
+### 5. When does structured data matter for frontend work?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Structured data matters when pages need better search understanding, rich results, product/event/article metadata, or machine-readable content. I validate it with tooling and keep it consistent with visible content so SEO metadata does not lie.
 
 ---
 

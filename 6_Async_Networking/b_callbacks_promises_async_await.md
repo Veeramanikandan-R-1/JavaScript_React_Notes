@@ -123,25 +123,25 @@ async function loadDashboard() {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Callbacks, Promises, and async-await in a real project?
+### 1. What problem did promises solve compared with nested callbacks?
 
-I model async work as explicit states: idle, loading, success, empty, error, cancelled, and stale.
+Promises make async results composable: you can return values, chain steps, handle errors in one path, and combine work with APIs like `Promise.all`. They do not remove the need to model loading, cancellation, or stale responses.
 
-### 2. What happens internally when Callbacks, Promises, and async-await is involved?
+### 2. What does `async` do to a function's return value?
 
-Promises schedule continuations as microtasks, while timers and user events are tasks. HTTP failures need explicit status handling because fetch does not reject on 4xx/5xx.
+An `async` function always returns a promise. Returning a value resolves the promise with that value, and throwing an error rejects it. This matters when callers forget to `await` or attach error handling.
 
-### 3. How do you debug issues related to Callbacks, Promises, and async-await?
+### 3. Why does `try/catch` sometimes fail to catch an async error?
 
-I check request order, cancellation, stale updates, retry rules, idempotency, and how the UI behaves when the network is slow or offline.
+If you start a promise inside `try` but do not `await` it or return it, the rejection happens after the `try/catch` has finished. Use `await`, return the promise chain, or attach a `.catch` where ownership is clear.
 
-### 4. What is the biggest production risk with Callbacks, Promises, and async-await?
+### 4. What is the difference between sequential and parallel awaits?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Sequential awaits wait for one request before starting the next. Parallel awaits start independent work first, then await together with `Promise.all` or a similar helper. The right choice depends on dependencies and failure behavior.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What async code issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Floating promises, missing error paths, serial requests that could be parallel, parallel requests that should be ordered, stale UI updates after unmount/navigation, and loading states that never settle.
 
 ---
 

@@ -169,25 +169,25 @@ Why custom hooks help:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Custom Hooks and Reusable Logic in a real project?
+### 1. When should you extract a custom hook?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Extract a custom hook when stateful logic is reused, when a component is becoming hard to read, or when an external system needs a clean React API. Do not extract only to make a file look smaller if the abstraction has no clear purpose.
 
-### 2. What happens internally when Custom Hooks and Reusable Logic is involved?
+### 2. What makes a custom hook API good?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+It has clear inputs and outputs, owns cleanup, documents async/error states, avoids surprising side effects, and keeps stable references where consumers reasonably depend on them.
 
-### 3. How do you debug issues related to Custom Hooks and Reusable Logic?
+### 3. How do you test a custom hook?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Test through a small component or hook-testing utility, depending on the stack. Cover initial state, updates, cleanup, async success/failure, stale responses, and dependency changes.
 
-### 4. What is the biggest production risk with Custom Hooks and Reusable Logic?
+### 4. What can go wrong when a hook hides too much?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Consumers may not understand when network calls happen, how errors are handled, what triggers rerenders, or how cleanup works. A reusable hook should reduce complexity, not move it into a black box.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What custom-hook issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Missing dependency handling, no cleanup, returning unstable objects/functions unnecessarily, mixing unrelated responsibilities, hiding product decisions, and hooks that are reusable in name only.
 
 ---
 

@@ -121,25 +121,25 @@ When a style does not apply, inspect:
 
 # Interview Questions with Answers
 
-### 1. How would you explain CSS Interview Notes in a real project?
+### 1. Explain the cascade and specificity as if you were debugging a real bug.
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+The winning declaration depends on origin, importance, cascade layer, specificity, source order, and inheritance. In a real bug, I inspect the computed style, find the crossed-out declarations, identify the winning selector, and decide whether the fix belongs in order, specificity, scope, or component API.
 
-### 2. What happens internally when CSS Interview Notes is involved?
+### 2. When do you choose Flexbox and when do you choose Grid?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Flexbox is better for one-dimensional distribution, such as nav items or action rows. Grid is better for two-dimensional page or card layouts where rows and columns both matter. I choose based on the layout problem, not personal preference.
 
-### 3. How do you debug issues related to CSS Interview Notes?
+### 3. A page has horizontal scroll only on mobile. What do you check first?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Inspect the page width, highlight overflowing elements, and check fixed widths, long unbroken text, images, tables, negative margins, `100vw`, and flex children missing `min-width: 0`. Then confirm the fix at zoomed text sizes and narrow devices.
 
-### 4. What is the biggest production risk with CSS Interview Notes?
+### 4. What makes CSS accessible?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Accessible CSS preserves visible focus, readable contrast, scalable text, enough hit area, usable disabled/error states, reduced-motion preferences, and layouts that still work with zoom, translated text, and assistive technology.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How would you review a CSS pull request as a senior frontend engineer?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I check whether the layout model is appropriate, selectors are scoped, tokens are used, states are complete, responsive behavior survives real content, and the change does not create browser-support or performance risks. I also look for whether the CSS matches an existing component pattern before adding a new one.
 
 ---
 

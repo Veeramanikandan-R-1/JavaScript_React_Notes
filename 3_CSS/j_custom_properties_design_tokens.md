@@ -128,25 +128,25 @@ Before going deeper into frameworks or libraries, understand this topic as part 
 
 # Interview Questions with Answers
 
-### 1. How would you explain Custom Properties and Design Tokens in a real project?
+### 1. How are CSS custom properties different from Sass variables?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Sass variables are resolved at build time. CSS custom properties exist in the browser, participate in cascade and inheritance, and can change at runtime, which makes them useful for themes, component APIs, and user preferences.
 
-### 2. What happens internally when Custom Properties and Design Tokens is involved?
+### 2. How would you name design tokens for a real product?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+Use raw scale tokens for primitives, such as `--color-blue-600`, and semantic tokens for usage, such as `--color-action-primary-bg` or `--color-text-danger`. Components should depend mostly on semantic tokens so themes can change without rewriting component CSS.
 
-### 3. How do you debug issues related to Custom Properties and Design Tokens?
+### 3. How would you implement light and dark theme support with custom properties?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Define default tokens on `:root`, override semantic tokens under a theme selector such as `[data-theme="dark"]`, and update the attribute from app state or system preference. Test contrast, focus states, charts, disabled states, and third-party embedded surfaces in both themes.
 
-### 4. What is the biggest production risk with Custom Properties and Design Tokens?
+### 4. What can go wrong with runtime theming?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Variables may inherit from an unexpected ancestor, fallback values may hide missing tokens, theme changes can flash during app startup, and color combinations can fail contrast. Inspect computed values in DevTools rather than only reading the source CSS.
 
-### 5. What should a senior engineer look for in code review?
+### 5. How do design tokens help a frontend team beyond reusing colors?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+They create a shared contract for spacing, typography, radius, elevation, motion, density, and states. Good tokens reduce visual drift, make redesigns cheaper, and give design, engineering, and QA the same language for reviewing UI.
 
 ---
 

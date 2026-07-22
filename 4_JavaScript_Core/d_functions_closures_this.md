@@ -236,25 +236,25 @@ console.log(formatUsd(120));
 
 # Interview Questions with Answers
 
-### 1. How would you explain Functions, Closures, and this in a real project?
+### 1. What is a closure, and where does it show up in frontend code?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+A closure is a function retaining access to variables from its lexical scope after that outer scope has run. It shows up in event handlers, timers, async callbacks, hooks, memoized functions, debounced handlers, and module-level private state.
 
-### 2. What happens internally when Functions, Closures, and this is involved?
+### 2. Why does `this` behave differently in arrow functions?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+Arrow functions do not create their own `this`; they capture it lexically from the surrounding scope. Normal functions receive `this` from how they are called, which is why method extraction, callbacks, and event handlers can change behavior.
 
-### 3. How do you debug issues related to Functions, Closures, and this?
+### 3. What can go wrong when passing an object method as a callback?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+The method may lose its receiver, so `this` becomes `undefined` in strict mode or points somewhere unexpected. Fixes include binding the method, wrapping the call, or designing the function to accept explicit arguments instead of relying on `this`.
 
-### 4. What is the biggest production risk with Functions, Closures, and this?
+### 4. How would you debug a stale value inside a click handler or timer?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Find where the function was created and what variables it captured. Then check whether the value changes after creation, whether the handler is re-registered, and whether the code needs a fresh closure, a ref, a dependency update, or a functional state update.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What function-related issues do you look for in code review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Hidden side effects, unclear return values, accidental dependency on `this`, callbacks that capture stale state, unnecessary function recreation in hot paths, and utility functions that mix pure logic with DOM or network work.
 
 ---
 

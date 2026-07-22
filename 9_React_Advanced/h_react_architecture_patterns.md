@@ -135,25 +135,25 @@ App code wires providers, routes, and shell layout.
 
 # Interview Questions with Answers
 
-### 1. How would you explain React Architecture Patterns in a real project?
+### 1. How do you decide component boundaries in a large React feature?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Boundaries should follow product responsibilities, state ownership, reuse needs, and testing seams. A good component has a clear purpose and API; it is not split only because the file got long.
 
-### 2. What happens internally when React Architecture Patterns is involved?
+### 2. What is the difference between UI state, server state, and derived state?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+UI state is owned by the client interaction, server state comes from remote data and needs caching/invalidation, and derived state can be calculated from existing values. Mixing them creates unnecessary effects and synchronization bugs.
 
-### 3. How do you debug issues related to React Architecture Patterns?
+### 3. When would you introduce a shared design-system component?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Introduce one when the pattern is reused, needs consistent accessibility/visual behavior, or carries product-wide interaction rules. Avoid premature shared components that freeze a pattern before the use cases are understood.
 
-### 4. What is the biggest production risk with React Architecture Patterns?
+### 4. What architecture signs tell you state is in the wrong place?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Many props passed through uninterested components, duplicated state that drifts, effects that sync siblings, global stores for local behavior, and components that cannot be tested without booting a large part of the app.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What React architecture issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Unclear ownership, over-generalized components, mixed server/client state, unnecessary global state, effects used as data plumbing, inaccessible shared components, and feature code reaching into another feature's internals.
 
 ---
 

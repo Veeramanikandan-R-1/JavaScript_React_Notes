@@ -163,25 +163,25 @@ Visual note:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Source Maps, Debugging, CI, and Frontend Delivery in a real project?
+### 1. What are source maps used for in production debugging?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+They map minified bundle locations back to the original source files, making stack traces and DevTools debugging usable. They are most useful when tied to the exact release/commit that produced the deployed assets.
 
-### 2. What happens internally when Source Maps, Debugging, CI, and Frontend Delivery is involved?
+### 2. What are the security and operational tradeoffs of publishing source maps?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+Public source maps can expose source structure and comments. Private upload to an error-monitoring tool gives debugging value while reducing exposure. The right choice depends on product risk and observability needs.
 
-### 3. How do you debug issues related to Source Maps, Debugging, CI, and Frontend Delivery?
+### 3. What should CI verify before deploying a frontend app?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+Install from the lockfile, typecheck, lint, test, build, run key smoke or E2E checks, validate assets, and attach the release id/source maps. The pipeline should fail before deployment when the app cannot be built reproducibly.
 
-### 4. What is the biggest production risk with Source Maps, Debugging, CI, and Frontend Delivery?
+### 4. How do you debug a bug that appears only after deployment?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Start from the release id, compare the deployed commit and lockfile, inspect production env values, reproduce with a production build locally, check source-mapped stack traces, and review CDN/cache behavior.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What delivery-pipeline issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Skipping lockfile installs, deploying without build/test evidence, source maps not matching releases, long-lived cached HTML, missing rollback plan, and CI scripts that differ from local package scripts without a reason.
 
 ---
 

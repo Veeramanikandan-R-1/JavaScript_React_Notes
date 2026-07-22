@@ -153,25 +153,25 @@ Experimental elements and proposals change over time. If old notes mention items
 
 # Interview Questions with Answers
 
-### 1. How would you explain details, dialog, template, and Progressive Enhancement in a real project?
+### 1. When would you choose native `details/summary` instead of building an accordion from scratch?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+When the requirement is a simple disclosure that should work with minimal JavaScript. Native `details/summary` gives built-in toggle behavior and accessibility semantics. I would build custom only if design or behavior requirements exceed what the native element can reliably support.
 
-### 2. What happens internally when details, dialog, template, and Progressive Enhancement is involved?
+### 2. What does the native `dialog` element give you, and what must you still verify?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+`dialog` gives a browser-supported dialog primitive, `showModal()`, backdrop behavior, and better semantics than a random div. I still verify focus movement, close behavior, accessible name, scroll locking, browser support, and how nested or stacked modals are handled.
 
-### 3. How do you debug issues related to details, dialog, template, and Progressive Enhancement?
+### 3. What is progressive enhancement?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+Progressive enhancement means starting with working HTML and then layering CSS and JavaScript enhancements. If JavaScript fails or loads slowly, the core content or form should still be understandable and usable where possible.
 
-### 4. What is the biggest production risk with details, dialog, template, and Progressive Enhancement?
+### 4. When is the `template` element useful?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+`template` stores inert markup that is not rendered until cloned. It is useful for lightweight browser-native examples, repeated markup, or progressive enhancement without immediately executing scripts or loading media inside the template.
 
-### 5. What should a senior engineer look for in code review?
+### 5. A modal works visually but screen-reader users are confused. What do you inspect?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I inspect the accessible name, role, focus placement, tab containment, background inertness, Escape/close behavior, return focus, and whether important content is announced. Visual overlay alone does not make a dialog accessible.
 
 ---
 

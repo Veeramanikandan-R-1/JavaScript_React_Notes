@@ -179,25 +179,25 @@ function Dashboard() {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Semantic HTML and Landmarks in a real project?
+### 1. When would you use `section`, `article`, `aside`, and a plain `div`?
 
-It means choosing markup that describes meaning first: headings for hierarchy, landmarks for page regions, labels for controls, and native elements for behavior.
+Use `section` for a thematic group that usually has a heading, `article` for self-contained content that can stand alone, `aside` for complementary content, and `div` when you only need a styling or layout wrapper. A senior answer should not force semantic tags where they do not add meaning.
 
-### 2. What happens internally when Semantic HTML and Landmarks is involved?
+### 2. A page has three navigation areas. How do screen-reader users distinguish them?
 
-The browser parses markup into the DOM and accessibility tree, so incorrect HTML can create bugs even when the screen looks visually correct.
+Repeated landmarks need accessible names, such as `<nav aria-label="Primary">`, `<nav aria-label="Breadcrumb">`, and `<nav aria-label="Account">`. Otherwise assistive tech may announce several identical navigation landmarks.
 
-### 3. How do you debug issues related to Semantic HTML and Landmarks?
+### 3. Is `div role="button"` equivalent to a real `button`?
 
-I check DOM order, headings, labels, alt text, link/button purpose, form submission, keyboard navigation, and whether the page still works with limited JavaScript.
+No. ARIA can expose a role, but it does not automatically give keyboard behavior, disabled behavior, form behavior, focus styling, or expected browser interactions. I use a real `button` unless there is a strong reason not to.
 
-### 4. What is the biggest production risk with Semantic HTML and Landmarks?
+### 4. How many `main` elements should a page have?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+One visible `main` landmark per page is the normal rule. It identifies the primary unique content. Multiple visible `main` landmarks make landmark navigation confusing, especially for screen-reader users.
 
-### 5. What should a senior engineer look for in code review?
+### 5. A custom tab component uses clickable `span`s. What do you ask in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I ask whether native buttons can be used. If it must be custom, I check roles, `aria-selected`, roving tab index or focus strategy, keyboard arrows, focus visibility, and whether the DOM order matches the visual order.
 
 ---
 

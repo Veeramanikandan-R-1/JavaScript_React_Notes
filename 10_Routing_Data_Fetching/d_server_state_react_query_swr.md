@@ -131,25 +131,25 @@ function OrdersPage() {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Server State with React Query or SWR in a real project?
+### 1. What makes a good React Query or SWR key?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+A good key includes every input that changes the returned data: resource id, filters, pagination, locale, user scope, and feature mode. Missing inputs create wrong-cache bugs.
 
-### 2. What happens internally when Server State with React Query or SWR is involved?
+### 2. What is the difference between stale data and cached data?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+Cached data is stored for reuse. Stale data is cached data that the library considers old enough to refetch. Stale does not always mean unusable; it depends on product freshness requirements.
 
-### 3. How do you debug issues related to Server State with React Query or SWR?
+### 3. How do you update cached data after a mutation?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Invalidate affected queries, refetch, or update the cache directly when the new value is known. For optimistic updates, snapshot previous data and roll back on failure.
 
-### 4. What is the biggest production risk with Server State with React Query or SWR?
+### 4. When should you not use a server-state library?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+For simple static data, one-off local interactions, or state that is purely client-owned. Server-state libraries shine when caching, invalidation, retries, background refetching, and deduplication matter.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What server-state issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Weak query keys, duplicated local copies of cached data, missing invalidation, unsafe optimistic updates, aggressive stale times, and UI that treats background refetch as full-page loading.
 
 ---
 

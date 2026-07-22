@@ -166,25 +166,25 @@ Visual notes from `htmlCss.docx`:
 
 # Interview Questions with Answers
 
-### 1. How would you explain CSS Grid Layout in a real project?
+### 1. When would you choose CSS Grid over Flexbox?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+I choose Grid when rows and columns both matter: dashboards, galleries, page shells, comparison layouts, and forms with aligned labels/fields. Flexbox is better for one-dimensional alignment. The interview answer should be about layout shape, not personal preference.
 
-### 2. What happens internally when CSS Grid Layout is involved?
+### 2. How does `minmax()` help responsive layouts?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+`minmax()` lets a track have a minimum usable size and a flexible maximum. A common pattern is `repeat(auto-fit, minmax(16rem, 1fr))`, which creates responsive card grids without hard-coded breakpoints.
 
-### 3. How do you debug issues related to CSS Grid Layout?
+### 3. What is the difference between explicit and implicit grid tracks?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+Explicit tracks are defined by `grid-template-columns` or `grid-template-rows`. Implicit tracks are created when items are placed outside the defined grid. I check implicit tracks when items appear in unexpected rows or columns.
 
-### 4. What is the biggest production risk with CSS Grid Layout?
+### 4. How do named grid areas help maintainability?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Named areas make page-region placement readable, especially for responsive layouts that rearrange header, sidebar, content, and footer. They are less useful for highly dynamic lists where line or auto-placement is clearer.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What grid bugs do you look for on real content?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I check overflow from long content, too-small `minmax()` values, implicit tracks, keyboard/focus order versus visual order, and whether CSS rearrangement changes the reading order in a confusing way.
 
 ---
 

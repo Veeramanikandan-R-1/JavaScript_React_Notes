@@ -234,25 +234,25 @@ Visual notes from `htmlCss.docx`:
 
 # Interview Questions with Answers
 
-### 1. How would you explain CSS Architecture, BEM, and CSS Modules in a real project?
+### 1. How do you prevent global CSS from breaking unrelated screens?
 
-I start from the layout requirement, decide whether normal flow, flexbox, grid, or positioning fits, then use the cascade deliberately.
+Use clear ownership boundaries: component-scoped styles, CSS Modules, BEM, or a controlled utility system. Avoid broad selectors like `.content button`, keep selectors shallow, and define where global reset, tokens, typography, and layout rules are allowed.
 
-### 2. What happens internally when CSS Architecture, BEM, and CSS Modules is involved?
+### 2. How would you compare BEM, CSS Modules, and utility classes in an interview?
 
-The browser resolves cascade and computed styles, calculates boxes, lays them out, paints, and composites. A CSS bug usually lives in one of those steps.
+BEM gives readable global class names but relies on discipline. CSS Modules give local scoping at build time. Utility classes create consistency through constrained primitives but can make markup dense if the team has no extraction strategy.
 
-### 3. How do you debug issues related to CSS Architecture, BEM, and CSS Modules?
+### 3. What does a good class name communicate?
 
-I inspect the element, check computed styles, box model, active media/container queries, overwritten rules, overflow, and stacking contexts.
+It communicates component ownership and purpose, not the current visual implementation. `.product-card__price` is more maintainable than `.large-blue-text` because the design can change while the role stays stable.
 
-### 4. What is the biggest production risk with CSS Architecture, BEM, and CSS Modules?
+### 4. How would you structure CSS for a large app with a design system?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Keep global files limited to reset, tokens, base typography, and app shell rules. Put component styles near components, expose documented variants through props/classes, and centralize shared patterns in design-system components instead of copying CSS between features.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What CSS architecture smells do you look for in a pull request?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Deep selectors, repeated magic values, `!important`, global overrides for one screen, class names tied to color or position, and copied component styles. I also check that new variants do not bypass tokens, accessibility states, or existing component APIs.
 
 ---
 

@@ -122,25 +122,25 @@ console.log(greet(user));
 
 # Interview Questions with Answers
 
-### 1. How would you explain JavaScript Introduction in a real project?
+### 1. What does it mean that JavaScript is single-threaded in the browser?
 
-I explain the value model, execution order, scope, references, and failure cases before reaching for syntax.
+JavaScript execution for a page mostly runs on the main thread, which is also responsible for user input, style, layout, and paint. Long synchronous work can block clicks, typing, animation, and rendering, so production frontend code must be careful with expensive loops and heavy parsing.
 
-### 2. What happens internally when JavaScript Introduction is involved?
+### 2. How would you explain the difference between JavaScript and the browser APIs?
 
-JavaScript runs synchronously until the stack clears; async work resumes later through host scheduling, so timing and shared state matter.
+JavaScript is the language: values, functions, objects, scope, promises, and modules. The browser provides host APIs such as DOM, fetch, timers, storage, events, history, and rendering. A good answer separates language behavior from environment behavior.
 
-### 3. How do you debug issues related to JavaScript Introduction?
+### 3. Why does understanding references matter in UI code?
 
-I reproduce the input, add a breakpoint, inspect scope and call stack, verify object identity, and test the edge case that failed.
+Objects and arrays are shared by reference, so mutating one reference can unexpectedly change state elsewhere. This matters in React, memoization, reducers, form state, cache updates, and debugging “why did this value change?” bugs.
 
-### 4. What is the biggest production risk with JavaScript Introduction?
+### 4. How do you keep JavaScript from making an interface feel slow?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Measure main-thread work, split expensive tasks, avoid unnecessary re-renders, debounce high-frequency handlers, lazy-load noncritical code, and move appropriate work to workers. The goal is not only faster code; it is preserving responsiveness.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What do you look for when reviewing a frontend JavaScript utility?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+I check input/output clarity, edge cases, mutation, error handling, testability, naming, and whether the utility belongs in shared code. I also check whether browser-specific behavior has leaked into code that should be pure.
 
 ---
 

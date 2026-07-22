@@ -152,25 +152,25 @@ Frontend code can reduce risk, but security-sensitive checks must be enforced by
 
 # Interview Questions with Answers
 
-### 1. How would you explain Browser Security, CORS, CSP, and XSS in a real project?
+### 1. What problem does CORS solve, and what does it not solve?
 
-It is about using the web platform directly: DOM, events, forms, storage, security boundaries, and browser rendering.
+CORS lets a server decide which browser origins are allowed to read its cross-origin responses. It is not authentication, authorization, or backend security; non-browser clients can still call the server unless the server protects the resource.
 
-### 2. What happens internally when Browser Security, CORS, CSP, and XSS is involved?
+### 2. Why is XSS dangerous in a frontend app?
 
-Browser APIs are live and stateful, so code must clean up listeners, avoid layout thrashing, preserve accessibility, and respect security limits.
+Injected script can act as the user, read accessible tokens/data, change the page, submit requests, and steal sensitive information. Prevent it by escaping output, avoiding unsafe HTML insertion, sanitizing trusted rich text, and using CSP as defense in depth.
 
-### 3. How do you debug issues related to Browser Security, CORS, CSP, and XSS?
+### 3. What does CSP protect against?
 
-I inspect DOM state, event propagation, network/security errors, storage values, accessibility names, and performance traces.
+CSP limits where scripts, styles, images, frames, and other resources can load from and can block inline script execution. It reduces the impact of injection bugs, but it does not replace correct escaping and safe rendering.
 
-### 4. What is the biggest production risk with Browser Security, CORS, CSP, and XSS?
+### 4. How do you debug a CORS failure?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Read the browser console and Network tab, inspect preflight `OPTIONS`, `Access-Control-Allow-Origin`, allowed methods/headers, credentials mode, and whether the API is returning the headers on both success and error responses.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What frontend security issues do you look for in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Unsafe `innerHTML`, rendering untrusted markdown without sanitization, secrets in client code, relaxed CSP, storing auth tokens in risky places, missing `rel="noopener"` on external links, and trusting client-side checks for authorization.
 
 ---
 

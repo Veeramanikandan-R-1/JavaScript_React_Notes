@@ -131,25 +131,25 @@ function Modal({ title, children, onClose }) {
 
 # Interview Questions with Answers
 
-### 1. How would you explain Portals, Modals, and Overlays in a real project?
+### 1. Why are portals useful for modals and overlays?
 
-React code should be understood as pure rendering plus explicit state and effects. Components describe UI; React decides how to update the DOM.
+Portals let React render overlay content outside the parent DOM hierarchy while keeping it in the React tree. This helps with stacking, clipping, and app shell layout without losing React context.
 
-### 2. What happens internally when Portals, Modals, and Overlays is involved?
+### 2. What accessibility behavior does a modal need?
 
-State updates schedule rendering; React reconciles element trees using component type and keys, then commits DOM changes and runs effects after commit.
+It needs an accessible name, focus moved into it on open, focus contained while open, Escape/close behavior where appropriate, background content hidden from interaction, and focus restored to the opener on close.
 
-### 3. How do you debug issues related to Portals, Modals, and Overlays?
+### 3. What overlay bugs happen because of stacking contexts?
 
-I check props, state ownership, derived values, keys, effect dependencies, memoization assumptions, and whether server state is being treated as UI state.
+Parents with transforms, opacity, filters, isolation, or positioned z-index can create stacking contexts that trap overlays behind other UI. Portals and a z-index system help avoid random one-off fixes.
 
-### 4. What is the biggest production risk with Portals, Modals, and Overlays?
+### 4. How should body scroll behave when a modal is open?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Usually background scroll should be locked while preserving scroll position and avoiding layout shift from scrollbar changes. Mobile browsers need special care because fixed positioning and viewport units can behave differently.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What modal/overlay issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Missing focus management, click-outside bugs, Escape behavior conflicts, z-index magic numbers, body scroll leaks, no cleanup, inaccessible names, and overlays that cannot handle nested or concurrent dialogs.
 
 ---
 

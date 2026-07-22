@@ -234,25 +234,25 @@ Important distinctions:
 
 # Interview Questions with Answers
 
-### 1. How would you explain Babel, TypeScript, and Transpilation in a real project?
+### 1. What is the difference between transpilation and type checking?
 
-Tooling should make development faster and production safer: install, run, lint, test, bundle, preview, and deploy reliably.
+Transpilation changes source syntax into runnable JavaScript for target browsers or runtimes. Type checking analyzes TypeScript for type errors but does not change runtime behavior. Many toolchains do these as separate steps.
 
-### 2. What happens internally when Babel, TypeScript, and Transpilation is involved?
+### 2. Why can TypeScript pass but the app still fail at runtime?
 
-A build tool follows imports, transforms files, splits chunks, rewrites assets, and emits optimized files. Dev mode and production mode can behave differently.
+Types can be wrong at boundaries such as APIs, local storage, URL params, feature flags, and third-party scripts. TypeScript does not validate runtime data unless you add parsing or schema validation.
 
-### 3. How do you debug issues related to Babel, TypeScript, and Transpilation?
+### 3. When do you need Babel in a modern frontend stack?
 
-I inspect scripts, dependency versions, lockfiles, source maps, environment variables, build output, and CI logs.
+You may need Babel for JSX transforms, syntax transforms, plugins, legacy browser support, or specific framework/tooling requirements. Some stacks use esbuild or SWC for speed, so the answer should match the project setup.
 
-### 4. What is the biggest production risk with Babel, TypeScript, and Transpilation?
+### 4. How do browser targets affect output code?
 
-The biggest risk is building something that works for the demo state but fails with real content, slow networks, accessibility needs, errors, or future changes.
+Targets decide which syntax must be transformed and which polyfills may be needed. A modern-only target can ship smaller code, while supporting older browsers may require transforms that change performance and bundle size.
 
-### 5. What should a senior engineer look for in code review?
+### 5. What TypeScript/tooling issues do you flag in review?
 
-They should check the mental model, edge cases, accessibility, performance cost, naming, state ownership, test coverage, and whether the simpler native/platform option was considered.
+Unchecked `any`, unsafe assertions, disabled type errors, inconsistent build/typecheck scripts, runtime data trusted without validation, and transpiler changes without verifying the production build.
 
 ---
 
