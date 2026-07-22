@@ -123,25 +123,25 @@ export function AppRoute() {
 
 # Interview Questions with Answers
 
-### 1. Why does LCP matter in React Performance and Profiling?
+### 1. How do you know a React performance problem is actually a React problem?
 
-LCP means Largest Contentful Paint. Use performance work when measurement shows a user-facing problem or a budget risk.
+Profile first. The bottleneck may be React rendering, JavaScript outside React, layout/paint, network, images, or third-party scripts. Use React Profiler and browser Performance traces together.
 
-### 2. How does CLS affect the implementation?
+### 2. What does the React Profiler tell you?
 
-CLS means Cumulative Layout Shift. The browser has limited time per frame; long JavaScript, forced layout, heavy paint, and excessive network cost reduce responsiveness.
+It shows which components rendered, how long they took, and why commits happened. It helps identify expensive renders, unnecessary parent updates, and props/state changes that cascade through the tree.
 
-### 3. What mistake should you avoid around optimizing random code without profiling?
+### 3. What are common causes of unnecessary React renders?
 
-Avoid optimizing random code without profiling. Measure with DevTools, Lighthouse, React Profiler, and real-user metrics.
+State owned too high, context values changing identity, unstable object/function props, selectors returning new references, key changes, and effects that set derived state.
 
-### 4. How would you debug a production issue related to React Performance and Profiling?
+### 4. When is `useMemo` not the right fix?
 
-Capture a trace before changing code. Identify whether time is spent in network, parse, scripting, style, layout, paint, or React rendering.
+When the calculation is cheap, dependencies change every render, the bottleneck is elsewhere, or the complexity outweighs the gain. Often the better fix is moving state down, splitting components, or reducing work.
 
-### 5. What would you check in code review for React Performance and Profiling?
+### 5. What React performance issues do you flag in review?
 
-Is the initial bundle reasonable? Are images and fonts optimized?
+Premature memoization, expensive work in render, large context providers, avoidable list rerenders, effects that trigger render loops, and no measurement for risky performance changes.
 
 ---
 

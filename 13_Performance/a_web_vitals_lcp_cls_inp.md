@@ -123,25 +123,25 @@ export function AppRoute() {
 
 # Interview Questions with Answers
 
-### 1. Why does LCP matter in Web Vitals, LCP, CLS, and INP?
+### 1. What do LCP, CLS, and INP measure?
 
-LCP means Largest Contentful Paint. Use performance work when measurement shows a user-facing problem or a budget risk.
+LCP measures when the main content appears, CLS measures unexpected layout movement, and INP measures interaction responsiveness. Together they connect performance work to user-visible loading, stability, and input delay.
 
-### 2. How does CLS affect the implementation?
+### 2. How would you improve a poor LCP score?
 
-CLS means Cumulative Layout Shift. The browser has limited time per frame; long JavaScript, forced layout, heavy paint, and excessive network cost reduce responsiveness.
+Identify the LCP element, then improve server response, resource priority, image sizing/format, CSS delivery, font loading, and JavaScript blocking. Do not guess; inspect field data and a trace.
 
-### 3. What mistake should you avoid around optimizing random code without profiling?
+### 3. What causes CLS in real apps?
 
-Avoid optimizing random code without profiling. Measure with DevTools, Lighthouse, React Profiler, and real-user metrics.
+Images without dimensions, late-loading ads/banners, web fonts swapping, injected content above existing content, skeletons with different final sizes, and route transitions that do not reserve space.
 
-### 4. How would you debug a production issue related to Web Vitals, LCP, CLS, and INP?
+### 4. How do you debug poor INP?
 
-Capture a trace before changing code. Identify whether time is spent in network, parse, scripting, style, layout, paint, or React rendering.
+Use field data to find affected interactions, then capture a Performance trace. Look for long tasks, expensive event handlers, heavy React renders, layout thrashing, and synchronous work blocking the next paint.
 
-### 5. What would you check in code review for Web Vitals, LCP, CLS, and INP?
+### 5. What performance checks do you do in review?
 
-Is the initial bundle reasonable? Are images and fonts optimized?
+Image dimensions and priority, font strategy, bundle impact, route-level lazy loading, third-party scripts, loading states that reserve space, and whether the change has before/after measurement when performance risk is real.
 
 ---
 

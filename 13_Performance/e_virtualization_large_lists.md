@@ -125,25 +125,25 @@ function LargeOrderList({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. Why does Conditional branch matter in Virtualization and Large Lists?
+### 1. When should you use list virtualization?
 
-Conditional branch means Choosing which UI to render from current state. In interviews, connect it to Virtualization and Large Lists by explaining the concrete UI behavior, failure state, and tradeoff.
+Use virtualization when rendering many rows/cards creates slow initial render, scrolling jank, or high memory use. It renders only the visible window plus overscan instead of the entire list.
 
-### 2. How does Stable key affect the implementation?
+### 2. What are the tradeoffs of virtualization?
 
-Stable key means A persistent identity for each item in a changing list. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+It adds complexity around dynamic row heights, keyboard navigation, screen readers, find-in-page, sticky headers, scroll restoration, and measuring. It should be used when the performance gain justifies those costs.
 
-### 3. What mistake should you avoid around optimizing random code without profiling?
+### 3. Why are stable item keys still important in virtualized lists?
 
-Avoid optimizing random code without profiling. Measure with DevTools, Lighthouse, React Profiler, and real-user metrics.
+Rows are reused as the user scrolls. Stable keys and item identities prevent wrong row state, focus jumps, incorrect selection, and stale rendered content.
 
-### 4. How would you debug a production issue related to Virtualization and Large Lists?
+### 4. How do you handle variable-height rows?
 
-Capture a trace before changing code. Identify whether time is spent in network, parse, scripting, style, layout, paint, or React rendering.
+Use a virtualization library that supports measurement, cache row heights carefully, update measurements when content changes, and test images, expanded rows, wrapping text, and responsive widths.
 
-### 5. What would you check in code review for Virtualization and Large Lists?
+### 5. What large-list issues do you flag in review?
 
-Is the initial bundle reasonable? Are images and fonts optimized?
+Rendering thousands of nodes, filtering/sorting every render, index keys, no empty/loading states, inaccessible virtualized content, broken scroll restoration, and virtualization added before measuring the real bottleneck.
 
 ---
 

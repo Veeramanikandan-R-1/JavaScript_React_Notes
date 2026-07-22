@@ -148,25 +148,25 @@ Senior debugging line: first identify whether the bottleneck is network, parsing
 
 # Interview Questions with Answers
 
-### 1. Why does LCP matter in Rendering Performance, Layout, and Paint?
+### 1. What is the difference between layout and paint?
 
-LCP means Largest Contentful Paint. Use performance work when measurement shows a user-facing problem or a budget risk.
+Layout calculates geometry: where elements are and how big they are. Paint draws pixels for text, images, shadows, borders, and backgrounds. Some changes trigger both; some composited changes can avoid layout and paint.
 
-### 2. How does CLS affect the implementation?
+### 2. What is forced synchronous layout?
 
-CLS means Cumulative Layout Shift. The browser has limited time per frame; long JavaScript, forced layout, heavy paint, and excessive network cost reduce responsiveness.
+It happens when JavaScript writes to the DOM and then immediately reads layout values, forcing the browser to calculate layout early. In loops or frequent events, this becomes layout thrashing.
 
-### 3. What mistake should you avoid around optimizing random code without profiling?
+### 3. Which CSS/DOM changes are usually cheaper to animate?
 
-Avoid optimizing random code without profiling. Measure with DevTools, Lighthouse, React Profiler, and real-user metrics.
+`transform` and `opacity` are usually cheaper because they can often be composited. Animating dimensions, position, filters, or large shadows can trigger layout/paint and should be measured.
 
-### 4. How would you debug a production issue related to Rendering Performance, Layout, and Paint?
+### 4. How do you debug a slow scroll interaction?
 
-Capture a trace before changing code. Identify whether time is spent in network, parse, scripting, style, layout, paint, or React rendering.
+Record a trace, inspect long tasks, paint time, forced reflow warnings, and event handlers. Then reduce main-thread work, batch layout reads/writes, use passive listeners where appropriate, and simplify expensive visual effects.
 
-### 5. What would you check in code review for Rendering Performance, Layout, and Paint?
+### 5. What rendering issues do you flag in review?
 
-Is the initial bundle reasonable? Are images and fonts optimized?
+Layout reads inside loops, scroll handlers doing heavy work, unnecessary DOM churn, expensive animations, huge box shadows/filters, and code that measures layout without accounting for fonts, images, and responsive changes.
 
 ---
 
