@@ -133,25 +133,25 @@ export default function OrdersPage({ orders }) {
 
 # Interview Questions with Answers
 
-### 1. Why does Label association matter in Form Accessibility and Error States?
+### 1. What makes a form field accessible?
 
-Label association means A programmatic connection between a label and its control. In interviews, connect it to Form Accessibility and Error States by explaining the concrete UI behavior, failure state, and tradeoff.
+It has a programmatic label, clear instructions, valid input semantics, keyboard support, visible focus, and any help/error text connected to the field with accessible relationships.
 
-### 2. How does Error message affect the implementation?
+### 2. How should errors be announced after submit?
 
-Error message means Clear feedback tied to the invalid field. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+Show a summary when useful, connect each field error to its input, and move focus to the first invalid field or summary depending on form complexity. The user should understand what failed and how to fix it.
 
-### 3. What mistake should you avoid around mutating state directly?
+### 3. Why is disabling the submit button often not enough?
 
-Avoid mutating state directly. Keep render pure.
+A disabled button may not explain what is wrong and may be skipped by assistive technology. If submit is disabled, the UI should still communicate requirements and errors clearly.
 
-### 4. How would you debug a production issue related to Form Accessibility and Error States?
+### 4. How do you handle async validation accessibly?
 
-Use React DevTools to inspect props, state, owners, and render causes. Check keys, effect dependencies, stale closures, and state mutation.
+Show pending state near the field, avoid stealing focus, cancel stale checks, and announce final errors clearly. Username/email availability checks are a common example.
 
-### 5. What would you check in code review for Form Accessibility and Error States?
+### 5. What form-accessibility issues do you flag in review?
 
-Is state owned by the smallest sensible component? Are effects necessary and cleaned up?
+Missing labels, placeholder-only fields, color-only errors, errors not associated with inputs, focus lost after submit, inaccessible custom controls, and validation that changes layout unpredictably.
 
 ---
 

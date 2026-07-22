@@ -129,25 +129,25 @@ if (!result.success) {
 
 # Interview Questions with Answers
 
-### 1. Why does Schema matter in Schema Validation with Zod or Yup?
+### 1. What problem does schema validation solve in frontend forms?
 
-Schema means A single definition of expected data shape and constraints. In interviews, connect it to Schema Validation with Zod or Yup by explaining the concrete UI behavior, failure state, and tradeoff.
+It centralizes expected shape, constraints, transformations, and error generation for form/API data. It is especially useful at runtime boundaries where TypeScript alone cannot verify incoming values.
 
-### 2. How does Resolver affect the implementation?
+### 2. How is schema validation different from TypeScript types?
 
-Resolver means Code that turns schema results into form errors. Implementation depends on ownership, lifecycle, and edge cases, not only naming the API.
+TypeScript checks code at compile time. Schemas validate actual runtime data, such as form input, API responses, local storage, and URL params. Many teams infer TypeScript types from schemas to avoid duplication.
 
-### 3. What mistake should you avoid around mutating state directly?
+### 3. Where should server validation errors appear in the UI?
 
-Avoid mutating state directly. Keep render pure.
+Field-specific errors should attach to the relevant field. Form-level errors should appear in a summary or alert area. The UI should preserve user input and make recovery clear.
 
-### 4. How would you debug a production issue related to Schema Validation with Zod or Yup?
+### 4. What can go wrong with schema transforms?
 
-Use React DevTools to inspect props, state, owners, and render causes. Check keys, effect dependencies, stale closures, and state mutation.
+Transforms can change types or values in ways the UI does not expect, especially with empty strings, numbers, dates, and optional fields. Keep raw input and submitted payload expectations clear.
 
-### 5. What would you check in code review for Schema Validation with Zod or Yup?
+### 5. What schema-validation issues do you flag in review?
 
-Is state owned by the smallest sensible component? Are effects necessary and cleaned up?
+Duplicated client/server rules, vague error messages, schemas that reject valid partial input too early, unchecked API responses, and form code that ignores resolver output or server errors.
 
 ---
 
