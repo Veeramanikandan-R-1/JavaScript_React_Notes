@@ -1,6 +1,3 @@
-
----
-
 # 1. HTML (Must Know)
 
 ## HTML Fundamentals
