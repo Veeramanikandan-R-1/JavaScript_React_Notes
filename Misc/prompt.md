@@ -1,0 +1,12 @@
+Consider yourself senior React Dev, I am preparing for react js interview having 6 years experience, i want you to share notes for below topic (explain the concept simply but make sure to cover all content needed for interview) and the end provide revision notes (having cheatsheet and commonly asked interview questions)
+
+topic is below:
+
+## HTML Fundamentals
+
+* HTML document structure
+* DOCTYPE
+* Semantic HTML
+* Block vs Inline elements
+* Empty elements
+* Global attributes
