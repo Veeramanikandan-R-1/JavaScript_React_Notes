@@ -2,13 +2,11 @@ Consider yourself senior React Dev, I am preparing for react js interview having
 
 topic is below:
 
-## Media
+## Meta Tags
 
-* img
-* picture
-* audio
-* video
-* source
-* iframe
-* svg
-* canvas
+* charset
+* viewport
+* description
+* robots
+* Open Graph
+* favicon
