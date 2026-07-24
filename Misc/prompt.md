@@ -2,11 +2,12 @@ Consider yourself senior React Dev, I am preparing for react js interview having
 
 topic is below:
 
-## Meta Tags
+CSS
 
-* charset
-* viewport
-* description
-* robots
-* Open Graph
-* favicon
+## Positioning
+
+* static
+* relative
+* absolute
+* fixed
+* sticky
