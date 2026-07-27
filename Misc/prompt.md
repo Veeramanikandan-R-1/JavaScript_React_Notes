@@ -4,13 +4,26 @@ topic is below:
 
 CSS
 
-## Flexbox (Complete)
+## Units
 
-* flex-direction
-* justify-content
-* align-items
-* align-self
-* flex-wrap
-* flex-grow
-* flex-shrink
-* flex-basis
+* px
+* rem
+* em
+* vh
+* vw
+* %
+* ch
+
+## Colors
+
+* rgb
+* rgba
+* hsl
+* opacity
+
+## Typography
+
+* font-family
+* font-weight
+* line-height
+* letter-spacing
