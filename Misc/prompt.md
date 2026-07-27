@@ -4,10 +4,13 @@ topic is below:
 
 CSS
 
-## Positioning
+## Flexbox (Complete)
 
-* static
-* relative
-* absolute
-* fixed
-* sticky
+* flex-direction
+* justify-content
+* align-items
+* align-self
+* flex-wrap
+* flex-grow
+* flex-shrink
+* flex-basis
