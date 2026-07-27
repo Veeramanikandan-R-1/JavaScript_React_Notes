@@ -2,28 +2,13 @@ Consider yourself senior React Dev, I am preparing for react js interview having
 
 topic is below:
 
-CSS
+# 3. JavaScript (Most Important)
 
-## Units
+---
 
-* px
-* rem
-* em
-* vh
-* vw
-* %
-* ch
+## Basics
 
-## Colors
-
-* rgb
-* rgba
-* hsl
-* opacity
-
-## Typography
-
-* font-family
-* font-weight
-* line-height
-* letter-spacing
+* Variables
+* Scope
+* Hoisting
+* Strict mode
