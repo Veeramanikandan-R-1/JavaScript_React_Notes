@@ -4,16 +4,10 @@ topic is below:
 
 # JavaScript
 
-## Arrays
+## Strings
 
-* map
-* filter
-* reduce
-* find
-* some
-* every
-* flat
-* flatMap
-* sort
-* splice
+* split
+* substring
 * slice
+* includes
+* replace
