@@ -4,10 +4,9 @@ topic is below:
 
 # JavaScript
 
-## Strings
+## Numbers
 
-* split
-* substring
-* slice
-* includes
-* replace
+* parseInt
+* parseFloat
+* Number
+* Math
