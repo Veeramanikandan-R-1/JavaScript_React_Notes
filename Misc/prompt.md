@@ -2,13 +2,11 @@ Consider yourself senior React Dev, I am preparing for react js interview having
 
 topic is below:
 
-# 3. JavaScript (Most Important)
+# JavaScript
 
----
+## Execution Context
 
-## Basics
-
-* Variables
-* Scope
-* Hoisting
-* Strict mode
+* Execution Context
+* Call Stack
+* Lexical Environment
+* Scope Chain
