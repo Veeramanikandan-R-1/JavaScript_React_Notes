@@ -4,9 +4,16 @@ topic is below:
 
 # JavaScript
 
-## Execution Context
+## Arrays
 
-* Execution Context
-* Call Stack
-* Lexical Environment
-* Scope Chain
+* map
+* filter
+* reduce
+* find
+* some
+* every
+* flat
+* flatMap
+* sort
+* splice
+* slice
