@@ -4,9 +4,11 @@ topic is below:
 
 # JavaScript
 
-## Numbers
+## Promises
 
-* parseInt
-* parseFloat
-* Number
-* Math
+* Promise
+* async/await
+* Promise.all
+* Promise.allSettled
+* race
+* any
