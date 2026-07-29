@@ -4,4 +4,4 @@ topic is below:
 
 # JavaScript
 
-## OOPs in JS
+## currying
