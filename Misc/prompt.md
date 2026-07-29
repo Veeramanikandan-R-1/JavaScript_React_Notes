@@ -4,10 +4,10 @@ topic is below:
 
 # JavaScript
 
-## Modules
+## Events
 
-* import
-* export
-* default export
-* named export
-* dynamic import
+* Bubbling
+* Capturing
+* Delegation
+* preventDefault
+* stopPropagation
