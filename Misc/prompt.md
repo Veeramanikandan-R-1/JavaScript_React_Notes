@@ -4,10 +4,4 @@ topic is below:
 
 # JavaScript
 
-## Events
-
-* Bubbling
-* Capturing
-* Delegation
-* preventDefault
-* stopPropagation
+## OOPs in JS
