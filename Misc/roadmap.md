@@ -414,6 +414,8 @@
 * MutationObserver
 * ResizeObserver
 
+## OOPs in JS
+
 ---
 
 # 4. Browser Internals

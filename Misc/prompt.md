@@ -4,11 +4,10 @@ topic is below:
 
 # JavaScript
 
-## Promises
+## Modules
 
-* Promise
-* async/await
-* Promise.all
-* Promise.allSettled
-* race
-* any
+* import
+* export
+* default export
+* named export
+* dynamic import
