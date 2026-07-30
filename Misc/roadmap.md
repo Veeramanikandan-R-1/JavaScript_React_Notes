@@ -521,20 +521,6 @@
 
 ---
 
-## Refs
-
-* forwardRef
-* useRef
-
----
-
-## Context API
-
-* Provider
-* Consumer
-* Performance considerations
-
----
 
 # 6. React Performance
 
