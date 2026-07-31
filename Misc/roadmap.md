@@ -610,7 +610,7 @@
 ---
 
 # 11. Testing
-
+(revise RTL and Cypress for now)
 * Jest
 * React Testing Library
 * Mocking

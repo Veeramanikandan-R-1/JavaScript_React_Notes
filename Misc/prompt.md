@@ -2,12 +2,25 @@ Consider yourself Senior React Dev, I am preparing for react js interview having
 
 topic is below:
 
-React Architecture
+TypeScript (Highly Preferred)
 
-* Folder structure
-* Feature-based architecture
-* Component composition
-* Smart vs Dumb components
-* Container/Presentational pattern
-* Custom hooks architecture
-* Reusable components
+* Types
+* Interfaces
+* Generics
+* Utility Types
+* Enums
+* Type Guards
+* keyof
+* typeof
+* React with TypeScript
+* Typing Props
+* Typing Hooks
+---
+
+Consider yourself Senior React Dev, I am preparing for react js interview having 6 years experience, i want you to share notes for below topic (explain the concept simply) don't have to go in depth i have just worked on these topics for sometime so this is not main focus, so plan to cover top level only, cover must know concepts in the topics in short
+
+topic is below:
+
+# 11. Testing
+* Cypress (basics)
+* api mocking in cypress
