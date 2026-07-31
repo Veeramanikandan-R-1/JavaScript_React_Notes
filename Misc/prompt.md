@@ -2,19 +2,12 @@ Consider yourself Senior React Dev, I am preparing for react js interview having
 
 topic is below:
 
-React Fundamentals
+React Architecture
 
-# 6. React Performance
-
-* React.memo
-* useMemo
-* useCallback
-* Lazy Loading
-* Suspense
-* Code Splitting
-* Dynamic Import
-* Windowing
-* Virtualization
-* Memoization
-* Stable references
-* Prevent unnecessary renders
+* Folder structure
+* Feature-based architecture
+* Component composition
+* Smart vs Dumb components
+* Container/Presentational pattern
+* Custom hooks architecture
+* Reusable components
