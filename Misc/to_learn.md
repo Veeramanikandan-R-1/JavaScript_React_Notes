@@ -5,3 +5,5 @@ handling more table data
 using AI in react development
 
 debounce throttling
+
+redux saga
