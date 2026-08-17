@@ -32,6 +32,61 @@ Accessibility is supported by:
 
 ---
 
+What is WCAG?
+
+### WCAG — Web Content Accessibility Guidelines
+
+**WCAG** is a set of guidelines for making websites and web applications **accessible to people with disabilities**.
+
+It is maintained by the **W3C**.
+
+### 4 main principles — POUR ⭐
+
+Remember **POUR**:
+
+| Principle              | Meaning                                     | Example                        |
+| ---------------------- | ------------------------------------------- | ------------------------------ |
+| **P — Perceivable**    | Users should be able to perceive content    | Alt text for images            |
+| **O — Operable**       | UI should be usable                         | Keyboard navigation            |
+| **U — Understandable** | Content/UI should be understandable         | Clear labels and errors        |
+| **R — Robust**         | Works with different assistive technologies | Semantic HTML + screen readers |
+
+### Common WCAG examples
+
+```jsx
+// Good
+<button>Submit</button>
+
+// Avoid
+<div onClick={submit}>Submit</div>
+```
+
+Other important practices:
+
+* Provide `alt` text for meaningful images
+* Ensure sufficient **color contrast**
+* Support **keyboard navigation**
+* Use proper headings (`h1`, `h2`, etc.)
+* Associate labels with form inputs
+* Provide accessible error messages
+* Don't rely only on color to communicate information
+* Use ARIA when semantic HTML isn't sufficient
+
+### WCAG levels
+
+```text
+A   → Minimum
+AA  → Common target / industry standard ⭐
+AAA → Highest level
+```
+
+### Interview answer 🎯
+
+> **"WCAG stands for Web Content Accessibility Guidelines. It provides standards for making web applications accessible to people with disabilities. The four principles are Perceivable, Operable, Understandable, and Robust, commonly remembered as POUR. In React, this means using semantic HTML, keyboard accessibility, proper labels, alt text, sufficient contrast, and ARIA where necessary."**
+
+
+---
+
 # 2. ARIA (Accessible Rich Internet Applications)
 
 ## What is ARIA?
