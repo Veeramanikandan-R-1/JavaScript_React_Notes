@@ -22,20 +22,6 @@ Consider yourself Senior React Dev, I am preparing for react js interview having
 
 topic is below:
 
-Frequently Asked Coding Questions
+---
 
-* Debounce
-* Throttle
-* Deep Clone
-* Flatten Array
-* Polyfills (`map`, `filter`, `reduce`, `bind`, `call`, `apply`)
-* Promise implementation
-* EventEmitter
-* LRU Cache (basic)
-* Memoization
-* Currying
-* Function Composition
-* Pipe
-* Deep Equal
-* Object Flattening
-* Array/Object Transformations
+explain below topics shortly  but don't miss any concepts in that topic needed for interview wherever needed/applicable give one example
