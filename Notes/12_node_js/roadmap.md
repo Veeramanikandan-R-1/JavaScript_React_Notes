@@ -147,7 +147,7 @@ Sure. For your situation, I’d keep **Node.js + Express.js interview preparatio
 * [ ] Proper error responses
 * [ ] Logging
 
-### 🟠 Authentication & Security
+### 🟠 Authentication & Security -- TBC
 
 * [ ] JWT authentication
 * [ ] Login/logout
