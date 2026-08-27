@@ -1,825 +1,489 @@
-# 1. Fundamentals
+# CSS Flexbox — Complete Interview Notes
 
-## What is Flexbox?
-
-Flexbox (Flexible Box Layout) is a **one-dimensional layout system** used to arrange child elements in:
-
-* Row (horizontal)
-* Column (vertical)
-
-Unlike Grid, Flexbox works in **one direction at a time**.
-
----
-
-## Why do we use Flexbox?
-
-Before Flexbox:
-
-* Float
-* Inline-block
-* Table layouts
-
-These were difficult for alignment and responsive layouts.
-
-Flexbox solves:
-
-* Centering
-* Equal spacing
-* Vertical alignment
-* Responsive layouts
-* Dynamic sizing
-
----
-
-## Enable Flexbox
+**Flexbox** is a **one-dimensional layout system** used to arrange elements in a **row or column** and control their alignment, spacing, and sizing.
 
 ```css
 .container {
-    display: flex;
+  display: flex;
 }
 ```
 
-Now all direct children become **flex items**.
+### Core terminology
 
-```html
-<div class="container">
-    <div>A</div>
-    <div>B</div>
-    <div>C</div>
-</div>
+```text
+Container (flex parent)
+       ↓
+┌─────────────────────────────┐
+│  Item 1   Item 2   Item 3  │
+└─────────────────────────────┘
+       ↑          ↑
+    Flex items
 ```
 
-Output
+* **Main axis** → controlled by `flex-direction`
+* **Cross axis** → perpendicular to main axis
+* `justify-content` → alignment on **main axis**
+* `align-items` → alignment on **cross axis**
 
+---
+
+# 1. `flex-direction`
+
+Defines the **main axis** and direction of flex items.
+
+```css
+.container {
+  display: flex;
+  flex-direction: row;
+}
 ```
-A   B   C
+
+Values:
+
+```text
+row            → → →  (default)
+row-reverse    ← ← ←
+column         ↓ ↓ ↓
+column-reverse ↑ ↑ ↑
+```
+
+Example:
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+}
+```
+
+Now items are arranged vertically.
+
+### ⭐ Important
+
+Changing `flex-direction` changes the meaning of the axes:
+
+```text
+row:
+main axis  → horizontal
+cross axis → vertical
+
+column:
+main axis  → vertical
+cross axis → horizontal
 ```
 
 ---
 
-# Understanding Main Axis & Cross Axis
+# 2. `justify-content`
 
-Everything in Flexbox revolves around **two axes**.
+Controls alignment/space distribution **along the main axis**.
 
-### Default (`flex-direction: row`)
-
+```css
+.container {
+  display: flex;
+  justify-content: center;
+}
 ```
-Main Axis  →
-+-------------------------+
-| A   B   C               |
-|                         |
-|                         |
-+-------------------------+
-        ↓
-    Cross Axis
+
+Common values:
+
+```text
+flex-start
+center
+flex-end
+space-between
+space-around
+space-evenly
+```
+
+Example:
+
+```css
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+```
+
+```text
+| Item 1          Item 2          Item 3 |
+```
+
+### Remember
+
+> `justify-content` → **main axis**
+
+---
+
+# 3. `align-items`
+
+Controls alignment of flex items **along the cross axis**.
+
+```css
+.container {
+  display: flex;
+  align-items: center;
+}
+```
+
+Common values:
+
+```text
+stretch        → default
+flex-start
+center
+flex-end
+baseline
+```
+
+Example:
+
+```css
+.container {
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+```
+
+Items become vertically centered when `flex-direction: row`.
+
+### Remember
+
+> `align-items` → **cross axis**
+
+---
+
+# 4. `align-self`
+
+Overrides the parent's `align-items` **for an individual flex item**.
+
+```css
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.item2 {
+  align-self: flex-end;
+}
+```
+
+So:
+
+```text
+Item 1 → center
+Item 2 → flex-end
+Item 3 → center
+```
+
+Common values:
+
+```text
+auto
+flex-start
+center
+flex-end
+stretch
+baseline
+```
+
+### Difference
+
+```text
+align-items → all flex items
+align-self  → one specific flex item
 ```
 
 ---
 
-### Column Direction
+# 5. `flex-wrap`
 
-```
-Cross Axis →
-
-+----------+
-| A        |
-| B        |
-| C        |
-+----------+
-
-Main Axis ↓
-```
-
-> **Remember:** `justify-content` always works on the **main axis**, while `align-items` works on the **cross axis**.
-
----
-
-# 2. flex-direction
-
-Controls the direction of flex items.
+Controls whether flex items should **wrap onto multiple lines** when there isn't enough space.
 
 Default:
 
 ```css
 .container {
-    flex-direction: row;
+  flex-wrap: nowrap;
 }
 ```
 
-Output
+### `nowrap`
 
+```text
+[1] [2] [3] [4] [5] [6]
+------------------------>
 ```
-A   B   C
-```
 
----
+Items stay on one line and may shrink/overflow depending on sizing.
 
-### row
-
-Left → Right
+### `wrap`
 
 ```css
-flex-direction: row;
-```
-
----
-
-### row-reverse
-
-```
-C   B   A
-```
-
----
-
-### column
-
-```
-A
-B
-C
-```
-
----
-
-### column-reverse
-
-```
-C
-B
-A
-```
-
----
-
-## Use Cases
-
-* Row → Navbar
-* Column → Forms
-* Column → Cards
-* Row → Toolbar
-
----
-
-# 3. justify-content
-
-Controls alignment along the **main axis**.
-
-```css
-.container{
-    display:flex;
-    justify-content:center;
+.container {
+  flex-wrap: wrap;
 }
 ```
 
----
-
-### flex-start (Default)
-
-```
-A B C
+```text
+[1] [2] [3]
+[4] [5] [6]
 ```
 
----
+### `wrap-reverse`
 
-### center
-
-```
-      A B C
-```
+Wraps onto the opposite cross-axis direction.
 
 ---
 
-### flex-end
+# 6. `flex-grow`
 
-```
-            A B C
-```
-
----
-
-### space-between
-
-```
-A      B      C
-```
-
----
-
-### space-around
-
-```
- A    B    C
-```
-
-(equal space around each item)
-
----
-
-### space-evenly
-
-```
- A    B    C
-```
-
-(equal spacing everywhere)
-
----
-
-## Interview Tip
-
-If direction changes:
+Controls how much a flex item can **grow when extra space is available**.
 
 ```css
-flex-direction: column;
-```
-
-then **justify-content becomes vertical alignment**.
-
----
-
-# 4. align-items
-
-Aligns items on the **cross axis**.
-
-```css
-align-items:center;
-```
-
----
-
-### flex-start
-
-```
-A
-B
-C
-```
-
-Top
-
----
-
-### center
-
-Items vertically centered.
-
----
-
-### flex-end
-
-Items aligned to bottom.
-
----
-
-### stretch (Default)
-
-Items stretch to fill cross axis (if no fixed size is set).
-
----
-
-### baseline
-
-Aligns text baselines.
-
-Useful when font sizes differ.
-
----
-
-## Example
-
-```css
-.container{
- display:flex;
- align-items:center;
+.item {
+  flex-grow: 1;
 }
 ```
 
----
-
-# justify-content vs align-items
-
-Assume:
+Example:
 
 ```css
-flex-direction: row;
-```
+.item1 {
+  flex-grow: 1;
+}
 
-| Property        | Controls   |
-| --------------- | ---------- |
-| justify-content | Horizontal |
-| align-items     | Vertical   |
-
-If
-
-```css
-flex-direction: column;
-```
-
-They swap:
-
-| Property        | Controls   |
-| --------------- | ---------- |
-| justify-content | Vertical   |
-| align-items     | Horizontal |
-
----
-
-# 5. align-self
-
-Overrides `align-items` for **one flex item**.
-
-Container
-
-```css
-.container{
-    align-items:center;
+.item2 {
+  flex-grow: 2;
 }
 ```
 
-Child
+If there is extra space, it is distributed according to the grow factors:
+
+```text
+Item 1 → 1 part
+Item 2 → 2 parts
+```
+
+So item 2 gets roughly **twice the extra space** allocated to item 1.
+
+### Default
 
 ```css
-.item{
-    align-self:flex-end;
+flex-grow: 0;
+```
+
+Items don't grow by default.
+
+---
+
+# 7. `flex-shrink`
+
+Controls how much a flex item can **shrink when there isn't enough space**.
+
+Default:
+
+```css
+flex-shrink: 1;
+```
+
+Example:
+
+```css
+.item1 {
+  flex-shrink: 1;
+}
+
+.item2 {
+  flex-shrink: 0;
 }
 ```
 
-Only that item moves.
+`item2` won't shrink due to flex shrinking, while `item1` can shrink.
 
----
+### Common issue
 
-## Use Case
-
-Notification badge
-
-Special button
-
-Highlighted card
-
----
-
-# 6. flex-wrap
-
-Controls whether items wrap onto multiple lines.
-
-Default
+A flex item may unexpectedly overflow because it has:
 
 ```css
-flex-wrap: nowrap;
+flex-shrink: 0;
 ```
 
----
+or because its minimum size prevents shrinking.
 
-### nowrap
-
-```
-A B C D E F G
-```
-
-Everything stays on one line.
-
-May overflow.
-
----
-
-### wrap
-
-```
-A B C
-
-D E F
-```
-
-Moves to next line.
-
----
-
-### wrap-reverse
-
-Wraps in reverse direction.
-
----
-
-## Common React Use
-
-Card Grid
+A common fix for overflowing flex children is sometimes:
 
 ```css
-display:flex;
-flex-wrap:wrap;
-gap:16px;
-```
-
----
-
-# 7. flex-grow
-
-Controls how much an item grows when extra space is available.
-
-Default
-
-```css
-flex-grow:0;
-```
-
-No growing.
-
----
-
-Example
-
-```css
-.item1{
- flex-grow:1;
-}
-
-.item2{
- flex-grow:2;
+.child {
+  min-width: 0;
 }
 ```
 
-Remaining space divided
-
-```
-Item1 → 1 part
-
-Item2 → 2 parts
-```
-
-Item2 becomes twice as large.
+This is particularly useful when a flex child contains long text or other content that needs to shrink.
 
 ---
 
-## Example
+# 8. `flex-basis`
 
-Container width
-
-```
-900px
-```
-
-Children
-
-```
-1
-
-2
-
-1
-```
-
-Available space
-
-```
-900
-
-↓
-
-225
-
-450
-
-225
-```
-
----
-
-# 8. flex-shrink
-
-Controls how much an item shrinks when there isn't enough space.
-
-Default
+Defines the **initial size of a flex item along the main axis** before remaining space is distributed.
 
 ```css
-flex-shrink:1;
-```
-
-Items shrink automatically.
-
----
-
-Prevent shrinking
-
-```css
-flex-shrink:0;
-```
-
-Useful for:
-
-Logo
-
-Buttons
-
-Profile image
-
----
-
-# 9. flex-basis
-
-Defines the initial size of a flex item **before** remaining space is distributed.
-
-```css
-.item{
- flex-basis:200px;
+.item {
+  flex-basis: 200px;
 }
 ```
 
-Initial width becomes
-
-```
-200px
-```
-
-before `flex-grow` or `flex-shrink` is applied.
-
----
-
-## Difference
+If:
 
 ```css
-width:200px;
-```
-
-Sets width.
-
----
-
-```css
-flex-basis:200px;
-```
-
-Preferred starting size within the flex layout.
-
-`flex-basis` participates in the flex sizing algorithm, whereas `width` is a general sizing property.
-
----
-
-# flex Shorthand
-
-Instead of
-
-```css
-.item{
- flex-grow:1;
- flex-shrink:1;
- flex-basis:200px;
+.container {
+  flex-direction: row;
 }
 ```
 
-Use
+then `flex-basis: 200px` is an initial **width-like** size.
+
+If:
 
 ```css
-.item{
- flex:1 1 200px;
+.container {
+  flex-direction: column;
 }
 ```
 
-Format
+it is an initial **height-like** size.
 
-```
-flex:
+### `flex-basis: auto`
 
-grow
+Uses the item's main-size property (`width`/`height`) if specified; otherwise its content-based size.
 
-shrink
+### `flex-basis: 0`
 
-basis
-```
+Treats the initial main size as zero, so available space is distributed based more directly on `flex-grow`.
 
 ---
 
-# Real-world React Example
+# ⭐ `flex-grow`, `flex-shrink`, `flex-basis` Together
 
-```jsx
-<div className="toolbar">
-    <Logo />
-    <Search />
-    <Profile />
-</div>
-```
+These are combined by the `flex` shorthand:
 
 ```css
-.toolbar{
- display:flex;
- align-items:center;
- justify-content:space-between;
+.item {
+  flex: 1 1 0;
 }
 ```
 
----
+Meaning:
 
-Responsive Card Grid
+```text
+grow   = 1
+shrink = 1
+basis  = 0
+```
+
+Very common:
 
 ```css
-.cards{
- display:flex;
- flex-wrap:wrap;
- gap:16px;
+.item {
+  flex: 1;
 }
-
-.card{
- flex:1 1 300px;
-}
 ```
 
-Cards grow, shrink, and wrap automatically.
-
----
-
-# Best Practices
-
-* Use Flexbox for one-dimensional layouts.
-* Use Grid for two-dimensional layouts.
-* Prefer `gap` over margins for spacing between flex items.
-* Use `flex: 1` for equal-width items.
-* Use `flex-wrap: wrap` for responsive card layouts.
-* Prevent shrinking (`flex-shrink: 0`) for logos and icons that must retain their size.
-
----
-
-# Common Mistakes
-
-❌ Confusing `justify-content` and `align-items`.
-
-Remember:
-
-* **Main axis → justify-content**
-* **Cross axis → align-items**
-
----
-
-❌ Forgetting the axis changes with `flex-direction`.
-
-If direction changes to `column`, the main axis becomes vertical.
-
----
-
-❌ Using `width` instead of `flex-basis`.
-
-`flex-basis` works better with Flexbox because it's part of the flex sizing algorithm.
-
----
-
-❌ Forgetting `flex-wrap`.
-
-Items overflow on smaller screens.
-
----
-
-# Revision Notes
-
-## Flexbox Cheat Sheet
-
-| Property          | Purpose                         |
-| ----------------- | ------------------------------- |
-| `display: flex`   | Enable Flexbox                  |
-| `flex-direction`  | Row / Column direction          |
-| `justify-content` | Align on main axis              |
-| `align-items`     | Align on cross axis             |
-| `align-self`      | Override alignment for one item |
-| `flex-wrap`       | Allow wrapping                  |
-| `flex-grow`       | Grow into extra space           |
-| `flex-shrink`     | Shrink when space is limited    |
-| `flex-basis`      | Initial size before grow/shrink |
-| `flex`            | Shorthand (`grow shrink basis`) |
-
----
-
-## Axis Rule
-
-### `flex-direction: row`
-
-```
-Main Axis  →  justify-content
-
-Cross Axis ↓  align-items
-```
-
-### `flex-direction: column`
-
-```
-Main Axis  ↓  justify-content
-
-Cross Axis →  align-items
-```
-
----
-
-## flex-grow
-
-```
-1 2 1
-
-↓
-
-25% 50% 25%
-```
-
----
-
-## flex Shorthand
-
-```css
-flex: 1 1 300px;
-
-/* grow shrink basis */
-```
-
----
-
-## Remember
-
-```
-display:flex
-      ↓
-Choose Direction
-      ↓
-justify-content
-(Main Axis)
-      ↓
-align-items
-(Cross Axis)
-      ↓
-Wrapping
-      ↓
-Grow
-Shrink
-Basis
-```
-
----
-
-# Common Interview Questions (6 Years React)
-
-### 1. What is Flexbox?
-
-Flexbox is a **one-dimensional CSS layout system** used to arrange items in a row or a column with flexible alignment and spacing.
-
----
-
-### 2. What is the difference between `justify-content` and `align-items`?
-
-* `justify-content` aligns items along the **main axis**.
-* `align-items` aligns items along the **cross axis**.
-
----
-
-### 3. What happens to the axes when `flex-direction: column` is used?
-
-The **main axis becomes vertical**, and the **cross axis becomes horizontal**. `justify-content` now controls vertical alignment, while `align-items` controls horizontal alignment.
-
----
-
-### 4. What is the difference between `align-items` and `align-self`?
-
-* `align-items` applies to **all flex items** in the container.
-* `align-self` overrides the alignment for **one specific flex item**.
-
----
-
-### 5. What is the default value of `flex-wrap`?
-
-```css
-flex-wrap: nowrap;
-```
-
-All items stay on one line and may overflow if there isn't enough space.
-
----
-
-### 6. What is the purpose of `flex-grow`?
-
-It specifies how much a flex item should grow relative to other items when there is extra available space.
-
----
-
-### 7. What is `flex-shrink`?
-
-It determines how much a flex item should shrink when there isn't enough space. Setting `flex-shrink: 0` prevents the item from shrinking.
-
----
-
-### 8. What is `flex-basis`?
-
-It defines the initial size of a flex item before the browser distributes remaining space using `flex-grow` and `flex-shrink`.
-
----
-
-### 9. What does `flex: 1` mean?
-
-`flex: 1` is shorthand for:
+This is effectively:
 
 ```css
 flex: 1 1 0%;
 ```
 
-It allows the item to grow and shrink while starting from a zero flex basis, making sibling items with the same value share available space equally.
+for the shorthand's omitted components.
+
+Example:
+
+```css
+.container {
+  display: flex;
+}
+
+.item {
+  flex: 1;
+}
+```
+
+Multiple items with `flex: 1` will generally share the available space equally.
 
 ---
 
-### 10. When should you use Flexbox instead of Grid?
+# 🎯 Practical Example
 
-Use **Flexbox** for one-dimensional component layouts (navbars, forms, toolbars, cards).
+```jsx
+function Navbar() {
+  return (
+    <nav className="navbar">
+      <div className="logo">Logo</div>
 
-Use **Grid** for two-dimensional page layouts (dashboards, galleries, complex row-and-column structures).
+      <div className="links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+
+      <button>Login</button>
+    </nav>
+  );
+}
+```
+
+```css
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.links {
+  display: flex;
+  gap: 16px;
+}
+```
+
+---
+
+# ⭐ Quick Interview Revision
+
+| Property          | Controls                         |
+| ----------------- | -------------------------------- |
+| `flex-direction`  | Main axis/direction              |
+| `justify-content` | Main-axis alignment              |
+| `align-items`     | Cross-axis alignment             |
+| `align-self`      | Cross-axis alignment of one item |
+| `flex-wrap`       | Whether items wrap               |
+| `flex-grow`       | How much item grows              |
+| `flex-shrink`     | How much item shrinks            |
+| `flex-basis`      | Initial main-axis size           |
+
+### Most important mental model
+
+```text
+              flex-direction
+                    ↓
+              Defines main axis
+                    ↓
+       ┌────────────────────────┐
+       │ justify-content        │ → Main axis
+       │                        │
+       │ align-items            │ → Cross axis
+       └────────────────────────┘
+```
+
+### 🎯 Interview one-liners
+
+> **`justify-content` works on the main axis, while `align-items` works on the cross axis.**
+
+> **`align-self` overrides `align-items` for an individual flex item.**
+
+> **`flex-grow` controls expansion, `flex-shrink` controls shrinking, and `flex-basis` defines the initial main-axis size.**
+
+> **Flexbox is primarily a one-dimensional layout system; CSS Grid is generally preferred when you need simultaneous row-and-column control.**

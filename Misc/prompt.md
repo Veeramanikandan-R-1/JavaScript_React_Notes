@@ -3,9 +3,11 @@ Consider yourself Senior React Dev, I have 5 year of experience in react JS, now
 Topic:
 CSS
 
-## Fundamentals
+Pseudo
 
-* Selectors
-* Specificity
-* Cascade
-* Inheritance
+* before
+* after
+* hover
+* active
+* focus
+* nth-child

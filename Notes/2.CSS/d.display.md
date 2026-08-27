@@ -1,451 +1,161 @@
-# 1. Fundamentals
+# CSS Display — Interview Notes
 
-## What is `display`?
+`display` controls **how an element participates in layout** and how its children are laid out.
 
-The `display` property defines **how an element behaves in the layout**.
+---
 
-It determines:
+## 1. `block`
 
-* Whether the element starts on a new line
-* Whether width/height can be applied
-* How child elements are arranged
+Takes the **full available width** and starts on a new line.
+
+```css
+.box {
+  display: block;
+}
+```
+
+Examples:
+
+* `<div>`
+* `<p>`
+* `<h1>`
+
+```html
+<div>Box 1</div>
+<div>Box 2</div>
+```
+
+```text
+Box 1  ─────────────
+Box 2  ─────────────
+```
+
+### Key points
+
+* Starts on a new line.
+* `width`, `height`, `margin`, `padding` work normally.
+* `width: auto` typically fills available space.
+
+---
+
+# 2. `inline`
+
+Element stays **within the same line** as surrounding content.
+
+```css
+.text {
+  display: inline;
+}
+```
+
+Examples:
+
+* `<span>`
+* `<a>`
+* `<strong>`
+
+```html
+<span>Hello</span>
+<span>World</span>
+```
+
+```text
+Hello World
+```
+
+### Important
+
+For a normal inline element:
+
+* `width` / `height` generally **don't apply**.
+* Horizontal margin/padding work.
+* Vertical margin doesn't affect layout in the same way as block elements.
+
+---
+
+# 3. `inline-block`
+
+Combines characteristics of **inline + block**.
+
+```css
+.box {
+  display: inline-block;
+  width: 100px;
+  height: 50px;
+}
+```
+
+* Stays on the same line like `inline`.
+* Allows `width` and `height` like a block-level box.
+
+```html
+<span class="box">One</span>
+<span class="box">Two</span>
+```
+
+```text
+[ One ] [ Two ]
+```
+
+### Common use
+
+Useful when you need elements **side-by-side while still controlling their dimensions**.
+
+---
+
+# 4. `flex`
+
+Creates a **flex container** and lays out its direct children using the Flexbox model.
+
+```css
+.container {
+  display: flex;
+}
+```
 
 Example:
 
 ```css
-.box {
-    display: block;
-}
-```
-
----
-
-## Common Display Values
-
-* `block`
-* `inline`
-* `inline-block`
-* `flex`
-* `grid`
-* `none`
-
----
-
-# 2. display: block
-
-## What is it?
-
-A block element occupies the **entire available width** and always starts on a **new line**.
-
-```css
-div {
-    display: block;
-}
-```
-
----
-
-## Characteristics
-
-* Starts on a new line.
-* Takes full available width by default.
-* Width and height work.
-* Margin and padding work.
-
----
-
-## Example
-
-```html
-<div>One</div>
-<div>Two</div>
-```
-
-Output
-
-```text
-One
--------------------
-
-Two
--------------------
-```
-
----
-
-## Common Block Elements
-
-* `div`
-* `p`
-* `h1-h6`
-* `section`
-* `article`
-* `header`
-* `footer`
-
----
-
-# 3. display: inline
-
-## What is it?
-
-Inline elements occupy **only as much width as their content**.
-
-```css
-span {
-    display: inline;
-}
-```
-
----
-
-## Characteristics
-
-* Doesn't start on a new line.
-* Width and height are ignored.
-* Horizontal padding/margin work.
-* Vertical margin has no effect on layout, and vertical padding affects painting but doesn't change line box height in the same way as block elements.
-
----
-
-## Example
-
-```html
-<span>Hello</span>
-<span>React</span>
-```
-
-Output
-
-```text
-Hello React
-```
-
----
-
-## Common Inline Elements
-
-* `span`
-* `a`
-* `strong`
-* `em`
-* `label`
-
----
-
-# 4. display: inline-block
-
-## What is it?
-
-Combines features of **inline** and **block**.
-
-```css
-.box {
-    display: inline-block;
-}
-```
-
----
-
-## Characteristics
-
-* Appears on the same line.
-* Width and height work.
-* Margin and padding work.
-
----
-
-## Example
-
-```css
-.box {
-    width: 120px;
-    height: 80px;
-    display: inline-block;
-}
-```
-
-Output
-
-```text
-+------+ +------+
-| Box1 | | Box2 |
-+------+ +------+
-```
-
----
-
-## When to Use?
-
-Historically used for horizontal layouts before Flexbox.
-
-Today it's mainly useful for:
-
-* Small UI elements
-* Badges
-* Chips
-* Icons
-
----
-
-# 5. display: flex
-
-## What is Flexbox?
-
-Flexbox is a **one-dimensional layout system**.
-
-It arranges children in:
-
-* Row (default)
-* Column
-
----
-
-## Example
-
-```css
 .container {
-    display: flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 ```
 
 ```html
 <div class="container">
-    <div>A</div>
-    <div>B</div>
-    <div>C</div>
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
 </div>
 ```
 
-Output
+### Important concepts
 
 ```text
-A   B   C
+Main axis   → justify-content
+Cross axis  → align-items
 ```
 
----
-
-## Default Direction
+Common properties:
 
 ```css
-flex-direction: row;
+justify-content
+align-items
+flex-direction
+flex-wrap
+gap
+flex
 ```
+
+**Use Flexbox:** Primarily for **one-dimensional layouts** (row OR column).
 
 ---
 
-## Common Properties
+# 5. `grid`
 
-### justify-content
-
-Controls alignment on the **main axis**.
-
-```css
-justify-content: center;
-justify-content: space-between;
-justify-content: space-around;
-justify-content: flex-end;
-```
-
----
-
-### align-items
-
-Controls alignment on the **cross axis**.
-
-```css
-align-items: center;
-```
-
-![alt text](image.png)
-
----
-
-### gap
-
-Space between flex items.
-
-```css
-gap: 20px;
-```
-
----
-
-### flex-wrap
-
-Allows wrapping.
-
-```css
-flex-wrap: wrap;
-```
-
----
-
-## React Use Cases
-
-* Navbar
-* Forms
-* Cards
-* Buttons
-* Toolbars
-* Responsive layouts
-
----
-
-# 6. display: grid
-
-## What is Grid?
-
-Grid is a **two-dimensional layout system**.
-
-It controls:
-
-* Rows
-* Columns
-
----
-
-## Example
-
-```css
-.container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-```
-
-Output
-
-```text
-A   B   C
-D   E   F
-```
-
----
-
-## Common Properties
-
-### grid-template-columns
-
-```css
-grid-template-columns: 1fr 1fr 1fr;
-```
-
----
-
-## What does `1fr` mean in CSS Grid?
-
-`fr` stands for **fraction**.
-
-It represents **one fraction of the available free space** inside a CSS Grid container.
-
-### Example 1
-
-```css
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-```
-
-This creates **2 equal columns**.
-
-```text
-+-------------+-------------+
-|      A      |      B      |
-+-------------+-------------+
-```
-
-Each column gets **50%** of the available space.
-
----
-
-### Example 2
-
-```css
-.container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-}
-```
-
-Output:
-
-```text
-+---------+------------------+
-|    A    |        B         |
-+---------+------------------+
-```
-
-Space is divided into **3 equal parts**:
-
-* First column → **1 part (1fr)**
-* Second column → **2 parts (2fr)**
-
-So:
-
-* Column A = **33.3%**
-* Column B = **66.7%**
-
----
-
-### Example 3
-
-```css
-.container {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-}
-```
-
-If the container width is **1000px**:
-
-```text
-First column  = 200px
-Remaining     = 800px
-Second column = 1fr = 800px
-```
-
-`1fr` uses **all the remaining available space** after fixed-size columns are allocated.
-
----
-
-## Interview Tip
-
-`fr` is **not a fixed unit** like `px`. It is a **flexible unit** that divides the remaining free space proportionally among grid columns or rows.
-
-### Interview Answer (30 seconds)
-
-> **"`fr` stands for fraction. It represents a proportional share of the available space in a CSS Grid container. For example, `1fr 1fr` creates two equal columns, while `1fr 2fr` creates columns in a 1:2 ratio. It's the preferred way to build flexible and responsive Grid layouts."**
-
----
-
-### grid-template-rows
-
-```css
-grid-template-rows: auto auto;
-```
-
----
-
-### gap
-
-```css
-gap: 16px;
-```
-
----
-
-### place-items
-
-Centers content.
-
-```css
-place-items: center;
-```
-
----
-
-### Example
+Creates a **CSS Grid container**.
 
 ```css
 .container {
@@ -457,340 +167,97 @@ place-items: center;
 
 ```html
 <div class="container">
-  <div>A</div>
-  <div>B</div>
-  <div>C</div>
-  <div>D</div>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>
 </div>
 ```
 
-Output:
+Result:
 
 ```text
-+---+---+---+
-| A | B | C |
-+---+---+---+
-| D |   |   |
-+---+---+---+
+┌─────┬─────┬─────┐
+│  1  │  2  │  3  │
+├─────┼─────┼─────┤
+│  4  │  5  │  6  │
+└─────┴─────┴─────┘
 ```
 
-### Common Properties
+### Important concepts
 
-* `display: grid` → Enables Grid layout.
-* `grid-template-columns` → Defines the number and width of columns.
-* `grid-template-rows` → Defines rows.
-* `gap` → Space between grid items.
-* `place-items: center` → Centers items horizontally and vertically.
+* Rows
+* Columns
+* `grid-template-columns`
+* `grid-template-rows`
+* `gap`
+* `grid-column`
+* `grid-row`
 
-### Flex vs Grid
-
-| Flexbox                | Grid                      |
-| ---------------------- | ------------------------- |
-| 1D (Row **or** Column) | 2D (Rows **and** Columns) |
-| Component layout       | Page/Grid layout          |
-
-### Interview Answer (30 seconds)
-
-> **"CSS Grid is a two-dimensional layout system that arranges elements in both rows and columns. It's ideal for complex layouts like dashboards, galleries, and product grids. The main properties are `display: grid`, `grid-template-columns`, `grid-template-rows`, and `gap`. Compared to Flexbox, which is one-dimensional, Grid is better suited for full-page or multi-row/multi-column layouts."**
+**Use Grid:** Primarily for **two-dimensional layouts** (rows + columns).
 
 ---
 
-## React Use Cases
+# 6. `none`
 
-* Dashboard
-* Product listing
-* Gallery
-* Analytics widgets
-* Card layouts
-
----
-
-# Flex vs Grid
-
-| Flex                | Grid                  |
-| ------------------- | --------------------- |
-| One-dimensional     | Two-dimensional       |
-| Row OR Column       | Rows AND Columns      |
-| Best for components | Best for page layouts |
-
----
-
-# 7. display: none
-
-## What is it?
-
-Completely removes the element from the layout.
+Removes the element from the layout.
 
 ```css
-.hidden {
-    display: none;
+.box {
+  display: none;
 }
 ```
 
----
-
-## Characteristics
-
-* Not visible.
-* Doesn't occupy space.
-* Cannot receive focus.
-* Not read by screen readers because it's removed from the accessibility tree.
-
----
-
-## Example
-
-```css
-.menu {
-    display: none;
-}
-```
-
-Menu disappears completely.
-
----
-
-## Difference
-
-### display: none
-
 ```text
-Item removed completely.
-```
-
-### visibility: hidden
-
-```text
-Item invisible
-
-↓
-
-Still occupies space.
-```
-
----
-
-# Display Comparison
-
-| Property     | New Line            | Width/Height | Occupies Space |
-| ------------ | ------------------- | ------------ | -------------- |
-| block        | ✅                   | ✅            | ✅              |
-| inline       | ❌                   | ❌            | ✅              |
-| inline-block | ❌                   | ✅            | ✅              |
-| flex         | Depends on children | ✅            | ✅              |
-| grid         | Depends on grid     | ✅            | ✅              |
-| none         | ❌                   | ❌            | ❌              |
-
----
-
-# Real-world React Example
-
-```jsx
-<div className="card">
-    <img src="phone.png" alt="Phone" />
-    <h3>iPhone</h3>
-    <button>Buy</button>
-</div>
-```
-
-```css
-.card {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-```
-
-Children are arranged vertically with equal spacing.
-
----
-
-# Best Practices
-
-* Use **Flexbox** for one-dimensional layouts.
-* Use **Grid** for two-dimensional layouts.
-* Avoid `inline-block` for complex layouts.
-* Use `display: none` when an element should be completely removed from the layout.
-* Prefer semantic HTML and use CSS only for layout.
-
----
-
-# Common Mistakes
-
-❌ Using Grid for simple horizontal alignment.
-
-Flexbox is simpler.
-
----
-
-❌ Using Flexbox for complex dashboards.
-
-Grid is more suitable.
-
----
-
-❌ Using `display: none` when you only want to hide visually but preserve layout.
-
-Use `visibility: hidden` instead.
-
----
-
-❌ Expecting width/height to work on inline elements.
-
-They don't.
-
----
-
-# Revision Notes
-
-## Display Cheat Sheet
-
-| Display        | New Line          | Width/Height | Common Use            |
-| -------------- | ----------------- | ------------ | --------------------- |
-| `block`        | ✅                 | ✅            | Sections, divs        |
-| `inline`       | ❌                 | ❌            | Text, links           |
-| `inline-block` | ❌                 | ✅            | Badges, icons         |
-| `flex`         | Child layout (1D) | ✅            | Navbars, forms, cards |
-| `grid`         | Child layout (2D) | ✅            | Dashboards, galleries |
-| `none`         | Removed           | ❌            | Hide elements         |
-
----
-
-## Remember
-
-```text
-block
-↓
-
-Full width
-New line
-
-inline
-↓
-
-Content width
-Same line
-
-inline-block
-↓
-
-Content width
-Width/Height allowed
-
-flex
-↓
-
-1 Dimension
-(Row OR Column)
-
-grid
-↓
-
-2 Dimensions
-(Rows + Columns)
-
-none
-↓
-
+Element
+   ↓
 Removed from layout
 ```
 
----
+Unlike:
 
-## Flex vs Grid
+```css
+visibility: hidden;
+```
 
-| Flex            | Grid              |
-| --------------- | ----------------- |
-| One-dimensional | Two-dimensional   |
-| Components      | Full-page layouts |
-| Navbar          | Dashboard         |
-| Form            | Gallery           |
-| Toolbar         | Analytics Grid    |
+`visibility: hidden` hides the element but **its layout space is generally preserved**.
 
----
+### React example
 
-# Common Interview Questions (6 Years React)
+```jsx
+{isOpen && <Modal />}
+```
 
-### 1. What is the difference between `block` and `inline`?
-
-| Block                | Inline                 |
-| -------------------- | ---------------------- |
-| Starts on a new line | Stays on the same line |
-| Takes full width     | Takes content width    |
-| Width/Height work    | Width/Height ignored   |
+This is often preferable when you don't need the component rendered at all.
 
 ---
 
-### 2. What is `inline-block`?
+# ⭐ Quick Comparison
 
-It behaves like an inline element (stays on the same line) but allows setting width and height like a block element.
+| Display        | New line?        | Width/Height | Typical Use                     |
+| -------------- | ---------------- | ------------ | ------------------------------- |
+| `block`        | ✅                | ✅            | Sections/content                |
+| `inline`       | ❌                | ❌*           | Text-level content              |
+| `inline-block` | ❌                | ✅            | Inline elements with dimensions |
+| `flex`         | Container layout | —            | 1D layout                       |
+| `grid`         | Container layout | —            | 2D layout                       |
+| `none`         | —                | —            | Remove from layout              |
 
----
+* Normal inline boxes don't accept `width`/`height` in the usual way.
 
-### 3. What is the difference between Flexbox and Grid?
+### 🎯 Interview Must Remember
 
-* **Flexbox** is for one-dimensional layouts (row or column).
-* **Grid** is for two-dimensional layouts (rows and columns).
+```text
+block        → Full-width/new line
+inline       → Same line, no normal width/height
+inline-block → Same line + width/height
+flex         → 1D layout (row/column)
+grid         → 2D layout (rows/columns)
+none         → Removed from layout
+```
 
----
+**Most important comparison:**
 
-### 4. When should you use Flexbox?
-
-Use Flexbox when arranging items in a single direction, such as:
-
-* Navigation bars
-* Forms
-* Card content
-* Button groups
-* Toolbars
-
----
-
-### 5. When should you use Grid?
-
-Use Grid for layouts that require both rows and columns, such as:
-
-* Dashboards
-* Product grids
-* Photo galleries
-* Analytics pages
-
----
-
-### 6. What does `display: none` do?
-
-It completely removes the element from the layout. It doesn't occupy space, can't receive focus, and isn't exposed to assistive technologies.
-
----
-
-### 7. What is the difference between `display: none` and `visibility: hidden`?
-
-| `display: none`                 | `visibility: hidden`              |
-| ------------------------------- | --------------------------------- |
-| Removed from layout             | Layout space preserved            |
-| Doesn't occupy space            | Occupies space                    |
-| Removed from accessibility tree | Still in layout (but not visible) |
-
----
-
-### 8. Can width and height be applied to inline elements?
-
-No. They are ignored for standard inline elements.
-
----
-
-### 9. Why is Flexbox commonly used in React applications?
-
-Because React components often represent one-dimensional UI sections (headers, forms, cards, toolbars), and Flexbox provides simple, responsive alignment for these layouts.
-
----
-
-### 10. How do you decide between Flexbox and Grid?
-
-* **Flexbox** → Aligning or distributing items in one direction.
-* **Grid** → Building layouts with rows and columns simultaneously.
-
-**Rule of Thumb:**
-
-* **Component layout → Flexbox**
-* **Page layout → Grid**
+> **Flexbox is generally best for one-dimensional layouts, while Grid is designed for two-dimensional layouts.**

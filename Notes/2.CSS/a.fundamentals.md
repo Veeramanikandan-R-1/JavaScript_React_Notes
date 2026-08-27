@@ -63,6 +63,106 @@ h2 + p { }
 h2 ~ p { }
 ```
 
+Sure — these are **CSS combinators** that define the relationship between elements.
+
+### 1. Descendant — space ` `
+
+```css
+.parent .child {
+  color: red;
+}
+```
+
+Selects `.child` **anywhere inside** `.parent`, even deeply nested.
+
+```html
+<div class="parent">
+  <div>
+    <p class="child">Hello</p> <!-- ✅ -->
+  </div>
+</div>
+```
+
+---
+
+### 2. Direct Child — `>`
+
+```css
+.parent > .child {
+  color: red;
+}
+```
+
+Selects `.child` only if it is a **direct child** of `.parent`.
+
+```html
+<div class="parent">
+  <p class="child">Hello</p> <!-- ✅ -->
+  
+  <div>
+    <p class="child">World</p> <!-- ❌ -->
+  </div>
+</div>
+```
+
+**Difference:**
+
+```text
+.parent .child  → anywhere inside
+.parent > .child → direct child only
+```
+
+---
+
+### 3. Adjacent Sibling — `+`
+
+```css
+h2 + p {
+  color: red;
+}
+```
+
+Selects the **immediately next sibling** `<p>` after an `<h2>`.
+
+```html
+<h2>Title</h2>
+<p>Hello</p>       <!-- ✅ -->
+<p>World</p>       <!-- ❌ -->
+```
+
+---
+
+### 4. General Sibling — `~`
+
+```css
+h2 ~ p {
+  color: red;
+}
+```
+
+Selects **all `<p>` siblings that come after** the `<h2>`.
+
+```html
+<h2>Title</h2>
+<p>One</p>         <!-- ✅ -->
+<div>Something</div>
+<p>Two</p>         <!-- ✅ -->
+<p>Three</p>       <!-- ✅ -->
+```
+
+### ⭐ Quick Revision
+
+| Combinator | Meaning                |
+| ---------- | ---------------------- |
+| `A B`      | B anywhere inside A    |
+| `A > B`    | B direct child of A    |
+| `A + B`    | B immediately after A  |
+| `A ~ B`    | All B siblings after A |
+
+**Easy memory:** `>` = direct, `+` = next one, `~` = all following siblings.
+
+---
+
 ### Pseudo-class vs pseudo-element
 
 **Pseudo-class** → selects an element based on a **state/condition**.
