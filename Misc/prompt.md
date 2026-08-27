@@ -3,9 +3,10 @@ Consider yourself Senior React Dev, I have 5 year of experience in react JS, now
 Topic:
 JavaScript
 
-Execution Context
+Modules
 
-* Execution Context
-* Call Stack
-* Lexical Environment
-* Scope Chain
+* import
+* export
+* default export
+* named export
+* dynamic import

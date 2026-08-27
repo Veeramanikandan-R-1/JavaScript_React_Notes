@@ -325,6 +325,7 @@
 
 * Date API
 * Intl.DateTimeFormat
+* diff between Date and new Date
 
 ---
 
@@ -338,6 +339,7 @@
 * rest
 * modules
 * classes
+* other important es6 features
 
 ---
 
