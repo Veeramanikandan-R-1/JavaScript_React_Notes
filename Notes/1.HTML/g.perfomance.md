@@ -1,691 +1,367 @@
-# 1. Fundamentals
+# Performance — React/HTML Interview Notes
 
-## What is Web Performance?
-
-Web performance is how **fast a webpage loads, becomes interactive, and responds to users**.
-
-Good performance improves:
-
-* User Experience (UX)
-* SEO
-* Core Web Vitals
-* Conversion rate
-
-As a React developer, optimizing **resource loading** is as important as optimizing React rendering.
+These concepts mainly control **when browser resources are downloaded and executed**. They can improve initial page load, especially **LCP, FCP, and Total Blocking Time (TBT)**.
 
 ---
 
-# 2. defer
+note:
 
-## What is it?
+* **LCP** → **Largest Contentful Paint** — measures when the **largest visible content element** (e.g., hero image, heading, large text block) is rendered.
 
-`defer` tells the browser to **download the JavaScript file in parallel** while parsing HTML, but **execute it only after the HTML is fully parsed**.
+* **FCP** → **First Contentful Paint** — measures when the **first piece of content** (text, image, SVG, etc.) is rendered on the screen.
+
+### Easy way to remember
+
+**FCP = First content appears**
+**LCP = Largest important content appears**
+
+
+---
+
+## 1. `defer`
+
+Used with external JavaScript files.
 
 ```html
-<script defer src="main.js"></script>
+<script src="/app.js" defer></script>
 ```
+
+### Behavior
+
+* Downloads script **in parallel** while HTML is parsing.
+* Executes **after HTML parsing completes**.
+* Maintains execution order when multiple deferred scripts are present.
+* Doesn't block HTML parsing.
+
+```text
+HTML parsing ────────────────────┐
+JS download    ────────────────   │
+                                 ↓
+                         HTML parsing done
+                                 ↓
+                         Execute JS
+```
+
+### Best for
+
+Scripts that need the DOM and aren't required immediately.
+
+**Interview:** `defer` is generally a good default for classic external scripts.
 
 ---
 
-## Without defer
+# 2. `async`
 
-Browser flow:
-
-```
-HTML Parsing
-      ↓
-Encounter <script>
-      ↓
-Stop parsing HTML
-      ↓
-Download JS
-      ↓
-Execute JS
-      ↓
-Continue HTML parsing
-```
-
-HTML parsing is blocked.
-
----
-
-## With defer
-
-```
-HTML Parsing
-      ↓
-Download JS (parallel)
-      ↓
-Continue HTML parsing
-      ↓
-HTML Finished
-      ↓
-Execute JS
-```
-
-No blocking while parsing.
-
----
-
-## Multiple Deferred Scripts
+Downloads the script in parallel with HTML parsing and executes it **as soon as it finishes downloading**.
 
 ```html
-<script defer src="a.js"></script>
-<script defer src="b.js"></script>
+<script src="/analytics.js" async></script>
 ```
 
-Execution order:
+### Behavior
 
-```
-a.js
+* Download doesn't block HTML parsing.
+* Execution **can interrupt HTML parsing**.
+* Execution order between multiple async scripts is **not guaranteed**.
 
-↓
-
-b.js
-```
-
-Order is preserved.
-
----
-
-## When to use?
-
-* Large application scripts
-* React bundles
-* Scripts depending on the DOM
-
----
-
-# 3. async
-
-## What is it?
-
-`async` downloads the script in parallel and executes it **immediately after download**, even if HTML parsing isn't complete.
-
-```html
-<script async src="analytics.js"></script>
+```text
+HTML parsing ─────────────────────────
+JS download ────────┐
+                    ↓
+                 Execute
+                    ↓
+HTML parsing continues
 ```
 
----
+### Best for
 
-## Flow
+Independent scripts such as:
 
-```
-HTML Parsing
-      ↓
-Download JS
-      ↓
-Download Complete
-      ↓
-Pause HTML Parsing
-      ↓
-Execute JS
-      ↓
-Resume HTML Parsing
-```
-
----
-
-## Multiple Async Scripts
-
-```html
-<script async src="a.js"></script>
-<script async src="b.js"></script>
-```
-
-Execution order is **not guaranteed**.
-
-Whichever downloads first executes first.
-
----
-
-## When to use?
-
-Independent scripts:
-
-* Google Analytics
+* Analytics
 * Ads
-* Tracking
-* Heatmaps
+* Tracking scripts
+
+### `async` vs `defer`
+
+|                                      | `async`               | `defer`             |
+| ------------------------------------ | --------------------- | ------------------- |
+| Download                             | Parallel              | Parallel            |
+| Execute                              | As soon as downloaded | After HTML parsing  |
+| Execution order                      | ❌ Not guaranteed      | ✅ Preserved         |
+| Blocks HTML parsing during execution | Yes                   | No                  |
+| Typical use                          | Independent scripts   | Application scripts |
 
 ---
 
-## defer vs async
+# 3. Module Scripts
 
-| Feature                             | defer                      | async                           |
-| ----------------------------------- | -------------------------- | ------------------------------- |
-| Downloads in parallel               | ✅                          | ✅                               |
-| Blocks HTML parsing during download | ❌                          | ❌                               |
-| Blocks parsing during execution     | ❌ (executes after parsing) | ✅                               |
-| Executes after HTML parsing         | ✅                          | ❌                               |
-| Execution order preserved           | ✅                          | ❌                               |
-| Best for                            | App scripts                | Third-party independent scripts |
-
----
-
-# 4. Module Scripts
-
-## What are Module Scripts?
-
-JavaScript ES Modules loaded using:
+JavaScript modules can be loaded using:
 
 ```html
-<script type="module" src="main.js"></script>
+<script type="module" src="/app.js"></script>
 ```
 
----
+Module scripts are **deferred by default**.
 
-## Benefits
-
-* Supports `import` / `export`
-* Uses strict mode automatically
-* Each file has its own scope
-* Downloads dependencies efficiently
-* Deferred by default
-
----
-
-## Example
-
-```javascript
-// utils.js
-export function sum(a, b) {
-    return a + b;
-}
-```
-
-```javascript
-// main.js
-import { sum } from "./utils.js";
-```
-
----
-
-## Does `type="module"` need `defer`?
-
-No.
+So:
 
 ```html
-<script type="module" src="main.js"></script>
+<script type="module" src="/app.js"></script>
 ```
 
-Module scripts already behave like deferred scripts.
+behaves similarly to:
 
-Adding `defer` is unnecessary.
+```html
+<script type="module" src="/app.js" defer></script>
+```
+
+### Features
+
+* Supports `import` / `export`.
+* Deferred by default.
+* Strict mode automatically applies.
+* Each module has its own scope.
+* Browser handles the module dependency graph.
+
+```js
+// app.js
+import { add } from "./utils.js";
+
+console.log(add(2, 3));
+```
+
+### Interview point
+
+Don't normally need to add `defer` to a module script because modules are deferred by default.
 
 ---
 
-## Interview Tip
+# 4. Lazy Loading Images
 
-Modern React projects (Vite, Next.js, etc.) use ES Modules.
-
----
-
-# 5. Lazy Loading Images
-
-## What is it?
-
-Images are loaded **only when they are about to enter the viewport**.
-
-Instead of loading every image immediately.
-
----
-
-## Example
+Don't download images until they're close to the viewport.
 
 ```html
 <img
-src="product.jpg"
-loading="lazy"
-alt="Product">
+  src="/product.jpg"
+  alt="Product"
+  loading="lazy"
+/>
+```
+
+In React:
+
+```jsx
+<img
+  src="/product.jpg"
+  alt="Product"
+  loading="lazy"
+/>
+```
+
+### Good for
+
+* Images below the fold
+* Large image galleries
+* Long pages
+
+### ⚠️ Important
+
+Don't blindly lazy-load the **LCP/hero image**.
+
+For example:
+
+```jsx
+// Hero image — usually don't lazy load
+<img
+  src="/hero.jpg"
+  alt="Dashboard"
+  loading="eager"
+/>
+```
+
+Below-the-fold:
+
+```jsx
+<img
+  src="/product.jpg"
+  alt="Product"
+  loading="lazy"
+/>
 ```
 
 ---
 
-## Without Lazy Loading
-
-```
-100 Images
-
-↓
-
-Browser downloads all 100 immediately.
-```
-
----
-
-## With Lazy Loading
-
-```
-Only visible images
-
-↓
-
-Downloaded first
-
-↓
-
-Remaining images download while scrolling.
-```
-
----
-
-## Benefits
-
-* Faster initial page load
-* Lower bandwidth usage
-* Better Largest Contentful Paint (LCP) for offscreen images
-
----
-
-## Don't Lazy Load
-
-* Hero image
-* Banner image
-* Logo above the fold
-* Any image immediately visible when the page loads
-
-These should load immediately.
-
----
-
-# 6. preload
-
-## What is preload?
+# 5. `preload`
 
 Tells the browser:
 
-> **"This resource is critical. Download it immediately."**
+> **"This resource will be needed very soon; start fetching it early."**
 
-Example
-
-```html
-<link
-rel="preload"
-href="/fonts/inter.woff2"
-as="font"
-type="font/woff2"
-crossorigin>
-```
-
----
-
-## Common Uses
-
-* Fonts
-* Hero image
-* Critical CSS
-* Critical JavaScript
-
----
-
-## Flow
-
-Normal
-
-```
-HTML
-
-↓
-
-Discover Font
-
-↓
-
-Download Font
-```
-
-Preload
-
-```
-HTML Starts
-
-↓
-
-Download Font Immediately
-```
-
----
-
-## Benefit
-
-Reduces waiting time for important resources.
-
----
-
-# 7. prefetch
-
-## What is Prefetch?
-
-Prefetch downloads resources that **might be needed later**, during browser idle time.
+Example:
 
 ```html
 <link
-rel="prefetch"
-href="/about.js">
+  rel="preload"
+  href="/hero.webp"
+  as="image"
+/>
 ```
 
----
-
-## Example
-
-User is on
-
-```
-Home
-```
-
-Next likely page
-
-```
-About
-```
-
-Browser downloads
-
-```
-about.js
-```
-
-in the background.
-
-When the user navigates:
-
-```
-Instant loading
-```
-
----
-
-## React Example
-
-Many routing libraries and frameworks prefetch route bundles automatically or provide APIs to do so (e.g., Next.js prefetches links in many cases).
-
----
-
-# 8. dns-prefetch
-
-## What is it?
-
-Resolves a domain's DNS **before** it's actually needed.
-
-Normally
-
-```
-Need google.com
-
-↓
-
-DNS Lookup
-
-↓
-
-Connect
-
-↓
-
-Download
-```
-
-With DNS Prefetch
-
-```
-Browser resolves DNS earlier
-
-↓
-
-Later connection becomes faster
-```
-
----
-
-## Example
+CSS:
 
 ```html
 <link
-rel="dns-prefetch"
-href="//fonts.googleapis.com">
+  rel="preload"
+  href="/critical.css"
+  as="style"
+/>
 ```
 
----
-
-## Useful For
-
-Third-party domains
-
-* Google Fonts
-* Analytics
-* CDN
-* APIs
-
----
-
-## Benefit
-
-Saves DNS lookup time.
-
----
-
-# preload vs prefetch vs dns-prefetch
-
-| Feature          | preload                    | prefetch             | dns-prefetch         |
-| ---------------- | -------------------------- | -------------------- | -------------------- |
-| Purpose          | Load critical resource now | Load future resource | Resolve domain early |
-| Priority         | High                       | Low                  | Very Low             |
-| Used For         | Fonts, hero image, CSS     | Next page JS         | External domains     |
-| Used Immediately | ✅                          | ❌                    | ❌                    |
-
----
-
-# Real-world Example
+Font:
 
 ```html
-<head>
-
-<meta charset="UTF-8">
-
-<script
-type="module"
-src="/main.js"></script>
-
 <link
-rel="preload"
-href="/fonts/inter.woff2"
-as="font"
-type="font/woff2"
-crossorigin>
-
-<link
-rel="prefetch"
-href="/dashboard.js">
-
-<link
-rel="dns-prefetch"
-href="//fonts.googleapis.com">
-
-</head>
-
-<body>
-
-<img
-src="banner.jpg"
-alt="Banner">
-
-<img
-src="gallery1.jpg"
-loading="lazy"
-alt="Gallery">
-
-</body>
+  rel="preload"
+  href="/font.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
 ```
 
----
+### Use for
 
-# Best Practices
+Resources that are:
 
-* Use `defer` for traditional application scripts.
-* Use `async` only for independent third-party scripts.
-* Prefer `type="module"` for modern JavaScript applications.
-* Lazy load images below the fold.
-* Preload only critical resources.
-* Prefetch resources likely needed on the next navigation.
-* Use `dns-prefetch` for frequently accessed third-party domains.
-* Measure performance using Chrome DevTools and Lighthouse before optimizing.
+* **High priority**
+* Needed very soon
+* Discovered late by the browser
 
----
+### ⚠️ Don't overuse
 
-# Common Mistakes
-
-❌ Using `async` for dependent scripts
-
-May execute in the wrong order.
+Preloading unnecessary resources can **compete with critical resources** and actually hurt performance.
 
 ---
 
-❌ Lazy loading the hero image
+# 6. `prefetch`
 
-Delays the most important visible image.
+Tells the browser:
 
----
+> **"This resource may be needed later."**
 
-❌ Preloading too many resources
-
-Reduces the benefit because everything competes for bandwidth.
-
----
-
-❌ Using both `defer` and `type="module"`
-
-`type="module"` is already deferred.
-
----
-
-❌ Prefetching large resources unnecessarily
-
-Wastes bandwidth and cache.
-
----
-
-# Revision Notes
-
-## Performance Cheat Sheet
-
-| Feature          | Purpose                                          | When to Use                         |
-| ---------------- | ------------------------------------------------ | ----------------------------------- |
-| `defer`          | Download in parallel, execute after HTML parsing | Main application scripts            |
-| `async`          | Download and execute immediately                 | Analytics, Ads, Tracking            |
-| `type="module"`  | ES Modules (automatically deferred)              | Modern JavaScript/React apps        |
-| `loading="lazy"` | Load images only when needed                     | Images below the fold               |
-| `preload`        | Download critical resources immediately          | Fonts, hero images, critical CSS    |
-| `prefetch`       | Download likely future resources                 | Next route/page assets              |
-| `dns-prefetch`   | Resolve DNS early                                | External domains (CDN, Fonts, APIs) |
-
----
-
-## Remember
-
+```html
+<link
+  rel="prefetch"
+  href="/next-page.js"
+/>
 ```
+
+Usually lower priority than `preload`.
+
+### Example
+
+If the user is currently on:
+
+```text
+/products
+```
+
+and you're confident they may navigate to:
+
+```text
+/products/details
+```
+
+you could prefetch resources for that future page.
+
+### Difference
+
+```text
+preload  → Needed NOW / very soon
+prefetch → Might be needed LATER
+```
+
+**Interview:** `prefetch` is speculative; the browser may choose whether/when to fetch it.
+
+---
+
+# 7. `dns-prefetch`
+
+Asks the browser to perform **DNS resolution early** for a domain you'll likely request.
+
+```html
+<link
+  rel="dns-prefetch"
+  href="//cdn.example.com"
+/>
+```
+
+For example, if assets come from:
+
+```text
+cdn.example.com
+```
+
+DNS lookup can happen before the actual resource request.
+
+### Benefit
+
+Reduces DNS lookup latency when the resource is requested later.
+
+### `dns-prefetch` vs `preconnect`
+
+```html
+<link rel="preconnect" href="https://cdn.example.com">
+```
+
+* `dns-prefetch` → DNS lookup only.
+* `preconnect` → DNS + connection setup (and TLS for HTTPS).
+
+For an important third-party origin, `preconnect` can be more effective, but should also be used selectively.
+
+---
+
+# ⭐ Quick Interview Revision
+
+```text
 defer
-    ↓
-App Scripts
+→ Download parallel
+→ Execute after HTML parsing
+→ Order preserved
 
 async
-    ↓
-Independent Scripts
+→ Download parallel
+→ Execute immediately when downloaded
+→ Order NOT guaranteed
 
-module
-    ↓
-Modern ES Modules
+type="module"
+→ Supports import/export
+→ Deferred by default
 
-lazy
-    ↓
-Offscreen Images
+loading="lazy"
+→ Delay offscreen image loading
+→ Don't normally lazy-load LCP/hero image
 
 preload
-    ↓
-Critical Resources
+→ Resource needed very soon
+→ High priority
+→ Don't overuse
 
 prefetch
-    ↓
-Future Resources
+→ Resource potentially needed later
+→ Low/speculative priority
 
 dns-prefetch
-    ↓
-External Domains
+→ Resolve DNS early
+→ Reduces DNS lookup latency
 ```
 
----
+### 🎯 Most important interview comparison
 
-# Common Interview Questions (6 Years React)
+**`preload` vs `prefetch`:**
 
-### 1. What is the difference between `defer` and `async`?
+> `preload` is for a resource the current page **definitely needs soon**; `prefetch` is for a resource that **may be needed later**, often for a future navigation.
 
-* `defer` executes after HTML parsing is complete and preserves script order.
-* `async` executes as soon as the download finishes and does not preserve order.
+**`async` vs `defer`:**
 
----
-
-### 2. Why is `type="module"` preferred in modern React projects?
-
-It supports ES Modules (`import`/`export`), uses strict mode automatically, has module scope, and behaves like `defer` by default.
-
----
-
-### 3. Can you use both `defer` and `type="module"`?
-
-Yes, but it's unnecessary because module scripts are already deferred by default.
-
----
-
-### 4. When should you use lazy loading for images?
-
-For images below the fold or content that is not immediately visible. Avoid lazy loading above-the-fold images.
-
----
-
-### 5. What is the difference between `preload` and `prefetch`?
-
-* **Preload:** Downloads a critical resource needed for the current page immediately.
-* **Prefetch:** Downloads a resource likely to be needed on a future navigation during idle time.
-
----
-
-### 6. What is `dns-prefetch`?
-
-It performs DNS resolution for external domains in advance, reducing the connection setup time when those domains are later accessed.
-
----
-
-### 7. Why shouldn't dependent scripts use `async`?
-
-Because `async` doesn't guarantee execution order, which can cause scripts that rely on one another to fail.
-
----
-
-### 8. What resources are commonly preloaded?
-
-* Web fonts
-* Hero images
-* Critical CSS
-* Critical JavaScript needed for initial rendering
-
----
-
-### 9. How does lazy loading improve performance?
-
-It reduces initial network requests, decreases bandwidth usage, and speeds up the first render by loading offscreen images only when needed.
-
----
-
-### 10. How would you optimize a React application's loading performance?
-
-A strong answer should include:
-
-* Use ES Modules (`type="module"`).
-* Code split with `React.lazy()` and dynamic imports.
-* Lazy load offscreen images.
-* Preload critical fonts and hero assets.
-* Prefetch likely next-route bundles.
-* Use `dns-prefetch`/`preconnect` for important third-party origins.
-* Compress and cache static assets.
-* Measure improvements using Lighthouse and Chrome DevTools.
+> Both download without blocking HTML parsing, but `async` executes as soon as downloaded with no guaranteed order, while `defer` waits for HTML parsing to finish and preserves script order.

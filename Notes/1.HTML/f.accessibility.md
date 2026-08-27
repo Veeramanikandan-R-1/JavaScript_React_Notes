@@ -1,800 +1,456 @@
-# 1. Fundamentals
+# Accessibility (A11y) — React Interview Notes
 
-## What is Accessibility (a11y)?
+**Accessibility (A11y)** means making applications usable by people with disabilities, including users who rely on **keyboard navigation, screen readers, or other assistive technologies**.
 
-Accessibility means designing web applications so that **everyone**, including people with disabilities, can use them.
+For a 5-year React developer, remember this principle:
 
-This includes users with:
-
-* Visual impairments
-* Hearing impairments
-* Motor disabilities
-* Cognitive disabilities
-
-Accessibility is supported by:
-
-* Semantic HTML
-* Keyboard support
-* Screen readers
-* ARIA attributes
-* Proper focus management
+> **Use semantic HTML first → add ARIA only when necessary.**
 
 ---
 
-## Why is Accessibility Important?
+## 1. ARIA
 
-* Better user experience
-* Legal compliance (WCAG, ADA)
-* Better SEO (semantic HTML helps search engines)
-* Required in many enterprise applications
+**ARIA = Accessible Rich Internet Applications.**
 
-> **React Interview Tip:** Accessibility is **not React-specific**. React helps build UIs, but developers must use HTML and ARIA correctly.
-
----
-
-What is WCAG?
-
-### WCAG — Web Content Accessibility Guidelines
-
-**WCAG** is a set of guidelines for making websites and web applications **accessible to people with disabilities**.
-
-It is maintained by the **W3C**.
-
-### 4 main principles — POUR ⭐
-
-Remember **POUR**:
-
-| Principle              | Meaning                                     | Example                        |
-| ---------------------- | ------------------------------------------- | ------------------------------ |
-| **P — Perceivable**    | Users should be able to perceive content    | Alt text for images            |
-| **O — Operable**       | UI should be usable                         | Keyboard navigation            |
-| **U — Understandable** | Content/UI should be understandable         | Clear labels and errors        |
-| **R — Robust**         | Works with different assistive technologies | Semantic HTML + screen readers |
-
-### Common WCAG examples
-
-```jsx
-// Good
-<button>Submit</button>
-
-// Avoid
-<div onClick={submit}>Submit</div>
-```
-
-Other important practices:
-
-* Provide `alt` text for meaningful images
-* Ensure sufficient **color contrast**
-* Support **keyboard navigation**
-* Use proper headings (`h1`, `h2`, etc.)
-* Associate labels with form inputs
-* Provide accessible error messages
-* Don't rely only on color to communicate information
-* Use ARIA when semantic HTML isn't sufficient
-
-### WCAG levels
-
-```text
-A   → Minimum
-AA  → Common target / industry standard ⭐
-AAA → Highest level
-```
-
-### Interview answer 🎯
-
-> **"WCAG stands for Web Content Accessibility Guidelines. It provides standards for making web applications accessible to people with disabilities. The four principles are Perceivable, Operable, Understandable, and Robust, commonly remembered as POUR. In React, this means using semantic HTML, keyboard accessibility, proper labels, alt text, sufficient contrast, and ARIA where necessary."**
-
-
----
-
-# 2. ARIA (Accessible Rich Internet Applications)
-
-## What is ARIA?
-
-ARIA is a set of HTML attributes that provide additional accessibility information to assistive technologies like screen readers.
+ARIA provides additional information to assistive technologies when native HTML semantics aren't enough.
 
 Example:
 
-```html
-<button aria-label="Close">
-    ✕
+```jsx
+<button aria-label="Close dialog">
+  ✕
 </button>
 ```
 
-Without ARIA:
+ARIA can communicate:
 
-```
-Screen reader:
-"button"
-```
+* What an element is (`role`)
+* What it is called (`aria-label`)
+* What it is related to (`aria-labelledby`)
+* Additional description (`aria-describedby`)
+* State (`aria-expanded`, `aria-checked`, etc.)
 
-With ARIA:
+### ⚠️ Important
 
-```
-Screen reader:
-"Close button"
-```
-
----
-
-## When should you use ARIA?
-
-Only when semantic HTML is not enough.
-
-Good:
-
-```html
-<button>Save</button>
-```
-
-No ARIA needed.
-
-Instead of:
-
-```html
-<div role="button">
-```
-
-Use the semantic element:
-
-```html
-<button>
-```
-
----
-
-## Best Practice
-
-> **Use native HTML first. Add ARIA only when necessary.**
-
----
-
-# 3. role
-
-## What is role?
-
-`role` tells assistive technologies what an element represents.
-
-Example
-
-```html
-<div role="button">
-```
-
-Screen reader treats it like a button.
-
----
-
-## Common Roles
-
-| Role       | Purpose           |
-| ---------- | ----------------- |
-| button     | Button            |
-| dialog     | Modal             |
-| navigation | Navigation menu   |
-| main       | Main content      |
-| banner     | Header            |
-| search     | Search area       |
-| alert      | Important message |
-| checkbox   | Checkbox          |
-
----
-
-## React Example
+Don't use ARIA to replace semantic HTML unnecessarily.
 
 ```jsx
-<div
-    role="button"
-    tabIndex="0"
->
-    Submit
+// ❌
+<div role="button" onClick={handleClick}>
+  Save
+</div>
+
+// ✅
+<button onClick={handleClick}>
+  Save
+</button>
+```
+
+Native `<button>` already provides keyboard behavior, focus, and button semantics.
+
+---
+
+# 2. `role`
+
+Defines the **semantic role** of an element for assistive technologies.
+
+```jsx
+<div role="alert">
+  Payment failed
 </div>
 ```
 
-> If you use `role="button"` on a non-button element, you must also implement keyboard support (`Enter`/`Space`) yourself.
+Common roles:
+
+```text
+button
+dialog
+alert
+navigation
+tab
+tabpanel
+checkbox
+radio
+progressbar
+```
+
+Example:
+
+```jsx
+<div role="dialog" aria-labelledby="dialog-title">
+  <h2 id="dialog-title">Delete User</h2>
+</div>
+```
+
+### Interview point
+
+`role="button"` **does not automatically make a `<div>` behave like a real button**. You would also need keyboard handling, focus behavior, etc. Prefer `<button>`.
 
 ---
 
-# 4. aria-label
+# 3. `aria-label`
 
-## What is it?
+Provides an **accessible name directly**.
 
-Provides an accessible name when no visible text exists.
+Useful when an element has no visible text.
 
-Example
-
-```html
+```jsx
 <button aria-label="Close">
-    ✕
+  ✕
 </button>
 ```
 
-Visible
+A screen reader can announce something like:
 
-```
-✕
-```
+> "Close, button"
 
-Screen reader
+### Good use cases
 
-```
-Close button
-```
+* Icon-only buttons
+* Search buttons
+* Close buttons
 
----
-
-## Use Cases
-
-* Icon buttons
-* SVG buttons
-* Image-only controls
-
----
-
-# 5. aria-labelledby
-
-## What is it?
-
-Uses another element's text as the accessible name.
-
-Example
-
-```html
-<h2 id="title">
-    User Settings
-</h2>
-
-<button aria-labelledby="title">
+```jsx
+<button aria-label="Search">
+  🔍
 </button>
 ```
 
-Screen reader
+---
 
+# 4. `aria-labelledby`
+
+Uses the text of **another element** as the accessible name.
+
+```jsx
+<h2 id="dialog-title">Delete Account</h2>
+
+<div
+  role="dialog"
+  aria-labelledby="dialog-title"
+>
+  Are you sure?
+</div>
 ```
-User Settings button
+
+Here, the dialog's accessible name comes from the `<h2>`.
+
+### `aria-label` vs `aria-labelledby`
+
+```text
+aria-label
+    → label is provided directly
+
+aria-labelledby
+    → label comes from another element
 ```
+
+Prefer `aria-labelledby` when a visible heading already exists.
 
 ---
 
-## Difference
+# 5. `aria-describedby`
 
-`aria-label`
+Associates an element with **additional descriptive information**.
 
-```
-Text written directly
-```
+```jsx
+<label htmlFor="email">Email</label>
 
-`aria-labelledby`
-
-```
-Uses existing visible text
-```
-
----
-
-# 6. aria-describedby
-
-## What is it?
-
-Associates descriptive text with an element.
-
-Example
-
-```html
 <input
-id="email"
-aria-describedby="emailHelp">
+  id="email"
+  aria-describedby="email-help"
+/>
 
-<p id="emailHelp">
-We'll never share your email.
+<p id="email-help">
+  We'll never share your email.
 </p>
 ```
 
-Screen reader
+A screen reader can understand:
 
-```
-Email input
+> "Email, edit text. We'll never share your email."
 
-We'll never share your email.
-```
+### Difference
 
----
-
-## Difference
-
-| Attribute        | Purpose                          |
-| ---------------- | -------------------------------- |
-| aria-label       | Gives the element a name         |
-| aria-labelledby  | Uses another element as its name |
-| aria-describedby | Adds extra description           |
-
----
-
-# 7. tabindex
-
-## What is tabindex?
-
-Controls keyboard focus order.
-
-Example
-
-```html
-<button tabindex="0">
+```text
+aria-labelledby  → What is this?
+aria-describedby → Additional information about it
 ```
 
 ---
 
-## Values
+# 6. `tabindex`
 
-### tabindex="0"
+Controls whether an element can receive **keyboard focus**.
 
-Included in normal Tab order.
+### `tabIndex={0}`
 
-Recommended.
-
----
-
-### tabindex="-1"
-
-Cannot be reached using Tab.
-
-Can receive focus programmatically.
-
-Example
-
-```javascript
-element.focus();
-```
-
-Useful for:
-
-* Modal dialogs
-* Error messages
-* Focus restoration
-
----
-
-### tabindex="1+"
-
-Creates a custom focus order.
-
-Not recommended because it becomes difficult to maintain.
-
----
-
-## Best Practice
-
-Use:
-
-```
-0
-```
-
-or
-
-```
--1
-```
-
-Avoid positive values.
-
----
-
-# 8. Keyboard Navigation
-
-## Why?
-
-Many users cannot use a mouse.
-
-They navigate using:
-
-* Tab
-* Shift + Tab
-* Enter
-* Space
-* Arrow keys
-* Escape
-
----
-
-## Good React Components Must Support
-
-Buttons
-
-```
-Enter
-
-Space
-```
-
-Menus
-
-```
-Arrow keys
-```
-
-Modal
-
-```
-Escape
-```
-
-Links
-
-```
-Enter
-```
-
----
-
-## React Example
+Adds the element to the normal keyboard tab order.
 
 ```jsx
-<button
-onKeyDown={handleKeyDown}>
-```
-
----
-
-## Interview Point
-
-Never create clickable `<div>` elements without keyboard support.
-
----
-
-# 9. Screen Readers
-
-## What are they?
-
-Software that reads webpage content aloud.
-
-Examples
-
-* NVDA (Windows)
-* JAWS
-* VoiceOver (macOS/iOS)
-* TalkBack (Android)
-
----
-
-## How they work
-
-They read
-
-* headings
-* buttons
-* labels
-* links
-* landmarks
-* form controls
-
-using the DOM, semantic HTML, and ARIA.
-
----
-
-## Good HTML
-
-```html
-<button>
-Save
-</button>
-```
-
-Screen reader
-
-```
-Save button
-```
-
----
-
-## Bad HTML
-
-```html
-<div>
-Save
+<div tabIndex={0}>
+  Focusable content
 </div>
 ```
 
-Screen reader
+### `tabIndex={-1}`
 
-```
-Save
-```
-
-No indication it's interactive.
-
----
-
-# 10. Focus Management
-
-## What is Focus?
-
-The currently active element receiving keyboard input.
-
-Example
-
-```
-Tab
-
-↓
-
-Input
-
-↓
-
-Button
-
-↓
-
-Link
-```
-
----
-
-## Why Important?
-
-When opening a modal
-
-Focus should move
-
-```
-Button
-
-↓
-
-Modal
-```
-
-When closing modal
-
-Focus should return
-
-```
-Modal
-
-↓
-
-Original button
-```
-
----
-
-## React Example
+Element can receive focus programmatically but is **not reachable using Tab**.
 
 ```jsx
-const inputRef = useRef();
+<div ref={elementRef} tabIndex={-1} />
+```
+
+Then:
+
+```js
+elementRef.current.focus();
+```
+
+Very useful for **focus management**.
+
+### ⚠️ Avoid positive values
+
+```jsx
+tabIndex={1} // ❌
+tabIndex={2} // ❌
+```
+
+Positive tabindex creates a custom focus order and can make keyboard navigation confusing.
+
+**Preferred:**
+
+```text
+tabIndex={0}   → normal tab order
+tabIndex={-1}  → programmatic focus only
+```
+
+---
+
+# 7. Keyboard Navigation
+
+Everything interactive should be usable **without a mouse**.
+
+Common keys:
+
+```text
+Tab       → Move forward
+Shift+Tab → Move backward
+Enter     → Activate buttons/links
+Space     → Activate buttons/checkboxes
+Esc       → Close dialogs/menus
+Arrow keys → Navigate certain widgets
+```
+
+### Native HTML gives keyboard support automatically
+
+```jsx
+<button onClick={save}>
+  Save
+</button>
+```
+
+Much better than:
+
+```jsx
+<div onClick={save}>
+  Save
+</div>
+```
+
+If you absolutely must create a custom interactive component, you need to handle keyboard behavior yourself.
+
+---
+
+# 8. Screen Readers
+
+Screen readers convert UI content into **spoken output or Braille**.
+
+Examples:
+
+* NVDA
+* JAWS
+* VoiceOver
+* TalkBack
+
+For React applications, ensure:
+
+* Semantic HTML
+* Meaningful accessible names
+* Proper form labels
+* Correct heading hierarchy
+* Useful alt text
+* Keyboard accessibility
+* Proper focus management
+* Appropriate ARIA where required
+
+Example:
+
+```jsx
+<label htmlFor="username">
+  Username
+</label>
+
+<input id="username" />
+```
+
+A screen reader can associate the label with the input.
+
+---
+
+# 9. Focus Management
+
+Focus management means **deliberately controlling where keyboard focus goes**, especially after UI changes.
+
+### Common cases
+
+* Opening a modal → move focus inside modal
+* Closing modal → return focus to trigger button
+* Navigating to a new page → move focus appropriately
+* Showing an error → make important information available to the user
+
+### React example
+
+```jsx
+const inputRef = useRef(null);
 
 useEffect(() => {
-    inputRef.current.focus();
-}, []);
+  if (isOpen) {
+    inputRef.current?.focus();
+  }
+}, [isOpen]);
+
+return (
+  <input
+    ref={inputRef}
+    aria-label="User name"
+  />
+);
 ```
 
+### Modal example — conceptually
+
+```text
+Click "Delete"
+      ↓
+Open modal
+      ↓
+Move focus → modal heading/input
+      ↓
+User interacts with modal
+      ↓
+Close modal
+      ↓
+Return focus → "Delete" button
+```
+
+**Interview:** Good modal accessibility also requires appropriate dialog semantics and typically **focus trapping/containment** while the modal is open.
+
 ---
 
-## Common Use Cases
+# 10. `alt` Text
 
-* Modal dialogs
-* Search boxes
-* Error messages
-* Forms after validation
-* Route/page changes (focus the main content or heading)
+Provides a text alternative for images.
 
----
-
-# 11. Alt Text
-
-## What is Alt Text?
-
-Alternative text describing an image.
-
-```html
+```jsx
 <img
-src="cat.jpg"
-alt="Black cat sleeping on a sofa">
+  src="/profile.jpg"
+  alt="John Smith"
+/>
 ```
 
----
+### Informative image
 
-## Why?
-
-If image doesn't load
-
-or
-
-Screen reader is used
-
-Text is read.
-
----
-
-## Decorative Images
-
-```html
+```jsx
 <img
-src="line.png"
-alt="">
+  src="/sales-chart.png"
+  alt="Sales increased by 20% in 2026"
+/>
 ```
 
-Empty alt tells screen readers to ignore it.
+### Decorative image
 
----
+Use empty alt:
 
-## Bad Example
-
-```html
-alt="image"
-```
-
-Too generic.
-
----
-
-## Good Example
-
-```html
-alt="Company logo"
-```
-
----
-
-# React Best Practices
-
-* Use semantic HTML (`button`, `nav`, `main`, `header`) before adding ARIA.
-* Never replace semantic elements with generic `div`s unless necessary.
-* Every form control should have a `<label>` or accessible name.
-* Every interactive element should be keyboard accessible.
-* Use meaningful `alt` text.
-* Manage focus for dialogs, navigation changes, and forms.
-* Test with keyboard only (no mouse).
-* Use browser accessibility tools and screen readers during testing.
-
----
-
-# Common Mistakes
-
-❌ Using clickable `<div>` instead of `<button>`
-
-❌ Missing `alt` on images
-
-❌ Missing form labels
-
-❌ Positive `tabindex` values
-
-❌ Keyboard trap (user cannot leave a modal)
-
-❌ Using ARIA to replace semantic HTML
-
-❌ Icon buttons without an accessible name
-
----
-
-# Real-world Example
-
-```html
-<label for="search">Search</label>
-
-<input
-id="search"
-type="text"
-aria-describedby="searchHelp">
-
-<p id="searchHelp">
-Enter a product name.
-</p>
-
-<button aria-label="Search">
-🔍
-</button>
-
+```jsx
 <img
-src="logo.png"
-alt="Company logo">
+  src="/decoration.png"
+  alt=""
+/>
 ```
 
----
+This tells screen readers to ignore the decorative image.
 
-# Revision Notes
+### ❌ Avoid
 
-## Accessibility Cheat Sheet
-
-| Concept             | Purpose                             | Example                          |
-| ------------------- | ----------------------------------- | -------------------------------- |
-| ARIA                | Adds accessibility info             | `aria-label`, `aria-describedby` |
-| role                | Defines element purpose             | `role="dialog"`                  |
-| aria-label          | Gives accessible name               | Icon button                      |
-| aria-labelledby     | Uses another element's text as name | Heading → Button                 |
-| aria-describedby    | Adds extra description              | Help/error text                  |
-| tabindex="0"        | Normal keyboard navigation          | Focusable element                |
-| tabindex="-1"       | Programmatic focus only             | Modal, errors                    |
-| Keyboard Navigation | Supports keyboard users             | Tab, Enter, Space, Esc           |
-| Screen Reader       | Reads page content                  | NVDA, JAWS, VoiceOver            |
-| Focus Management    | Moves/restores focus                | Modals, forms                    |
-| alt                 | Describes image                     | `"Company logo"`                 |
-
----
-
-## Remember
-
-```
-Semantic HTML
-        ↓
-Use ARIA only if needed
-        ↓
-Keyboard Accessible
-        ↓
-Screen Reader Friendly
-        ↓
-Proper Focus Management
-        ↓
-Accessible React App
+```jsx
+<img src="/profile.jpg" alt="image" />
 ```
 
----
-
-# Common Interview Questions (6 Years React)
-
-### 1. What is ARIA and when should you use it?
-
-ARIA provides accessibility information for assistive technologies. Use it only when semantic HTML cannot provide the required behavior or information.
+`alt` should communicate the **purpose/content**, not simply say "image."
 
 ---
 
-### 2. What is the difference between `aria-label`, `aria-labelledby`, and `aria-describedby`?
+# ⭐ Important Interview Concepts
 
-* **`aria-label`** → Provides an accessible name directly.
-* **`aria-labelledby`** → Uses another element's visible text as the accessible name.
-* **`aria-describedby`** → Adds supplementary descriptive information.
+### Semantic HTML first
 
----
+```jsx
+// ✅
+<button>Submit</button>
 
-### 3. What does `role` do?
+// ❌
+<div role="button">Submit</div>
+```
 
-It tells assistive technologies what an element represents (e.g., `button`, `dialog`, `navigation`). Prefer native HTML elements over adding roles to generic elements.
+Native elements provide built-in accessibility behavior.
 
----
+### Form accessibility
 
-### 4. What is the difference between `tabindex="0"` and `tabindex="-1"`?
+```jsx
+<label htmlFor="email">Email</label>
 
-* `0` → Included in normal Tab order.
-* `-1` → Removed from Tab order but can receive focus programmatically.
+<input id="email" type="email" />
+```
 
----
+Don't rely only on placeholder text as the label.
 
-### 5. Why are positive `tabindex` values discouraged?
+### Dynamic content
 
-They create a custom focus order that's difficult to maintain and can confuse keyboard users. Let the DOM order determine navigation whenever possible.
+For important dynamically displayed messages:
 
----
+```jsx
+<div role="alert">
+  Payment failed.
+</div>
+```
 
-### 6. Why is keyboard navigation important?
-
-Many users cannot use a mouse. Every interactive element must be operable using the keyboard.
-
----
-
-### 7. What is focus management in React?
-
-It is the process of moving and restoring keyboard focus appropriately, such as focusing a modal when it opens and returning focus to the triggering button when it closes.
-
----
-
-### 8. What is the purpose of the `alt` attribute?
-
-It provides an accessible text alternative for images. Decorative images should use `alt=""`.
+For less urgent status updates, appropriate live-region semantics such as `role="status"` can be used.
 
 ---
 
-### 9. What are screen readers?
+# Quick Revision
 
-Assistive technologies that read webpage content aloud using semantic HTML, ARIA attributes, and the accessibility tree.
+| Concept                 | Purpose                                                   |
+| ----------------------- | --------------------------------------------------------- |
+| **ARIA**                | Add accessibility semantics when native HTML isn't enough |
+| **role**                | Defines what an element represents                        |
+| **aria-label**          | Directly provides accessible name                         |
+| **aria-labelledby**     | Gets accessible name from another element                 |
+| **aria-describedby**    | Provides additional description                           |
+| **tabIndex={0}**        | Normal keyboard tab order                                 |
+| **tabIndex={-1}**       | Programmatic focus, not Tab                               |
+| **Keyboard navigation** | UI usable without mouse                                   |
+| **Screen reader**       | Reads/interprets accessible UI                            |
+| **Focus management**    | Controls focus during UI changes                          |
+| **alt**                 | Text alternative for images                               |
 
----
+### 🎯 5-year React interview answer
 
-### 10. How do you make a custom React component accessible?
+If asked **"How do you make a React application accessible?"**, cover:
 
-* Use semantic HTML where possible.
-* Provide an accessible name (`label` or ARIA).
-* Support keyboard interactions.
-* Manage focus correctly.
-* Test with keyboard and screen readers.
+> **Semantic HTML → keyboard accessibility → proper labels → ARIA when needed → meaningful alt text → focus management → screen-reader testing → sufficient color contrast → accessible forms and error messages.**
+
+And remember the golden rule:
+
+> **Don't add ARIA just because you can. Correct semantic HTML is usually the best accessibility solution.**

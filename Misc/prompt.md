@@ -1,27 +1,11 @@
-Consider yourself Senior React Dev, I am preparing for react js interview having 6 years experience, i want you to share notes for below topic (explain the concept simply but make sure to cover all content needed for interview) and the end provide short revision notes and commonly asked interview questions which would be asked in react 6 year exp interviews
+Consider yourself Senior React Dev, I have 5 year of experience in react JS, now i need notes for the topic below, be short and precise at the same time don't miss any important concepts to cover, wherever needed good examples for code
 
-topic is below:
+Topic:
+CSS
 
-TypeScript (Highly Preferred)
+## Fundamentals
 
-- Types
-- Interfaces
-- Generics
-- Utility Types
-- Enums
-- Type Guards
-- keyof
-- typeof
-- React with TypeScript
-- Typing Props
-- Typing Hooks
-
----
-
-Consider yourself Senior React Dev, I am preparing for react js interview having 6 years experience, i want you to share notes for below topic (explain the concept simply) don't have to go in depth i have just worked on these topics for sometime so this is not main focus, so plan to cover top level only, cover must know concepts in the topics in short
-
-topic is below:
-
----
-
-explain below express js topics shortly  but don't miss any concepts in that topic needed for interview wherever needed/applicable give one example
+* Selectors
+* Specificity
+* Cascade
+* Inheritance

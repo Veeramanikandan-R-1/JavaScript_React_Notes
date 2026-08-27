@@ -1,1165 +1,422 @@
-# 1. HTML Document Structure
+# HTML Fundamentals — Interview Notes
 
-## What is HTML?
-
-HTML (HyperText Markup Language) defines the **structure of a webpage**.
-
-Think of HTML as the **skeleton** of a website.
-
-CSS = Styling
-
-JavaScript = Behavior
-
-HTML = Structure
+For a **5-year React developer**, you should know these fundamentals well because React ultimately renders HTML elements to the DOM.
 
 ---
 
-## Basic HTML Structure
+## 1. HTML Document Structure ⭐
+
+A standard HTML document:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My App</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React App</title>
-</head>
+  <body>
+    <header>Header</header>
 
-<body>
+    <main>
+      <h1>Hello React</h1>
+      <p>Welcome</p>
+    </main>
 
-    <h1>Hello World</h1>
-
-    <script src="main.js"></script>
-
-</body>
+    <footer>Footer</footer>
+  </body>
 </html>
 ```
 
----
+### Important parts
 
-## Structure Explained
-
-### `<!DOCTYPE html>`
-
-Tells browser this document is HTML5.
-
----
-
-### `<html>`
-
-Root element.
-
-Everything lives inside this tag.
-
-```html
-<html lang="en">
-```
-
-`lang="en"` helps:
-
-* Screen readers
-* SEO
-* Translation tools
+* `<!DOCTYPE html>` → tells browser to use modern HTML standards.
+* `<html>` → root element.
+* `<head>` → metadata, title, CSS links, etc.
+* `<body>` → visible page content.
+* `<meta charset="UTF-8">` → character encoding.
+* `<meta name="viewport">` → important for responsive/mobile rendering.
+* `<title>` → browser tab title.
 
 ---
 
-### `<head>`
-
-Contains metadata.
-
-Not shown on webpage.
-
-Contains:
-
-* title
-* meta tags
-* favicon
-* CSS links
-* preload
-* fonts
-
-Example
-
-```html
-<head>
-    <title>Dashboard</title>
-</head>
-```
-
----
-
-### `<body>`
-
-Contains everything visible.
-
-```html
-<body>
-
-<h1>Dashboard</h1>
-
-<button>Save</button>
-
-</body>
-```
-
----
-
-## Why React Developers Should Care
-
-React eventually renders HTML.
-
-```jsx
-return (
-    <button>Save</button>
-)
-```
-
-React converts JSX into
-
-```html
-<button>Save</button>
-```
-
-Understanding HTML helps write better JSX.
-
----
-
-# 2. DOCTYPE
-
-## What is DOCTYPE?
-
-DOCTYPE tells browser
-
-> "Render this page using HTML5 standards."
-
-Example
+# 2. DOCTYPE ⭐
 
 ```html
 <!DOCTYPE html>
 ```
 
----
+It tells the browser that the document should be interpreted using **modern HTML standards mode**.
 
-## Why Needed?
+### Important
 
-Without it,
+It is **not an HTML element**.
 
-Browser enters **Quirks Mode**
+It helps prevent the browser from entering **quirks mode**, which can cause legacy rendering behavior.
 
-Which behaves like old browsers.
+**Interview answer:**
 
-Possible issues:
-
-* incorrect box model
-* layout problems
-* inconsistent CSS behavior
-
-Modern applications always use
-
-```html
-<!DOCTYPE html>
-```
+> `DOCTYPE` tells the browser which document mode to use. In HTML5, `<!DOCTYPE html>` enables standards mode.
 
 ---
 
-## HTML5 DOCTYPE
+# 3. Semantic HTML ⭐⭐⭐
 
-Old HTML versions
+Semantic elements clearly describe their **meaning/purpose**.
 
-```html
-<!DOCTYPE HTML PUBLIC "...">
-```
-
-HTML5 simplified it to
-
-```html
-<!DOCTYPE html>
-```
-
----
-
-## Interview Question
-
-Does DOCTYPE create an HTML element?
-
-No.
-
-It is an instruction for browser.
-
----
-
-# 3. Semantic HTML
-
-One of the most asked interview topics.
-
----
-
-## What is Semantic HTML?
-
-Semantic tags describe the meaning of content.
-
-Instead of
-
-```html
-<div>
-```
-
-Use
-
-```html
-<header>
-```
-
-Browser immediately understands
-
-"This is page header."
-
----
-
-## Benefits
-
-### Better Readability
-
-Instead of
-
-```html
-<div>
-<div>
-<div>
-```
-
-Use
+### Common semantic elements
 
 ```html
 <header>
 <nav>
 <main>
-<footer>
-```
-
-Much easier.
-
----
-
-### Better SEO
-
-Search engines understand page better.
-
-Google knows
-
-* article
-* navigation
-* footer
-* section
-
----
-
-### Better Accessibility
-
-Screen readers announce
-
-"Navigation"
-
-instead of
-
-"Div"
-
-Huge benefit.
-
----
-
-### Easier Maintenance
-
-Developers immediately understand layout.
-
----
-
-# Common Semantic Tags
-
-## header
-
-Top section
-
-```html
-<header>
-
-Logo
-
-Menu
-
-</header>
-```
-
----
-
-## nav
-
-Navigation links
-
-```html
-<nav>
-
-<a href="/">Home</a>
-
-</nav>
-```
-
----
-
-## main
-
-Main page content.
-
-Only **one main element** per page.
-
-```html
-<main>
-
-Dashboard
-
-</main>
-```
-
----
-
-## section
-
-Groups related content.
-
-```html
 <section>
-
-Products
-
-</section>
-```
-
----
-
-## article
-
-Independent content.
-
-Examples
-
-* Blog
-* News
-* Review
-* Forum post
-
-```html
 <article>
-
-React Tutorial
-
-</article>
-```
-
----
-
-## aside
-
-Sidebar
-
-Advertisements
-
-Related links
-
-```html
 <aside>
-
-Recent Posts
-
-</aside>
+<footer>
 ```
 
----
-
-## footer
-
-Bottom area
+Example:
 
 ```html
+<header>
+  <h1>My Blog</h1>
+</header>
+
+<nav>
+  <a href="/home">Home</a>
+  <a href="/about">About</a>
+</nav>
+
+<main>
+  <article>
+    <h2>React Performance</h2>
+    <p>Article content...</p>
+  </article>
+
+  <aside>
+    Related articles
+  </aside>
+</main>
+
 <footer>
-
-Copyright
-
+  Copyright 2026
 </footer>
 ```
 
----
+### Why semantic HTML?
 
-## figure
+1. **Accessibility** — screen readers understand page structure better.
+2. **SEO** — search engines can better understand content.
+3. **Maintainability** — code communicates its purpose clearly.
+4. **Better structure** — avoids excessive generic `<div>` usage.
 
-Images with captions.
-
-```html
-<figure>
-
-<img src="dog.png">
-
-<figcaption>Dog</figcaption>
-
-</figure>
-```
-
----
-
-## time
-
-Represents date/time.
+### Semantic vs non-semantic
 
 ```html
-<time datetime="2026-07-23">
-July 23
-</time>
+<!-- Non-semantic -->
+<div class="header"></div>
+
+<!-- Semantic -->
+<header></header>
 ```
 
----
-
-## address
-
-Contact information.
+A `<div>` doesn't describe what the content means.
 
 ---
 
-## details
+# 4. Block vs Inline Elements ⭐
 
-Expandable section.
+### Block elements
 
-```html
-<details>
+Normally start on a **new line** and take the available width.
 
-<summary>Read More</summary>
-
-Content
-
-</details>
-```
-
----
-
-## Non-semantic Elements
+Examples:
 
 ```html
 <div>
-
-<span>
-```
-
-These don't describe meaning.
-
-Use them only when no semantic tag fits.
-
----
-
-## When NOT to Replace div
-
-Layout wrapper
-
-Flex container
-
-Grid container
-
-Animation wrapper
-
-React component wrapper
-
-Using `div` is perfectly fine there.
-
----
-
-# Semantic vs Non Semantic
-
-Semantic
-
-```html
+<p>
+<h1>
+<section>
+<article>
 <header>
-<nav>
 <footer>
+<ul>
 ```
 
-Non Semantic
+Example:
 
 ```html
-<div>
+<div>First</div>
+<div>Second</div>
+```
+
+Conceptually:
+
+```text
+First
+Second
+```
+
+### Inline elements
+
+Normally remain within the same line and take only the space they need.
+
+Examples:
+
+```html
 <span>
-```
-
----
-
-# 4. Block vs Inline Elements
-
-Very common interview question.
-
----
-
-## Block Elements
-
-Take full available width.
-
-Always start on new line.
-
-Example
-
-```html
-<div>One</div>
-
-<div>Two</div>
-```
-
-Output
-
-```
-One
-
-Two
-```
-
----
-
-Common Block Elements
-
-```
-div
-
-p
-
-section
-
-article
-
-header
-
-footer
-
-nav
-
-main
-
-form
-
-ul
-
-ol
-
-li
-
-table
-
-h1-h6
-```
-
----
-
-## Inline Elements
-
-Take only required width.
-
-Stay on same line.
-
-Example
-
-```html
-Hello
-
-<span>React</span>
-
-World
-```
-
-Output
-
-```
-Hello React World
-```
-
----
-
-Common Inline Elements
-
-```
-span
-
-a
-
-strong
-
-em
-
-label
-
-img
-
-input
-
-button
-
-small
-
-code
-```
-
----
-
-## Visual Difference
-
-Block
-
-```
-██████████████
-```
-
-Inline
-
-```
-Text Text Text
-```
-
----
-
-## Why It Matters in React
-
-Suppose
-
-```jsx
-<span>
-<button>
-<div>
-```
-
-Choosing wrong element may affect
-
-* Layout
-* Accessibility
-* CSS
-
----
-
-# 5. Empty Elements
-
-Also called
-
-Void Elements.
-
----
-
-## What are Empty Elements?
-
-They cannot have children.
-
-Example
-
-```html
-<br>
-```
-
-Cannot do
-
-```html
-<br>
-
-Hello
-
-</br>
-```
-
-Invalid.
-
----
-
-## Common Empty Elements
-
-```
-img
-
-br
-
-hr
-
-input
-
-meta
-
-link
-
-source
-
-track
-
-embed
-
-area
-
-base
-
-col
-
-wbr
-```
-
----
-
-## Example
-
-```html
-<img src="logo.png">
-
-<input type="text">
-
-<hr>
-
-<br>
-```
-
----
-
-## JSX Difference
-
-HTML
-
-```html
+<a>
+<strong>
+<em>
 <img>
+<button>
 ```
 
-React JSX
+Example:
+
+```html
+<span>Hello</span>
+<span>World</span>
+```
+
+Conceptually:
+
+```text
+Hello World
+```
+
+### Important interview point
+
+Don't think of block vs inline purely as an unchangeable property.
+
+CSS can change the layout behavior:
+
+```css
+span {
+  display: block;
+}
+```
+
+So **`display` controls the layout behavior**, while HTML elements have default display behavior.
+
+---
+
+# 5. Empty Elements ⭐
+
+Empty elements are elements that **cannot have child content**.
+
+Also commonly called **void elements**.
+
+Examples:
+
+```html
+<img src="photo.jpg" alt="Profile" />
+<br />
+<hr />
+<input type="text" />
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="style.css" />
+```
+
+They don't have closing tags:
+
+```html
+<!-- Correct -->
+<img src="photo.jpg" alt="Photo" />
+
+<!-- Not valid HTML -->
+<img src="photo.jpg"></img>
+```
+
+### Common void elements
+
+`area`, `base`, `br`, `col`, `embed`, `hr`, `img`, `input`, `link`, `meta`, `param`, `source`, `track`, `wbr`
+
+### React note
+
+JSX requires JSX syntax conventions:
 
 ```jsx
-<img />
+<img src="/logo.png" alt="Logo" />
+<input type="text" />
+<br />
 ```
 
-React requires self-closing syntax for elements without children.
+The `/` is required in JSX for these self-closing elements.
 
 ---
 
-# 6. Global Attributes
+# 6. Global Attributes ⭐⭐
 
-Global attributes work on **almost every HTML element**.
+Global attributes can generally be used on **most HTML elements**.
 
----
+### `id`
 
-## id
-
-Unique identifier.
+Unique identifier:
 
 ```html
-<div id="header">
+<div id="user-profile">
+  John
+</div>
 ```
 
-Useful for
-
-* CSS
-* JavaScript
-* Anchor links
-
----
-
-## class
-
-Grouping elements.
-
-```html
-<div class="card">
+```js
+document.getElementById("user-profile");
 ```
 
-React uses
+In React:
 
 ```jsx
-className
-```
-
-instead of
-
-```html
-class
+<div id="user-profile">John</div>
 ```
 
 ---
 
-## style
+### `class`
 
-Inline styles.
+Specifies CSS class:
 
 ```html
-<div style="color:red">
+<div class="card">Product</div>
 ```
 
-React
+In JSX:
 
 ```jsx
-<div style={{ color: "red" }}>
+<div className="card">Product</div>
 ```
+
+**Important React difference:** HTML uses `class`; JSX uses `className`.
 
 ---
 
-## title
+### `style`
 
-Tooltip.
-
-```html
-<button title="Delete">
-```
-
----
-
-## hidden
-
-Hide element.
+Inline CSS:
 
 ```html
-<div hidden>
+<div style="color: red;">Hello</div>
 ```
 
----
-
-## tabindex
-
-Controls keyboard focus order.
-
-```html
-<div tabindex="0">
-```
-
-Common values:
-
-`0` → Focusable in normal tab order.
-
-`-1` → Programmatically focusable only (not reachable by Tab).
-
-Avoid positive values (`1`, `2`, etc.) because they create confusing navigation order.
-
----
-
-## contenteditable
-
-Makes content editable.
-
-```html
-<div contenteditable="true">
-```
-
----
-
-## draggable
-
-```html
-<div draggable="true">
-```
-
----
-
-## spellcheck
-
-```html
-<textarea spellcheck="true">
-```
-
----
-
-## lang
-
-Language.
-
-```html
-<html lang="en">
-```
-
----
-
-## dir
-
-Text direction.
-
-```html
-<div dir="rtl">
-```
-
-Useful for Arabic/Hebrew.
-
----
-
-## data-* Attributes
-
-Custom attributes.
-
-Example
-
-```html
-<button data-id="101">
-```
-
-Read in JS
-
-```javascript
-element.dataset.id
-```
-
-Used heavily in
-
-* Testing
-* Analytics
-* Custom metadata
-
-Example
+React:
 
 ```jsx
-<button data-testid="save-btn">
+<div style={{ color: "red" }}>Hello</div>
 ```
 
 ---
 
-## aria-* Attributes
+### `title`
 
-Improve accessibility.
+Provides additional information, often shown as a tooltip:
 
-Example
+```html
+<button title="Delete this item">
+  Delete
+</button>
+```
+
+---
+
+### `hidden`
+
+Hides the element:
+
+```html
+<div hidden>Secret content</div>
+```
+
+---
+
+### `tabindex`
+
+Controls keyboard focus behavior:
+
+```html
+<button tabindex="0">Submit</button>
+```
+
+In React:
+
+```jsx
+<button tabIndex={0}>Submit</button>
+```
+
+**Accessibility note:** Don't use positive `tabIndex` values unnecessarily because they can create a confusing keyboard navigation order.
+
+---
+
+### `data-*`
+
+Stores custom data on an element:
+
+```html
+<button data-user-id="123">
+  Edit
+</button>
+```
+
+JavaScript:
+
+```js
+button.dataset.userId; // "123"
+```
+
+React:
+
+```jsx
+<button data-user-id={user.id}>
+  Edit
+</button>
+```
+
+---
+
+### `aria-*`
+
+Used for **accessibility information**:
 
 ```html
 <button aria-label="Close">
+  X
+</button>
 ```
 
-Screen readers announce
+In React:
 
-"Close"
-
-instead of
-
-"Button"
-
-Very common in React projects.
-
----
-
-# Best Practices
-
-* Always use semantic HTML whenever possible.
-* Use `div` only when no semantic element fits.
-* Use one `<main>` per page.
-* Always include `<!DOCTYPE html>`.
-* Set `<html lang="en">` (or the appropriate language).
-* Prefer `data-*` for custom data instead of inventing attributes.
-* Add `aria-*` only when native HTML semantics are not sufficient.
-* Use `tabindex` sparingly and avoid positive values.
-* Remember JSX differences (`className`, `htmlFor`, self-closing tags).
-
----
-
-# Common Mistakes
-
-❌ Using only `<div>` everywhere.
-
-❌ Multiple `<main>` elements on a page.
-
-❌ Missing `lang` attribute.
-
-❌ Using `class` instead of `className` in React.
-
-❌ Forgetting to self-close empty elements in JSX (`<img />`, `<input />`).
-
-❌ Using positive `tabindex` values.
-
-❌ Replacing semantic elements with `div` unnecessarily.
-
----
-
-# Revision Notes
-
-### HTML Structure
-
-```
-DOCTYPE
-    ↓
-html
- ├── head
- └── body
+```jsx
+<button aria-label="Close">
+  X
+</button>
 ```
 
----
-
-### Semantic Tags
-
-```
-header
-nav
-main
-section
-article
-aside
-footer
-figure
-figcaption
-details
-summary
-time
-address
-```
+Prefer native semantic HTML first; use ARIA when native HTML doesn't provide the required semantics.
 
 ---
 
-### Non-Semantic
+# 🔥 Interview Quick Revision
 
-```
-div
-span
-```
+| Topic             | Key Point                       |
+| ----------------- | ------------------------------- |
+| `DOCTYPE`         | Enables standards mode          |
+| `<html>`          | Root element                    |
+| `<head>`          | Metadata/resources              |
+| `<body>`          | Visible content                 |
+| Semantic HTML     | Describes meaning/purpose       |
+| Block             | Normally starts on new line     |
+| Inline            | Normally flows within same line |
+| Empty/Void        | Cannot contain children         |
+| `id`              | Identifier, generally unique    |
+| `class`           | CSS class                       |
+| `data-*`          | Custom data                     |
+| `aria-*`          | Accessibility                   |
+| `hidden`          | Hides element                   |
+| `tabindex`        | Keyboard focus order            |
+| React `className` | JSX equivalent of HTML `class`  |
 
----
+### ⭐ Most important for React interviews
 
-### Block Elements
-
-```
-div
-p
-section
-article
-header
-footer
-nav
-main
-form
-ul
-ol
-li
-table
-h1-h6
-```
-
-Start on a new line and occupy full width by default.
-
----
-
-### Inline Elements
-
-```
-span
-a
-strong
-em
-img
-input
-button
-label
-small
-code
-```
-
-Stay on the same line and take only the space they need.
-
----
-
-### Empty (Void) Elements
-
-```
-img
-input
-br
-hr
-meta
-link
-source
-track
-embed
-area
-base
-col
-wbr
-```
-
-No closing tag and no child content.
-
----
-
-### Global Attributes Cheat Sheet
-
-| Attribute                      | Purpose           |
-| ------------------------------ | ----------------- |
-| `id`                           | Unique identifier |
-| `class` (`className` in React) | CSS grouping      |
-| `style`                        | Inline styles     |
-| `title`                        | Tooltip           |
-| `hidden`                       | Hide element      |
-| `tabindex`                     | Keyboard focus    |
-| `contenteditable`              | Editable content  |
-| `draggable`                    | Drag support      |
-| `spellcheck`                   | Spell checking    |
-| `lang`                         | Language          |
-| `dir`                          | Text direction    |
-| `data-*`                       | Custom data       |
-| `aria-*`                       | Accessibility     |
-
----
-
-# Frequently Asked Interview Questions
-
-### 1. What is the purpose of `<!DOCTYPE html>`?
-
-It tells the browser to render the page in HTML5 standards mode and avoids Quirks Mode.
-
----
-
-### 2. What is Semantic HTML?
-
-HTML elements that describe the meaning of their content (e.g., `header`, `nav`, `main`, `article`), improving accessibility, SEO, and maintainability.
-
----
-
-### 3. Why is Semantic HTML important in React?
-
-Because React renders HTML. Using semantic elements improves accessibility, SEO, and code readability without affecting React itself.
-
----
-
-### 4. What is the difference between `div` and `section`?
-
-* `div`: Generic container with no meaning.
-* `section`: Groups related content and has semantic meaning.
-
----
-
-### 5. Difference between Block and Inline elements?
-
-* **Block:** Starts on a new line and occupies full width by default.
-* **Inline:** Flows within a line and takes only the required width.
-
----
-
-### 6. What are Void (Empty) elements?
-
-Elements that cannot contain children and do not have closing tags, such as `img`, `input`, `br`, and `hr`.
-
----
-
-### 7. What are Global Attributes?
-
-Attributes that can be applied to almost every HTML element, such as `id`, `class`, `style`, `title`, `tabindex`, `data-*`, and `aria-*`.
-
----
-
-### 8. Why do we use `data-*` attributes?
-
-To store custom, non-visible metadata on elements. Common uses include testing (`data-testid`), analytics, and JavaScript integrations.
-
----
-
-### 9. What are ARIA attributes?
-
-Attributes like `aria-label` and `aria-expanded` that provide additional accessibility information to assistive technologies when native HTML semantics are insufficient.
-
----
-
-### 10. Why does React use `className` instead of `class`?
-
-Because `class` is a reserved keyword in JavaScript, JSX uses `className` to map to the HTML `class` attribute.
-
----
-
-### 11. What is the purpose of the `lang` attribute?
-
-It tells browsers, search engines, and screen readers the language of the document, improving accessibility and SEO.
-
----
-
-### 12. Can you have multiple `<main>` elements on a page?
-
-No. A page should generally contain only one `<main>` element representing its primary content.
+**Semantic HTML + Accessibility + Block/Inline + Global attributes + DOCTYPE + HTML structure** are the areas I'd prioritize.

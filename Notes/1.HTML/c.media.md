@@ -1,911 +1,491 @@
+# Media — HTML Interview Notes
 
-# 1. `<img>`
-
-## What is `<img>`?
-
-Displays an image on the webpage.
-
-```html
-<img src="logo.png" alt="Company Logo">
-```
-
-Unlike most HTML elements, `<img>` is a **void (empty) element**.
+For a **5-year React developer**, know the purpose, important attributes, responsive media, accessibility, and when to use **SVG vs Canvas**.
 
 ---
 
-## Important Attributes
+## 1. `<img>` ⭐⭐⭐
 
-### src
-
-Image URL.
-
-```html
-<img src="/images/logo.png">
-```
-
----
-
-### alt
-
-Alternative text shown when:
-
-* Image fails to load
-* Screen readers read the page
+Displays an image.
 
 ```html
 <img
-    src="user.png"
-    alt="User Profile">
-```
-
-Always provide meaningful `alt` text unless the image is purely decorative.
-
----
-
-### width & height
-
-```html
-<img
-    src="logo.png"
-    width="200"
-    height="100">
-```
-
-**Why important?**
-
-Providing dimensions helps browsers reserve space before the image loads, reducing **Layout Shift (CLS)**.
-
----
-
-### loading
-
-Lazy loading.
-
-```html
-<img
-    src="banner.jpg"
-    loading="lazy">
-```
-
-Values:
-
-```text
-lazy
-eager
-```
-
----
-
-### decoding
-
-```html
-<img decoding="async">
-```
-
-Allows asynchronous image decoding for better rendering performance.
-
----
-
-## React Example
-
-```jsx
-<img
-    src={user.avatar}
-    alt={user.name}
-    loading="lazy"
+  src="/images/profile.jpg"
+  alt="User profile"
+  width="200"
+  height="200"
 />
 ```
 
----
+### Important attributes
 
-## Best Practices
+* `src` → image URL
+* `alt` → alternative text (**important for accessibility**)
+* `width`, `height` → dimensions
+* `loading="lazy"` → lazy-loads image
+* `srcset` → responsive image sources
+* `sizes` → tells browser which image size is appropriate
 
-* Always provide `alt`.
-* Specify `width` and `height`.
-* Lazy-load below-the-fold images.
-* Compress images (WebP/AVIF where possible).
+### React
 
----
-
-# 2. `<picture>`
-
-Used for **responsive images**.
-
-Different images can be served based on:
-
-* Screen size
-* Device resolution
-* Image format
-
----
-
-## Example
-
-```html
-<picture>
-
-    <source
-        media="(min-width:768px)"
-        srcset="desktop.jpg">
-
-    <img
-        src="mobile.jpg"
-        alt="Nature">
-
-</picture>
-```
-
-Desktop gets
-
-```text
-desktop.jpg
-```
-
-Mobile gets
-
-```text
-mobile.jpg
-```
-
----
-
-## Modern Format Example
-
-```html
-<picture>
-
-<source
-type="image/avif"
-srcset="image.avif">
-
-<source
-type="image/webp"
-srcset="image.webp">
-
+```jsx
 <img
-src="image.jpg"
-alt="Mountain">
-
-</picture>
+  src="/profile.jpg"
+  alt="User profile"
+  width={200}
+  height={200}
+  loading="lazy"
+/>
 ```
 
-Browser picks the first supported format.
+### Why `width`/`height`?
+
+Providing dimensions helps the browser reserve space and reduces **layout shift (CLS)**.
 
 ---
 
-## When to Use
+# 2. `<picture>` ⭐⭐
 
-* Responsive websites
-* Large hero images
-* Different image formats
-* Performance optimization
+Used for **responsive images** or different images based on conditions.
+
+```html
+<picture>
+  <source
+    media="(max-width: 600px)"
+    srcset="/mobile.jpg"
+  />
+
+  <source
+    media="(min-width: 601px)"
+    srcset="/desktop.jpg"
+  />
+
+  <img src="/desktop.jpg" alt="Landscape" />
+</picture>
+```
+
+The `<img>` is the **fallback** and should generally be included.
+
+### `<picture>` vs `<img>`
+
+* `<img>` → display one image, potentially with responsive `srcset`
+* `<picture>` → art direction / different formats or sources based on conditions
+
+Example format selection:
+
+```html
+<picture>
+  <source srcset="image.avif" type="image/avif" />
+  <source srcset="image.webp" type="image/webp" />
+  <img src="image.jpg" alt="Product" />
+</picture>
+```
 
 ---
 
 # 3. `<audio>`
 
-Embeds audio.
+Embeds audio content.
 
 ```html
 <audio controls>
+  <source src="song.mp3" type="audio/mpeg" />
+  <source src="song.ogg" type="audio/ogg" />
+  Your browser does not support audio.
+</audio>
+```
 
-<source src="song.mp3">
+### Important attributes
 
+```text
+controls
+autoplay
+loop
+muted
+preload
+```
+
+Example:
+
+```html
+<audio controls loop>
+  <source src="music.mp3" type="audio/mpeg" />
+</audio>
+```
+
+### React
+
+```jsx
+<audio controls>
+  <source src="/music.mp3" type="audio/mpeg" />
 </audio>
 ```
 
 ---
 
-## Common Attributes
+# 4. `<video>` ⭐⭐⭐
 
-### controls
-
-Shows audio controls.
+Embeds video content.
 
 ```html
-<audio controls>
-```
-
----
-
-### autoplay
-
-Starts automatically.
-
-```html
-<audio autoplay>
-```
-
-Modern browsers usually block autoplay with sound.
-
----
-
-### loop
-
-Repeats audio.
-
-```html
-<audio loop>
-```
-
----
-
-### muted
-
-Starts muted.
-
-```html
-<audio muted>
-```
-
----
-
-### preload
-
-```html
-<audio preload="metadata">
-```
-
-Values
-
-```text
-none
-metadata
-auto
-```
-
----
-
-# 4. `<video>`
-
-Embeds videos.
-
-```html
-<video controls>
-
-<source src="movie.mp4">
-
+<video
+  controls
+  width="600"
+  poster="/thumbnail.jpg"
+>
+  <source src="/video.mp4" type="video/mp4" />
+  Your browser does not support video.
 </video>
 ```
 
----
+### Important attributes
 
-## Common Attributes
+| Attribute      | Purpose                   |
+| -------------- | ------------------------- |
+| `controls`     | Show playback controls    |
+| `autoplay`     | Automatically play        |
+| `muted`        | Mute video                |
+| `loop`         | Repeat                    |
+| `poster`       | Thumbnail before playback |
+| `preload`      | Controls loading behavior |
+| `width/height` | Dimensions                |
 
-```text
-controls
-autoplay
-muted
-loop
-poster
-preload
-playsinline
-```
+### Autoplay
 
----
+Browsers commonly restrict autoplay with sound.
 
-### poster
-
-Image before playback.
+This is more likely to work:
 
 ```html
-<video
-
-poster="thumbnail.jpg">
+<video autoplay muted playsinline>
 ```
 
----
-
-### playsinline
-
-Important for mobile browsers.
-
-```html
-<video playsinline>
-```
-
----
-
-## React Example
-
-```jsx
-<video
-controls
-poster="/poster.png">
-```
+`playsinline` is particularly useful for inline playback on mobile browsers.
 
 ---
 
 # 5. `<source>`
 
-Defines multiple media sources.
-
-Used inside
-
-* picture
-* audio
-* video
-
----
-
-## Video Example
+Defines **multiple media sources** for `<picture>`, `<audio>`, and `<video>`.
 
 ```html
 <video controls>
-
-<source
-src="video.mp4"
-type="video/mp4">
-
-<source
-src="video.webm"
-type="video/webm">
-
+  <source src="video.webm" type="video/webm" />
+  <source src="video.mp4" type="video/mp4" />
 </video>
 ```
 
-Browser chooses supported format.
+Browser chooses a supported source.
+
+### Important
+
+`<source>` itself doesn't display media. It provides the source to a media element.
 
 ---
 
-# 6. `<iframe>`
+# 6. `<iframe>` ⭐⭐
 
-Embeds another webpage.
+Embeds another document/page inside the current page.
 
-Examples
+Common uses:
 
-* YouTube
-* Google Maps
-* Payment pages
-* Dashboards
-
----
-
-## Example
+* YouTube videos
+* Maps
+* External applications
+* Embedded documents
 
 ```html
 <iframe
-
-src="https://www.youtube.com/embed/xyz">
-
+  src="https://example.com"
+  title="Example website"
+  width="600"
+  height="400">
 </iframe>
 ```
 
----
+### Important attributes
 
-## Important Attributes
+* `src`
+* `title`
+* `width`, `height`
+* `loading="lazy"`
+* `allow`
+* `sandbox`
 
-### src
+### Security ⭐
 
-Embedded page.
-
----
-
-### title
-
-Accessibility.
+For untrusted embedded content, use `sandbox` where appropriate:
 
 ```html
 <iframe
-
-title="YouTube Video">
+  src="https://example.com"
+  title="External content"
+  sandbox>
+</iframe>
 ```
 
----
+`iframe` content is generally subject to browser security mechanisms such as the **same-origin policy**.
 
-### loading
+### React
 
-```html
-loading="lazy"
+```jsx
+<iframe
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="Product demonstration"
+  loading="lazy"
+/>
 ```
 
----
-
-### allowfullscreen
-
-```html
-allowfullscreen
-```
+**Accessibility:** Always provide a meaningful `title`.
 
 ---
 
-### sandbox
+# 7. `<svg>` ⭐⭐⭐
 
-Security.
+**Scalable Vector Graphics**.
 
-```html
-sandbox
-```
+Great for:
 
-Restricts iframe capabilities.
+* Icons
+* Logos
+* Illustrations
+* Charts
+* UI graphics
 
----
-
-## React Usage
-
-Very common for
-
-* YouTube
-* Vimeo
-* Power BI
-* Tableau
-* Google Maps
-
----
-
-## Security Consideration
-
-Never embed unknown websites.
-
-Always understand
-
-```text
-sandbox
-
-allow
-
-referrerPolicy
-```
-
-when working with third-party content.
-
----
-
-# 7. `<svg>`
-
-SVG = **Scalable Vector Graphics**
-
-Vector graphics are made from mathematical paths.
-
-They scale without losing quality.
-
----
-
-## Example
+Example:
 
 ```html
 <svg
-width="100"
-height="100">
-
-<circle
-
-cx="50"
-
-cy="50"
-
-r="40"
-
-fill="red"/>
-
+  width="100"
+  height="100"
+  viewBox="0 0 100 100"
+>
+  <circle
+    cx="50"
+    cy="50"
+    r="40"
+    fill="blue"
+  />
 </svg>
 ```
 
----
+### Advantages
 
-## Characteristics
+* Vector-based → doesn't become pixelated when scaled
+* Can be styled with CSS
+* Can be manipulated with JavaScript
+* Supports accessibility
+* Great for UI icons
 
-✔ Infinite scaling
+### React
 
-✔ Small file size
-
-✔ CSS styling
-
-✔ JavaScript manipulation
-
-✔ Animation support
-
----
-
-## React Example
+JSX:
 
 ```jsx
-<svg>
+<svg viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="40" />
+</svg>
+```
 
-<circle />
+Common React usage:
 
+```jsx
+<svg aria-label="Success" role="img">
+  ...
+</svg>
+```
+
+For decorative SVGs:
+
+```jsx
+<svg aria-hidden="true">
+  ...
 </svg>
 ```
 
 ---
 
-## Common Uses
+# 8. `<canvas>` ⭐⭐⭐
 
-* Logos
-* Icons
-* Charts
-* Loaders
-* Graphs
+Provides a **drawing surface** controlled mainly through JavaScript.
 
----
-
-## SVG Advantages
-
-* Resolution independent
-* Searchable in DOM
-* Easy to animate
-* CSS controllable
-
----
-
-# 8. `<canvas>`
-
-Canvas provides a drawing surface.
-
-Unlike SVG,
-
-Canvas draws pixels.
-
----
-
-## Example
-
-```html
-<canvas
-
-width="300"
-
-height="150">
-
-</canvas>
-```
-
-JavaScript
-
-```javascript
-const canvas = document.querySelector("canvas");
-
-const ctx = canvas.getContext("2d");
-
-ctx.fillRect(20,20,100,100);
-```
-
----
-
-## Characteristics
-
-✔ Pixel based
-
-✔ High performance
-
-✔ Requires JavaScript
-
-✔ Not editable after drawing
-
----
-
-## Common Uses
+Common uses:
 
 * Games
-* Image editors
-* Whiteboards
-* Charts
+* Image manipulation
+* Data visualization
+* Drawing applications
 * Animations
 
----
-
-# SVG vs Canvas
-
-| SVG                                         | Canvas                  |
-| ------------------------------------------- | ----------------------- |
-| Vector                                      | Pixel                   |
-| DOM elements                                | Drawing surface         |
-| Easy CSS styling                            | JS drawing only         |
-| Best for icons                              | Best for games          |
-| Scales infinitely                           | May blur when scaled    |
-| Easy event handling                         | Manual hit detection    |
-| Lower performance with thousands of objects | Better for many objects |
-
----
-
-## When to Choose
-
-### SVG
-
-* Logo
-* Icon
-* Charts
-* Maps
-* Diagrams
-
----
-
-### Canvas
-
-* Games
-* Paint apps
-* Particle animations
-* Image processing
-* High-frequency rendering
-
----
-
-# Image Formats (Interview Bonus)
-
-| Format | Best Use                                               |
-| ------ | ------------------------------------------------------ |
-| PNG    | Transparency                                           |
-| JPEG   | Photos                                                 |
-| WebP   | Modern web images                                      |
-| AVIF   | Better compression than WebP                           |
-| SVG    | Icons, logos                                           |
-| GIF    | Simple animations (prefer video or CSS where possible) |
-
----
-
-# Accessibility Best Practices
-
-### Images
-
-✔ Meaningful `alt`
+HTML:
 
 ```html
-<img alt="Profile picture">
+<canvas id="myCanvas" width="300" height="150"></canvas>
 ```
+
+JavaScript:
+
+```js
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+ctx.fillStyle = "blue";
+ctx.fillRect(20, 20, 100, 50);
+```
+
+### React
+
+```jsx
+const canvasRef = useRef(null);
+
+useEffect(() => {
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillRect(20, 20, 100, 50);
+}, []);
+
+return <canvas ref={canvasRef} width={300} height={150} />;
+```
+
+### Important characteristic
+
+Canvas is essentially **pixel-based/raster drawing**.
+
+Once drawn, individual shapes aren't retained as DOM elements.
 
 ---
 
-### Decorative Images
+# ⭐ SVG vs Canvas
+
+This is a **very common interview question**.
+
+| SVG                                    | Canvas                                  |
+| -------------------------------------- | --------------------------------------- |
+| Vector-based                           | Raster/pixel-based drawing surface      |
+| DOM-based                              | Not individual DOM elements             |
+| Each shape can be accessed/manipulated | Drawing is typically managed through JS |
+| Great for icons/charts/UI graphics     | Great for games/heavy drawing           |
+| Scales without pixelation              | Can pixelate when scaled                |
+| Easier accessibility                   | Accessibility requires extra work       |
+| Better for fewer interactive objects   | Better for many/high-frequency objects  |
+
+### Simple rule
+
+> **UI icons, logos, scalable graphics → SVG**
+
+> **Games, image processing, thousands of rapidly changing objects → Canvas**
+
+---
+
+# 🔥 Media Accessibility
+
+### Image
+
+Always provide meaningful `alt`:
 
 ```html
-<img
-
-alt="">
+<img src="user.jpg" alt="John's profile" />
 ```
 
-Screen readers ignore it.
+Decorative image:
 
----
+```html
+<img src="background.jpg" alt="" />
+```
 
 ### Video
 
-Provide
+Provide captions when appropriate:
 
-* captions
-* subtitles
-* transcripts when appropriate
+```html
+<video controls>
+  <source src="video.mp4" type="video/mp4" />
 
----
+  <track
+    kind="captions"
+    src="captions.vtt"
+    srclang="en"
+    label="English"
+  />
+</video>
+```
 
 ### iframe
 
-Always provide
+Provide:
 
 ```html
-title
+title="Google Map showing office location"
 ```
 
----
+### SVG
 
-### Audio
-
-Provide transcript when needed.
+Use appropriate accessible naming for meaningful SVGs; hide decorative SVGs from assistive technology.
 
 ---
 
-# Performance Best Practices
+# ⚡ Performance Points
 
-✔ Lazy load images
+For production React applications:
 
-```html
-loading="lazy"
+```jsx
+<img
+  src="/large-image.jpg"
+  alt="Product"
+  loading="lazy"
+  width={800}
+  height={600}
+/>
 ```
 
----
+Consider:
 
-✔ Specify width and height.
-
----
-
-✔ Use WebP or AVIF when supported.
-
----
-
-✔ Compress media.
+* **Lazy loading** for below-the-fold images/iframes
+* Modern formats such as **WebP/AVIF**
+* Responsive images with `srcset` / `sizes`
+* Correct image dimensions to reduce layout shift
+* Avoid unnecessarily huge media files
+* Use appropriate video compression
+* Don't autoplay media unnecessarily
 
 ---
 
-✔ Use `<picture>` for responsive images.
+# ⭐ Quick Revision
 
----
+| Element     | Purpose                        |
+| ----------- | ------------------------------ |
+| `<img>`     | Display image                  |
+| `<picture>` | Responsive/art-directed images |
+| `<audio>`   | Audio playback                 |
+| `<video>`   | Video playback                 |
+| `<source>`  | Alternative media source       |
+| `<iframe>`  | Embed another document         |
+| `<svg>`     | Vector graphics                |
+| `<canvas>`  | JS-based pixel drawing         |
 
-✔ Don't autoplay videos with sound.
+### Most important interview questions
 
----
+1. **`img` vs `picture`?**
 
-✔ Lazy-load iframes.
+   * `img` displays an image; `picture` allows different image sources based on media/type conditions.
 
----
+2. **SVG vs Canvas?**
 
-# Common Mistakes
+   * SVG is vector + DOM-based; Canvas is a pixel-based drawing surface.
 
-❌ Missing `alt` attribute.
+3. **Why `alt`?**
 
-❌ Using large images without compression.
+   * Accessibility and fallback text when an image can't be displayed.
 
-❌ Using PNG for photos instead of JPEG/WebP.
+4. **Why `loading="lazy"`?**
 
-❌ Forgetting `loading="lazy"` on non-critical images.
+   * Defers loading of non-critical media until it is near the viewport.
 
-❌ Using Canvas when SVG is more suitable.
+5. **Why multiple `<source>` elements?**
 
-❌ Missing `title` on iframes.
+   * Allows the browser to choose a supported/appropriate media format or source.
 
-❌ Embedding untrusted websites without sandboxing.
+6. **Why `title` on iframe?**
 
-❌ Autoplaying videos with audio (often blocked and poor UX).
-
----
-
-# React-Specific Notes
-
-* JSX uses the same media elements as HTML.
-* Use imported assets or URLs for `src`.
-* Manage media state (play, pause, mute) via React state or refs.
-* Use `useRef` to control audio/video elements imperatively.
-* Optimize images using your framework (e.g., Next.js `<Image />`) when available.
-
----
-
-# Revision Notes
-
-## Media Elements Cheat Sheet
-
-| Element   | Purpose                |
-| --------- | ---------------------- |
-| `img`     | Display image          |
-| `picture` | Responsive images      |
-| `audio`   | Play audio             |
-| `video`   | Play video             |
-| `source`  | Multiple media sources |
-| `iframe`  | Embed another webpage  |
-| `svg`     | Vector graphics        |
-| `canvas`  | Pixel drawing surface  |
-
----
-
-## Important `<img>` Attributes
-
-| Attribute  | Purpose              |
-| ---------- | -------------------- |
-| `src`      | Image URL            |
-| `alt`      | Accessibility        |
-| `width`    | Reserve layout space |
-| `height`   | Reserve layout space |
-| `loading`  | Lazy loading         |
-| `decoding` | Async decoding       |
-
----
-
-## Audio & Video Attributes
-
-| Attribute     | Purpose                |
-| ------------- | ---------------------- |
-| `controls`    | Show controls          |
-| `autoplay`    | Auto play              |
-| `muted`       | Start muted            |
-| `loop`        | Repeat                 |
-| `poster`      | Video thumbnail        |
-| `preload`     | Loading behavior       |
-| `playsinline` | Mobile inline playback |
-
----
-
-## iframe Attributes
-
-| Attribute         | Purpose            |
-| ----------------- | ------------------ |
-| `src`             | Embedded page      |
-| `title`           | Accessibility      |
-| `loading`         | Lazy loading       |
-| `sandbox`         | Security           |
-| `allowfullscreen` | Fullscreen support |
-
----
-
-## SVG vs Canvas Cheat Sheet
-
-| Feature          | SVG           | Canvas         |
-| ---------------- | ------------- | -------------- |
-| Graphics         | Vector        | Pixel          |
-| DOM-based        | ✅             | ❌              |
-| CSS Styling      | ✅             | ❌              |
-| Event Handling   | Easy          | Manual         |
-| Infinite Scaling | ✅             | ❌              |
-| Best For         | Icons, Charts | Games, Drawing |
-
----
-
-## Image Format Cheat Sheet
-
-| Format | Use Case         |
-| ------ | ---------------- |
-| PNG    | Transparency     |
-| JPEG   | Photos           |
-| WebP   | Modern web       |
-| AVIF   | Best compression |
-| SVG    | Logos & Icons    |
-
----
-
-# Commonly Asked React Interview Questions (6 Years Experience)
-
-### 1. What is the purpose of the `alt` attribute?
-
-It provides alternative text for accessibility and is shown if the image cannot be loaded.
-
----
-
-### 2. Why should `width` and `height` be specified on images?
-
-To reserve layout space before the image loads, reducing **Cumulative Layout Shift (CLS)**.
-
----
-
-### 3. What is the difference between `<img>` and `<picture>`?
-
-* **`img`** displays a single image.
-* **`picture`** lets the browser choose the most appropriate image based on screen size, format, or media queries.
-
----
-
-### 4. What is the purpose of the `<source>` element?
-
-It provides multiple media sources for `picture`, `audio`, or `video`, allowing the browser to choose the best supported option.
-
----
-
-### 5. Why is `loading="lazy"` important?
-
-It delays loading off-screen images or iframes until they are needed, improving page load performance.
-
----
-
-### 6. What is the difference between SVG and Canvas?
-
-* **SVG** is vector-based, DOM-backed, scalable, and ideal for icons and charts.
-* **Canvas** is pixel-based, drawn with JavaScript, and better suited for games and high-performance animations.
-
----
-
-### 7. When would you choose SVG over Canvas?
-
-For logos, icons, charts, maps, and graphics that need to scale cleanly and be styled or interacted with individually.
-
----
-
-### 8. When would you choose Canvas over SVG?
-
-For games, paint applications, particle systems, image manipulation, and scenarios with thousands of rapidly changing objects.
-
----
-
-### 9. How do you control a video or audio element in React?
-
-Typically by attaching a `ref` with `useRef` and calling methods like `play()`, `pause()`, or reading properties such as `currentTime`.
-
----
-
-### 10. What security concerns exist with iframes?
-
-Embedding untrusted content can introduce security risks. Use attributes like `sandbox`, limit permissions with `allow`, provide a `title`, and only embed trusted sources.
-
----
-
-### 11. What image format would you use for different scenarios?
-
-* **JPEG:** Photos
-* **PNG:** Images requiring transparency
-* **WebP/AVIF:** Optimized web delivery
-* **SVG:** Logos, icons, illustrations
-
----
-
-### 12. How can you optimize images in a React application?
-
-* Compress images.
-* Prefer WebP/AVIF.
-* Use responsive images with `<picture>`.
-* Lazy-load non-critical images.
-* Specify image dimensions.
-* Use framework-specific optimizations (e.g., Next.js `<Image />`) when applicable.
+   * Gives assistive technologies a meaningful description of the embedded content.
