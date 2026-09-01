@@ -326,6 +326,72 @@ This is particularly useful when a flex child contains long text or other conten
 
 # 8. `flex-basis`
 
+### `flex-basis` — short explanation
+
+`flex-basis` defines the **initial size of a flex item along the main axis** before `flex-grow` and `flex-shrink` are applied.
+
+```css
+.container {
+  display: flex;
+}
+
+.item {
+  flex-basis: 200px;
+}
+```
+
+If the container is in the default `row` direction:
+
+```text
+Container: 600px
+┌──────────────────────────────────────┐
+│   Item A       │   Item B            │
+│   200px        │   remaining space   │
+└──────────────────────────────────────┘
+```
+
+### `flex-basis` vs `width`
+
+```css
+.item {
+  width: 200px;
+  flex-basis: 300px;
+}
+```
+
+For a `row` flex container, **`flex-basis` generally determines the flex item's starting main size instead of `width`**.
+
+For `flex-direction: column`, the main axis is vertical, so `flex-basis` works with the item's **height**.
+
+### With `flex-grow`
+
+```css
+.container {
+  display: flex;
+  width: 600px;
+}
+
+.item {
+  flex-basis: 200px;
+  flex-grow: 1;
+}
+```
+
+If there are 2 items:
+
+```text
+Initial:  200 + 200 = 400px
+Remaining:        200px
+Each gets:         100px
+
+Final:    300px + 300px
+```
+
+### Interview one-liner
+
+> **`flex-basis` sets the starting size of a flex item on the main axis, after which `flex-grow` distributes extra space and `flex-shrink` handles insufficient space.**
+
+
 Defines the **initial size of a flex item along the main axis** before remaining space is distributed.
 
 ```css

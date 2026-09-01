@@ -150,6 +150,8 @@ Modern CSS also has:
 
 `dvh` is useful when mobile browser UI changes the dynamically visible viewport.
 
+DVH = Dynamic Viewport Height
+
 ---
 
 # 5. `vw` — Viewport Width
