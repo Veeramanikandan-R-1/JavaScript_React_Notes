@@ -44,6 +44,62 @@ Providing dimensions helps the browser reserve space and reduces **layout shift 
 
 ---
 
+Note:
+
+If we have srcset in img tag then why we need picture tag in html explain shortly?
+
+`srcset` and `<picture>` both help with **responsive images**, but they solve slightly different problems.
+
+### `srcset` → Same image, different sizes/resolutions
+
+Use it when the **same image** should be served at different resolutions based on screen/device.
+
+```html
+<img
+  src="image.jpg"
+  srcset="image-400.jpg 400w, image-800.jpg 800w, image-1200.jpg 1200w"
+  sizes="100vw"
+  alt="Example"
+/>
+```
+
+Browser chooses the most appropriate size.
+
+### `<picture>` → Different image/content based on conditions
+
+Use it when you want **different image files/formats/crops** depending on the situation.
+
+```html
+<picture>
+  <source media="(max-width: 600px)" srcset="mobile.jpg" />
+  <source srcset="desktop.jpg" />
+  <img src="desktop.jpg" alt="Example" />
+</picture>
+```
+
+For example:
+
+```text
+Desktop → wide/landscape image
+Mobile  → cropped/portrait image
+```
+
+It can also be used for **modern image formats**:
+
+```html
+<picture>
+  <source srcset="image.avif" type="image/avif" />
+  <source srcset="image.webp" type="image/webp" />
+  <img src="image.jpg" alt="Example" />
+</picture>
+```
+
+### 🎯 Interview answer
+
+> **`srcset` is mainly for choosing the appropriate resolution/size of the same image, while `<picture>` gives us art direction and format selection—allowing completely different images based on media conditions or supported formats.**
+
+---
+
 # 2. `<picture>` ⭐⭐
 
 Used for **responsive images** or different images based on conditions.
