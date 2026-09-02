@@ -35,6 +35,54 @@ search("react");
 
 **Remember:** Debounce = **wait until activity stops**.
 
+### Debounce using `useEffect`
+
+**Debouncing** means: execute a function only after the user **stops triggering an event for a specified time**.
+
+Common use case: **search API calls**.
+
+```jsx
+const [search, setSearch] = useState("");
+const [debouncedSearch, setDebouncedSearch] = useState("");
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setDebouncedSearch(search);
+  }, 500);
+
+  return () => clearTimeout(timer);
+}, [search]);
+```
+
+Now call the API when `debouncedSearch` changes:
+
+```jsx
+useEffect(() => {
+  if (debouncedSearch) {
+    fetch(`/api/search?q=${debouncedSearch}`);
+  }
+}, [debouncedSearch]);
+```
+
+### How it works
+
+```text
+User types:  R → Re → Rea → React
+              ↓    ↓     ↓      ↓
+            timer timer timer  timer
+                              ↓
+                         Wait 500ms
+                              ↓
+                         API call
+```
+
+Every new keystroke **clears the previous timer**, so the API runs only after the user stops typing for 500ms.
+
+**Interview one-liner:**
+
+> `useEffect` + `setTimeout` + cleanup (`clearTimeout`) is a simple way to debounce state changes in React.
+
+
 ---
 
 # 2. Throttle
