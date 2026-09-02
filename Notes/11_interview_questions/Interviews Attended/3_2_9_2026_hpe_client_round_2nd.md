@@ -16,7 +16,7 @@ fetch the api call result and show it in table
 
 5. how js files are executed in browser
 
-6. how js engine works (call stack, eventloop, web apis) (3.1 basics)
+6. how js engine works (call stack, eventloop, web apis) (3.1 basics) explain with example
 
 
 Answers
