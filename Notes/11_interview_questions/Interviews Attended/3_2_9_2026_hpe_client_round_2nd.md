@@ -18,6 +18,9 @@ fetch the api call result and show it in table
 
 6. how js engine works (call stack, eventloop, web apis) (3.1 basics) explain with example
 
+7. Difference between onload and loads in html
+
+---
 
 Answers
 
@@ -519,4 +522,50 @@ B
 
 ---
 
-6. 
+7. 
+In HTML, **`onload`** is an event handler. **`loads` is not a standard HTML event**.
+
+### `onload`
+
+Fires when a resource/page has **finished loading**.
+
+```html
+<body onload="console.log('Page loaded')">
+```
+
+For an image:
+
+```html
+<img src="photo.jpg" onload="console.log('Image loaded')" />
+```
+
+You can also use JavaScript:
+
+```js
+window.onload = () => {
+  console.log("Page loaded");
+};
+```
+
+### What about `load`?
+
+The actual event name is **`load`**. `onload` is the HTML/JS property used to handle that event.
+
+```js
+window.addEventListener("load", () => {
+  console.log("Everything loaded");
+});
+```
+
+So:
+
+| Term     | Meaning                               |
+| -------- | ------------------------------------- |
+| `load`   | The actual browser event              |
+| `onload` | Event-handler property/HTML attribute |
+| `loads`  | ❌ Not a standard HTML event           |
+
+**Interview tip:**
+`DOMContentLoaded` → HTML/DOM is ready.
+`load` → Page and its dependent resources (images, stylesheets, etc.) have loaded.
+
